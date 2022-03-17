@@ -6,27 +6,22 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
     {
-        path:'auth',
-        children:[
-            {
-                path:'',
-                redirectTo:'auth/login',
-                pathMatch:'full'
-            },
-            {
-                path:'login',
-                component:LoginComponent
-            },
-            {
-                path:'register',
-                component:RegisterComponent
-            },
-            {
-                path:'forgot-password',
-                component:ForgotPasswordComponent
-            },
-        ]
-    }
+        path:'',
+        redirectTo:'login',
+        pathMatch:'full'
+    },
+    {
+        path:'login',
+        component:LoginComponent
+    },
+    {
+        path:'register',
+        component:RegisterComponent
+    },
+    {
+        path:'forgot-password',
+        component:ForgotPasswordComponent
+    },
 ];
 
 @NgModule({
