@@ -6,17 +6,19 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
