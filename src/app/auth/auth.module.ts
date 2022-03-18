@@ -5,6 +5,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AngularMaterialModule } from '../angular-material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../core/services/auth.service';
 
 
 
@@ -18,6 +20,10 @@ import { AngularMaterialModule } from '../angular-material.module';
     CommonModule,
     AuthRoutingModule,
     AngularMaterialModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }
