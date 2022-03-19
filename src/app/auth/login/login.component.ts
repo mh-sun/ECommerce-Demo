@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
 
+  static isLoggedIn = false
+
   constructor (private fb:FormBuilder, private http:AuthService){}
   
   user = this.fb.group({
