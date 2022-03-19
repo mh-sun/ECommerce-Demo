@@ -6,11 +6,6 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
     {
-        path:'',
-        redirectTo:'login',
-        pathMatch:'full'
-    },
-    {
         path:'login',
         component:LoginComponent
     },
@@ -21,6 +16,11 @@ const routes: Routes = [
     {
         path:'forgot-password',
         component:ForgotPasswordComponent
+    },
+    {
+        path:'',
+        redirectTo:'login',
+        pathMatch:'full'
     },
 ];
 

@@ -6,6 +6,8 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../core/services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -19,9 +21,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AuthRoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
+    AuthService
   ]
 })
 export class AuthModule { }
