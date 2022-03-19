@@ -1,1 +1,42 @@
-<p>register works!</p>
+<mat-card-content class="content">
+    <form class="my-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+       <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input  matInput  placeholder="First name"  formControlName="firstName"required>
+        </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input  matInput formControlName="lastName"  placeholder="Last Name" name="lname"  required>
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Address</mat-label>
+              <input  matInput   placeholder="Address" name="address" formControlName="address" required>
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input  matInput formControlName="email"  placeholder="Email" name="email">
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input  matInput formControlName="password"  placeholder="Password"  name="password">
+           </mat-form-field>
+           <section class="example-section">
+            <label class="example-margin">Gender:</label>
+            <mat-radio-group >
+              <mat-radio-button class="example-margin" value="after">Male</mat-radio-button>
+              <mat-radio-button class="example-margin" value="before">Female</mat-radio-button>
+              <mat-radio-button class="example-margin" value="before">Other</mat-radio-button>
+            </mat-radio-group>
+          </section>
+       
+          <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-card-actions class="content">
+        <button mat-raised-button color="primary" type="submit">REGISTER</button>
+      </mat-card-actions>
+    </form>
+</mat-card-content>
