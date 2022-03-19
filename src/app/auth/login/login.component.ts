@@ -9,8 +9,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent {
 
-  static isLoggedIn = false
-
   constructor (private fb:FormBuilder, private http:AuthService){}
   
   user = this.fb.group({
@@ -27,7 +25,8 @@ export class LoginComponent {
       password: this.user.value.password
     }
     this.http.Login(user).subscribe(res=>{
-      console.log(res)
+      this.http.isLoggedIn = true
+      
     })
   }
 }

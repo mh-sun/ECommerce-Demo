@@ -9,6 +9,7 @@ export class AuthService {
     constructor(private http:HttpClient){}
 
     private url = 'http://localhost:3000/'
+    public isLoggedIn = false
     
     Login(data:object){
         console.log(data)

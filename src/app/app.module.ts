@@ -11,6 +11,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
