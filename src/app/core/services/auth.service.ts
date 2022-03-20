@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { User } from "../models/user.login.model";
 
 @Injectable({
@@ -11,10 +11,11 @@ export class AuthService {
     constructor(private http:HttpClient){}
 
     private url = 'http://localhost:3000/'
-    public isLoggedIn = false
+
+    public isLoggedIn = new BehaviorSubject(false);
     
-    Login(){
+    login(){
         let link = this.url + 'users'
-        return this.http.get<any[]>(link)
+        return this.http.get<User[]>(link)
     }
 }

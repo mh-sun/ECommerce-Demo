@@ -1,46 +1,58 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { User } from 'src/app/core/models/user.login.model';
+import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy{
 
-  constructor (private fb:FormBuilder, private http:AuthService){}
+  constructor (private fb:FormBuilder, 
+    private http:AuthService,
+    private route:Router,
+    private dialog:MatDialog,
+  ){}
   
   user = this.fb.group({
-    number:['', [Validators.required, 
-      Validators.maxLength(14),
-      Validators.minLength(10)]],
+    email:['', [
+      Validators.required,
+      Validators.email
+    ]],
     password:['', Validators.required]
   })
 
+  loginSubscription:any = null
+
   onLogin(){
-    let users:any = []
-
-    this.http.Login().subscribe((res:any[])=>{
-      
-      console.log(res)
-      res.forEach(r=>{
-        console.log(r.number)
-      })
-      users = res
+    this.loginSubscription = this.http.login().subscribe((users:any[])=>{
+      for(let i=0; i<users.length; i++){
+        let user = users[i]
+        if(user.number === this.user.value.number && user.password === this.user.value.password){
+          console.log('logged in')
+          this.http.isLoggedIn.next(true)
+          this.user.reset()
+          this.route.navigate(['/products'])
+          return
+        }
+      }
+      this.showDialog()
+      this.user.reset()
     })
+  }
 
-    let timer = setTimeout(()=>{
-        console.log(users, typeof users)
-        users.forEach((user:any) => {
-          if(user.number === this.user.value.number && user.password === this.user.value.password){
-            this.http.isLoggedIn = true
-            console.log('logged in')
-            clearTimeout(timer)
-          }
-          else console.log(user.number, 'not matched')
-        });
-    },1000)
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe()
+  }
+
+  showDialog() {
+    this.dialog.open(CredentialsMismatchComponent)
   }
 }
+
+
