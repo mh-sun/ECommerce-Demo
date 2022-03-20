@@ -1,5 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { of } from "rxjs";
+import { User } from "../models/user.login.model";
 
 @Injectable({
     providedIn: 'any'
@@ -11,9 +13,8 @@ export class AuthService {
     private url = 'http://localhost:3000/'
     public isLoggedIn = false
     
-    Login(data:object){
-        console.log(data)
+    Login(){
         let link = this.url + 'users'
-        return this.http.post<any>(link, data)
+        return this.http.get(link)
     }
 }
