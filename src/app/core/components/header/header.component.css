@@ -1,0 +1,6 @@
+div{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}

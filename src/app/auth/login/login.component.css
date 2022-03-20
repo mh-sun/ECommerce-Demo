@@ -25,3 +25,15 @@ mat-card{
     align-items: center;
     flex-direction: column;
 }
+
+.content-center-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 10%;
+}
+
+div.content-center-row{
+    width: 100%;
+}
