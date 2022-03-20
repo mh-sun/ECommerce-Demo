@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "atkia@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "email": "atkia.karim@selise.ch",
+      "password": "1455"
+    }
+  ]
+}

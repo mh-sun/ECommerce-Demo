@@ -17,4 +17,19 @@ export class AuthService {
         let link = this.url + 'users'
         return this.http.get(link)
     }
+
+    Registration(user: any){
+        let link = this.url + 'users'
+        return this.http.post(link,user);
+    }
+
+    getId(){
+        let link = this.url + 'users'
+        this.http.get(link).subscribe((data: any)=>{
+         console.log(data.length)
+         return data[data.length-1].id;
+       });
+       
+     }
+
 }
