@@ -19,18 +19,21 @@ export class LoginComponent {
     password:['', Validators.required]
   })
 
-  users: any
-
   onLogin(){
-    this.http.Login().subscribe((res)=>{
+    let users:any = []
+
+    this.http.Login().subscribe((res:any[])=>{
       
       console.log(res)
-      this.users = res
+      res.forEach(r=>{
+        console.log(r.number)
+      })
+      users = res
     })
 
     let timer = setTimeout(()=>{
-        console.log(this.users, typeof this.users)
-        this.users.forEach((user:any) => {
+        console.log(users, typeof users)
+        users.forEach((user:any) => {
           if(user.number === this.user.value.number && user.password === this.user.value.password){
             this.http.isLoggedIn = true
             console.log('logged in')

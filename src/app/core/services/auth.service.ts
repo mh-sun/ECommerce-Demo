@@ -15,6 +15,6 @@ export class AuthService {
     
     Login(){
         let link = this.url + 'users'
-        return this.http.get(link)
+        return this.http.get<any[]>(link)
     }
 }
