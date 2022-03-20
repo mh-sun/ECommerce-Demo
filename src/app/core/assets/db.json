@@ -9,6 +9,16 @@
       "id": 2,
       "email": "atkia.karim@selise.ch",
       "password": "1455"
+    },
+    {
+      "id": 3,
+      "email": "atkia.karim@selise.ch",
+      "password": "1455333"
+    },
+    {
+      "id": 4,
+      "email": "bsse1015@iit.du.ac.bd",
+      "password": "3334"
     }
   ]
 }
