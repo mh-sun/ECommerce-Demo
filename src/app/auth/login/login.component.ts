@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
+import { User } from 'src/app/core/models/user.login.model';
 
 
 @Component({
@@ -30,14 +31,15 @@ export class LoginComponent implements OnDestroy{
   loginSubscription:any = null
 
   onLogin(){
-    this.loginSubscription = this.http.login().subscribe((users:any[])=>{
+    this.loginSubscription = this.http.login().subscribe((users:User[])=>{
       for(let i=0; i<users.length; i++){
         let user = users[i]
-        if(user.number === this.user.value.number && user.password === this.user.value.password){
+        if(user.email === this.user.value.email && user.password === this.user.value.password){
           console.log('logged in')
-          AuthService.logStatus = true
+          console.log(user);
+          localStorage.setItem('logStatus', user.firstName)
           this.user.reset()
-          this.route.navigate(['/products'])
+          this.route.navigate(['/cart'])
           return
         }
       }

@@ -11,8 +11,6 @@ export class AuthService {
     constructor(private http:HttpClient){}
 
     private url = 'http://localhost:3000/'
-
-    static logStatus = false
     
     login(){
         let link = this.url + 'users'

@@ -28,7 +28,10 @@
         <ul class="navbar-nav ms-auto">
             <li class="nav-item auth">
                 <span>
-                    <a class="auth" routerLink="auth/login">Login</a>
+                    <a class="auth" routerLink="auth/login" #login *ngIf="logUser === null || logUser === ''">Login</a>
+                    <a class="auth" *ngIf="logUser !== null && logUser !== ''" (click)="logout()">
+                        <span class="user-name">{{logUser}}</span>, Logout
+                    </a>
                     /
                     <a class="auth" routerLink="auth/register">Register</a>
                 </span>

@@ -12,7 +12,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-      if(AuthService.logStatus){
+      let arr = [null, undefined, '']
+      if(!arr.includes(localStorage.getItem('logStatus'))){
         return true
       }
       else{
