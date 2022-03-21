@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
     firstName: [''],
     lastName: [''],
     address:[''],
-    email:['',Validators.required],
+    email:['',Validators.required,Validators.email],
     gender:[''],
     dateOfBirth:[''],
     password:['',Validators.required]

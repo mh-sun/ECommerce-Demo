@@ -1,19 +1,46 @@
+mat-card{
+  width: 60%;
+  margin-top: 20px;
+  
+}
 
 .content{
-    width: 350px;
-    height: 400px;
-    display: block;
-    margin-top: 2%;
+  
+    /* display: block;
+    margin-top: 2%; */
     margin-left:auto;
     margin-right:auto;  
-    vertical-align:middle;
+    /* vertical-align:middle; */
+}
+.example-section{
+  margin: 2%;
+}
+.example-radio-group {
+ display: inline-flex;
+  flex-direction: column;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+.button{
+  display: block;
+}
+.resetButton{
+  margin-left: 5%;
 }
 .my-form{
     min-width: 450px;
     max-width: 500px;
-    width: 100%;
+    width: 60%;
   }
    
   .full-width {
     width: 100%;
   }
+  .content-center-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
