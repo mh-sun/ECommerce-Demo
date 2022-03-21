@@ -12,7 +12,7 @@ export class AuthService {
 
     private url = 'http://localhost:3000/'
 
-    public isLoggedIn = new BehaviorSubject(false);
+    static logStatus = false
     
     login(){
         let link = this.url + 'users'
