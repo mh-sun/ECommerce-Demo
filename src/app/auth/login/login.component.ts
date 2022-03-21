@@ -35,7 +35,7 @@ export class LoginComponent implements OnDestroy{
         let user = users[i]
         if(user.number === this.user.value.number && user.password === this.user.value.password){
           console.log('logged in')
-          this.http.isLoggedIn.next(true)
+          AuthService.logStatus = true
           this.user.reset()
           this.route.navigate(['/products'])
           return
@@ -55,5 +55,3 @@ export class LoginComponent implements OnDestroy{
     this.dialog.open(CredentialsMismatchComponent)
   }
 }
-
-
