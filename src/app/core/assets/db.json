@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "u0.6612331635620694",
+      "email": "atkia.karim@selise.ch",
+      "password": "1455",
+      "firstName": "akila",
+      "lastName": "karim",
+      "dateOfBirth": "2022-02-28T18:00:00.000Z",
+      "gender": "female"
+    }
+  ]
+}
