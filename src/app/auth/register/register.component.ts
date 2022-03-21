@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
     address:[''],
     email:['',Validators.required],
     gender:[''],
+    dateOfBirth:[''],
     password:['',Validators.required]
   });
   registerSubcription:any;
@@ -27,8 +28,15 @@ export class RegisterComponent implements OnInit,OnDestroy {
   }
   onSubmit(){
     console.log(this.profileForm.value);
-    let newId = +this.http.getId()+1;
-    const user:User = {id:newId,email:this.profileForm.get('email')?.value,password:this.profileForm.get('password')?.value};
+    const user:User = 
+    { id:'',
+      email:this.profileForm.get('email')?.value,
+      password:this.profileForm.get('password')?.value,
+      firstName: this.profileForm.get('firstName')?.value,
+      lastName: this.profileForm.get('lastName')?.value,
+      dateOfBirth: this.profileForm.get('dateOfBirth')?.value,
+      gender: this.profileForm.get('gender')?.value,
+    };
     
     this.registerSubcription =this.http.Registration(user).subscribe((data: any)=>{
       console.log(data)

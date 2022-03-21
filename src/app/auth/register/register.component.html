@@ -22,16 +22,16 @@
            </mat-form-field>
            <section class="example-section">
             <label class="example-margin">Gender:</label>
-            <mat-radio-group >
-              <mat-radio-button class="example-margin" value="after">Male</mat-radio-button>
-              <mat-radio-button class="example-margin" value="before">Female</mat-radio-button>
-              <mat-radio-button class="example-margin" value="before">Other</mat-radio-button>
+            <mat-radio-group formControlName="gender" >
+              <mat-radio-button class="example-margin" value="male">Male</mat-radio-button>
+              <mat-radio-button class="example-margin" value="female">Female</mat-radio-button>
+              <mat-radio-button class="example-margin" value="other">Other</mat-radio-button>
             </mat-radio-group>
           </section>
        
           <mat-form-field>
             <mat-label>Date of Birth</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" placeholder="Choose a date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

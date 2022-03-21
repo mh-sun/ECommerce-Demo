@@ -1,24 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "atkia@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": 2,
+      "id": "u0.6612331635620694",
       "email": "atkia.karim@selise.ch",
-      "password": "1455"
-    },
-    {
-      "id": 3,
-      "email": "atkia.karim@selise.ch",
-      "password": "1455333"
-    },
-    {
-      "id": 4,
-      "email": "bsse1015@iit.du.ac.bd",
-      "password": "3334"
+      "password": "1455",
+      "firstName": "akila",
+      "lastName": "karim",
+      "dateOfBirth": "2022-02-28T18:00:00.000Z",
+      "gender": "female"
     }
   ]
 }
