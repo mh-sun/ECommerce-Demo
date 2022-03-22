@@ -8,3 +8,10 @@ div.carousel-item img{
     width: 100%;
     height: 550px;
 }
+div.carousel-item h2{
+    font-size: xx-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+div.carousel-item span{
+    font-weight: bolder;
+}
