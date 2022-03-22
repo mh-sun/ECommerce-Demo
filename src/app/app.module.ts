@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
-import { ProductComponent } from './product/product.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -17,8 +16,7 @@ import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    HeaderComponent,
-    ProductComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +29,7 @@ import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
     HttpClientModule
   ],
   providers: [
-   // {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
