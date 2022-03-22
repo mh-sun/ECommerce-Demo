@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { SideNavService } from '../../services/side-nav.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +7,8 @@ import { SideNavService } from '../../services/side-nav.service';
 })
 export class HeaderComponent {
   logUser:String|null = ''
-  constructor(private sidenavService:SideNavService){
+  constructor(){
     this.logUser = localStorage.getItem('logStatus')
   }
-  sidenavToggle(){
-    this.sidenavService.sideNav.next(true)
-  }
-  logout(){
-    localStorage.setItem('logStatus','')
-  }
+  
 }
