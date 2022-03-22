@@ -8,15 +8,7 @@ import { SideNavService } from './core/services/side-nav.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('drawer') drawer!:MatDrawer
 
   title = 'Angular-Project';
 
-  constructor(private sidenavService:SideNavService){
-    this.sidenavService.sideNav.subscribe({
-      next:(value)=>{
-        if(value)this.drawer.toggle()        
-      }
-    })
-  }
 }
