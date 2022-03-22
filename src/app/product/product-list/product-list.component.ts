@@ -18,9 +18,6 @@ export class ProductListComponent implements OnInit {
   getProduct():void{
     this.service.getProduct().subscribe(product=>{this.products = product});
   }
-  getProducts():Product[]{
-    return this.products;
-  }
   share() {
     window.alert('The product has been shared!');
    }

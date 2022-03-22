@@ -8,9 +8,18 @@
       "lastName": "karim",
       "dateOfBirth": "2022-02-28T18:00:00.000Z",
       "gender": "female"
+    },
+    {
+      "id": "u0.7840111858688614",
+      "email": "bsse1015@iit.du.ac.bd",
+      "password": "123",
+      "firstName": "Atkia",
+      "lastName": "Sobah",
+      "dateOfBirth": "2022-03-02T18:00:00.000Z",
+      "gender": "female"
     }
   ],
-  "products":[
+  "products": [
     {
       "id": 1,
       "name": "Phone XL",
@@ -30,7 +39,7 @@
       "description": ""
     }
   ],
-  "shipping":[
+  "shipping": [
     {
       "type": "Overnight",
       "price": 25.99
