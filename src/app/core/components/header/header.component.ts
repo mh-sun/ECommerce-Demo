@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SideNavService } from '../../services/side-nav.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class HeaderComponent {
+  constructor(private sidenavService:SideNavService){
   }
-
+  sidenavToggle(){
+    this.sidenavService.sideNav.next(true)
+  }
 }
