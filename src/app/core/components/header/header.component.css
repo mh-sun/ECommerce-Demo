@@ -38,12 +38,12 @@ div{
     height: 100%;
 }
 .indicator{
-    background-color: aqua;
-    border-radius: 50%;
-    color: white;
-    height: 18px;
-    width: 18px;
+    position:absolute;
     top: 0;
     right: 0;
-
+    font-size: 9px;
+}
+.dot{
+    color: yellow;
+    font-size: 50px;
 }
