@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { CartComponent } from './shared/components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -15,16 +14,18 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path:'cart',
-    component:CartComponent,
-    canActivate:[AuthGuard]
-  },
-  {
     path:'',
     redirectTo:'products',
     pathMatch: 'full'
   },
-  { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
+  {
+    path:'cart',
+    loadChildren:()=>import('./cart/cart.module').then(m=>m.CartModule),
+  },
+  { 
+    path: 'product', 
+    loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
+  },
   {
     path:'**',
     component:PageNotFoundComponent,
