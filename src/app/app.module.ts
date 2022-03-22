@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { HeaderComponent } from './core/components/header/header.component';
-import { ProductComponent } from './product/product.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,12 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent} from'./core/components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    ProductComponent
+    FooterComponent,
   ],
   imports: [
    
@@ -33,7 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule
   ],
   providers: [
-   // {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
