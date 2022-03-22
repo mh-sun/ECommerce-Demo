@@ -12,7 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +21,7 @@ import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
     ProductComponent
   ],
   imports: [
+   
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -28,7 +29,8 @@ import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
    // {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
