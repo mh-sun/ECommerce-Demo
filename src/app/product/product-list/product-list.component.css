@@ -27,7 +27,7 @@ div.carousel-item span{
     border-radius: .25rem;
 } */
 
-.item img {
+/* .item img {
     width: 64px;
 }
 
@@ -38,17 +38,19 @@ div.carousel-item span{
 
 .item a:hover {
     color: blue;
-}
+} */
 
 .card {
-    padding: 20px;
-    margin: 50px;
+    border-radius:5%;
+    padding: 2%;
+    margin: 2%;
 }
 
 .card img {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 15px;
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-bottom: 6%;
     transition: 0.3s ease-in-out;
 }
 
