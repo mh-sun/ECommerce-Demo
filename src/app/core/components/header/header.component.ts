@@ -14,6 +14,7 @@ export class HeaderComponent {
   constructor(private cartService:CartApiService, private logger:LogService){
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
+        console.log(res);
         this.logStatus = res
       }
     })
@@ -26,6 +27,6 @@ export class HeaderComponent {
   }
   
   logOut(){
-    this.logger.logout
+    this.logger.logout()
   }
 }

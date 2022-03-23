@@ -1,21 +1,23 @@
-<mat-card class="self-center">
-  <form class="form self-center content-center-col" [formGroup]="user" (ngSubmit)="onLogin()">
-    <mat-label>
-      <h1>Login Page</h1>
-    </mat-label>
-
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Ex. test@test.com" formControlName="email">
-    </mat-form-field>
+<mat-card class="w-50 self-center p-4 my-5">
+  <div class="container">
+    <form class="d-flex flex-column justify-items-center align-items-center" [formGroup]="user" (ngSubmit)="onLogin()">
+      <mat-label>
+        <h1>Login Page</h1>
+      </mat-label>
   
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="******" formControlName="password">
-    </mat-form-field>
-    <div class="content-center-row">
-      <a mat-raised-button routerLink="/auth/register" >Register</a>
-      <button mat-raised-button type="submit" [disabled]="!user.valid">Login</button>
-    </div>
-  </form>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Ex. test@test.com" formControlName="email">
+      </mat-form-field>
+    
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="******" formControlName="password">
+      </mat-form-field>
+      <div class="content-center-row">
+        <a mat-raised-button routerLink="/auth/register" >Register</a>
+        <button mat-raised-button type="submit" [disabled]="!user.valid">Login</button>
+      </div>
+    </form>
+  </div>
 </mat-card>
