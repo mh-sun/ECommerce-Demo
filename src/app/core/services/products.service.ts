@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { Product } from '../models/product.model';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +8,10 @@ import { Product } from '../models/product.model';
 export class ProductsService {
 
   constructor(private http:HttpClient) { }
-  private url='http://localhost:3000/products'
+  private url="https://fakestoreapi.com/"
 
   getProduct(){
-    return this.http.get<any>("https://fakestoreapi.com/products")
+    return this.http.get<any>(this.url+"products")
     .pipe(map((res:any)=>{
       return res;
     }))
