@@ -1,4 +1,4 @@
-<ng-container *ngIf="true">
+<ng-container *ngIf="products.length!=0">
     <div class="container">
         <div class="card-table">
             <div class="cart-product">
@@ -23,7 +23,7 @@
                             <td style="width: 25%;">{{item.description}}</td>
                             <th style="width: 12%;">{{item.price}}</th>
                             <td style="width: 12%;">1</td>
-                            <td style="width: 12%;">{{item.price}}</td>
+                            <td style="width: 12%;">{{item.price*1}}</td>
                             <td>
                                 <button (click)="removeItem(item)" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
@@ -44,7 +44,12 @@
     </div>
 </ng-container>
 
+<<<<<<< HEAD
+
+<ng-container *ngIf="products.length==0">
+=======
 <ng-container *ngIf="true">
+>>>>>>> cdf6458388392a98e7d01da1de8569c464f68e34
     <div class="container-fluid py-4">
         <div class="card d-flex align-items-center p-3">
             <h1 class="card-title">Cart</h1>

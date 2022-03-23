@@ -7,34 +7,35 @@ import { BehaviorSubject, map } from 'rxjs';
 })
 export class CartApiService {
 
-  public cartItemList : any =[]
-  public productList = new BehaviorSubject<any>([]);
-  public search = new BehaviorSubject<string>("");
+  private cartItemList : any =[{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops","price":109.95,"description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday","category":"men's clothing","image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg","rating":{"rate":3.9,"count":120}}]
+  private productList = new BehaviorSubject<any>([{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops","price":109.95,"description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday","category":"men's clothing","image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg","rating":{"rate":3.9,"count":120}}]);
 
   constructor(private http:HttpClient) { 
     
   }
   getProducts(){
-    return this.productList.asObservable();
+    return this.productList;
   }
 
-  setProduct(product : any){
-    this.cartItemList.push(...product);
-    this.productList.next(product);
+  getCartItemList(){
+    return this.cartItemList;
   }
+
   addtoCart(product : any){
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
     this.getTotalPrice();
     console.log(this.cartItemList)
   }
+
   getTotalPrice() : number{
     let grandTotal = 0;
     this.cartItemList.map((a:any)=>{
-      grandTotal += a.total;
+      grandTotal += a.price;
     })
     return grandTotal;
   }
+
   removeCartItem(product: any){
     this.cartItemList.map((a:any, index:any)=>{
       if(product.id=== a.id){
@@ -43,6 +44,7 @@ export class CartApiService {
     })
     this.productList.next(this.cartItemList);
   }
+  
   removeAllCart(){
     this.cartItemList = []
     this.productList.next(this.cartItemList);
