@@ -13,15 +13,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
 import { FooterComponent} from'./core/components/footer/footer.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
+    CartComponent
   ],
   imports: [
-   
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
