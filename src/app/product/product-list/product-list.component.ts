@@ -18,12 +18,12 @@ export class ProductListComponent implements OnInit {
       this.productList = res;
       this.filterCategory = res;
       this.productList.forEach((a:any) => {
-        // if(a.category ==="women's clothing" || a.category ==="men's clothing"){
-        //   a.category ="fashion"
-        // }
+      //   // if(a.category ==="women's clothing" || a.category ==="men's clothing"){
+      //   //   a.category ="fashion"
+      //   // }
         Object.assign(a,{quantity:1,total:a.price});
       });
-      console.log(this.productList)
+      // console.log(this.productList)
     });
 
     // this.cartService.search.subscribe((val:any)=>{
