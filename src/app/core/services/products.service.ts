@@ -9,7 +9,6 @@ import { Product } from '../models/product.model';
 export class ProductsService {
 
   constructor(private http:HttpClient) { }
-  private url='http://localhost:3000/products'
 
   getProduct(){
     return this.http.get<any>("https://fakestoreapi.com/products")
