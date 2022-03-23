@@ -10,7 +10,7 @@ import { User } from "../models/user.login.model";
 export class AuthService {
     constructor(private http:HttpClient){}
 
-    private url = 'http://localhost:3000/'
+    private url = 'https://fakestoreapi.com/'
     
     login(){
         let link = this.url + 'users'

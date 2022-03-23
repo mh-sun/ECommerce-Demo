@@ -33,11 +33,12 @@ export class LoginComponent implements OnDestroy{
   loginSubscription:any = null
 
   onLogin(){
-    this.loginSubscription = this.http.login().subscribe((users:User[])=>{
+    this.loginSubscription = this.http.login().subscribe((users:any)=>{
+      
       for(let i=0; i<users.length; i++){
         let user = users[i]
         if(user.email === this.user.value.email && user.password === this.user.value.password){
-          this.logger.logIn(user.firstName)
+          this.logger.logIn(user.username)
           this.user.reset()
           this.route.navigate(['/cart'])
           return
