@@ -11,8 +11,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent} from'./core/components/footer/footer.component';
+import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
