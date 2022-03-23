@@ -35,12 +35,17 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item auth">
-                    <span>
-                        <a class="auth" routerLink="auth/login" #login *ngIf="logUser === null || logUser === ''">Login</a>
-                        <a class="auth" *ngIf="logUser !== null && logUser !== ''">
+                    <div *ngIf="!logStatus;then loggedIn else loggedOut"></div>
+                    <ng-template #loggedIn>
+                        <a class="auth" routerLink="auth/login" >Login</a>
+                        <span id="or"> or </span>
+                        <a class="auth" routerLink="auth/register" >Register</a>
+                    </ng-template>
+                    <ng-template #loggedOut>
+                        <a class="auth" (click)="logOut()">
                             Logout
                         </a>
-                    </span>
+                    </ng-template>
                 </li>
             </ul>
         </div>

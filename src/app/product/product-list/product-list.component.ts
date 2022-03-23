@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
     //   this.searchKey = val;
     // })
   }
-
+  
   ngOnInit(): void {
     
   }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CartApiService } from '../../services/cart-api.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,16 @@ import { CartApiService } from '../../services/cart-api.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  logUser:String|null = ''
+  logStatus!:boolean
   cartItemNumber:number = 0
-  constructor(private cartService:CartApiService){
-    this.logUser = localStorage.getItem('logStatus')
+
+  constructor(private cartService:CartApiService, private logger:LogService){
+    this.logger.getLogStatus().subscribe({
+      next:(res:boolean)=>{
+        this.logStatus = res
+      }
+    })
+
     this.cartService.getProducts().subscribe({
       next:res=>{
         this.cartItemNumber = cartService.getCartItemList().length
@@ -18,4 +25,7 @@ export class HeaderComponent {
     })
   }
   
+  logOut(){
+    this.logger.logout
+  }
 }

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
 import { User } from 'src/app/core/models/user.login.model';
+import { LogService } from 'src/app/core/services/log.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginComponent implements OnDestroy{
     private http:AuthService,
     private route:Router,
     private dialog:MatDialog,
+    private logger:LogService
   ){}
   
   user = this.fb.group({
@@ -35,9 +37,7 @@ export class LoginComponent implements OnDestroy{
       for(let i=0; i<users.length; i++){
         let user = users[i]
         if(user.email === this.user.value.email && user.password === this.user.value.password){
-          console.log('logged in')
-          console.log(user);
-          localStorage.setItem('logStatus', user.firstName)
+          this.logger.logIn(user.firstName)
           this.user.reset()
           this.route.navigate(['/cart'])
           return
