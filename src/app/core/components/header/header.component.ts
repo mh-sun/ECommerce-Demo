@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 
@@ -10,6 +10,7 @@ import { LogService } from '../../services/log.service';
 export class HeaderComponent {
   logStatus!:boolean
   cartItemNumber:number = 0
+  scrolled:boolean = false
 
   constructor(private cartService:CartApiService, private logger:LogService){
     this.logger.getLogStatus().subscribe({
@@ -28,5 +29,9 @@ export class HeaderComponent {
   
   logOut(){
     this.logger.logout()
+  }
+
+  @HostListener('window:scroll',['$event']) onScroll(){
+    window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
   }
 }
