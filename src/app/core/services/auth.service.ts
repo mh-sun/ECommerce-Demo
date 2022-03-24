@@ -8,7 +8,9 @@ import { User } from "../models/user.login.model";
 })
 
 export class AuthService {
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient){
+        
+    }
 
     private url = 'https://fakestoreapi.com/'
     

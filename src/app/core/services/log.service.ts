@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 export class LogService {
 
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
+
   public getLogStatus(){
     return this._logStatus
   }
 
-  logIn(name:string){
-    localStorage.setItem('loggedUser', name)
+  logIn(user:any){
+    localStorage.setItem('loggedUser', JSON.stringify(user))
     this._logStatus.next(true)
   }
   logout(){

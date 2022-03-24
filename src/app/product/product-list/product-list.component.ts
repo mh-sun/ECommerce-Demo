@@ -8,10 +8,11 @@ import { ProductsService } from 'src/app/core/services/products.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent{
   public productList : any ;
   public filterCategory : any
   searchKey:string ="";
+
   constructor(private api : ProductsService, private cartService : CartApiService) {
     this.api.getProduct()
     .subscribe(res=>{
@@ -30,10 +31,7 @@ export class ProductListComponent implements OnInit {
     //   this.searchKey = val;
     // })
   }
-  
-  ngOnInit(): void {
-    
-  }
+
   addtocart(item: any){
     this.cartService.addToCart(item);
   }
@@ -45,5 +43,12 @@ export class ProductListComponent implements OnInit {
         return a;
       }
     })
+  }
+  onClickAddCart(){
+
+  }
+
+  onClickDiscover(){
+
   }
 }
