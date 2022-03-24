@@ -9,9 +9,10 @@
     border-radius: 5px;
     display: flex;
     align-self: center;
+    transition-duration: 500ms;
 }
 .checkoutinActive{
-    visibility: hidden;
+    right: -500px;
 }
 .row{
     width: 100%;

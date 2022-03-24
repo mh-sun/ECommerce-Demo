@@ -58,10 +58,10 @@ div{
     position:fixed;
     top: 0;
     width: 100%;
-    transition: 0.2s linear;
+    transition: 500ms linear;
     z-index: 100;
 }
 .noFixed{
     position: static;
-    transition: 0.2s linear;
+    transition: 500ms linear;
 }
