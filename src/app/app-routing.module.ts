@@ -26,6 +26,7 @@ const routes: Routes = [
     path: 'product', 
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
   },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {
     path:'**',
     component:PageNotFoundComponent,
