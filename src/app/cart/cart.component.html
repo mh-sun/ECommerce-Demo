@@ -1,7 +1,7 @@
-<div class="container-fluid p-4 bg-dark checkout d-flex flex-column justify-content-around align-items-center" #checkout>
-    <div class="row">
-        <button class="btn btn-warning text-light">
-            Proceed to pay
+<div class="container-fluid p-4 bg-dark checkout d-flex flex-column justify-content-around align-items-center" id="checkout">
+    <div>
+        <button class="text-light cross" (click)="checkOut()">
+            <i class="fas fa-times-circle"></i>
         </button>
     </div>
     <div class="row p-3 text-center">
@@ -63,7 +63,7 @@
             <tr class="row py-1"><hr></tr>
             <tr class="row py-1">
                 <td class="col"><span class="h3">Total</span></td>
-                <td class="col text-right"><span class="h3">{{grandTotal + deliveryCharge}}</span></td>
+                <td class="col text-right"><span class="h3">{{getTotal()}}</span></td>
             </tr>
         </table>
     </div>
@@ -126,7 +126,7 @@
         <div class="card d-flex align-items-center p-3 w-75 self-center">
             <h1 class="card-title">Cart</h1>
             <div class="card-body cart">
-                <div class="col-sm-12 empty-cart-cls "> 
+                <div class="col-sm-12 empty-cart-cls d-flex flex-column justify-content-around align-items-center"> 
                     <img src="../../assets/images/cart/cart-empty.jpg" width="130" height="130" class="img-fluid mb-4 mr-3">
                     <h3><strong>Your Cart is Empty</strong></h3>
                     <h4>Add something to make me happy :)</h4> 

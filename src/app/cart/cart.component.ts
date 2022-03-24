@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
 
@@ -14,8 +14,7 @@ export class CartComponent implements OnInit {
   public deliveryCharge:number = 100
 
   constructor(
-    private cartService : CartApiService,
-  ) { 
+    private cartService : CartApiService ) {
   }
 
   ngOnInit(): void {
@@ -31,6 +30,7 @@ export class CartComponent implements OnInit {
           }
       })
     }
+    this.checkOut()
   }
   removeItem(item: any){
     this.cartService.removeCartItem(item);
@@ -39,5 +39,12 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart();
   }
   checkOut(){
+    let elem = document.getElementById('checkout')
+    elem?.classList.contains('checkoutinActive')?
+      elem.classList.remove('checkoutinActive'):
+      elem?.classList.add('checkoutinActive')
+  }
+  getTotal(){
+    return (this.grandTotal + this.deliveryCharge).toFixed(2)
   }
 }
