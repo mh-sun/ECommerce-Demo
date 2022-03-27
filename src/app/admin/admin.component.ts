@@ -9,7 +9,7 @@ export class AdminComponent implements OnInit{
   title = 'admin-panel-layout';
   sideBarOpen = true;
   ngOnInit() {
-   console.log( document.getElementsByTagName('app-header'))
+  //  console.log( document.getElementsByTagName('app-header'))
 
   }
   sideBarToggler() {

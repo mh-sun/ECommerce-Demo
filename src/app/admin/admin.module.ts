@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AngularMaterialModule } from '../angular-material.module';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +18,14 @@ import { AngularMaterialModule } from '../angular-material.module';
     DashboardComponent,
     HeaderComponent,
     HomeComponent,
-    SidenavComponent
+    SidenavComponent,
+    ProductEditComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }
