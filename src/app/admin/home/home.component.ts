@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  title:string|any;
+  headerTitle:string|any;
+  constructor(private route:Router ) { }
 
   ngOnInit(): void {
+    this.title = 'Home';
+    this.headerTitle = document.getElementById('headerTitle')
+    this.headerTitle.innerText = this.title;
   }
 
 }
