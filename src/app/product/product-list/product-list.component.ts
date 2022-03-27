@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +15,8 @@ export class ProductListComponent{
   public filterCategory : any
   searchKey:string ="";
 
-  constructor(private api : ProductsService, private cartService : CartApiService) {
+  constructor(private api : ProductsService, private cartService : CartApiService,
+    private dialog:MatDialog) {
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
@@ -50,5 +53,12 @@ export class ProductListComponent{
 
   onClickDiscover(){
 
+  }
+  viewProduct(product:any){
+    console.log(product);
+    let dialogRef = this.dialog.open(ProductDetailsComponent, {
+      data: product,
+    })
+    // dialogRef.afterClosed().subscribe(res=>console.log)
   }
 }

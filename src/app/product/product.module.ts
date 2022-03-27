@@ -5,7 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AngularMaterialModule } from '../angular-material.module';
-
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { AngularMaterialModule } from '../angular-material.module';
   imports: [
     CommonModule,
     ProductRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxStarRatingModule
   ]
 })
 export class ProductModule { }

@@ -1,6 +1,3 @@
-/* .carousel{
-    margin-top: 5%;
-} */
 .btn-carousel{
     border: 2px solid white;
     background: transparent;
@@ -18,30 +15,6 @@ div.carousel-item h2{
 div.carousel-item span{
     font-weight: bolder;
 }
-/* .card-top {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background: #fff; 
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: .25rem;
-} */
-
-/* .item img {
-    width: 64px;
-}
-
-.item {
-    margin: 0px 15px;
-    text-align: center;
-}
-
-.item a:hover {
-    color: blue;
-} */
 
 .card {
     border-radius:5%;
@@ -52,8 +25,8 @@ div.carousel-item span{
 .card img {
     width: 70%;
     height: 70%;
-    margin-left: 15%;
-    margin-bottom: 6%;
+    margin: auto;
+    padding: 10%;
     transition: 0.3s ease-in-out;
 }
 
