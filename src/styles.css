@@ -18,3 +18,49 @@ p{
     margin-left: auto;
     margin-right: auto;
 }
+mat-card{
+    width: 60%;
+    margin-top: 20px;
+    
+  }
+  
+  .content{
+    
+      /* display: block;
+      margin-top: 2%; */
+      margin-left:auto;
+      margin-right:auto;  
+      /* vertical-align:middle; */
+  }
+  .example-section{
+    margin: 2%;
+  }
+  .example-radio-group {
+   display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .button{
+    display: block;
+  }
+  .resetButton{
+    margin-left: 5%;
+  }
+  .my-form{
+      min-width: 450px;
+      max-width: 500px;
+      width: 60%;
+    }
+     
+    .full-width {
+      width: 100%;
+    }
+    .content-center-col{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }

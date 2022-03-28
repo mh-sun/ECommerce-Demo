@@ -269,7 +269,8 @@
         "rating": {
             "rate": 4.1,
             "count": 259
-        }
+        },
+        "variation":{}
     },
     {
         "id": 3,
@@ -281,7 +282,8 @@
         "rating": {
             "rate": 4.7,
             "count": 500
-        }
+        },
+        "variation":{}
     },
     {
         "id": 4,
@@ -293,7 +295,8 @@
         "rating": {
             "rate": 2.1,
             "count": 430
-        }
+        },
+        "variation":{}
     },
     {
         "id": 5,
@@ -305,7 +308,8 @@
         "rating": {
             "rate": 4.6,
             "count": 400
-        }
+        },
+        "variation":{}
     },
     {
         "id": 6,
@@ -317,7 +321,8 @@
         "rating": {
             "rate": 3.9,
             "count": 70
-        }
+        },
+        "variation":{}
     },
     {
         "id": 7,
@@ -329,7 +334,8 @@
         "rating": {
             "rate": 3,
             "count": 400
-        }
+        },
+        "variation":{}
     },
     {
         "id": 8,
@@ -341,7 +347,8 @@
         "rating": {
             "rate": 1.9,
             "count": 100
-        }
+        },
+        "variation":{}
     },
     {
         "id": 9,
@@ -353,7 +360,8 @@
         "rating": {
             "rate": 3.3,
             "count": 203
-        }
+        },
+        "variation":{}
     },
     {
         "id": 10,
@@ -365,7 +373,8 @@
         "rating": {
             "rate": 2.9,
             "count": 470
-        }
+        },
+        "variation":{}
     },
     {
         "id": 11,
@@ -377,7 +386,8 @@
         "rating": {
             "rate": 4.8,
             "count": 319
-        }
+        },
+        "variation":{}
     },
     {
         "id": 12,
@@ -389,7 +399,8 @@
         "rating": {
             "rate": 4.8,
             "count": 400
-        }
+        },
+        "variation":{}
     },
     {
         "id": 13,
@@ -401,7 +412,8 @@
         "rating": {
             "rate": 2.9,
             "count": 250
-        }
+        },
+        "variation":{}
     },
     {
         "id": 14,
@@ -413,7 +425,8 @@
         "rating": {
             "rate": 2.2,
             "count": 140
-        }
+        },
+        "variation":{}
     },
     {
         "id": 15,
@@ -425,7 +438,8 @@
         "rating": {
             "rate": 2.6,
             "count": 235
-        }
+        },
+        "variation":{}
     },
     {
         "id": 16,
@@ -437,7 +451,8 @@
         "rating": {
             "rate": 2.9,
             "count": 340
-        }
+        },
+        "variation":{}
     },
     {
         "id": 17,
@@ -449,7 +464,8 @@
         "rating": {
             "rate": 3.8,
             "count": 679
-        }
+        },
+        "variation":{}
     },
     {
         "id": 18,
@@ -461,7 +477,8 @@
         "rating": {
             "rate": 4.7,
             "count": 130
-        }
+        },
+        "variation":{}
     },
     {
         "id": 19,
@@ -473,7 +490,8 @@
         "rating": {
             "rate": 4.5,
             "count": 146
-        }
+        },
+        "variation":{}
     },
     {
         "id": 20,
@@ -485,7 +503,8 @@
         "rating": {
             "rate": 3.6,
             "count": 145
-        }
+        },
+        "variation":{}
     }
   ]
 }

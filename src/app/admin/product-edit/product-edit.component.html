@@ -1,12 +1,136 @@
+<mat-card class="content">
 <div *ngIf="product">
-    <form [formGroup]="productEditForm">
+    <div class="card py-3">
+    <div class="table">
+        <tr>
+            <td class="col-sm-6">
+              <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
+              <img [src]="product.image" >
+              <!-- </div>  -->
+            </td>
+            <td class="col-sm-8">
+
+    <form class="my-form content content-center-col" [formGroup]="productEditForm" (ngSubmit)="onSubmit()" >
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Title</mat-label>
             <input  matInput  formControlName="title">
         </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Price</mat-label>
+            <input  matInput  formControlName="price">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input  matInput  formControlName="description">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Category</mat-label>
+            <input  matInput  formControlName="category">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Image Link</mat-label>
+            <input  matInput  formControlName="image">
+        </mat-form-field>
+        <!-- <input type="file" accept="image/*" (change)="showPreview($event)" /> -->
+ 
+ 
+        <!-- <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input  matInput  formControlName="rating">
+        </mat-form-field> -->
+        <!-- <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Variation</mat-label>
+        
+            
+        </mat-form-field> -->
+        
+        <!-- <div *ngIf="!variation">
+            <button (click)="addVariation()">Add Variation</button>
+            <div class="table" *ngIf="newVariation" >
+                <tr >
+                    <td>
+                       Keys
+                    </td> 
+                    <td>
+                        Values
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                       <input type="text"/>
+                    </td> 
+                    <td>
+                        <input type="text"/>
+                    </td>
+                </tr>
+
+            </div>
+
+        </div> -->
+
+        <!-- <div class="table" *ngIf="variation" >
+            <tr >
+                <td>
+                   Keys
+                </td> 
+                <td>
+                    Values
+                </td>
+            </tr>
+            <tr >
+                <td>
+                   <input type="text"/>
+                </td> 
+                <td>
+                    <input type="text"/>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                   <input type="text"/>
+                </td> 
+                <td>
+                    <input type="text"/>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                   <input type="text"/>
+                </td> 
+                <td>
+                    <input type="text"/>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                   <input type="text"/>
+                </td> 
+                <td>
+                    <input type="text"/>
+                </td>
+            </tr>
+      
+        </div> -->
+        <ng-container *ngFor="let var_key of var_keys; let i = index">
+            <div class="row full-width">
+                <h4 class="h4 text-secondary" class="col-md-4">{{var_key}}</h4>
+                <mat-radio-group class="col-md-8" [(ngModel)]="Variation[var_key]">
+                    <mat-radio-button *ngFor="let var_val of product.variation[var_key]" [value]="var_val">
+                        {{var_val}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </ng-container>
+
+        <mat-card-actions class="button">
+            <button mat-raised-button color="primary" type="submit" >Save</button>
+          </mat-card-actions>
     </form>
-<p>{{product.id}}</p>
-<p>{{product.title}}</p>
-<p>hello</p>
+</td>
+</tr>
 </div>
+</div>
+</div>
+</mat-card>
+
  

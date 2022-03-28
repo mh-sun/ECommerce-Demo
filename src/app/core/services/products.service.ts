@@ -7,7 +7,7 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
-  url ="https://fakestoreapi.com/products";
+  url ="http://localhost:3000/products";
   constructor(private http:HttpClient) { }
 
   getProduct(){
@@ -21,6 +21,5 @@ export class ProductsService {
     return this.http.get<Product>(newUrl).pipe(map((res:any)=>{
       return res;
     }))
-
   }
 }
