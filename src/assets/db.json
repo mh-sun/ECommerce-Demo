@@ -20,28 +20,24 @@
             "lastname": "doe"
         },
         "phone": "1-570-236-7033",
-        "cart" : {
-            "date": "2020-03-02T00:00:02.000Z",
-            "products": [
-                {
-                    "productId": 1,
-                    "quantity": 4,
-                    "variation":{
-                        "size":"L",
-                        "color":"red"
-                    }
-                },
-                {
-                    "productId": 2,
-                    "quantity": 1
-                },
-                {
-                    "productId": 3,
-                    "quantity": 6
+        "cart" :  [
+            {
+                "productId": 1,
+                "quantity": 4,
+                "variation":{
+                    "size":"L",
+                    "color":"red"
                 }
-            ]
-        },
-        "__v": 0
+            },
+            {
+                "productId": 2,
+                "quantity": 1
+            },
+            {
+                "productId": 3,
+                "quantity": 6
+            }
+        ]
     },
     {
         "address": {
@@ -62,8 +58,7 @@
             "firstname": "david",
             "lastname": "morrison"
         },
-        "phone": "1-570-236-7033",
-        "__v": 0
+        "phone": "1-570-236-7033"
     },
     {
         "address": {
@@ -84,8 +79,7 @@
             "firstname": "kevin",
             "lastname": "ryan"
         },
-        "phone": "1-567-094-1345",
-        "__v": 0
+        "phone": "1-567-094-1345"
     },
     {
         "address": {
@@ -106,8 +100,7 @@
             "firstname": "don",
             "lastname": "romer"
         },
-        "phone": "1-765-789-6734",
-        "__v": 0
+        "phone": "1-765-789-6734"
     },
     {
         "address": {
@@ -128,8 +121,7 @@
             "firstname": "derek",
             "lastname": "powell"
         },
-        "phone": "1-956-001-1945",
-        "__v": 0
+        "phone": "1-956-001-1945"
     },
     {
         "address": {
@@ -150,8 +142,7 @@
             "firstname": "david",
             "lastname": "russell"
         },
-        "phone": "1-678-345-9856",
-        "__v": 0
+        "phone": "1-678-345-9856"
     },
     {
         "address": {
@@ -172,8 +163,7 @@
             "firstname": "miriam",
             "lastname": "snyder"
         },
-        "phone": "1-123-943-0563",
-        "__v": 0
+        "phone": "1-123-943-0563"
     },
     {
         "address": {
@@ -194,8 +184,7 @@
             "firstname": "william",
             "lastname": "hopkins"
         },
-        "phone": "1-478-001-0890",
-        "__v": 0
+        "phone": "1-478-001-0890"
     },
     {
         "address": {
@@ -216,8 +205,7 @@
             "firstname": "kate",
             "lastname": "hale"
         },
-        "phone": "1-678-456-1934",
-        "__v": 0
+        "phone": "1-678-456-1934"
     },
     {
         "address": {
@@ -238,8 +226,7 @@
             "firstname": "jimmie",
             "lastname": "klein"
         },
-        "phone": "1-104-001-4567",
-        "__v": 0
+        "phone": "1-104-001-4567"
     }
   ],
   "products":[
@@ -254,10 +241,7 @@
             "rate": 3.9,
             "count": 120
         },
-        "variation":{
-            "color":["red","green"],
-            "size":["S", "M", "L"]
-        }
+        "variation":{}
     },
     {
         "id": 2,
@@ -269,6 +253,10 @@
         "rating": {
             "rate": 4.1,
             "count": 259
+        },
+        "variation":{
+            "color":["red","green"],
+            "size":["S", "M", "L"]
         }
     },
     {

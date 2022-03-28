@@ -28,30 +28,18 @@
                             </h5>
                             <hr>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Color</h4>
-                                </div>
-                                <div class="col-md-8">
-                                    <!-- <mat-radio-group>
-                                        <mat-radio-button value="1"></mat-radio-button>
-                                        <mat-radio-button value="2"></mat-radio-button>
-                                        <mat-radio-button value="1"></mat-radio-button>
-                                        <mat-radio-button value="2"></mat-radio-button>
-                                    </mat-radio-group> -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Size</h4>
-                                </div>
-                                <div class="col-md-8">
-                                    <mat-radio-group>
-                                        <mat-radio-button value="1">S </mat-radio-button>
-                                        <mat-radio-button value="2">M </mat-radio-button>
-                                        <mat-radio-button value="1">L </mat-radio-button>
-                                        <mat-radio-button value="2">XL </mat-radio-button>
-                                    </mat-radio-group>
-                                </div>
+                                <ng-container *ngFor="let var_key of variations">
+                                    <div class="col-md-4">
+                                        <h4 class="h4 text-secondary">{{var_key}}</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <mat-radio-group>
+                                            <mat-radio-button *ngFor="let var_val of data.variation[var_key]" [value]="var_val">
+                                                {{var_val}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </ng-container>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">

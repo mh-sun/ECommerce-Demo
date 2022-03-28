@@ -11,13 +11,16 @@ import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
     useValue: { color: "primary" },
 }]
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent {
 
+  public variations:any = []
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef:MatDialogRef<ProductDetailsComponent>
-  ) {}
-  ngOnInit(): void {
+  ) {
+    this.variations = Object.keys(this.data.variation)
+    console.log(this.data.variation);
     
   }
   close(){
