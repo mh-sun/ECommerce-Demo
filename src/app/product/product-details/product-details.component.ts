@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { CartApiService } from 'src/app/core/services/cart-api.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,18 +14,24 @@ import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 })
 export class ProductDetailsComponent {
 
-  public variations:any = []
-  
+  public var_keys:any = []
+  public variation:any = {}
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef:MatDialogRef<ProductDetailsComponent>
+    private dialogRef:MatDialogRef<ProductDetailsComponent>,
+    private cartService: CartApiService
   ) {
-    this.variations = Object.keys(this.data.variation)
-    console.log(this.data.variation);
-    
+    this.var_keys = Object.keys(this.data.variation)
+    this.var_keys.forEach((k:any)=>{
+      this.variation[k] = this.data.variation[k][0]
+    })
   }
   close(){
     this.dialogRef.close()
   }
-  
+  addtocart(item: any){
+    console.log(item.title, this.variation);
+    // this.cartService.addToCart(item);
+  }
 }

@@ -21,9 +21,6 @@ export class ProductListComponent{
     .subscribe(res=>{
       this.productList = res;
       this.filterCategory = res;
-      // this.productList.forEach((a:any) => {
-      //   Object.assign(a,{quantity:1,total:a.price});
-      // });
     });
   }
   addtocart(item: any){
