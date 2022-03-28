@@ -12,7 +12,7 @@ export class AuthService {
         
     }
 
-    private url = 'https://fakestoreapi.com/'
+    private url = 'http://localhost:3000/'
     
     login(){
         let link = this.url + 'users'

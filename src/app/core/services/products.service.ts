@@ -7,12 +7,44 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
-  url ="https://fakestoreapi.com/products";
+  url ="http://localhost:3000/products";
   constructor(private http:HttpClient) { }
 
   getProduct(){
     return this.http.get<any>(this.url)
     .pipe(map((res:any)=>{
+      console.log(res);
+      res.forEach((a:any)=>{
+        Object.assign(a,{
+          quantity:1,
+          total:a.price
+        });
+
+        console.log(a.category);
+        
+        if(a.variation != {} && a.variation != undefined) return res
+
+        if(a.category=='men\'s clothing' || a.category=='women\'s clothing'){
+          Object.assign(a,{
+            variation:{
+              color:['red', 'black', 'yellow'],
+              size:['S', 'M', 'L', 'XL'],
+            }
+          })
+        }
+        else if(a.category=='jewelery'){
+          Object.assign(a,{
+            variation:{
+              material:['gold', 'silver']
+            }
+          })
+        }
+        else {
+          Object.assign(a,{
+            variation:{}
+          })
+        }
+      })
       return res;
     }))
   }

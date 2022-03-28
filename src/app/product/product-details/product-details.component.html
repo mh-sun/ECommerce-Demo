@@ -27,22 +27,16 @@
                                 <del>{{(data.price+data.price*.3).toFixed(2)}}</del> <strong> -30% </strong>
                             </h5>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Color</h4>
+                            <ng-container *ngFor="let var_key of var_keys; let i = index">
+                                <div class="row">
+                                    <h4 class="h4 text-secondary" class="col-md-4">{{var_key}}</h4>
+                                    <mat-radio-group class="col-md-8" [(ngModel)]="variation[var_key]">
+                                        <mat-radio-button *ngFor="let var_val of data.variation[var_key]" [value]="var_val">
+                                            {{var_val}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
                                 </div>
-                                <div class="col-md-8">
-                                    <h4 class="h4"></h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Size</h4>
-                                </div>
-                                <div class="col-md-8">
-                                    <h4 class="h4"></h4>
-                                </div>
-                            </div>
+                            </ng-container>
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4 class="h4 text-secondary">Quantity</h4>
@@ -57,7 +51,7 @@
                     </td>
                 </tr>
             </div>
-            <button class="btn btn-primary add-cart"><i class="fas fa-cart-plus"></i></button>
+            <button class="btn btn-primary add-cart" (click)="addtocart(data)"><i class="fas fa-cart-plus"></i></button>
         </div>
     </div>
 </div>
