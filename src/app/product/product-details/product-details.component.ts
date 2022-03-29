@@ -21,7 +21,8 @@ export class ProductDetailsComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef:MatDialogRef<ProductDetailsComponent>,
     private cartService: CartApiService
-  ) {
+  ) 
+  {
     this.var_keys = Object.keys(this.data.variation)
     this.var_keys.forEach((k:any)=>{
       this.variation[k] = this.data.variation[k][0]
