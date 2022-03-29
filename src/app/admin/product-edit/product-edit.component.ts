@@ -23,7 +23,7 @@ export class ProductEditComponent implements OnInit {
   product:Product|any;
   productEditForm:FormGroup|any;
   productIdFromRoute!: number;
-  
+  variantType=true;
   constructor(private fb:FormBuilder,private route:ActivatedRoute,private service:ProductsService) {}
 
   ngOnInit(): void {
@@ -49,7 +49,11 @@ export class ProductEditComponent implements OnInit {
      this.var_keys.forEach((k:any)=>{
        this.Variation[k] = this.product.variation[k][0]
      })
-     console.log(this.Variation,this.var_keys)
+     console.log(this.Variation,this.var_keys.length)
+
+     if(this.var_keys.length==0){
+       this.variantType=false;
+     }
      this.product.image = this.productEditForm.get('image').value;
 
     });

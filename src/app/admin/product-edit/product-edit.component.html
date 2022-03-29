@@ -43,16 +43,21 @@
         
             
         </mat-form-field> -->
-        
+       <div class="full-width variant">
+        <div *ngIf="variantType" class="full-width">
+            <p class="title">Variant:</p>
+        </div>
         <ng-container *ngFor="let var_key of var_keys; let i = index">
             <div class="table full-width">
                 <div class="d-flex">
-                    <div class="col-md-4">{{var_key}}</div>
+                    <div class="col-md-4">
+                        <span class="d-flex center">{{var_key}}</span>
+                    </div>
                     <div class="col-md-8 d-flex flex-column">
                         <span class="d-flex" *ngFor="let var_val of product.variation[var_key]; let j=index" >{{var_val}} 
                             <button mat-button (click)="removeVariation(var_key,j)"><mat-icon >remove</mat-icon></button>
                         </span>
-                        <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon></button>
+                        <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon> Add {{var_key}} type</button>
                         <div *ngIf="i==index">
                             <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
                             <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
@@ -74,6 +79,7 @@
             </div>
         </div>
 
+       </div>
 
         <mat-card-actions class="button">
             <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >Save</button>
