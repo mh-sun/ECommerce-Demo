@@ -13,15 +13,11 @@ export class ProductsService {
   getProduct(){
     return this.http.get<any>(this.url)
     .pipe(map((res:any)=>{
-      console.log(res);
       res.forEach((a:any)=>{
         Object.assign(a,{
           quantity:1,
           total:a.price
-        });
-
-        console.log(a.category);
-        
+        });        
         if(a.variation != {} && a.variation != undefined) return res
 
         if(a.category=='men\'s clothing' || a.category=='women\'s clothing'){
