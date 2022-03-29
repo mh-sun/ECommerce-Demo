@@ -28,6 +28,12 @@ export class ProductsService {
       console.log(data);
     });
   }
-
+  
+  public deletePost(id:number) {
+    const newUrl = this.url+'/'+id;
+    this.http.delete(newUrl).subscribe(data => {
+      console.log(data);
+    });
+  }
 
 }

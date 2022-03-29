@@ -16,22 +16,26 @@ export class DashboardComponent implements OnInit {
   dataSource:Product[] = [];
 
   constructor(private route:Router  ,private service:ProductsService) { 
+    this.title = 'Product List';
+    this.headerTitle = document.getElementById('headerTitle')
+    this.headerTitle.innerText = this.title;
+  }
+
+  ngOnInit(): void {
+   
     this.service.getProduct().subscribe((res)=>{
       this.dataSource = res;
     });
   }
-
-  ngOnInit(): void {
-    this.title = 'Product List';
-  
-    this.headerTitle = document.getElementById('headerTitle')
-    this.headerTitle.innerText = this.title;
-  }
-  edit(id:number){
-    console.log('called')
-    console.log(this.route.url)
-    // this.comp.getProduct(id);
-  console.log(id)
+  // edit(id:number){
+  //   console.log('called')
+  //   console.log(this.route.url)
+  //   // this.comp.getProduct(id);
+  // console.log(id)
+  // }
+  delete(id:number){
+    this.service.deletePost(id);
+    this.ngOnInit();
   }
 
   addData(){}
