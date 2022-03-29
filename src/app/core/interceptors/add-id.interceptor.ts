@@ -15,17 +15,17 @@ export class AddIDInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let user:User=request.body;
-    if(request.body!=null){
+  //   let user:User=request.body;
+  //   if(request.body!=null){
      
-      user.id ='u'+ Math.random();
-             console.log('hellooo')
-             console.log(user);
-    }
-    const modified = request.clone({
-      body:user
-   } );
-   return next.handle(modified);
+  //     user.id ='u'+ Math.random();
+  //            console.log('hellooo')
+  //            console.log(user);
+  //   }
+  //   const modified = request.clone({
+  //     body:user
+  //  } );
+   return next.handle(request);
   }
 }
 
