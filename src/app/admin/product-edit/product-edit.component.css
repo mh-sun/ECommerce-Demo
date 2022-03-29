@@ -2,3 +2,6 @@
     width: 70%;
     height: 100%;
 }
+td{
+    border: 1px solid black;
+}

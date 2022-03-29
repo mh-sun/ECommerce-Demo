@@ -10,7 +10,7 @@
             </td>
             <td class="col-sm-8">
 
-    <form class="my-form content content-center-col" [formGroup]="productEditForm" (ngSubmit)="onSubmit()" >
+    <form class="my-form content content-center-col" [formGroup]="productEditForm" >
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Title</mat-label>
             <input  matInput  formControlName="title">
@@ -44,86 +44,39 @@
             
         </mat-form-field> -->
         
-        <!-- <div *ngIf="!variation">
-            <button (click)="addVariation()">Add Variation</button>
-            <div class="table" *ngIf="newVariation" >
-                <tr >
-                    <td>
-                       Keys
-                    </td> 
-                    <td>
-                        Values
-                    </td>
-                </tr>
-                <tr >
-                    <td>
-                       <input type="text"/>
-                    </td> 
-                    <td>
-                        <input type="text"/>
-                    </td>
-                </tr>
-
-            </div>
-
-        </div> -->
-
-        <!-- <div class="table" *ngIf="variation" >
-            <tr >
-                <td>
-                   Keys
-                </td> 
-                <td>
-                    Values
-                </td>
-            </tr>
-            <tr >
-                <td>
-                   <input type="text"/>
-                </td> 
-                <td>
-                    <input type="text"/>
-                </td>
-            </tr>
-            <tr >
-                <td>
-                   <input type="text"/>
-                </td> 
-                <td>
-                    <input type="text"/>
-                </td>
-            </tr>
-            <tr >
-                <td>
-                   <input type="text"/>
-                </td> 
-                <td>
-                    <input type="text"/>
-                </td>
-            </tr>
-            <tr >
-                <td>
-                   <input type="text"/>
-                </td> 
-                <td>
-                    <input type="text"/>
-                </td>
-            </tr>
-      
-        </div> -->
         <ng-container *ngFor="let var_key of var_keys; let i = index">
-            <div class="row full-width">
-                <h4 class="h4 text-secondary" class="col-md-4">{{var_key}}</h4>
-                <mat-radio-group class="col-md-8" [(ngModel)]="Variation[var_key]">
-                    <mat-radio-button *ngFor="let var_val of product.variation[var_key]" [value]="var_val">
-                        {{var_val}}
-                    </mat-radio-button>
-                </mat-radio-group>
+            <div class="table full-width">
+                <div class="d-flex">
+                    <div class="col-md-4">{{var_key}}</div>
+                    <div class="col-md-8 d-flex flex-column">
+                        <span class="d-flex" *ngFor="let var_val of product.variation[var_key]; let j=index" >{{var_val}} 
+                            <button mat-button (click)="removeVariation(var_key,j)"><mat-icon >remove</mat-icon></button>
+                        </span>
+                        <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon></button>
+                        <div *ngIf="i==index">
+                            <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
+                            <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
+                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                        </div>
+                    </div>
+                    
+            </div>
             </div>
         </ng-container>
+        <div>
+            <button mat-button (click)="addVariant=!addVariant"><mat-icon >add</mat-icon>Add More Variant</button>
+            <div *ngIf="addVariant">
+                <label for="key">Key</label>
+                <input type="text" id="key" #box1>
+                <label for="value">Value</label>
+            <input type="text" id="value" #box2 >
+            <button mat-button (click)="addMore(box1.value,box2.value)" ><mat-icon>done</mat-icon></button>
+            </div>
+        </div>
+
 
         <mat-card-actions class="button">
-            <button mat-raised-button color="primary" type="submit" >Save</button>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >Save</button>
           </mat-card-actions>
     </form>
 </td>
