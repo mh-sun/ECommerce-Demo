@@ -7,6 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class LogService {
 
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
+  public loggedUser = new BehaviorSubject<object|null>(null)
 
   public getLogStatus(){
     return this._logStatus
@@ -15,9 +16,11 @@ export class LogService {
   logIn(user:any){
     localStorage.setItem('loggedUser', JSON.stringify(user))
     this._logStatus.next(true)
+    this.loggedUser.next(user)
   }
   logout(){
     localStorage.removeItem('loggedUser')
     this._logStatus.next(false)
+    this.loggedUser.next(null)
   }
 }

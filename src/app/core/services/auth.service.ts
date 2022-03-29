@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { User } from "../models/user.login.model";
+import { User } from "../models/user.model";
 
 @Injectable({
     providedIn: 'any'
@@ -12,7 +12,7 @@ export class AuthService {
         
     }
 
-    private url = 'https://fakestoreapi.com/'
+    private url = 'http://localhost:3000/'
     
     login(){
         let link = this.url + 'users'
@@ -21,16 +21,16 @@ export class AuthService {
 
     Registration(user: any){
         let link = this.url + 'users'
-        return this.http.post(link,user);
+        return this.http.post(link, user);
     }
 
-    getId(){
-        let link = this.url + 'users'
-        this.http.get(link).subscribe((data: any)=>{
-         console.log(data.length)
-         return data[data.length-1].id;
-       });
+    // getId(){
+    //     let link = this.url + 'users'
+    //     this.http.get(link).subscribe((data: any)=>{
+    //      console.log(data.length)
+    //      return data[data.length-1].id;
+    //    });
        
-     }
+    //  }
 
 }

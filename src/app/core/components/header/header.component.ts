@@ -15,7 +15,6 @@ export class HeaderComponent {
   constructor(private cartService:CartApiService, private logger:LogService){
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
-        console.log(res);
         this.logStatus = res
       }
     })

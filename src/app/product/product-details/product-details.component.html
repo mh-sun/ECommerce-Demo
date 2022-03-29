@@ -27,47 +27,31 @@
                                 <del>{{(data.price+data.price*.3).toFixed(2)}}</del> <strong> -30% </strong>
                             </h5>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Color</h4>
-                                </div>
-                                <div class="col-md-8">
-                                    <!-- <mat-radio-group>
-                                        <mat-radio-button value="1"></mat-radio-button>
-                                        <mat-radio-button value="2"></mat-radio-button>
-                                        <mat-radio-button value="1"></mat-radio-button>
-                                        <mat-radio-button value="2"></mat-radio-button>
-                                    </mat-radio-group> -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="h4 text-secondary">Size</h4>
-                                </div>
-                                <div class="col-md-8">
-                                    <mat-radio-group>
-                                        <mat-radio-button value="1">S </mat-radio-button>
-                                        <mat-radio-button value="2">M </mat-radio-button>
-                                        <mat-radio-button value="1">L </mat-radio-button>
-                                        <mat-radio-button value="2">XL </mat-radio-button>
+                            <ng-container *ngFor="let var_key of var_keys; let i = index">
+                                <div class="row">
+                                    <h4 class="h4 text-secondary" class="col-md-4">{{var_key}}</h4>
+                                    <mat-radio-group class="col-md-8" [(ngModel)]="variation[var_key]">
+                                        <mat-radio-button *ngFor="let var_val of data.variation[var_key]" [value]="var_val">
+                                            {{var_val}}
+                                        </mat-radio-button>
                                     </mat-radio-group>
                                 </div>
-                            </div>
+                            </ng-container>
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4 class="h4 text-secondary">Quantity</h4>
                                 </div>
                                 <div class="col-md-8 quant">
-                                    <button class="btn-ico"><i class="fas fa-plus"></i></button>
-                                    <input type="text" value="1">
-                                    <button class="btn-ico"><i class="fas fa-minus"></i></button>
+                                    <button class="btn-ico" (click)="increaseQuantity()"><i class="fas fa-plus"></i></button>
+                                    <input type="text" [value]="quantity" [(ngModel)]="quantity">
+                                    <button class="btn-ico" (click)="decreaseQuantity()"><i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
                         </div>
                     </td>
                 </tr>
             </div>
-            <button class="btn btn-primary add-cart"><i class="fas fa-cart-plus"></i></button>
+            <button class="btn btn-primary add-cart" (click)="addtocart(data)"><i class="fas fa-cart-plus"></i></button>
         </div>
     </div>
 </div>
