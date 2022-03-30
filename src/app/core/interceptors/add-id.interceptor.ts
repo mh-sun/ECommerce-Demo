@@ -7,7 +7,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { User } from '../models/user.login.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AddIDInterceptor implements HttpInterceptor {

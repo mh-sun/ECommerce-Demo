@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
-import { User } from 'src/app/core/models/user.login.model';
+import { User } from 'src/app/core/models/user.model';
 import { LogService } from 'src/app/core/services/log.service';
 
 

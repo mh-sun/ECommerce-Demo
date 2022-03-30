@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body{
+	
 	line-height: 1.5;
 	font-family: 'Poppins', sans-serif;
 }
@@ -20,8 +21,10 @@ ul{
 	list-style: none;
 }
 .footer{
+	position: relative;
 	background-color: #24262b;
     padding: 70px 0;
+
 }
 .footer-col{
    width: 25%;
