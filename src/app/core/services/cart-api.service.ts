@@ -15,9 +15,14 @@ export class CartApiService {
 
   constructor(private logger:LogService) {
     logger.loggedUser.subscribe({
-      next: u=>this.user = u
+      next: u=>{
+        this.user = u
+        this.productList.next(u?.cart)
+        this.cartItemList = u?.cart
+      }
     })
-   }
+  }
+
   getProducts(){
     return this.productList.asObservable();
   }
@@ -30,14 +35,18 @@ export class CartApiService {
     this.cartItemList.push(...product);
     this.productList.next(product);
   }
+  
   addToCart(product : any){
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
     if(this.user !== null){
       this.user.cart.push(product)
       this.logger.loggedUser.next(this.user)
+      this.logger.storeUser()
     }
+    
   }
+
   getTotalPrice() : number{
     let grandTotal = 0;
     this.cartItemList.map((a:any)=>{
@@ -45,6 +54,7 @@ export class CartApiService {
     })
     return grandTotal;
   }
+
   removeCartItem(product: any){
     this.cartItemList.map((a:any, index:any)=>{
       if(product.id=== a.id){
@@ -52,17 +62,20 @@ export class CartApiService {
         if(this.user !== null){
           this.user.cart.splice(product)
           this.logger.loggedUser.next(this.user)
+          this.logger.storeUser()
         }
       }
     })
     this.productList.next(this.cartItemList);
   }
+
   clearCart(){
     this.cartItemList = []
     this.productList.next(this.cartItemList);
     if(this.user !== null){
       this.user.cart = []
       this.logger.loggedUser.next(this.user)
+      this.logger.storeUser()
     }
   }
 }

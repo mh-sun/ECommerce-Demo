@@ -7,12 +7,16 @@ import { User } from '../models/user.model';
 })
 export class LogService {
 
+  private user!:User|null
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
   public loggedUser = new BehaviorSubject<User|null>(null)
 
   constructor(){
     let str = localStorage.getItem('loggedUser')
     str === null ? this.loggedUser.next(null) : this.loggedUser.next(JSON.parse(str))
+    this.loggedUser.subscribe({
+      next: u=>this.user = u
+    })
   }
 
   public getLogStatus(){
@@ -28,5 +32,8 @@ export class LogService {
     localStorage.removeItem('loggedUser')
     this._logStatus.next(false)
     this.loggedUser.next(null)
+  }
+  storeUser(){
+    localStorage.setItem('loggedUser', JSON.stringify(this.user))
   }
 }

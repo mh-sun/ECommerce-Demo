@@ -29,7 +29,6 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     if(this.user !== null){
       this.cartService.getProducts().subscribe({
         next:(res)=>{          
