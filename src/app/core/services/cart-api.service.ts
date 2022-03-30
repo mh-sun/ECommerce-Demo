@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { User } from '../models/user.model';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartApiService {
 
+  private user!:User|null
   private cartItemList : any =[]
   private productList = new BehaviorSubject<any>([]);
-  public search = new BehaviorSubject<string>("");
 
-  constructor() { }
+  constructor(private logger:LogService) {
+    logger.loggedUser.subscribe({
+      next: u=>this.user = u
+    })
+   }
   getProducts(){
     return this.productList.asObservable();
   }
@@ -27,8 +33,10 @@ export class CartApiService {
   addToCart(product : any){
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-    console.log(this.cartItemList)
+    if(this.user !== null){
+      this.user.cart.push(product)
+      this.logger.loggedUser.next(this.user)
+    }
   }
   getTotalPrice() : number{
     let grandTotal = 0;
@@ -41,6 +49,10 @@ export class CartApiService {
     this.cartItemList.map((a:any, index:any)=>{
       if(product.id=== a.id){
         this.cartItemList.splice(index,1);
+        if(this.user !== null){
+          this.user.cart.splice(product)
+          this.logger.loggedUser.next(this.user)
+        }
       }
     })
     this.productList.next(this.cartItemList);
@@ -48,5 +60,9 @@ export class CartApiService {
   clearCart(){
     this.cartItemList = []
     this.productList.next(this.cartItemList);
+    if(this.user !== null){
+      this.user.cart = []
+      this.logger.loggedUser.next(this.user)
+    }
   }
 }

@@ -29,14 +29,12 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
     
     if(this.user !== null){
       this.cartService.getProducts().subscribe({
-        next:(res)=>{
+        next:(res)=>{          
           this.products = res
           this.grandTotal = this.cartService.getTotalPrice()
-          console.log(this.grandTotal)
           }
       })
     }

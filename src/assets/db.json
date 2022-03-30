@@ -20,37 +20,7 @@
             "lastname": "doe"
         },
         "phone": "1-570-236-7033",
-        "cart" :  [
-            {
-                "productId": 1,
-                "variation":[
-                    {
-                        "variation_type":
-                            {
-                                "size":"L",
-                                "color":"green"
-                            },
-                        "quantity": 4
-                    },
-                    {
-                        "variation_type":
-                            {
-                                "size":"L",
-                                "color":"red"
-                            },
-                        "quantity": 4
-                    }
-                ]
-            },
-            {
-                "productId": 2,
-                "quantity": 1
-            },
-            {
-                "productId": 3,
-                "quantity": 6
-            }
-        ]
+        "cart" :  []
     },
     {
         "address": {
