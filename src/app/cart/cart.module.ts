@@ -13,6 +13,7 @@ import { PaymentComponent } from './payment/payment.component';
     CommonModule,
     CartRoutingModule,
     CartRoutingModule
-  ]
+  ],
+  
 })
 export class CartModule { }

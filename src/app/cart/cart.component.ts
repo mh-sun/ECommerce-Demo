@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../core/models/user.model';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
 
@@ -11,30 +12,34 @@ import { LogService } from '../core/services/log.service';
 export class CartComponent implements OnInit {
   public products : any = [];
   public grandTotal !: number;
-  public user!: any;
+  public user: User|null = null;
   public deliveryCharge:number = 100
 
   constructor(
     private cartService : CartApiService,
-    private router:Router
+    private router:Router,
+    private logger:LogService
   ) {
+    this.logger.loggedUser.subscribe({
+      next:u=>{
+        console.log(u)
+        this.user = u
+      }
+    })
   }
 
   ngOnInit(): void {
-    let user = localStorage.getItem('loggedUser')
-    console.log(user)
-    if(user !== null){
-      this.user = JSON.parse(user)
+    console.log(this.user);
+    
+    if(this.user !== null){
       this.cartService.getProducts().subscribe({
         next:(res)=>{
-          console.log(res)
           this.products = res
           this.grandTotal = this.cartService.getTotalPrice()
           console.log(this.grandTotal)
           }
       })
     }
-    this.checkOut()
   }
   removeItem(item: any){
     this.cartService.removeCartItem(item);
@@ -44,9 +49,9 @@ export class CartComponent implements OnInit {
   }
   checkOut(){
     let elem = document.getElementById('checkout')
-    elem?.classList.contains('checkoutinActive')?
-      elem.classList.remove('checkoutinActive'):
-      elem?.classList.add('checkoutinActive')
+    elem?.classList.contains('checkoutInActive')?
+      elem.classList.remove('checkoutInActive'):
+      elem?.classList.add('checkoutInActive')
   }
   getTotal(){
     return (this.grandTotal + this.deliveryCharge).toFixed(2)

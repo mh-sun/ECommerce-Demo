@@ -11,7 +11,7 @@
     align-self: center;
     transition-duration: 500ms;
 }
-.checkoutinActive{
+.checkoutInActive{
     right: -500px;
 }
 .row{

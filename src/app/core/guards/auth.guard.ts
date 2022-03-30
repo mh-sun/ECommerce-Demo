@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { LogService } from '../services/log.service';
 
@@ -8,13 +9,21 @@ import { LogService } from '../services/log.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router:Router, private logger:LogService){}
+  private user:User|null = null
+  constructor(private router:Router, private logger:LogService){
+    this.logger.loggedUser.subscribe({
+      next:(u)=>{
+        console.log(u);
+        
+        this.user = u
+      }
+    })
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-      let arr = [null, undefined, '']
-      if(!arr.includes(localStorage.getItem('loggedUser'))){
+      if(this.user !== null){
         return true
       }
       else{

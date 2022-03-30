@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +8,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class LogService {
 
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
-  public loggedUser = new BehaviorSubject<object|null>(null)
+  public loggedUser = new BehaviorSubject<User|null>(null)
 
   constructor(){
     let str = localStorage.getItem('loggedUser')
-    if (str === null) return
-    let user = JSON.parse(str)
-    this.loggedUser.next(user)
+    str === null ? this.loggedUser.next(null) : this.loggedUser.next(JSON.parse(str))
   }
 
   public getLogStatus(){

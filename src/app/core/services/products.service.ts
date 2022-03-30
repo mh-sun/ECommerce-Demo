@@ -10,7 +10,7 @@ export class ProductsService {
   url ="http://localhost:3000/products";
   constructor(private http:HttpClient) { }
 
-  getProduct(){
+  getProduct(){ 
     return this.http.get<any>(this.url)
     .pipe(map((res:any)=>{
       res.forEach((a:any)=>{
