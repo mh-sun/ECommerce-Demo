@@ -23,11 +23,24 @@
         "cart" :  [
             {
                 "productId": 1,
-                "quantity": 4,
-                "variation":{
-                    "size":"L",
-                    "color":"red"
-                }
+                "variation":[
+                    {
+                        "variation_type":
+                            {
+                                "size":"L",
+                                "color":"green"
+                            },
+                        "quantity": 4
+                    },
+                    {
+                        "variation_type":
+                            {
+                                "size":"L",
+                                "color":"red"
+                            },
+                        "quantity": 4
+                    }
+                ]
             },
             {
                 "productId": 2,

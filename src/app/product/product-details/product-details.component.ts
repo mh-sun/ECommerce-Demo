@@ -35,7 +35,6 @@ export class ProductDetailsComponent {
     this.loggedUser.loggedUser.subscribe({
       next:(u:object|null)=>{
         this.user = u
-        console.log(this.user)
       }
     })
   }
@@ -43,13 +42,22 @@ export class ProductDetailsComponent {
   close(){
     this.dialogRef.close()
   }
+  
   addtocart(item: any){
-    console.log(item.title, this.variation);
+    if(this.user.cart == undefined) this.user.cart = []
+    this.user.cart.push({
+      productId:item.id,
+      quantity:this.quantity,
+      variation:this.variation
+    })
     console.log(this.user);
+    localStorage.setItem('loggedUser', JSON.stringify(this.user))
   }
+
   increaseQuantity(){
     this.quantity++
   }
+
   decreaseQuantity(){
     if(this.quantity<=0) return
     else this.quantity--

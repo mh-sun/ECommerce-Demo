@@ -9,6 +9,13 @@ export class LogService {
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
   public loggedUser = new BehaviorSubject<object|null>(null)
 
+  constructor(){
+    let str = localStorage.getItem('loggedUser')
+    if (str === null) return
+    let user = JSON.parse(str)
+    this.loggedUser.next(user)
+  }
+
   public getLogStatus(){
     return this._logStatus
   }
