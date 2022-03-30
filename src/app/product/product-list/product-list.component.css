@@ -21,16 +21,32 @@ div.carousel-item span{
     padding: 2%;
     margin: 2%;
 }
-
-.card img {
-    width: 70%;
-    height: 70%;
-    margin: auto;
-    padding: 10%;
+.btn{
+ margin-left: 26%;
+}
+.mat-card{
+    border-radius:5%;
+    padding: 6%;
+    margin: 2%;
+    width: 100%;
+    height: 100%;
+}
+img.mat-card-image {
+    padding: 11%;
+}
+/* .card img {
+    width: 100%;
+        height: 100%;
+        object-fit: cover;
+    padding: 5%;
     transition: 0.3s ease-in-out;
 }
-
-.card img:hover {
+.imgContainer{
+    width: 100%;
+    height: 70%;
+} */
+img:hover {
     transition: 0.3s ease-in-out;
     transform: scale(1.1);
 }
+

@@ -1,12 +1,95 @@
+<mat-card class="content">
 <div *ngIf="product">
-    <form [formGroup]="productEditForm">
+    <div class="card py-3">
+    <div class="table">
+        <tr>
+            <td class="col-sm-6">
+              <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
+              <img [src]="product.image" >
+              <!-- </div>  -->
+            </td>
+            <td class="col-sm-8">
+
+    <form class="my-form content content-center-col" [formGroup]="productEditForm" >
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Title</mat-label>
             <input  matInput  formControlName="title">
         </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Price</mat-label>
+            <input  matInput  formControlName="price">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input  matInput  formControlName="description">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Category</mat-label>
+            <input  matInput  formControlName="category">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Image Link</mat-label>
+            <input  matInput  formControlName="image">
+        </mat-form-field>
+        <!-- <input type="file" accept="image/*" (change)="showPreview($event)" /> -->
+ 
+ 
+        <!-- <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Rating</mat-label>
+            <input  matInput  formControlName="rating">
+        </mat-form-field> -->
+        <!-- <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Variation</mat-label>
+        
+            
+        </mat-form-field> -->
+       <div class="full-width variant">
+        <div *ngIf="variantType" class="full-width">
+            <p class="title">Variant:</p>
+        </div>
+        <ng-container *ngFor="let var_key of var_keys; let i = index">
+            <div class="table full-width">
+                <div class="d-flex">
+                    <div class="col-md-4">
+                        <span class="d-flex center">{{var_key}}</span>
+                    </div>
+                    <div class="col-md-8 d-flex flex-column">
+                        <span class="d-flex" *ngFor="let var_val of product.variation[var_key]; let j=index" >{{var_val}} 
+                            <button mat-button (click)="removeVariation(var_key,j)"><mat-icon >remove</mat-icon></button>
+                        </span>
+                        <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon> Add {{var_key}} type</button>
+                        <div *ngIf="i==index">
+                            <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
+                            <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
+                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                        </div>
+                    </div>
+                    
+            </div>
+            </div>
+        </ng-container>
+        <div>
+            <button mat-button (click)="addVariant=!addVariant"><mat-icon >add</mat-icon>Add More Variant</button>
+            <div *ngIf="addVariant">
+                <label for="key">Key</label>
+                <input type="text" id="key" #box1>
+                <label for="value">Value</label>
+            <input type="text" id="value" #box2 >
+            <button mat-button (click)="addMore(box1.value,box2.value)" ><mat-icon>done</mat-icon></button>
+            </div>
+        </div>
+
+       </div>
+
+        <mat-card-actions class="button">
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >Save</button>
+          </mat-card-actions>
     </form>
-<p>{{product.id}}</p>
-<p>{{product.title}}</p>
-<p>hello</p>
+</td>
+</tr>
 </div>
+</div>
+</div>
+</mat-card>
+
  

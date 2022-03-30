@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdminModule { }

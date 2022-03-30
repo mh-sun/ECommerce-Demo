@@ -50,6 +50,19 @@ export class ProductsService {
     return this.http.get<Product>(newUrl).pipe(map((res:any)=>{
       return res;
     }))
-
   }
+  updatePost(postData: Object,id:number) {
+    const newUrl = this.url+'/'+id;
+    this.http.put( newUrl, postData).subscribe(data => {
+      console.log(data);
+    });
+  }
+  
+  public deletePost(id:number) {
+    const newUrl = this.url+'/'+id;
+    this.http.delete(newUrl).subscribe(data => {
+      console.log(data);
+    });
+  }
+
 }

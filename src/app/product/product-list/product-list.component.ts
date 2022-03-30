@@ -12,7 +12,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 })
 export class ProductListComponent{
   public productList : any ;
-  public filterCategory : any
+  public filterCategory = new Array();
   searchKey:string ="";
 
   constructor(private api : ProductsService, private cartService : CartApiService,
@@ -20,8 +20,16 @@ export class ProductListComponent{
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
-      this.filterCategory = res;
+      console.log(this.productList)
+      for(let product of this.productList){
+        if(product.isActive){
+          this.filterCategory.push(product)
+          console.log(this.filterCategory)
+        }  
+      }
+     
     });
+
   }
   addtocart(item: any){
     this.cartService.addToCart(item);

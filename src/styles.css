@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/font-awesome/css/font-awesome.css';
-html, body { height: 100%; }
+html, body { height: 100vmax; display: grid; grid-template-rows: auto 1fr auto;}
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
@@ -18,3 +18,50 @@ p{
     margin-left: auto;
     margin-right: auto;
 }
+mat-card{
+    width: 60%;
+    margin-top: 20px;
+    
+  }
+  
+  .content{
+    
+      /* display: block;
+      margin-top: 2%; */
+      margin-left:auto;
+      margin-right:auto;  
+      margin-bottom: 2%;
+      /* vertical-align:middle; */
+  }
+  .example-section{
+    margin: 2%;
+  }
+  .example-radio-group {
+   display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .button{
+    display: block;
+  }
+  .resetButton{
+    margin-left: 5%;
+  }
+  .my-form{
+      min-width: 450px;
+      max-width: 500px;
+      width: 60%;
+    }
+     
+    .full-width {
+      width: 100%;
+    }
+    .content-center-col{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }

@@ -12,26 +12,34 @@ import { ProductEditComponent } from '../product-edit/product-edit.component';
 export class DashboardComponent implements OnInit {
   title:string|any;
   headerTitle:string|any;
-  displayedColumns: string[] = ['id', 'title', 'price','description','edit','delete'];
-  dataSource:Product[] = [];
-
+  displayedColumns: string[] = ['id', 'title', 'price','description','availailability','edit','delete'];
+  dataSource:any;
+  active!:string;
   constructor(private route:Router  ,private service:ProductsService) { 
+    this.title = 'Product List';
+    this.headerTitle = document.getElementById('headerTitle')
+    this.headerTitle.innerText = this.title;
+  }
+
+  ngOnInit(): void {
+   
     this.service.getProduct().subscribe((res)=>{
       this.dataSource = res;
     });
   }
 
-  ngOnInit(): void {
-    this.title = 'Product List';
+  activate(state:boolean,i:number){
+    console.log(state,this.dataSource[i])
+      this.dataSource[i].isActive=!state;
+      console.log(state,this.dataSource[i]);
+      let index = i+1; 
+      this.service.updatePost(this.dataSource[i],index);
   
-    this.headerTitle = document.getElementById('headerTitle')
-    this.headerTitle.innerText = this.title;
   }
-  edit(id:number){
-    console.log('called')
-    console.log(this.route.url)
-    // this.comp.getProduct(id);
-  console.log(id)
+  
+  delete(id:number){
+    this.service.deletePost(id);
+    this.ngOnInit();
   }
 
   addData(){}

@@ -1,16 +1,12 @@
-mat-card{
+/* mat-card{
   width: 60%;
   margin-top: 20px;
   
 }
 
 .content{
-  
-    /* display: block;
-    margin-top: 2%; */
     margin-left:auto;
     margin-right:auto;  
-    /* vertical-align:middle; */
 }
 .example-section{
   margin: 2%;
@@ -43,4 +39,4 @@ mat-card{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+} */

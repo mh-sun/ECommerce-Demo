@@ -1,0 +1,23 @@
+.card img{
+    width: 70%;
+    height: 100%;
+}
+td{
+    /* border: 1px solid black;*/
+} 
+.title{
+    color: rgba(0,0,0,.6);
+    text-align: left;
+    font-size: large;
+    font-weight: bold;
+}
+.variant{
+    background-color: rgba(0,0,0,.04);
+    padding: 2%
+}
+.center{
+    color: rgba(0,0,0,.7);
+    padding-top: 18%;
+    font-size: small;
+    font-weight: bold;
+}
