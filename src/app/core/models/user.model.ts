@@ -1,3 +1,13 @@
+interface productVariation{
+    variation_type: object
+    quantity: number
+}
+
+interface CartProduct{
+    productId: number
+    variation: productVariation[]
+}
+
 export interface User{
     address: {
         geolocation: {
@@ -18,5 +28,5 @@ export interface User{
         lastname: string
     },
     phone: string
-    cart : object[]
+    cart : CartProduct[]
 }

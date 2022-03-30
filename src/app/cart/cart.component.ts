@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let user = localStorage.getItem('loggedUser')
+    console.log(user)
     if(user !== null){
       this.user = JSON.parse(user)
       this.cartService.getProducts().subscribe({
