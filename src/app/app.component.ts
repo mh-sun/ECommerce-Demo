@@ -9,7 +9,7 @@ import { NavigationStart, Router } from '@angular/router';
 export class AppComponent {
 
   title = 'Angular-Project';
-  showHead: boolean = false;
+  hide: boolean = false;
 
   ngOnInit() {
   }
@@ -18,11 +18,11 @@ export class AppComponent {
   // on route change to '/login', set the variable showHead to false
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/admin'||event['url'] == '/admin/home'||event['url'] == '/admin/dashboard') {
-          this.showHead = false;
+        if (event['url'] == '/admin'||event['url'] == '/admin/home'||event['url'] == '/admin/productList') {
+          this.hide = false;
         } else {
           // console.log("NU")
-          this.showHead = true;
+          this.hide = true;
         }
       }
     });
