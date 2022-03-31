@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
+import { LogService } from 'src/app/core/services/log.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
@@ -14,9 +15,12 @@ export class ProductListComponent{
   public productList : any ;
   public filterCategory = new Array();
   searchKey:string ="";
+  isLoggedIn:boolean = false
 
-  constructor(private api : ProductsService, private cartService : CartApiService,
-    private dialog:MatDialog) {
+  constructor(private api : ProductsService, 
+    private cartService : CartApiService,
+    private dialog:MatDialog,
+    private logger:LogService) {
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
@@ -30,9 +34,22 @@ export class ProductListComponent{
      
     });
 
+    this.logger.getLogStatus().subscribe({
+      next:res=>this.isLoggedIn = res
+    })
   }
   addtocart(item: any){
-    this.cartService.addToCart(item);
+    let c:any = {
+      productId : item.id,
+      variation : {},
+      quantity: 1
+    }
+
+    for(let var_key in item.variation){
+      c.variation[var_key] = item.variation[var_key][0]
+      // console.log(var_key, item.variation[var_key]);
+    }
+    this.cartService.addToCart(c);
   }
   onClickAddCart(){
 

@@ -9,7 +9,6 @@ import { User } from "../models/user.model";
 
 export class AuthService {
     constructor(private http:HttpClient){
-        
     }
 
     private url = 'http://localhost:3000/'
@@ -23,14 +22,5 @@ export class AuthService {
         let link = this.url + 'users'
         return this.http.post(link, user);
     }
-
-    // getId(){
-    //     let link = this.url + 'users'
-    //     this.http.get(link).subscribe((data: any)=>{
-    //      console.log(data.length)
-    //      return data[data.length-1].id;
-    //    });
-       
-    //  }
 
 }

@@ -7,6 +7,7 @@ import { User } from '../models/user.model';
 })
 export class LogService {
 
+  public userSubscription:any
   private user!:User|null
   private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
   public loggedUser = new BehaviorSubject<User|null>(null)
@@ -14,8 +15,11 @@ export class LogService {
   constructor(){
     let str = localStorage.getItem('loggedUser')
     str === null ? this.loggedUser.next(null) : this.loggedUser.next(JSON.parse(str))
-    this.loggedUser.subscribe({
-      next: u=>this.user = u
+    this.userSubscription = this.loggedUser.subscribe({
+      next: u=>{
+        this.user = u
+        console.log(this.user)
+      }
     })
   }
 
