@@ -1,11 +1,9 @@
-interface productVariation{
-    variation_type: object
-    quantity: number
-}
+import { Order } from "./order.model"
 
 interface CartProduct{
     productId: number
-    variation: productVariation[]
+    variation: object
+    quantity:number
 }
 
 export interface User{
@@ -29,4 +27,5 @@ export interface User{
     },
     phone: string
     cart : CartProduct[]
+    orders : Order[]
 }

@@ -1,4 +1,5 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, HostListener, Input } from '@angular/core';
+import { User } from '../../models/user.model';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 
@@ -7,23 +8,30 @@ import { LogService } from '../../services/log.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements AfterViewInit{
+
   logStatus!:boolean
-  cartItemNumber:number = 0
+  cartItemNumber:number|undefined = 0
   scrolled:boolean = false
 
-  constructor(private cartService:CartApiService, private logger:LogService){
+  constructor(
+    private cartService:CartApiService, 
+    private logger:LogService
+  ){
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
         this.logStatus = res
       }
     })
-
-    this.cartService.getProducts().subscribe({
-      next:res=>{
-        this.cartItemNumber = cartService.getCartItemList().length
+    this.logger.loggedUser.subscribe({
+      next:u=>{
+        this.cartItemNumber = u?.cart.length
       }
     })
+  }
+
+  ngAfterViewInit(): void {
+    this.cartItemNumber = this.cartItemNumber===undefined? 0 : this.cartItemNumber
   }
   
   logOut(){

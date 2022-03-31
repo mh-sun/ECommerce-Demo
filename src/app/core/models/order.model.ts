@@ -6,12 +6,10 @@ interface productDetails{
 
 export interface Order{
     id:number
-    userid:number
     products:productDetails[]
     payment:{
         subtottal:number
         shipping:number
-        // discount:number
     }
     address:string
     date:string
