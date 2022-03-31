@@ -19,7 +19,7 @@ export class OrdersComponent implements OnInit {
   totalBill=0;
   order:Order={
     id: 1,
-    userid: 1,
+    userid:1,
     products: [
     ],
     payment: {

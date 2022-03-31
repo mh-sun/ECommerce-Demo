@@ -92,7 +92,7 @@
                 <p><strong>Price:</strong> ${{item.price}}</p>
                   </mat-card-content>
                   <mat-card-actions>
-                    <button class="btn btn-primary" (click)=addtocart(item)>Add to cart</button>
+                     <button class="btn btn-primary mt-auto" (click)=addtocart(item) [disabled]="!isLoggedIn">Add to cart</button>
                   </mat-card-actions>
                 </mat-card>
                 <!-- <div class="img-wrap">
@@ -105,7 +105,7 @@
               <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button> -->
             
 
-              <button class="btn btn-primary mt-auto" (click)=addtocart(item) [disabled]="!isLoggedIn">Add to cart</button>
+             
             </div>
           </div>
         </ng-container>
