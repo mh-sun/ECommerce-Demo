@@ -1,7 +1,9 @@
 interface productDetails{
+    title:string
+    image:string
     productId:number
     variation:object
-    quatity:number
+    quantity:number
 }
 
 export interface Order{
@@ -9,7 +11,7 @@ export interface Order{
     userid:number
     products:productDetails[]
     payment:{
-        subtottal:number
+        subtotal:number
         shipping:number
         // discount:number
     }

@@ -1,4 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { Order } from '../../models/order.model';
+import { AuthService } from '../../services/auth.service';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 
@@ -11,8 +13,19 @@ export class HeaderComponent {
   logStatus!:boolean
   cartItemNumber:number = 0
   scrolled:boolean = false
-
+  order:Order={
+    id: 0,
+    userid: 0,
+    products: [],
+    payment: {
+      subtotal: 0,
+      shipping: 0
+    },
+    address: '',
+    date: ''
+  };
   constructor(private cartService:CartApiService, private logger:LogService){
+    
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
         this.logStatus = res

@@ -37,6 +37,7 @@ export class CartApiService {
   }
   
   addToCart(product : any){
+    console.log('add to cart called')
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
     if(this.user !== null){

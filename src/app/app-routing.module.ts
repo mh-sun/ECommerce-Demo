@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OrdersComponent } from './core/components/orders/orders.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   { 
     path: 'product', 
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
+  },
+  {
+    path:'orders',
+    component:OrdersComponent
   },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {

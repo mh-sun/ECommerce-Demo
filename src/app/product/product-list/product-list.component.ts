@@ -32,6 +32,7 @@ export class ProductListComponent{
 
   }
   addtocart(item: any){
+    console.log('add to cart called')
     this.cartService.addToCart(item);
   }
   onClickAddCart(){
