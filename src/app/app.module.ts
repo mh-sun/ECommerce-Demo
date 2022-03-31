@@ -14,13 +14,15 @@ import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
 import { FooterComponent} from'./core/components/footer/footer.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import { CartComponent } from './cart/cart.component';
+import { OrdersComponent } from './core/components/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    CartComponent
+    CartComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

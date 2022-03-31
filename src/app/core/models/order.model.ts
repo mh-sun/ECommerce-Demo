@@ -1,14 +1,16 @@
 interface productDetails{
+    title:string
+    image:string
     productId:number
     variation:object
-    quatity:number
+    quantity:number
 }
 
 export interface Order{
     id:number
     products:productDetails[]
     payment:{
-        subtottal:number
+        subtotal:number
         shipping:number
     }
     address:string

@@ -1,0 +1,97 @@
+<!-- <mat-card class="w-50 self-center p-4 my-5 main"> -->
+    <div class="container">
+        <div class="title">
+            <h1>Order Details</h1>
+        </div>
+        <mat-card class="full-width">
+            <table class="full-width">
+                <tr>
+                    <td>Order #{{order.id}}</td>
+                    <td rowspan="2" style="text-align: right;">Total {{totalBill|currency}}</td>
+                </tr>
+                <tr>
+                    <td>Placed On: {{order.date}}</td>
+                </tr>
+            </table>
+        </mat-card>
+        <mat-card class="full-width" >
+            <div class="scalling">
+                <span *ngFor="let item of counts;let i = index">
+                    <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
+                    <span class="circles" [class.active]="orderStatus == item"></span>
+                    <span class="bar" *ngIf="(i != counts.length-1)"></span>
+                </span>
+            </div>
+            <div class="card-table">
+                <div class="cart-product">
+                    <table class="table table-responsive">
+                        <!-- <tbody> -->
+                            <tr *ngFor="let item of order.products; let i = index">
+                                <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
+                                <td style="width: 25%;">{{item.title}}</td>
+                                <th style="width: 13%;">{{totalBill|currency}}</th>
+                                <td style="width: 12%;">Qty: {{item.quantity}}</td>
+                                <td>
+                                    <button class="btn">
+                                        Write a review
+                                    </button>
+                                </td>
+                            </tr>
+                        <!-- </tbody> -->
+                    </table>
+                </div>
+            </div>
+        </mat-card>
+        <!-- <mat-card class="full-width"> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-card class="full-width">
+                        <mat-card-title>
+                            Shipping Address
+                        </mat-card-title>
+                        <mat-card-content class="font">
+                            <div class="full-width">{{user.name.firstname + ' ' + user.name.lastname}}</div>
+                            <div class="full-width"><button mat-button><mat-icon>home</mat-icon></button> {{order.address}}</div>
+                            <div class="full-width">{{user.phone}}</div>
+                        </mat-card-content>
+                    </mat-card>
+                    <mat-card class="full-width">
+                        <mat-card-title>
+                            Billing Address
+                        </mat-card-title>
+                        <mat-card-content class="font">
+                            <div class="full-width ">{{user.name.firstname + ' ' + user.name.lastname}}</div>
+                            <div class="full-width "> {{order.address}}</div>
+                            <div class="full-width">{{user.phone}}</div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-md-6">
+                    <mat-card class="full-width">
+                        <mat-card-title>
+                            Total Summary
+                        </mat-card-title>
+                        <mat-card-content class="font">
+                            <div class="row">
+                                <div class="col-md-6">Subtotal</div>
+                                <div class="col-md-6" style="text-align: right;">{{order.payment.subtotal|currency}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">Shipping fee</div>
+                                <div class="col-md-6" style="text-align: right;">{{order.payment.shipping|currency}}</div>
+                            </div>
+                            <!-- <div class="full-width"> -->
+                                <hr>
+                            <!-- </div> -->
+                            <div class="row">
+                                <div class="col-md-6">Total</div>
+                                <div class="col-md-6" style="text-align: right;">{{totalBill|currency}}</div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        <!-- </mat-card> -->
+    </div>
+<!-- </mat-card> -->
+

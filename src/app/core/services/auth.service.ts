@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, map, Observable, of } from "rxjs";
 import { User } from "../models/user.model";
 
 @Injectable({
@@ -21,6 +21,12 @@ export class AuthService {
     Registration(user: any){
         let link = this.url + 'users'
         return this.http.post(link, user);
+    }
+    getOneUser(id:number){
+        let link = this.url + 'users/'+id;
+      return this.http.get<User>(link).pipe(map((res:any)=>{
+        return res;
+      }))
     }
 
 }
