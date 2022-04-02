@@ -6,11 +6,14 @@
     <h2 matSubheader class="mt-2">APPLICATIONS</h2>
   
     <a mat-list-item routerLinkActive="list-item-active" routerLink="home">
-      <mat-icon>home</mat-icon> Home
+      <button mat-button> <mat-icon>home</mat-icon> Home</button>
+     
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="productList">
-      <mat-icon>list</mat-icon> Product List
+      <button mat-button> <mat-icon>list</mat-icon> Product List</button>
     </a>
-    <a mat-list-item> <i class='fas fa-shopping-bag'></i> Add Product</a>
+    <a mat-list-item>
+      <button mat-button (click)="openDialog()"><i class='fas fa-shopping-bag'></i> Add Product</button>
+    </a>  
   </mat-nav-list>
   
