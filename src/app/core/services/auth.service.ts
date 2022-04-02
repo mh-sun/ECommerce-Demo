@@ -22,7 +22,7 @@ export class AuthService {
         let link = this.url + 'users'
         return this.http.post(link, user);
     }
-    getOneUser(id:number){
+    getOneUser(id:any){
         let link = this.url + 'users/'+id;
       return this.http.get<User>(link).pipe(map((res:any)=>{
         return res;

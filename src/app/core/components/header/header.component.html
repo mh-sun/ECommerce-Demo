@@ -37,10 +37,7 @@
                         <button mat-button><mat-icon>shopping_basket</mat-icon>Order History</button>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                      <li><a class="dropdown-item" routerLink="orders">Order_1</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li  *ngFor="let order of orders"><a class="dropdown-item" [routerLink]="['/orders',order.id]">Order_{{order.id}}</a></li>
                     </ul>
                 </li>
             </ul>

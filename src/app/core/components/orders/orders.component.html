@@ -51,7 +51,7 @@
                         </mat-card-title>
                         <mat-card-content class="font">
                             <div class="full-width">{{user.name.firstname + ' ' + user.name.lastname}}</div>
-                            <div class="full-width"><button mat-button><mat-icon>home</mat-icon></button> {{order.address}}</div>
+                            <div class="full-width"><button mat-button class="homeBtn"><mat-icon>home</mat-icon></button> {{user.address.city +' '+ user.address.street +' '+ user.address.zipcode}}</div>
                             <div class="full-width">{{user.phone}}</div>
                         </mat-card-content>
                     </mat-card>

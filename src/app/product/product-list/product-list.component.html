@@ -79,13 +79,13 @@
         <ng-container *ngFor="let item of filterCategory">
             <div class="card col-md-3" >
               <div (click)="viewProduct(item)">
-                <mat-card class="example-card">
+                <!-- <mat-card class="example-card"> -->
                   <!-- <mat-card-header>
                      <div mat-card-avatar class="example-header-image"></div> 
                     <mat-card-title>Shiba Inu</mat-card-title>
                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                   </mat-card-header> -->
-                  <img mat-card-image src="{{item.image}}" alt="Photo of a Shiba Inu">
+                  <!-- <img mat-card-image src="{{item.image}}" alt="Photo of a Shiba Inu">
                   <mat-card-content>
                     <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
@@ -94,20 +94,20 @@
                   <mat-card-actions>
                      <button class="btn btn-primary mt-auto" (click)=addtocart(item) [disabled]="!isLoggedIn">Add to cart</button>
                   </mat-card-actions>
-                </mat-card>
-                <!-- <div class="img-wrap">
+                </mat-card> -->
+                <div class="img-wrap">
                   <img mat-card-image src="{{item.image}}" alt="">
                 </div>
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
                 <p><strong>Price:</strong> ${{item.price}}</p>
               </div>
-              <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button> -->
+              <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button>
             
 
              
             </div>
-          </div>
+          <!-- </div> -->
         </ng-container>
     </div>
 </div>
