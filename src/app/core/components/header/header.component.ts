@@ -14,17 +14,7 @@ export class HeaderComponent implements AfterViewInit{
   logStatus!:boolean
   cartItemNumber:number|undefined = 0
   scrolled:boolean = false
-  order:Order={
-    id: 0,
-    userid: 0,
-    products: [],
-    payment: {
-      subtotal: 0,
-      shipping: 0
-    },
-    address: '',
-    date: ''
-  };
+  orders: Order[] | undefined ;
   constructor(private cartService:CartApiService, private logger:LogService){
     
     this.logger.getLogStatus().subscribe({
@@ -34,12 +24,14 @@ export class HeaderComponent implements AfterViewInit{
     })
     this.logger.loggedUser.subscribe({
       next:u=>{
+        this.orders = u?.orders;
         this.cartItemNumber = u?.cart.length
       }
     })
   }
 
   ngAfterViewInit(): void {
+    console.log(this.orders)
     this.cartItemNumber = this.cartItemNumber===undefined? 0 : this.cartItemNumber
   }
   

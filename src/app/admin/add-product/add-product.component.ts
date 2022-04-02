@@ -25,9 +25,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SidenavComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder) {
-      console.log(data)
-     }
+    @Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder){}
 
   onNoClick(): void {
     this.dialogRef.close();

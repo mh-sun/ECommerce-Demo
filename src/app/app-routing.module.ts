@@ -26,8 +26,8 @@ const routes: Routes = [
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
   },
   {
-    path:'orders',
-    component:OrdersComponent
+    path:'orders/:id',
+    component:OrdersComponent, data: { kind: 'update' }
   },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {

@@ -20,7 +20,53 @@
         "lastname": "doe"
       },
       "phone": "1-570-236-7033",
-      "cart": []
+      "cart": [],
+      "orders":[
+        {
+          "id":1,
+          "products":[
+            {
+              "title": "Solid Gold Petite Micropave ",
+              "image": "../../../assets/images/product-image/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+              "quantity": 1,
+              "variation": {
+                "material": [
+                  "gold",
+                  "silver"
+                ]
+              }
+            }
+          ],
+          "payment":{
+              "subtotal":10000,
+              "shipping":100
+          },
+          "address":"Barmiz Market,Cox's Bazar",
+          "date":"10.03.2022"
+        },
+        {
+          
+          "id":2,
+          "products":[
+            {
+              "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",         
+              "image": "../../../assets/images/product-image/81fPKd-2AYL._AC_SL1500_.jpg",
+              "quantity": 1,
+              "variation": {
+                "color": [
+                  "black"
+                ]      
+              }
+            }
+          ],
+          "payment":{
+              "subtotal":4000,
+              "shipping":100
+          },
+          "address":"Barmiz Market,Cox's Bazar",
+          "date":"20.03.2022"
+        }
+      ]
     },
     {
       "address": {

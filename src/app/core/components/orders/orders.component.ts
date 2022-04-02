@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
+import { LogService } from '../../services/log.service';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
@@ -17,31 +19,44 @@ export class OrdersComponent implements OnInit {
   "Delivered"];
   public orderStatus = "Delivered";
   totalBill=0;
-  order:Order={
-    id: 1,
-    userid:1,
-    products: [
-    ],
-    payment: {
-      subtotal: 100,
-      shipping: 10
-    },
-    address: "Cox,Bangladesh",
-    date: '1/03/2020'
-  };
-  constructor(private service:ProductsService,private userService:AuthService) {
-    this.service.getOneProduct(1).subscribe(res=>{
-      this.order.products.push(res);
-    })
-    this.userService.getOneUser(this.order.userid).subscribe(res=>{
-      console.log(res)
-       this.user = res;
-    })
-   }
+  order:Order|any;
+  constructor(private service:ProductsService,private userService:AuthService,private route:ActivatedRoute,private log:LogService) {   
+  }
+  shouldDetach(r: ActivatedRouteSnapshot): boolean{
+    let detach: boolean = true;
+    console.log("detaching", r, "return: ", detach);
+    return detach;
+    
+  }
 
   ngOnInit(): void {
-    // console.log(this.order,this.user);
-    this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
+    console.log('ng oninit called')
+    let orders:Order[]|undefined;
+    const routeParams = this.route.snapshot.paramMap;
+    let orderId = Number(routeParams.get('id'));
+    console.log(orderId)
+    this.log.loggedUser.subscribe({
+      next:u=>{
+        orders = u?.orders;
+        let userId = u?.id;
+        this.userService.getOneUser(userId).subscribe(res=>{
+          console.log(res)
+           this.user = res;
+        })
+        if(orders!=null){
+          for(let order of orders){
+            if(order.id==orderId){
+              this.order = order;
+              console.log(this.order);
+              this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
+            }
+          }
+        }
+      }
+    })
+    
   }
+
+  
 
 }
