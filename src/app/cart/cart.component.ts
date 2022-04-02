@@ -19,25 +19,15 @@ export class CartComponent {
   constructor(
     private cartService : CartApiService,
     private router:Router,
-    private logger:LogService,
-    private productApi:ProductsService
+    private logger:LogService
   ) {
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.user = u
-        this.getProducts(u?.cart)
-        this.grandTotal = this.cartService.getTotalPrice()
+        this.products = cartService.products
+        this.grandTotal = cartService.getTotalPrice()
       }
     })
-  }
-  getProducts(cart: any) {
-    console.log(cart);
-    
-    cart.forEach((element:any) => {
-      this.productApi.getOneProduct(element.productId).subscribe(res=>{
-        this.products.push(res)
-      })
-    });
   }
 
   removeItem(item: any){

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, HostListener, Input } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
@@ -8,7 +8,7 @@ import { LogService } from '../../services/log.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterViewInit{
+export class HeaderComponent implements OnInit{
 
   logStatus!:boolean
   cartItemNumber:number|undefined = 0
@@ -29,8 +29,7 @@ export class HeaderComponent implements AfterViewInit{
       }
     })
   }
-
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.cartItemNumber = this.cartItemNumber===undefined? 0 : this.cartItemNumber
   }
   
