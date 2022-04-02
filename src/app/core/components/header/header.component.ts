@@ -1,5 +1,6 @@
-import { AfterViewChecked, AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
+import { AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
+import { Order } from '../../models/order.model';
+import { AuthService } from '../../services/auth.service';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 
@@ -13,11 +14,19 @@ export class HeaderComponent implements OnInit{
   logStatus!:boolean
   cartItemNumber:number|undefined = 0
   scrolled:boolean = false
-
-  constructor(
-    private cartService:CartApiService, 
-    private logger:LogService
-  ){
+  order:Order={
+    id: 0,
+    userid: 0,
+    products: [],
+    payment: {
+      subtotal: 0,
+      shipping: 0
+    },
+    address: '',
+    date: ''
+  };
+  constructor(private cartService:CartApiService, private logger:LogService){
+    
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
         this.logStatus = res

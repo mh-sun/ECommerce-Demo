@@ -32,6 +32,7 @@ export class CartComponent {
 
   removeItem(item: any){
     this.cartService.removeCartItem(item);
+    
   }
   emptycart(){
     this.cartService.clearCart();
