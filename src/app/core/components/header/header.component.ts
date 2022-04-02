@@ -14,17 +14,7 @@ export class HeaderComponent implements OnInit{
   logStatus!:boolean
   cartItemNumber:number|undefined = 0
   scrolled:boolean = false
-  order:Order={
-    id: 0,
-    userid: 0,
-    products: [],
-    payment: {
-      subtotal: 0,
-      shipping: 0
-    },
-    address: '',
-    date: ''
-  };
+  orders: Order[] | undefined ;
   constructor(private cartService:CartApiService, private logger:LogService){
     
     this.logger.getLogStatus().subscribe({
@@ -34,11 +24,18 @@ export class HeaderComponent implements OnInit{
     })
     this.logger.loggedUser.subscribe({
       next:u=>{
+        this.orders = u?.orders;
         this.cartItemNumber = u?.cart.length
       }
     })
   }
+<<<<<<< HEAD
   ngOnInit(): void {
+=======
+
+  ngAfterViewInit(): void {
+    console.log(this.orders)
+>>>>>>> c6f119b869e55ec7df520622241462fb1cc131ff
     this.cartItemNumber = this.cartItemNumber===undefined? 0 : this.cartItemNumber
   }
   

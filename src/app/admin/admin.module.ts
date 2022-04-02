@@ -10,6 +10,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     HomeComponent,
     SidenavComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,

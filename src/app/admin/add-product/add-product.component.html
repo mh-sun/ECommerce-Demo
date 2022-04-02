@@ -1,0 +1,69 @@
+<div mat-dialog-content>
+  <p>Add Product Details</p>
+  <!-- <mat-card class="content"> -->
+        <div class="card py-3">
+        <div class="table">
+            <tr>
+                <td class="col-sm-6">
+                    <div *ngIf="imageLink && imageLink !== ''">
+                        <img [src]="imageLink">
+                    </div>
+                </td>
+        <td class="col-sm-8">
+    
+        <form class="my-form content content-center-col" [formGroup]="productForm" >
+           
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Title</mat-label>
+                <input  matInput  formControlName="title">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Price</mat-label>
+                <input  matInput  formControlName="price">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Description</mat-label>
+                <input  matInput  formControlName="description">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Category</mat-label>
+                <input  matInput  formControlName="category">
+            </mat-form-field>
+            <!-- <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Image Link</mat-label>
+                
+                <input  matInput  formControlName="image" > 
+            </mat-form-field> -->
+          <div class="full-width variant">
+            <mat-label>Upload product image: </mat-label>
+            <input  type="file" accept="image/*" (change)="imagePreview($event)" />
+          </div>
+           <div class="full-width variant">
+            <div class="full-width">
+                <mat-label>Variant</mat-label>
+                <div>
+                    <button mat-button (click)="addVariant=!addVariant"><mat-icon >add</mat-icon>Add Variant</button>
+                    <div *ngIf="addVariant">
+                        <label for="key">Key</label>
+                        <input type="text" id="key" #box1>
+                        <label for="value">Value</label>
+                    <input type="text" id="value" #box2 >
+                    <button mat-button (click)="addMore(box1.value,box2.value)" ><mat-icon>done</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+    
+           </div>
+    
+            <mat-card-actions class="button">
+                <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
+                <button mat-raised-button color="primary"  (click)="onSubmit()" >Save</button>
+            </mat-card-actions>
+        </form>
+    </td>
+    </tr>
+    </div>
+    </div>
+    <!-- </div> -->
+    <!-- </mat-card> -->
+</div>
