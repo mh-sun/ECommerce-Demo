@@ -37,10 +37,11 @@ export class CartApiService{
     this.grandTotal.next(grandTotal)
   }
   getProducts(){
-    this.cartProducts = []
+    console.log("Cart : ???????????", this.user?.cart)
     this.user?.cart.forEach(item=>{
       this.addToCartProduct(item)
     })
+    console.log('Cart Product : ???????????', this.cartProducts)
     return this.cartProducts
   }
 
