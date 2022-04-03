@@ -28,7 +28,6 @@ export class AppComponent {
     });
   }
   @HostListener('window:scroll',['$event']) onScroll(){
-    console.log(window.scrollY)
     window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
   }
 }

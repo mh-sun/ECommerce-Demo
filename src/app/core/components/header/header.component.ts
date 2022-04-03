@@ -3,6 +3,7 @@ import { Order } from '../../models/order.model';
 import { AuthService } from '../../services/auth.service';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ export class HeaderComponent implements AfterViewInit{
   cartItemNumber:number|undefined = 0
   scrolled:boolean = false
   orders: Order[] | undefined ;
-  constructor(private cartService:CartApiService, private logger:LogService){
+  constructor(private cartService:CartApiService, private logger:LogService,private orderService:OrderService,private log:LogService){
     
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
@@ -41,5 +42,8 @@ export class HeaderComponent implements AfterViewInit{
 
   @HostListener('window:scroll',['$event']) onScroll(){
     window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
+  }
+  sendOrder(order:Order): void {
+    this.orderService.sendOrder(order);
   }
 }
