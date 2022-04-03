@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Order } from '../models/order.model';
 
 @Injectable()
 export class AddIDInterceptor implements HttpInterceptor {
@@ -15,15 +16,15 @@ export class AddIDInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-  //   let user:User=request.body;
+  //   let order:Order=request.body;
   //   if(request.body!=null){
      
-  //     user.id ='u'+ Math.random();
+  //     order.id ='o'+ Math.random();
   //            console.log('hellooo')
-  //            console.log(user);
+  //            console.log(order);
   //   }
   //   const modified = request.clone({
-  //     body:user
+  //     body:order
   //  } );
    return next.handle(request);
   }

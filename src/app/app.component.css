@@ -2,20 +2,35 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden !important;
+    /* overflow: hidden !important; */
   }
   
-  /* mat-drawer {
-    width: 260px;
-  } */
+  mat-drawer {
+    overflow: unset;
+  }
   mat-drawer-container {
 
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: unset;
+    background-color: unset;
+  }
+  mat-drawer-content{
+    overflow: unset;
   }
   
   /* mat-drawer {
     background: #0f172a;
   }  */
-  
+  .fixed{
+    position:fixed;
+    top: 0;
+    width: 100%;
+    transition: 500ms linear;
+    z-index: 100;
+}
+.noFixed{
+    position: static;
+    transition: 500ms linear;
+}
