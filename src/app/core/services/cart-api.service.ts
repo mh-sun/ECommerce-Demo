@@ -22,14 +22,17 @@ export class CartApiService{
       next: u=>{
         this.user = u
 
-        this.user?.cart.forEach((element:any) => {
+        this.cartProducts = []
+        this.user?.cart.forEach((element) => {
           this.productApi.getOneProduct(element.productId).subscribe(res=>{
             let resProduct:CartProduct = {
               product : res,
               quantity: element.quantity,
               variation: element.variation
             }
-            this.cartProducts.push(resProduct)            
+            console.log("Before : ", this.cartProducts)
+            this.cartProducts.push(resProduct)
+            console.log("After : ", this.cartProducts)
           })
         });
       }
@@ -50,9 +53,10 @@ export class CartApiService{
     return grandTotal;
   }
 
-  removeCartItem(product: any){
+  removeCartItem(cartItem: CartProduct){
     this.user?.cart.map((a:any, index:any)=>{
-      if(product.id=== a.id){
+      console.log(a)
+      if(cartItem.product.id === a.productId){
         this.user?.cart.splice(index,1);
         this.logger.loggedUser.next(this.user)
         this.logger.storeUser(this.user)

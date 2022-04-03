@@ -31,7 +31,8 @@ export class CartComponent {
     })
   }
 
-  removeItem(item: any){
+  removeItem(item: CartProduct){
+    console.log(item)
     this.cartService.removeCartItem(item);
   }
   emptycart(){
