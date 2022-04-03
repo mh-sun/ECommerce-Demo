@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { NavigationStart, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  scrolled:boolean = false
   title = 'Angular-Project';
   hide: boolean = false;
 
@@ -27,5 +27,7 @@ export class AppComponent {
       }
     });
   }
-
+  @HostListener('window:scroll',['$event']) onScroll(){
+    window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
+  }
 }
