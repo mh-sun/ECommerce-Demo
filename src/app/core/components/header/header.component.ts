@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit{
   }
 
   @HostListener('window:scroll',['$event']) onScroll(){
+    console.log('test')
     window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
   }
 }

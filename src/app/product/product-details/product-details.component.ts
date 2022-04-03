@@ -53,10 +53,7 @@ export class ProductDetailsComponent {
       quantity: this.quantity
     }
 
-    this.user.cart.push(c)
-    this.logger.loggedUser.next(this.user)
-    this.logger.storeUser(this.user)
-    this.productInCart(item.id)
+    this.cartService.addToCart(c)
   }
 
   increaseQuantity(){
@@ -68,7 +65,4 @@ export class ProductDetailsComponent {
     else this.quantity--
   }
 
-  productInCart(id:number){
-    let arr = this.user.cart.map((i:any)=>i.id)
-  }
 }

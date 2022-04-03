@@ -25,9 +25,15 @@ export class CartComponent {
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.user = u
-        this.products = cartService.cartProducts
-        this.grandTotal = cartService.getTotalPrice()
+        this.products = cartService.getProducts()
+        console.log(2222222222222)
+        this.grandTotalPrice()
       }
+    })
+  }
+  grandTotalPrice() {
+    this.cartService.grandTotal.subscribe({
+      next:res=>this.grandTotal = res
     })
   }
 
