@@ -14,6 +14,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 export class ProductListComponent{
   public productList : any ;
   public filterCategory = new Array();
+  public carouselItems = new Array()
   searchKey:string ="";
   isLoggedIn:boolean = false
 
@@ -29,36 +30,32 @@ export class ProductListComponent{
       for(let product of this.productList){
         if(product.isActive){
           this.filterCategory.push(product)
-          // console.log(this.filterCategory)
         }  
       }
-     
+      for(let i = 0; i < 3; i++){
+        this.carouselItems.push(this.filterCategory[i])
+      }
     });
 
     this.logger.getLogStatus().subscribe({
       next:res=>this.isLoggedIn = res
     })
   }
+  
   addtocart(item: any){
-    let c:any = {
+    let cartItem:any = {
       productId : item.id,
       variation : {},
       quantity: 1
     }
-
     for(let var_key in item.variation){
-      c.variation[var_key] = item.variation[var_key][0]
-      // console.log(var_key, item.variation[var_key]);
+      cartItem.variation[var_key] = item.variation[var_key][0]
     }
-    this.cartService.addToCart(c);
+    // console.log(cartItem);
+    
+    this.cartService.addToCart(cartItem);
   }
-  onClickAddCart(){
 
-  }
-
-  onClickDiscover(){
-
-  }
   viewProduct(product:any){
     this.dialog.open(ProductDetailsComponent, {
       data: product,

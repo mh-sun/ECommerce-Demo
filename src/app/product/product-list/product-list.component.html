@@ -5,63 +5,32 @@
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="carousel-caption">
-          <div class="container">
-            <div class="row">
-              <div class="text-white">
-                <span>New Arival</span>
-                <h2>Denim Something</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                <br>
-                <div class="d-flex justify-content-around">
-                  <a (click)="onClickAddCart()" class="btn btn-carousel">Add to cart</a>
-                  <a (click)="onClickDiscover()" class="btn btn-carousel">Discover</a>
+      <ng-container *ngFor="let item of carouselItems;let i = index">
+        <div class="carousel-item" [ngClass]="i == 0? 'active':''">
+          <div class="carousel-caption">
+            <div class="container">
+              <div class="row">
+                <div class="text-white">
+                  <span>New Arival</span>
+                  <h2>
+                    {{item.title}}
+                  </h2>
+                  <p>
+                    {{item.description}}
+                  </p>
+                  <br>
+                  <div class="d-flex justify-content-around">
+                    <a (click)="addtocart(item)" class="btn btn-carousel">Add to cart</a>
+                    <a (click)="viewProduct(item)" class="btn btn-carousel">Discover</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <img [src]="item.image">
         </div>
-        <img src="../../assets/images/carousel-image/jacket-woman.webp" class=" w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <div class="carousel-caption">
-          <div class="container">
-            <div class="row">
-              <div class="text-white">
-                <span>New Arival</span>
-                <h2>Denim Something</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                <br>
-                <div class="d-flex justify-content-around">
-                  <a href="#" class="btn btn-carousel">Add to cart</a>
-                  <a href="#" class="btn btn-carousel">Discover</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="../../assets/images/carousel-image/men-jeans.jpg" class="w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <div class="carousel-caption">
-          <div class="container">
-            <div class="row">
-              <div class="text-white">
-                <span>New Arival</span>
-                <h2>Denim Something</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                <br>
-                <div class="d-flex justify-content-around">
-                  <a href="#" class="btn btn-carousel">Add to cart</a>
-                  <a href="#" class="btn btn-carousel">Discover</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="../../assets/images/carousel-image/men-shoe.webp" class="w-100" alt="...">
-      </div>
+      </ng-container>
+
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
