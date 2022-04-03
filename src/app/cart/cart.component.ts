@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartProduct } from '../core/models/cart-product.model';
+import { Product } from '../core/models/product.model';
 import { User } from '../core/models/user.model';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
-import { ProductsService } from '../core/services/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ import { ProductsService } from '../core/services/products.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  public products : any = [];
+  public products : CartProduct[] = [];
   public grandTotal !: number;
   public user: User|null = null;
   public deliveryCharge:number = 100
@@ -24,7 +25,7 @@ export class CartComponent {
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.user = u
-        this.products = cartService.products
+        this.products = cartService.cartProducts
         this.grandTotal = cartService.getTotalPrice()
       }
     })
@@ -32,7 +33,6 @@ export class CartComponent {
 
   removeItem(item: any){
     this.cartService.removeCartItem(item);
-    
   }
   emptycart(){
     this.cartService.clearCart();

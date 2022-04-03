@@ -52,7 +52,6 @@ export class ProductListComponent{
       cartItem.variation[var_key] = item.variation[var_key][0]
     }
     // console.log(cartItem);
-    
     this.cartService.addToCart(cartItem);
   }
 

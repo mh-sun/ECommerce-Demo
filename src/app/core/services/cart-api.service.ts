@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { CartProduct } from '../models/cart-product.model';
 import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
 import { LogService } from './log.service';
@@ -12,7 +13,7 @@ import { ProductsService } from './products.service';
 export class CartApiService{
 
   private user!:User|null
-  public products:Product[] = []
+  public cartProducts:CartProduct[] = []
 
   constructor(
     private logger:LogService,
@@ -23,28 +24,28 @@ export class CartApiService{
 
         this.user?.cart.forEach((element:any) => {
           this.productApi.getOneProduct(element.productId).subscribe(res=>{
-            if(!(res in this.products)){
-              this.products.push(res)
+            let resProduct:CartProduct = {
+              product : res,
+              quantity: element.quantity,
+              variation: element.variation
             }
-            console.log(this.products);
-            
+            this.cartProducts.push(resProduct)            
           })
         });
       }
     })
   }
-  
+
   addToCart(product : any){
     this.user?.cart.push(product)
     this.logger.loggedUser.next(this.user)
-    this.logger.storeUser
+    this.logger.storeUser(this.user)
   }
 
   getTotalPrice() : number{
     let grandTotal = 0;
-    this.user?.cart.map((a:any)=>{
-      console.log(a.quantity);
-      
+    this.cartProducts.forEach(c=>{
+      grandTotal += (c.product.price*c.quantity)
     })
     return grandTotal;
   }
@@ -54,7 +55,7 @@ export class CartApiService{
       if(product.id=== a.id){
         this.user?.cart.splice(index,1);
         this.logger.loggedUser.next(this.user)
-        this.logger.storeUser()
+        this.logger.storeUser(this.user)
       }
     })
   }
@@ -62,6 +63,6 @@ export class CartApiService{
   clearCart(){
     this.user?.cart.splice(0,this.user.cart.length)
     this.logger.loggedUser.next(this.user)
-    this.logger.storeUser()
+    this.logger.storeUser(this.user)
   }
 }

@@ -18,7 +18,6 @@ export class LogService {
     this.userSubscription = this.loggedUser.subscribe({
       next: u=>{
         this.user = u
-        console.log(this.user)
       }
     })
   }
@@ -40,7 +39,8 @@ export class LogService {
     this._logStatus.next(false)
     this.loggedUser.next(null)
   }
-  storeUser(){
-    localStorage.setItem('loggedUser', JSON.stringify(this.user))
+  storeUser(user:User|null){
+    if(user === null) return
+    localStorage.setItem('loggedUser', JSON.stringify(user))
   }
 }

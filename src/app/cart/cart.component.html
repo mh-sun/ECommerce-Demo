@@ -99,12 +99,12 @@
                     <tbody>
                         <tr *ngFor="let item of products; let i = index">
                             <td>{{i+1}}</td>
-                            <td>{{item.title}}</td>
-                            <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
-                            <td style="width: 25%;">{{item.description}}</td>
-                            <th style="width: 12%;">{{item.price}}</th>
-                            <td style="width: 12%;">1</td>
-                            <td style="width: 12%;">{{item.price*1}}</td>
+                            <td>{{item.product.title}}</td>
+                            <td><img style="width: 120px;" src="{{item.product.image}}" alt=""></td>
+                            <td style="width: 25%;">{{item.product.description}}</td>
+                            <th style="width: 12%;">{{item.product.price}}</th>
+                            <td style="width: 12%;">{{item.quantity}}</td>
+                            <td style="width: 12%;">{{item.product.price*item.quantity}}</td>
                             <td>
                                 <button (click)="removeItem(item)" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
@@ -116,7 +116,7 @@
                             <td><button (click)="emptycart()" class="btn btn-danger">Clear</button></td>
                             <td><button routerLink="/products" class="btn btn-primary">Shop</button></td>
                             <td><button class="btn btn-success" (click)="checkOut()">Checkout</button></td>
-                            <td><strong>Grand Total : ${{grandTotal}}</strong></td>
+                            <td><strong>Grand Total : ${{grandTotal | number : '.2'}}</strong></td>
                         </tr>
                     </tbody>
                 </table>

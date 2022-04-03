@@ -55,7 +55,7 @@ export class ProductDetailsComponent {
 
     this.user.cart.push(c)
     this.logger.loggedUser.next(this.user)
-    this.logger.storeUser()
+    this.logger.storeUser(this.user)
     this.productInCart(item.id)
   }
 
