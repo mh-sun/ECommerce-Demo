@@ -21,14 +21,15 @@ export class ProductListComponent{
     private cartService : CartApiService,
     private dialog:MatDialog,
     private logger:LogService) {
+
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
-      console.log(this.productList)
+      // console.log(this.productList)
       for(let product of this.productList){
         if(product.isActive){
           this.filterCategory.push(product)
-          console.log(this.filterCategory)
+          // console.log(this.filterCategory)
         }  
       }
      

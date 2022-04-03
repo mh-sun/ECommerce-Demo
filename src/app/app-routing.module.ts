@@ -29,7 +29,9 @@ const routes: Routes = [
     path:'orders/:id',
     component:OrdersComponent, data: { kind: 'update' }
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { 
+    path: 'admin', 
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {
     path:'**',
     component:PageNotFoundComponent,

@@ -29,13 +29,7 @@ export class HeaderComponent implements OnInit{
       }
     })
   }
-<<<<<<< HEAD
   ngOnInit(): void {
-=======
-
-  ngAfterViewInit(): void {
-    console.log(this.orders)
->>>>>>> c6f119b869e55ec7df520622241462fb1cc131ff
     this.cartItemNumber = this.cartItemNumber===undefined? 0 : this.cartItemNumber
   }
   

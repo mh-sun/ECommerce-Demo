@@ -12,14 +12,13 @@ export class ProductsService {
   constructor(private http:HttpClient) { }
 
   getProduct(){ 
-    return this.http.get<any>(this.url)
-    .pipe(map((res:any)=>{
+    return this.http.get<any>(this.url).pipe(map((res:any)=>{
       res.forEach((a:any)=>{
-        Object.assign(a,{
-          quantity:1,
-          total:a.price
-        });        
-        if(a.variation != {} && a.variation != undefined) return res
+        // Object.assign(a,{
+        //   quantity:1,
+        //   total:a.price
+        // });        
+        // if(a.variation != {} && a.variation != undefined) return res
 
         if(a.category=='men\'s clothing' || a.category=='women\'s clothing'){
           Object.assign(a,{
@@ -51,6 +50,7 @@ export class ProductsService {
       return res;
     }))
   }
+  
   updatePost(postData: Object,id:number) {
     const newUrl = this.url+'/'+id;
     this.http.put( newUrl, postData).subscribe(data => {
