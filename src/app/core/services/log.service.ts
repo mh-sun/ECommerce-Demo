@@ -22,9 +22,6 @@ export class LogService {
       }
     })
   }
-  public getLogUser(){
-    return this.loggedUser;
-  }
 
   public getLogStatus(){
     return this._logStatus

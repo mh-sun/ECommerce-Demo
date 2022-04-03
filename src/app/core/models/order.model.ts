@@ -7,7 +7,7 @@ interface productDetails{
 }
 
 export interface Order{
-    id:number,
+    id:string,
     userid:number,
     products:productDetails[]
     payment:{
