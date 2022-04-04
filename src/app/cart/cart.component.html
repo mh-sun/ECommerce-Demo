@@ -111,15 +111,17 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="4"></td>
-                            <td><button (click)="emptycart()" class="btn btn-danger">Clear</button></td>
-                            <td><button routerLink="/products" class="btn btn-primary">Shop</button></td>
-                            <td><button class="btn btn-success" (click)="checkOut()">Checkout</button></td>
-                            <td><strong>Grand Total : ${{grandTotal | number : '.2'}}</strong></td>
-                        </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <!-- <tr> -->
+                        <div class="col-md-1"><button (click)="emptycart()" class="clearBtn">Clear</button></div>
+                        <div class="col-md-1"><button routerLink="/products" class="shopBtn">Shop</button></div>
+                        <div class="col-md-1"><button class="checkoutBtn" (click)="checkOut()">Checkout</button></div>
+                        <!-- <td colspan="3"></td> -->
+                        <div class="col-md-9" style="text-align: right;font-size: x-large;"><strong>Grand Total : ${{grandTotal | number : '.2'}}</strong></div>
+                    <!-- </tr> -->
+                </div>
             </div>
         </div>
     </div>
