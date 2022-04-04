@@ -28,6 +28,7 @@ export class CartComponent {
     })
     this.cartService.cartSubject.subscribe({
       next:(res)=>{
+        console.log(res)
         this.products = res
       },
       complete:()=>{

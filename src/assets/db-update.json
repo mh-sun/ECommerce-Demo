@@ -16,7 +16,7 @@
           "lastname": "doe"
         },
         "phone": "1-570-236-7033",
-        "cart": 1,
+        "carts": [1],
         "orders":[
           {
             "id":1,

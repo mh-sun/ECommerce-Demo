@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
@@ -22,12 +23,12 @@ export class ProductListComponent{
   constructor(private api : ProductsService, 
     private cartService : CartApiService,
     private dialog:MatDialog,
-    private logger:LogService) {
+    private logger:LogService,
+    private router:Router) {
 
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
-      // console.log(this.productList)
       for(let product of this.productList){
         if(product.isActive){
           this.filterCategory.push(product)
@@ -49,8 +50,7 @@ export class ProductListComponent{
   }
 
   viewProduct(product:any){
-    this.dialog.open(ProductDetailsComponent, {
-      data: product,
-    })
+    console.log(product.id)
+    this.router.navigate(["/products", product.id])
   }
 }
