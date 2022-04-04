@@ -1,3 +1,5 @@
+import { Variation } from "./variation.model";
+
 export interface Product {
     isActive: boolean;
     id: number;
@@ -10,5 +12,5 @@ export interface Product {
         rate: number
         count: number
     },
-    variation:object
+    variation: Variation[]
 }

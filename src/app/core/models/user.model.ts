@@ -26,6 +26,6 @@ export interface User{
         lastname: string
     },
     phone: string
-    cart : CartProduct[]
+    cartId : number
     orders : Order[]
 }
