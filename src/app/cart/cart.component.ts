@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartProduct } from '../core/models/cart-product.model';
-import { Product } from '../core/models/product.model';
+import { Cart } from '../core/models/cart-product.model';
 import { User } from '../core/models/user.model';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
@@ -12,7 +11,7 @@ import { LogService } from '../core/services/log.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  public products : CartProduct[] = [];
+  public products : Cart[] = [];
   public grandTotal !: number;
   public user: User|null = null;
   public deliveryCharge:number = 100
@@ -25,19 +24,25 @@ export class CartComponent {
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.user = u
-        this.products = cartService.getProducts()
-        console.log(2222222222222)
+      }
+    })
+    this.cartService.cartSubject.subscribe({
+      next:(res)=>{
+        this.products = res
+      },
+      complete:()=>{
         this.grandTotalPrice()
       }
     })
   }
   grandTotalPrice() {
-    this.cartService.grandTotal.subscribe({
-      next:res=>this.grandTotal = res
+    this.grandTotal = 0
+    this.products.forEach(cp=>{
+      this.grandTotal += (cp.total.price*cp.quantity+cp.total.shipping)
     })
   }
 
-  removeItem(item: CartProduct){
+  removeItem(item: Cart){
     console.log(item)
     this.cartService.removeCartItem(item);
   }

@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit{
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.orders = u?.orders;
-        this.cartItemNumber = u?.cart.length
+        this.cartItemNumber = u?.carts.length
       }
     })
   }

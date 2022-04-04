@@ -1,6 +1,12 @@
 export interface Cart{
+    id:number
+    productId:number
     title: string;
-    price: number;
+    total: {
+        price:number
+        shipping:number
+        discount:number
+    };
     description: string;
     image: string
     variation: object

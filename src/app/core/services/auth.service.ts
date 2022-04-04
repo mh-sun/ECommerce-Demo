@@ -18,11 +18,11 @@ export class AuthService {
         return this.http.get<User[]>(link)
     }
 
-    Registration(user: any){
+    Registration(user: User){
         let link = this.url + 'users'
         return this.http.post(link, user);
     }
-    getOneUser(id:any){
+    getOneUser(id:number){
         let link = this.url + 'users/'+id;
       return this.http.get<User>(link).pipe(map((res:any)=>{
         return res;

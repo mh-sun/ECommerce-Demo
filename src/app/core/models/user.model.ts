@@ -1,11 +1,5 @@
 import { Order } from "./order.model"
 
-interface CartProduct{
-    productId: number
-    variation: object
-    quantity:number
-}
-
 export interface User{
     address: {
         city: string
@@ -22,6 +16,6 @@ export interface User{
         lastname: string
     },
     phone: string
-    cartId : number
+    carts : number[]
     orders : Order[]
 }

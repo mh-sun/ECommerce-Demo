@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
@@ -42,16 +43,8 @@ export class ProductListComponent{
     })
   }
   
-  addtocart(item: any){
-    let cartItem:any = {
-      productId : item.id,
-      variation : {},
-      quantity: 1
-    }
-    for(let var_key in item.variation){
-      cartItem.variation[var_key] = item.variation[var_key][0]
-    }
-    // console.log(cartItem);
+  addtocart(item: Product){
+    let cartItem:Cart = this.cartService.createCartItem(item, item.variation[0].type, 1)
     this.cartService.addToCart(cartItem);
   }
 

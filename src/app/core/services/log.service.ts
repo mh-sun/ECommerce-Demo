@@ -26,10 +26,11 @@ export class LogService {
     return this._logStatus
   }
 
-  logIn(user:any){
+  logIn(user:User){
     localStorage.setItem('loggedUser', JSON.stringify(user))
     this._logStatus.next(true)
     this.loggedUser.next(user)
+    
   }
   logout(){
     localStorage.removeItem('loggedUser')

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
@@ -47,11 +48,7 @@ export class ProductDetailsComponent {
   addtocart(item: Product){
     if(this.user.cart === undefined) this.user.cart = []
 
-    let c = {
-      productId : item.id,
-      variation: this.variation,
-      quantity: this.quantity
-    }
+    let c:Cart = this.cartService.createCartItem(item, this.variation, this.quantity)
 
     this.cartService.addToCart(c)
   }
