@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { Product } from 'src/app/core/models/product.model';
-import { CartApiService } from 'src/app/core/services/cart-api.service';
+//import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ProductDetailsComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef:MatDialogRef<ProductDetailsComponent>,
-    private cartService: CartApiService,
+  //  private cartService: CartApiService,
     private logger:LogService
   ) 
   {
@@ -53,10 +53,7 @@ export class ProductDetailsComponent {
       quantity: this.quantity
     }
 
-    this.user.cart.push(c)
-    this.logger.loggedUser.next(this.user)
-    this.logger.storeUser(this.user)
-    this.productInCart(item.id)
+    //this.cartService.addToCart(c)
   }
 
   increaseQuantity(){
@@ -68,7 +65,4 @@ export class ProductDetailsComponent {
     else this.quantity--
   }
 
-  productInCart(id:number){
-    let arr = this.user.cart.map((i:any)=>i.id)
-  }
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
 import { Order } from '../../models/order.model';
 import { AuthService } from '../../services/auth.service';
-import { CartApiService } from '../../services/cart-api.service';
+// import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 import { OrderService } from '../../services/order.service';
 
@@ -16,7 +16,9 @@ export class HeaderComponent implements OnInit{
   cartItemNumber:number|undefined = 0
   scrolled:boolean = false
   orders: Order[] | undefined ;
-  constructor(private cartService:CartApiService, private logger:LogService,private orderService:OrderService,private log:LogService){
+  constructor(
+    // private cartService:CartApiService, 
+    private logger:LogService,private orderService:OrderService,private log:LogService){
     
     this.logger.getLogStatus().subscribe({
       next:(res:boolean)=>{
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit{
     this.logger.loggedUser.subscribe({
       next:u=>{
         this.orders = u?.orders;
-        this.cartItemNumber = u?.cart.length
+        // this.cartItemNumber = u?.cart.length
       }
     })
   }

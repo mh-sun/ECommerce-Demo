@@ -12,9 +12,23 @@
     background-color: rgba(0,0,0,.04);
     padding: 2%
 }
-.center{
+/* .center{
     color: rgba(0,0,0,.7);
     padding-top: 18%;
     font-size: small;
     font-weight: bold;
+} */
+.btn-ico{
+    border: none;
+    border-radius: 20px;
+}
+.btn-ico:hover{
+    margin-left:2% ;
+    color: white;
+    background-color:grey;
+}
+.quantity{
+    border: 0;
+    text-align: center;
+    width:20%
 }

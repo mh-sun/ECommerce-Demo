@@ -8,10 +8,6 @@ interface CartProduct{
 
 export interface User{
     address: {
-        geolocation: {
-            lat: string
-            long: string
-        },
         city: string
         street: string
         number: number
@@ -26,6 +22,6 @@ export interface User{
         lastname: string
     },
     phone: string
-    cart : CartProduct[]
+    cartId : number
     orders : Order[]
 }

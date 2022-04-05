@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
+import {Variation} from 'src/app/core/models/variation.model';
 import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
@@ -10,17 +11,19 @@ import { ProductsService } from 'src/app/core/services/products.service';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  public var_keys:any = []
-  public Variation:any = {}
-  // url: any; 
+  quantity:number[]=[];
+  public var_keys:any[] = [];
+  valueArray = new Array();
+  Variation:Variation[]|any = [];
+  variation:Variation|any;
   msg = "";
   index:number | undefined;
   existValue=false;
   addVariant=false;
-  // removeType=false;
   title:string|any;
   headerTitle:string|any;
   product:Product|any;
+  typeForm:FormGroup|any;
   productEditForm:FormGroup|any;
   productIdFromRoute!: number;
   variantType=true;
@@ -41,15 +44,18 @@ export class ProductEditComponent implements OnInit {
         description:[this.product.description,],
         category:[this.product.category,],
         image:[this.product.image,],
-        
+        types:this.fb.array([
+        ])
      });
-     
-     this.var_keys = Object.keys(this.product.variation)
-     //console.log();
-     this.var_keys.forEach((k:any)=>{
-       this.Variation[k] = this.product.variation[k][0]
-     })
-     console.log(this.Variation,this.var_keys.length)
+     for(let variation of this.product.variation){
+      console.log(variation['type'])
+        this.var_keys.push(Object.keys(variation['type']))
+        this.variation = variation['type'];
+      console.log(this.var_keys,this.variation);
+      this.Variation.push(this.variation)
+      this.quantity.push(variation['quantity'])
+     }
+     console.log(this.Variation.length,this.var_keys.length)
 
      if(this.var_keys.length==0){
        this.variantType=false;
@@ -59,23 +65,34 @@ export class ProductEditComponent implements OnInit {
     });
 
   }
+  get types(){
+    return this.productEditForm.get('types') as FormArray
+  }
   changeType(index:number){
     console.log(index)
       this.index = index;
     
   }
 
-  check(key:string,input:string){
-    console.log(input)
-    for(let v of this.product.variation[key]){
-      if(this.product.variation[key].indexOf(input) !== -1){
-        this.msg = 'Already exist';
-        break;
-    } 
-    else{
-      this.msg = ''
-    }
-  }
+  // check(key:string,input:string){
+  //   console.log(input)
+  //   for(let v of this.product.variation[key]){
+  //     if(this.product.variation[key].indexOf(input) !== -1){
+  //       this.msg = 'Already exist';
+  //       break;
+  //   } 
+  //   else{
+  //     this.msg = ''
+  //   }
+  // }
+  // }
+
+  addType(){
+    this.typeForm =this.fb.group({
+      key:[''],
+      value:['']
+    })
+    this.types.push(this.typeForm); 
   }
 
   addVariation(key:string,input:string){
@@ -86,37 +103,104 @@ export class ProductEditComponent implements OnInit {
     for(let v of this.product.variation[key]){
       console.log(this.existValue)
       if(this.product.variation[key].indexOf(input) !== -1){
-      //  this.msg = 'Already exist';
-      this.existValue = true;
-      console.log(this.existValue)
+        this.existValue = true;
+        console.log(this.existValue)
+          break;
+      } 
+      else{
+        this.product.variation[key].push(input);
+        this.index=-1;
         break;
-    } 
-    else{
-      this.product.variation[key].push(input);
-      this.index=-1;
-      break;
-    }
+      }
     }
     console.log(this.product.variation[key][0])
     
   }
-  removeVariation(key:string,index:number){
-    this.product.variation[key].splice(index,1)
-     console.log(this.product.variation[key])
+
+  removeVariation(index:number){
+    this.product.variation.splice(index,1)
+    this.Variation.splice(index,1)
+    console.log(this.product.variation,this.Variation)
   }
 
-  addMore(input1:string,input2:string){
-    console.log(input1,input2);
-    let arr = new Array(input2);
-    this.product.variation[input1] = arr;
-    console.log(this.product.variation)
-    this.var_keys = Object.keys(this.product.variation)
-     //console.log();
-     this.var_keys.forEach((k:any)=>{
-       this.Variation[k] = this.product.variation[k][0]
-     })
-     console.log(this.Variation,this.var_keys);
-     this.addVariant = false;
+  haveSameData(obj1:Object|any, obj2:Object|any) {
+    const obj1Length = Object.keys(obj1).length;
+    const obj2Length = Object.keys(obj2).length;
+
+    if (obj1Length === obj2Length) {
+        return Object.keys(obj1).every(
+            key => obj2.hasOwnProperty(key)
+                && obj2[key] === obj1[key]);
+    }
+    return false;
+  }
+
+  // addMore(typeKey:string,typeValue:string,quantity:string){
+  //   let key = typeKey;
+  //   console.log(typeKey,typeValue);
+  //   let obj:any={
+  //     type:{
+  //     },
+  //     quantity:quantity
+  //   };
+  //   obj.type[typeKey] = typeValue;
+  //   for(let variation of this.Variation){
+  //     console.log(obj.type,variation)
+  //     if(this.haveSameData(variation,obj.type)){
+  //        console.log('Variation already exist')
+  //        break;
+  //     }
+  //     else{
+  //       console.log('ok')
+  //     }
+      
+  //   }
+    
+  //   // this.variation = obj.type;
+  //   // this.Variation.push(this.variation)   
+  //   // this.product.variation.push(obj);
+  //   // this.var_keys.push(Object.keys(this.variation))
+  //   console.log(obj,this.Variation,this.product.variation)
+  //   this.addVariant = false;
+  // }
+
+  addMore(quantity:string){
+    console.log(this.types,quantity);
+    let obj:any={
+      type:{
+      },
+      quantity:quantity
+    };
+    // obj.type[typeKey] = typeValue;
+    // for(let variation of this.Variation){
+    //   console.log(obj.type,variation)
+    //   if(this.haveSameData(variation,obj.type)){
+    //      console.log('Variation already exist')
+    //      break;
+    //   }
+    //   else{
+    //     console.log('ok')
+    //   }
+      
+    // }
+    
+    // this.variation = obj.type;
+    // this.Variation.push(this.variation)   
+    // this.product.variation.push(obj);
+    // // this.var_keys.push(Object.keys(this.variation))
+    // console.log(obj,this.Variation,this.product.variation)
+    // this.addVariant = false;
+  }
+  increaseQuantity(index:number){
+    this.product.variation[index]['quantity']++;
+    console.log(this.product.variation[index].quantity)
+  }
+
+  decreaseQuantity(index:number){
+   if(this.product.variation[index].quantity<=0) return
+    else   this.product.variation[index].quantity--;
+
+   console.log(this.product.variation[index].quantity)
   }
 
   onSubmit(){
@@ -124,9 +208,7 @@ export class ProductEditComponent implements OnInit {
     for(let key of arr){
       console.log(key)
       this.product[key] = this.productEditForm.get(key).value;
-
     }
-    
     console.log('onsubmit:' ,this.productEditForm.value,'Product Detail:',this.product);
     this.service.updatePost(this.product,this.productIdFromRoute);
   }

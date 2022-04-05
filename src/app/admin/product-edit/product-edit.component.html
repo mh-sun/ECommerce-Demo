@@ -47,38 +47,76 @@
         <div *ngIf="variantType" class="full-width">
             <p class="title">Variant:</p>
         </div>
-        <ng-container *ngFor="let var_key of var_keys; let i = index">
-            <div class="table full-width">
-                <div class="d-flex">
-                    <div class="col-md-4">
-                        <span class="d-flex center">{{var_key}}</span>
+        <div *ngFor="let variation of Variation;let k=index">
+            <ng-container >
+                <div class="table full-width"*ngFor="let var_k of var_keys[k]">
+                    <div class="d-flex" >
+                        <div class="col-md-4">
+                            <span class="d-flex center">{{var_k}}:</span>
+                        </div>
+                        <div class="col-md-8 d-flex flex-column">
+                            <span class="d-flex" >{{variation[var_k]}} 
+                            </span>
+                            <!-- <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon> Add {{var_key}} type</button>
+                            <div *ngIf="i==index">
+                                <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
+                                <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
+                                <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                            </div>-->
+                        </div>   
                     </div>
-                    <div class="col-md-8 d-flex flex-column">
-                        <span class="d-flex" *ngFor="let var_val of product.variation[var_key]; let j=index" >{{var_val}} 
-                            <button mat-button (click)="removeVariation(var_key,j)"><mat-icon >remove</mat-icon></button>
-                        </span>
-                        <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon> Add {{var_key}} type</button>
-                        <div *ngIf="i==index">
-                            <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
-                            <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
-                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                </div>
+            </ng-container>
+            <ng-container>
+                <div class="table full-width">
+                    <div class="d-flex">
+                        <div class="col-md-4">Quantity:
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn-ico" (click)="increaseQuantity(k)"><i class="fas fa-plus"></i></button>
+                            <span>{{product.variation[k]['quantity']}}</span>
+                            <button class="btn-ico" (click)="decreaseQuantity(k)"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    
-            </div>
-            </div>
-        </ng-container>
-        <div>
-            <button mat-button (click)="addVariant=!addVariant"><mat-icon >add</mat-icon>Add More Variant</button>
+                </div>
+            </ng-container>
+            <button mat-button (click)="removeVariation(k)" ><mat-icon >remove</mat-icon>Remove variation</button>
+        </div>
+        <!-- <div>
+            <button mat-button (click)="addVariant=!addVariant"><mat-icon>add</mat-icon>Add More Variant</button>
             <div *ngIf="addVariant">
                 <label for="key">Key</label>
                 <input type="text" id="key" #box1>
                 <label for="value">Value</label>
-            <input type="text" id="value" #box2 >
-            <button mat-button (click)="addMore(box1.value,box2.value)" ><mat-icon>done</mat-icon></button>
+                <input type="text" id="value" #box2 >
+                <button mat-button (click)="addType()"><mat-icon >add</mat-icon> Add more type</button>
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="key" #box3>
+                <button mat-button (click)="addMore(box1.value,box2.value,box3.value)" ><mat-icon>done</mat-icon></button>
             </div>
-        </div>
-
+        </div> -->
+        <ng-container formArrayName="types">
+            <ng-container *ngFor="let type of types.controls; let i = index">
+                <div [formGroup]="typeForm">
+                    <mat-form-field appearance="fill">
+                        <input matInput
+                               formControlName="key"
+                               placeholder="type">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <input matInput
+                               formControlName="value"
+                               placeholder="Value">
+                    </mat-form-field>
+                </div>
+            </ng-container>
+            <button mat-mini-fab (click)="addType()">
+                <mat-icon class="add-course-btn">add</mat-icon>
+            </button>
+        </ng-container>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="key" #box3>
+        <button mat-button type="submit" (click)="addMore(box3.value)" ><mat-icon>done</mat-icon></button>
        </div>
 
         <mat-card-actions class="button">

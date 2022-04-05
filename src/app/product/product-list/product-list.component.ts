@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product.model';
-import { CartApiService } from 'src/app/core/services/cart-api.service';
+// import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
@@ -19,7 +19,7 @@ export class ProductListComponent{
   isLoggedIn:boolean = false
 
   constructor(private api : ProductsService, 
-    private cartService : CartApiService,
+    // private cartService : CartApiService,
     private dialog:MatDialog,
     private logger:LogService) {
 
@@ -52,7 +52,7 @@ export class ProductListComponent{
       cartItem.variation[var_key] = item.variation[var_key][0]
     }
     // console.log(cartItem);
-    this.cartService.addToCart(cartItem);
+    // this.cartService.addToCart(cartItem);
   }
 
   viewProduct(product:any){
