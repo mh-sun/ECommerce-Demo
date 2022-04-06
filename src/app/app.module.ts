@@ -33,7 +33,7 @@ import { OrdersComponent } from './core/components/orders/orders.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}

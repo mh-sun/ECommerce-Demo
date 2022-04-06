@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { User } from 'src/app/core/models/user.model';
@@ -16,16 +16,17 @@ import { ProductsService } from 'src/app/core/services/products.service';
 })
 export class ProductDetailsComponent implements OnInit{
 
-  public var_keys:any = []
+  public var_keys:any = {}
   public variation:any = {}
   public quantity:number = 1
-  public data!:Product
+  public data:any = null
   private user!:User|null;
 
   constructor(
     private cartService: CartApiService,
     private logger:LogService,
-    private productService:ProductsService
+    private productService:ProductsService,
+    private route:ActivatedRoute
   ) {
     this.logger.loggedUser.subscribe({
       next:(u)=>{
@@ -34,20 +35,22 @@ export class ProductDetailsComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-    this.productService.getOneProduct(2).subscribe({
+    let id = this.route.snapshot.params['id'];
+    this.productService.getOneProduct(id).subscribe({
       next:res=>{
         this.data = res
-      },
-      complete:()=>{
-        for (const variation of this.data.variation) {
-          console.log(variation)
+        for(let var_i of this.data.variation){
+          let keys = Object.keys(var_i.type)
+          keys.forEach(k=>{
+            if(!this.var_keys[k]) this.var_keys[k] = []
+            let val = var_i.type[k]
+            if(this.var_keys[k].indexOf(val) <= -1) 
+              this.var_keys[k].push(val)
+          })
         }
-        // this.var_keys.forEach((k:any)=>{
-        //   this.variation[k] = this.data.variation[k][0]
-        // })
+        console.log(this.var_keys);
       }
     })
-    
   }
   
   addtocart(item: Product){
@@ -56,13 +59,47 @@ export class ProductDetailsComponent implements OnInit{
     this.cartService.addToCart(c)
   }
 
+  public isEqualObject(object1:any, object2:any):boolean{
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+    for (const key of keys1) {
+      const val1 = object1[key];
+      const val2 = object2[key];
+      if (val1 !== val2) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  getQuantity():number{
+    this.data.variation.forEach((e:any)=>{
+      if(this.isEqualObject(e.type, this.variation))
+      return e.quantity
+    })
+    
+    return -1
+  }
+
   increaseQuantity(){
+    console.log(this.variation)
+    let quant:number = this.getQuantity()
+    if(quant === -1) console.log("Product not found")
+    if(this.quantity >= quant) return
     this.quantity++
   }
 
   decreaseQuantity(){
-    if(this.quantity<=0) return
+    console.log(this.variation)
+    if(this.quantity<=1) return
     else this.quantity--
+  }
+
+  public getList(arr:any):any[]{
+    return Array.isArray(arr)?arr:[]
   }
 
 }

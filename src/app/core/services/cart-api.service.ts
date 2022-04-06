@@ -70,18 +70,8 @@ export class CartApiService{
     this.logger.loggedUser.next(this.user)
     return true
   }
-  cartAdd(item:Cart) {
-    this.http.post<Cart>(this.url, item).subscribe({
-      next:r=>{console.log("Cart is added", r)}
-    })
-  }
-  cartUpdate(item:Cart) {
-    this.http.put<Cart>(this.url + item.id, item).subscribe({
-      next:r=>{console.log("Cart is updated", r)}
-    })
-  }
 
-  isEqualObject(object1:any, object2:any):boolean{
+  public isEqualObject(object1:any, object2:any):boolean{
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
     if (keys1.length !== keys2.length) {
@@ -96,6 +86,19 @@ export class CartApiService{
     }
     return true;
   }
+
+  cartAdd(item:Cart) {
+    this.http.post<Cart>(this.url, item).subscribe({
+      next:r=>{console.log("Cart is added", r)}
+    })
+  }
+  cartUpdate(item:Cart) {
+    this.http.put<Cart>(this.url + item.id, item).subscribe({
+      next:r=>{console.log("Cart is updated", r)}
+    })
+  }
+
+  
 
   removeCartItem(product: Cart){
     for (let i = 0; i < this.cartProducts.length; i++) {
@@ -137,8 +140,6 @@ export class CartApiService{
       this.http.get<Cart>(this.url+ i).subscribe({
         next:res=>{
           this.cartProducts.push(res)
-        },
-        complete:()=>{
           if(index === this.user!.carts.length-1){
             console.log(this.cartProducts)
             this.cartSubject.next(this.cartProducts)
@@ -146,7 +147,5 @@ export class CartApiService{
         }
       })
     })
-
-    
   }
 }
