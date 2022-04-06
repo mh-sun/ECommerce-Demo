@@ -11,6 +11,7 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './add-product/add-product.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     HomeComponent,
     SidenavComponent,
     ProductEditComponent,
-    AddProductComponent
+    AddProductComponent,
+    OrderListComponent
   ],
   imports: [
     CommonModule,

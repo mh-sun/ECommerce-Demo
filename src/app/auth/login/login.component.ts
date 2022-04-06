@@ -40,7 +40,7 @@ export class LoginComponent implements OnDestroy{
         if(user.email === this.user.value.email && user.password === this.user.value.password){
           this.logger.logIn(user)
           this.user.reset()
-          this.route.navigate(['/cart'])
+          this.route.navigate(['/'])
           return
         }
       }

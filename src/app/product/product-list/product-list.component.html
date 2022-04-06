@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-          <img [src]="item.image">
+          <img [src]="item.image" class="carousel-img">
         </div>
       </ng-container>
 
@@ -49,7 +49,7 @@
       <div class="card col-md-3" >
         <div (click)="viewProduct(item)">
           <div class="img-wrap">
-            <img mat-card-image src="{{item.image}}" alt="">
+            <img mat-card-image src="{{item.image}}" alt="" class="prodct-img">
           </div>
           <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
           <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>

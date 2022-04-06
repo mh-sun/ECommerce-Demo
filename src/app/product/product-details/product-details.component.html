@@ -1,7 +1,6 @@
-<div class="container">
+<div class="container py-4">
     <div class="row">
-        <div class="card py-3">
-            <button class="btn w-auto" (click)="close()"><i class="fas fa-times"></i></button>
+        <div class="card py-3" *ngIf="data">
             <div class="table">
                 <tr>
                     <td class="col-sm-4">
@@ -27,11 +26,13 @@
                                 <del>{{(data.price+data.price*.3).toFixed(2)}}</del> <strong> -30% </strong>
                             </h5>
                             <hr>
-                            <ng-container *ngFor="let var_key of var_keys; let i = index">
+                            {{var_keys|json}}
+                            <ng-container *ngFor="let Item of var_keys | keyvalue; let i = index">
                                 <div class="row">
-                                    <h4 class="h4 text-secondary" class="col-md-4">{{var_key}}</h4>
-                                    <mat-radio-group class="col-md-8" [(ngModel)]="variation[var_key]">
-                                        <mat-radio-button *ngFor="let var_val of data.variation[var_key]" [value]="var_val">
+                                    <h4 class="h4 text-secondary" class="col-md-4">{{Item.key}}</h4>
+                                    {{Item.value}}
+                                    <mat-radio-group class="col-md-8" >
+                                        <mat-radio-button *ngFor="let var_val of getList(Item.value)" [value]="var_val">
                                             {{var_val}}
                                         </mat-radio-button>
                                     </mat-radio-group>
@@ -58,4 +59,3 @@
         </div>
     </div>
 </div>
-<br>
