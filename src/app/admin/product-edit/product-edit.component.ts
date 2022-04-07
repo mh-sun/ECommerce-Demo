@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
@@ -11,8 +11,8 @@ import { ProductsService } from 'src/app/core/services/products.service';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+  @ViewChild('box') inputQtn: any; 
   quantity:number[]=[];
-  public var_keys:any[] = [];
   valueArray = new Array();
   Variation:Variation[]|any = [];
   variation:Variation|any;
@@ -45,20 +45,12 @@ export class ProductEditComponent implements OnInit {
         category:[this.product.category,],
         image:[this.product.image,],
         types:this.fb.array([
+          // this.addTypeGroup()
         ])
      });
      for(let variation of this.product.variation){
-      console.log(variation['type'])
-        this.var_keys.push(Object.keys(variation['type']))
-        this.variation = variation['type'];
-      console.log(this.var_keys,this.variation);
-      this.Variation.push(this.variation)
+      this.Variation.push(variation['type'])
       this.quantity.push(variation['quantity'])
-     }
-     console.log(this.Variation.length,this.var_keys.length)
-
-     if(this.var_keys.length==0){
-       this.variantType=false;
      }
      this.product.image = this.productEditForm.get('image').value;
 
@@ -86,14 +78,28 @@ export class ProductEditComponent implements OnInit {
   //   }
   // }
   // }
-
-  addType(){
-    this.typeForm =this.fb.group({
-      key:[''],
-      value:['']
-    })
-    this.types.push(this.typeForm); 
+  private addTypeGroup(): FormGroup {
+    return this.fb.group({
+      key: [],
+      value: []
+    });
   }
+  addType(){
+    this.types.push(this.addTypeGroup())
+  }
+  removeType(index: number): void {
+    this.types.removeAt(index);
+  }
+  // addType(){
+  //   this.typeForm =this.fb.group({
+  //     key:[this.typeForm.get('key').value],
+  //     value:['']
+  //   })
+  //   this.types.push(this.typeForm); 
+  //   console.log(this.types)
+  //   this.types.updateValueAndValidity();
+  //   console.log(this.types)
+  // }
 
   addVariation(key:string,input:string){
     input = input.toString();
@@ -171,25 +177,17 @@ export class ProductEditComponent implements OnInit {
       },
       quantity:quantity
     };
-    // obj.type[typeKey] = typeValue;
-    // for(let variation of this.Variation){
-    //   console.log(obj.type,variation)
-    //   if(this.haveSameData(variation,obj.type)){
-    //      console.log('Variation already exist')
-    //      break;
-    //   }
-    //   else{
-    //     console.log('ok')
-    //   }
-      
-    // }
-    
-    // this.variation = obj.type;
-    // this.Variation.push(this.variation)   
-    // this.product.variation.push(obj);
-    // // this.var_keys.push(Object.keys(this.variation))
-    // console.log(obj,this.Variation,this.product.variation)
-    // this.addVariant = false;
+   
+     for(let x of this.types.value){
+      console.log(x)
+      obj.type[x.key] = x.value;
+     }
+     console.log(obj)
+     this.Variation.push(obj.type)
+     this.product.variation.push(obj);
+     console.log(this.product.variation)
+     this.types.reset();
+     this.inputQtn.nativeElement.value = ' ';
   }
   increaseQuantity(index:number){
     this.product.variation[index]['quantity']++;

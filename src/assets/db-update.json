@@ -99,6 +99,12 @@
             "size": "M"
           },
           "quantity": 4
+        },
+        {
+          "type": {
+            "metal": "gold"
+          },
+          "quantity": "2"
         }
       ],
       "isActive": true
@@ -254,64 +260,66 @@
         "discount": 0
       }
     },
-      {
-        "isActive": true,
-        "id": 4,
-        "title": "Mens Casual Slim Fit",
-        "price": 15.99,
-        "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-        "category": "men's clothing",
-        "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
-        "rating": {
-          "rate": 2.1,
-          "count": 430
-        },
-        "variation": [
-            {
-                "type": {
-                    "color": "red",
-                    "size": "S"
-                },
-                "quantity":4
-            },
-            {
-                "type": {
-                    "color": "green",
-                    "size": "M"
-                },
-                "quantity":4
-            },
-            {
-                "type": {
-                    "color": "black",
-                    "size": "M"
-                },
-                "quantity":4
-            }
-        ]
-      }
-    ],
-    "admin":[
-      {
-        "order":{
-          "id":1,
-          "products":[
-            {
-              "title": "Solid Gold Petite Micropave ",
-              "image": "../../../assets/images/product-image/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-              "quantity": 1,
-              "variation": {
-                "material":"gold"
-              }
-            }
-          ],
-          "payment":{
-              "subtotal":10000,
-              "shipping":100
+    {
+      "isActive": true,
+      "id": 4,
+      "title": "Mens Casual Slim Fit",
+      "price": 15.99,
+      "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "category": "men's clothing",
+      "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
+      "rating": {
+        "rate": 2.1,
+        "count": 430
+      },
+      "variation": [
+        {
+          "type": {
+            "color": "red",
+            "size": "S"
           },
-          "address":"Barmiz Market,Cox's Bazar",
-          "date":"10.03.2022"
+          "quantity": 4
+        },
+        {
+          "type": {
+            "color": "green",
+            "size": "M"
+          },
+          "quantity": 4
+        },
+        {
+          "type": {
+            "color": "black",
+            "size": "M"
+          },
+          "quantity": 4
         }
+      ]
+    }
+  ],
+  "admin": [
+    {
+      "order": {
+        "id": 1,
+        "name": "john",
+        "products": [
+          {
+            "title": "Solid Gold Petite Micropave ",
+            "image": "../../../assets/images/product-image/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+            "quantity": 1,
+            "variation": {
+              "material": "gold"
+            }
+          }
+        ],
+        "payment": {
+          "subtotal": 10000,
+          "shipping": 100
+        },
+        "address": "Barmiz Market,Cox's Bazar",
+        "date": "10.03.2022",
+        "status": "pending"
       }
-    ]
-  }
+    }
+  ]
+}

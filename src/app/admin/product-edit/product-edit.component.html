@@ -49,20 +49,14 @@
         </div>
         <div *ngFor="let variation of Variation;let k=index">
             <ng-container >
-                <div class="table full-width"*ngFor="let var_k of var_keys[k]">
+                <div class="table full-width"*ngFor="let var_k of variation|keyvalue">
                     <div class="d-flex" >
                         <div class="col-md-4">
-                            <span class="d-flex center">{{var_k}}:</span>
+                            <span class="d-flex center">{{var_k.key}}:</span>
                         </div>
                         <div class="col-md-8 d-flex flex-column">
-                            <span class="d-flex" >{{variation[var_k]}} 
+                            <span class="d-flex" >{{var_k.value}} 
                             </span>
-                            <!-- <button mat-button (click)="changeType(i)"><mat-icon >add</mat-icon> Add {{var_key}} type</button>
-                            <div *ngIf="i==index">
-                                <input type="text" #box (keyup)="check(var_key,box.value)"  id="value">
-                                <button mat-button (click)=" addVariation(var_key,box.value)" [disabled]="existValue"><mat-icon>done</mat-icon></button>
-                                <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-                            </div>-->
                         </div>   
                     </div>
                 </div>
@@ -95,7 +89,7 @@
                 <button mat-button (click)="addMore(box1.value,box2.value,box3.value)" ><mat-icon>done</mat-icon></button>
             </div>
         </div> -->
-        <ng-container formArrayName="types">
+        <!-- <ng-container formArrayName="types">
             <ng-container *ngFor="let type of types.controls; let i = index">
                 <div [formGroup]="typeForm">
                     <mat-form-field appearance="fill">
@@ -113,10 +107,28 @@
             <button mat-mini-fab (click)="addType()">
                 <mat-icon class="add-course-btn">add</mat-icon>
             </button>
-        </ng-container>
+        </ng-container> -->
+        <div class="full-width" *ngFor="let group of types.controls; let i = index;" formArrayName="types">
+            <div class="form-group jumbotron" [formGroupName]='i'>
+                <mat-form-field appearance="fill">
+                    <mat-label>Key</mat-label>
+                  <input matInput value="" formControlName="key"> 
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Value</mat-label>
+                  <input matInput value="" formControlName="value"> 
+                </mat-form-field>
+                <div class="rightAlign">
+                 <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
+                </div>
+            </div>
+          </div>
+          <div class="full-width">
+            <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add More Type</button>
+          </div>
         <label for="quantity">Quantity:</label>
-        <input type="text" id="key" #box3>
-        <button mat-button type="submit" (click)="addMore(box3.value)" ><mat-icon>done</mat-icon></button>
+        <input type="text" id="key" #box>
+        <button mat-button type="submit" (click)="addMore(box.value)" ><mat-icon>done</mat-icon></button>
        </div>
 
         <mat-card-actions class="button">

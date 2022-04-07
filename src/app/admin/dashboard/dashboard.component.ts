@@ -25,7 +25,9 @@ export class DashboardComponent implements OnInit {
    
     this.service.getProduct().subscribe((res)=>{
       this.dataSource = res;
+      console.log(this.dataSource)
     });
+
   }
 
   activate(state:boolean,i:number){

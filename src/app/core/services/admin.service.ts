@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Admin } from "../models/admin.model";
-import { Order } from '../models/order.model';
+import { map } from "rxjs";
+import {orderAdmin } from "../models/admin.model";
 @Injectable({
     providedIn: 'any'
 })
@@ -12,6 +12,12 @@ export class AdminService{
     private url = 'http://localhost:3000/admin';
 
     getOrders(){
-        return this.http.get<Order[]>(this.url);
+        return this.http.get<any>(this.url);
+    }
+    getOrderDetails(){
+        return this.http.get<any>(this.url).pipe(map(res=>{
+            
+            res = res.order;
+        }))
     }
 }
