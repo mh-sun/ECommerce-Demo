@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
@@ -13,20 +14,27 @@ import { ProductsService } from 'src/app/core/services/products.service';
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css'],
+  providers:[{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: { color: 'primary' },
+  }]
 })
+
 export class ProductDetailsComponent implements OnInit{
 
-  public var_keys:any = {}
+  public var_keys:string[]= []
+  public var_values:any = []
   public variation:any = {}
   public quantity:number = 1
   public data:any = null
-  private user!:User|null;
+  private user:User|null = null;
 
   constructor(
     private cartService: CartApiService,
     private logger:LogService,
     private productService:ProductsService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private snackBar:MatSnackBar
   ) {
     this.logger.loggedUser.subscribe({
       next:(u)=>{
@@ -41,22 +49,33 @@ export class ProductDetailsComponent implements OnInit{
         this.data = res
         for(let var_i of this.data.variation){
           let keys = Object.keys(var_i.type)
-          keys.forEach(k=>{
-            if(!this.var_keys[k]) this.var_keys[k] = []
-            let val = var_i.type[k]
-            if(this.var_keys[k].indexOf(val) <= -1) 
-              this.var_keys[k].push(val)
+          keys.forEach((k)=>{
+            if(this.var_keys.indexOf(k) <= -1)
+              this.var_keys.push(k)
           })
         }
-        console.log(this.var_keys);
+        console.log(this.var_keys)
+        this.var_keys.forEach(key=>{
+          let arr:any = []
+          for(let var_i of this.data.variation){
+            if(arr.indexOf(var_i.type[key]) === -1){
+              arr.push(var_i.type[key])
+            }
+          }
+          this.var_values.push(arr)
+        })
+        console.log(this.var_values);
+        
       }
     })
   }
   
   addtocart(item: Product){
     let c:Cart = this.cartService.createCartItem(item, this.variation, this.quantity)
-
-    this.cartService.addToCart(c)
+    console.log(c);
+    console.log(this.variation);
+    
+    // this.cartService.addToCart(c)
   }
 
   public isEqualObject(object1:any, object2:any):boolean{
@@ -76,25 +95,44 @@ export class ProductDetailsComponent implements OnInit{
   }
 
   getQuantity():number{
-    this.data.variation.forEach((e:any)=>{
+    if(Object.keys(this.variation).length !== this.var_keys.length) return -1
+    for(let e of this.data.variation){
       if(this.isEqualObject(e.type, this.variation))
       return e.quantity
-    })
-    
-    return -1
+    }
+    return -2
   }
 
   increaseQuantity(){
-    console.log(this.variation)
     let quant:number = this.getQuantity()
-    if(quant === -1) console.log("Product not found")
-    if(this.quantity >= quant) return
+    if(quant === -1){
+      this.snackBar.open("Please Select a full variant", "Close", {
+        duration:1000
+      })
+      return
+    } 
+    else if (quant === -2){
+      this.snackBar.open("Product variation not found", "Close", {
+        duration:1000
+      })
+      return
+    }
+    if(this.quantity >= quant) {
+      this.snackBar.open("Product quantity is at limit", "Close", {
+        duration:1000
+      })
+      return
+    }
     this.quantity++
   }
 
   decreaseQuantity(){
-    console.log(this.variation)
-    if(this.quantity<=1) return
+    if(this.quantity<=1) {
+      this.snackBar.open("Product quantity cannot be 0", "Close", {
+        duration:1000
+      })
+      return
+    }
     else this.quantity--
   }
 

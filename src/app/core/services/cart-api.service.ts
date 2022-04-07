@@ -28,7 +28,7 @@ export class CartApiService{
     })
   }
 
-  createCartItem(product:Product, variation:object, quantity:number, ...amount:any):Cart
+  createCartItem(product:Product, variation:object, quantity:number):Cart
   {
     return {
       id:Math.floor(Math.random() * 1000),
