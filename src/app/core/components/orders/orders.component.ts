@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { LogService } from '../../services/log.service';
 import { ProductsService } from '../../services/products.service';
 
@@ -20,7 +20,11 @@ export class OrdersComponent implements OnInit {
   public orderStatus = "Delivered";
   totalBill=0;
   order:Order|any;
-  constructor(private service:ProductsService,private userService:AuthService,private route:ActivatedRoute,private log:LogService,private router:Router) {   
+  constructor(private service:ProductsService,
+    // private userService:AuthService,
+    private route:ActivatedRoute,
+    private log:LogService,
+    private router:Router) {   
   }
   ngOnInit(): void {
     console.log('ng oninit called')

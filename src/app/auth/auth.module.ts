@@ -5,7 +5,6 @@ import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../core/services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CredentialsMismatchComponent } from './login/credentials-mismatch/credentials-mismatch.component';
 import { AddIDInterceptor } from '../core/interceptors/add-id.interceptor';
@@ -26,8 +25,7 @@ import { AddIDInterceptor } from '../core/interceptors/add-id.interceptor';
     HttpClientModule,
   ],
   providers: [
-    AuthService,
-      {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:AddIDInterceptor,multi:true}
   ]
 })
 export class AuthModule { }

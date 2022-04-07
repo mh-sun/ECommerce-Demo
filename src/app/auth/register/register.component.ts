@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user.model';
 import { FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Validators } from '@angular/forms';
+import { LogService } from 'src/app/core/services/log.service';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit,OnDestroy {
   });
   registerSubcription:any;
   
-  constructor(private fb:FormBuilder,private http:AuthService) { }
+  constructor(private fb:FormBuilder,
+    private http:LogService) { }
 
   ngOnInit(): void {
   }

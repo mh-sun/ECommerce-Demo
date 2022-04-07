@@ -6,7 +6,6 @@ import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
 import { ProductsService } from 'src/app/core/services/products.service';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'app-product-list',
@@ -18,7 +17,7 @@ export class ProductListComponent{
   public filterCategory = new Array();
   public carouselItems = new Array()
   searchKey:string ="";
-  isLoggedIn:boolean = false
+  // isLoggedIn:boolean = false
 
   constructor(private api : ProductsService, 
     private cartService : CartApiService,
@@ -39,9 +38,9 @@ export class ProductListComponent{
       }
     });
 
-    this.logger.getLogStatus().subscribe({
-      next:res=>this.isLoggedIn = res
-    })
+    // this.logger.getLogStatus().subscribe({
+    //   next:res=>this.isLoggedIn = res
+    // })
   }
   
   addtocart(item: Product){

@@ -27,8 +27,6 @@ export class ProductDetailsComponent implements OnInit{
   public variation:any = {}
   public quantity:number = 1
   public data:any = null
-  private user:User|null = null;
-
   constructor(
     private cartService: CartApiService,
     private logger:LogService,
@@ -36,11 +34,6 @@ export class ProductDetailsComponent implements OnInit{
     private route:ActivatedRoute,
     private snackBar:MatSnackBar
   ) {
-    this.logger.loggedUser.subscribe({
-      next:(u)=>{
-        this.user = u
-      }
-    })
   }
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
@@ -72,10 +65,34 @@ export class ProductDetailsComponent implements OnInit{
   
   addtocart(item: Product){
     let c:Cart = this.cartService.createCartItem(item, this.variation, this.quantity)
-    console.log(c);
-    console.log(this.variation);
-    
-    // this.cartService.addToCart(c)
+    if(Object.keys(this.variation).length !== this.var_keys.length){
+      this.snackBar.open("Please Select a full variant", "Close", {
+        duration:1000
+      })
+      return
+    }
+    else if(!this.variationExists()){
+      this.snackBar.open("Please Select a valid variant", "Close", {
+        duration:1000
+      })
+      return
+    }
+    else if(this.getQuantity() < 0){
+      this.snackBar.open("Please Select a valid quantity", "Close", {
+        duration:1000
+      })
+      return
+    }
+    console.log(c)
+    this.cartService.addToCart(c)
+  }
+  variationExists():boolean {
+    for (const variation of this.data.variation) {
+      if(this.isEqualObject(variation.type, this.variation)){
+        return true
+      }
+    }
+    return false
   }
 
   public isEqualObject(object1:any, object2:any):boolean{
@@ -135,9 +152,4 @@ export class ProductDetailsComponent implements OnInit{
     }
     else this.quantity--
   }
-
-  public getList(arr:any):any[]{
-    return Array.isArray(arr)?arr:[]
-  }
-
 }

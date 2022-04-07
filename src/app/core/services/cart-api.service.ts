@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, map } from 'rxjs';
 import { Cart } from '../models/cart-product.model';
 import { Product } from '../models/product.model';
@@ -17,14 +18,18 @@ export class CartApiService{
   private url:string = 'http://localhost:3000/carts/'
 
   private user!:User|null
-
   constructor(
     private http:HttpClient,
-    private logger:LogService
+    private logger:LogService,
+    private snackBar:MatSnackBar
   ){
-    logger.loggedUser.subscribe((res)=>{
-      this.user = res
-      console.log("Logged user : ", this.user)
+    this.logger.loggedUser.subscribe({
+      next:(res)=>{
+        this.user = res
+        this.cartProductLoad()
+      },
+      error:val=>console.error(val),
+      complete:()=>console.error(' Logger user subscription complete')
     })
   }
 
@@ -47,6 +52,12 @@ export class CartApiService{
   }
 
   addToCart(product : Cart):boolean{
+    if(this.user === null) {
+      this.snackBar.open("Please login", "Close", {
+        duration:1000
+      })
+      return false
+    }
     let flag = false
     for (let i = 0; i < this.cartProducts.length; i++) {
       const cartItem = this.cartProducts[i];
@@ -97,8 +108,6 @@ export class CartApiService{
       next:r=>{console.log("Cart is updated", r)}
     })
   }
-
-  
 
   removeCartItem(product: Cart){
     for (let i = 0; i < this.cartProducts.length; i++) {
