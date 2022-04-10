@@ -5,6 +5,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { OrderViewComponent } from './order-view/order-view.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {path:'addProduct',component:AddProductComponent},
     {path:'orderList',component:OrderListComponent},
+    {path:'orderView/:id',component:OrderViewComponent},
     {path:'productList',component:DashboardComponent,children:[
       
     ]},

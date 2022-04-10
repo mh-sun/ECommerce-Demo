@@ -25,6 +25,7 @@ button {
     color: black;
 }
 th {
+    text-align: center;
     font-size: large;
     background: #8e9c7fe3 ;
     font-weight: bold;
@@ -33,7 +34,7 @@ td.Pending {
     color: red;
     font-weight: bold;
 }
-td.Dispatch {
+td.Dispatched {
     color: green;
     font-weight: bold;
 }

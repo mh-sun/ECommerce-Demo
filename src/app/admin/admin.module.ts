@@ -12,6 +12,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './add-product/add-product.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { OrderViewComponent } from './order-view/order-view.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     SidenavComponent,
     ProductEditComponent,
     AddProductComponent,
-    OrderListComponent
+    OrderListComponent,
+    OrderViewComponent
   ],
   imports: [
     CommonModule,

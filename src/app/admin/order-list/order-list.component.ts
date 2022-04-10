@@ -11,6 +11,7 @@ import { AdminService } from 'src/app/core/services/admin.service';
 export class OrderListComponent implements OnInit {
   title:string|any;
   headerTitle:string|any;
+  status=false;
   displayedColumns: string[] = ['id', 'name', 'address','date','price','status','edit'];
   array:any[]=[];
   dataSource:any[]=[];
@@ -21,19 +22,20 @@ export class OrderListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.service.getOrders().subscribe(res=>{
-      for(let x of res){
-        this.array.push( x.order);
-      }
-      this.dataSource = this.array;
+      // for(let x of res){
+      //   this.array.push( x.order);
+      // }
+      // this.dataSource = this.array;
+      this.dataSource = res;
       console.log(this.dataSource)
     })
   }
-  activate(state:boolean,i:number){
-    console.log(state,this.dataSource[i])
-      this.dataSource[i].isActive=!state;
-      console.log(state,this.dataSource[i]);
-      let index = i+1; 
-      this.service.updatePost(this.dataSource[i],index);
+  changeStatus(i:number){
+    console.log(this.dataSource[i])
+      this.dataSource[i].status='Dispatched';
+    console.log(this.dataSource[i]);
+    let index = i+1; 
+    this.service.updatePost(this.dataSource[i],index);
   
   }
 
