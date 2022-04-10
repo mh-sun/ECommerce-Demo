@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
 import { LogService } from 'src/app/core/services/log.service';
+import { User } from 'src/app/core/models/user.model';
 
 
 @Component({
@@ -30,8 +31,8 @@ export class LoginComponent implements OnDestroy{
   loginSubscription:any = null
 
   onLogin(){
-    this.loginSubscription = this.logger.getUsers().subscribe((users:any)=>{
-      
+    this.loginSubscription = this.logger.getUsers().subscribe((users:User[])=>{
+      console.log(users)
       for(let i=0; i<users.length; i++){
         let user = users[i]
         if(

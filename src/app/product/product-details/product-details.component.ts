@@ -66,25 +66,20 @@ export class ProductDetailsComponent implements OnInit{
   addtocart(item: Product){
     let c:Cart = this.cartService.createCartItem(item, this.variation, this.quantity)
     if(Object.keys(this.variation).length !== this.var_keys.length){
-      this.snackBar.open("Please Select a full variant", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Please Select a full variant", 1000)
       return
     }
     else if(!this.variationExists()){
-      this.snackBar.open("Please Select a valid variant", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Please Select a valid variant", 1000)
       return
     }
     else if(this.getQuantity() < 0){
-      this.snackBar.open("Please Select a valid quantity", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Please Select a valid quantity", 1000)
       return
     }
     console.log(c)
-    this.cartService.addToCart(c)
+    if(this.cartService.addToCart(c)) this.showSnackBar("Product added successfully", 1000)
+    else this.showSnackBar("Add product unsuccessful", 1000)
   }
   variationExists():boolean {
     for (const variation of this.data.variation) {
@@ -123,21 +118,15 @@ export class ProductDetailsComponent implements OnInit{
   increaseQuantity(){
     let quant:number = this.getQuantity()
     if(quant === -1){
-      this.snackBar.open("Please Select a full variant", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Please Select a full variant", 1000)
       return
     } 
     else if (quant === -2){
-      this.snackBar.open("Product variation not found", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Product variation not found", 1000)
       return
     }
     if(this.quantity >= quant) {
-      this.snackBar.open("Product quantity is at limit", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Product quantity is at limit", 1000)
       return
     }
     this.quantity++
@@ -145,11 +134,15 @@ export class ProductDetailsComponent implements OnInit{
 
   decreaseQuantity(){
     if(this.quantity<=1) {
-      this.snackBar.open("Product quantity cannot be 0", "Close", {
-        duration:1000
-      })
+      this.showSnackBar("Product quantity cannot be 0", 1000)
       return
     }
     else this.quantity--
+  }
+
+  public showSnackBar(message:string, time:number){
+    this.snackBar.open(message, "Close", {
+      duration:time
+    })
   }
 }

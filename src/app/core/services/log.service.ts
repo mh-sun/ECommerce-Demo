@@ -9,22 +9,23 @@ import { User } from '../models/user.model';
 export class LogService {
 
   public userSubscription:any
-  // private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
   public loggedUser = new BehaviorSubject<User|null>(null)
+
+  private url = 'http://localhost:3000/'
 
   constructor(private http:HttpClient){
     let str = localStorage.getItem('loggedUser')
     if(str === null){
       this.loggedUser.next(null)
-      // this._logStatus.next(false)
     }
     else{
       this.loggedUser.next(JSON.parse(str))
-      // this._logStatus.next(true)
     }
+    this.loggedUser.subscribe(user=>{
+      this.storeUser(user)
+      http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{console.log(res)})
+    })
   }
-
-  private url = 'http://localhost:3000/'
     
   getUsers(){
       let link = this.url + 'users'
@@ -36,19 +37,13 @@ export class LogService {
       return this.http.post(link, user);
   }
 
-  // public getLogStatus(){
-  //   return this._logStatus
-  // }
-
   logIn(user:User){
     localStorage.setItem('loggedUser', JSON.stringify(user))
-    // this._logStatus.next(true)
     this.loggedUser.next(user)
     
   }
   logout(){
     localStorage.removeItem('loggedUser')
-    // this._logStatus.next(false)
     this.loggedUser.next(null)
   }
   storeUser(user:User|null){

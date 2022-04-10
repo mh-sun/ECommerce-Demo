@@ -37,15 +37,12 @@ export class ProductListComponent{
         this.carouselItems.push(this.filterCategory[i])
       }
     });
-
-    // this.logger.getLogStatus().subscribe({
-    //   next:res=>this.isLoggedIn = res
-    // })
   }
   
   addtocart(item: Product){
     let cartItem:Cart = this.cartService.createCartItem(item, item.variation[0].type, 1)
     this.cartService.addToCart(cartItem);
+    
   }
 
   viewProduct(product:any){

@@ -68,11 +68,11 @@ export class CartApiService{
           console.log("product found in cart")
           return false
         }
-      else if(cartItem.productId === product.productId){
-        flag = true
-        this.cartUpdate(product)
-        break
-      }
+      // else if(cartItem.productId === product.productId){
+      //   flag = true
+      //   this.cartUpdate(product)
+      //   break
+      // }
     }
     if(!flag) this.cartAdd(product)
     this.cartProducts.push(product)
@@ -139,6 +139,7 @@ export class CartApiService{
     this.cartProducts = []
     this.cartSubject.next(this.cartProducts)
     this.user?.carts.splice(0, this.user.carts.length)
+    this.logger.loggedUser.next(this.user)
   }
 
   cartProductLoad(){

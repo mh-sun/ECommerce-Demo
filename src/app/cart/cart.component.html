@@ -105,9 +105,13 @@
                             <td style="width: 25%;">{{item.description}}</td>
                             <th style="width: 12%;">{{item.total.price}}</th>
                             <td style="width: 12%;">
-                                <div class="col-sm-4">
-                                    {{item.variation | json}}
-                                </div>
+                                <ul>
+                                    <ng-container *ngFor="let item of item.variation | keyvalue">
+                                        <li>
+                                            {{item.value}}
+                                        </li>
+                                    </ng-container>        
+                                </ul>
                             </td>
                             <td style="width: 12%;">{{item.quantity}}</td>
                             <td style="width: 12%;">{{item.total.price*item.quantity}}</td>
