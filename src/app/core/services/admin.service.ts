@@ -14,10 +14,15 @@ export class AdminService{
     getOrders(){
         return this.http.get<any>(this.url);
     }
-    getOrderDetails(){
-        return this.http.get<any>(this.url).pipe(map(res=>{
-            
-            res = res.order;
-        }))
-    }
+    // getOrderDetails(){
+    //     return this.http.get<any>(this.url).forEach(res=>{
+    //         console.log(res.order)
+    //     })
+    // }
+    updatePost(postData: Object,id:number) {
+        const newUrl = this.url+'/'+id;
+        this.http.put( newUrl, postData).subscribe(data => {
+          console.log(data);
+        });
+      }
 }

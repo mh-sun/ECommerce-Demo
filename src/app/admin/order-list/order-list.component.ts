@@ -12,16 +12,29 @@ export class OrderListComponent implements OnInit {
   title:string|any;
   headerTitle:string|any;
   displayedColumns: string[] = ['id', 'name', 'address','date','price','status','edit'];
-  dataSource:any;
+  array:any[]=[];
+  dataSource:any[]=[];
   constructor(private route:Router  ,private service:AdminService) { 
     this.title = 'Order List';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
   }
   ngOnInit(): void {
-    this.service.getOrderDetails().subscribe(res=>{
-      console.log(res)
+    this.service.getOrders().subscribe(res=>{
+      for(let x of res){
+        this.array.push( x.order);
+      }
+      this.dataSource = this.array;
+      console.log(this.dataSource)
     })
+  }
+  activate(state:boolean,i:number){
+    console.log(state,this.dataSource[i])
+      this.dataSource[i].isActive=!state;
+      console.log(state,this.dataSource[i]);
+      let index = i+1; 
+      this.service.updatePost(this.dataSource[i],index);
+  
   }
 
 }

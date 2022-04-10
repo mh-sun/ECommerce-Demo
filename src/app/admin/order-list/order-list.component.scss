@@ -9,19 +9,37 @@ table{
     height: 100%;
     width: 100%;
 }
-th{
-    text-align: center;
-}
-.trim-info {
-    max-width: 150px;
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;  
-    line-height: 25px;
-    position: relative;
- }
+// th{
+//     text-align: center;
+// }
+// .trim-info {
+//     max-width: 150px;
+//     display: inline-block;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     white-space: nowrap;  
+//     line-height: 25px;
+//     position: relative;
+//  }
 button {
     color: black;
 }
-  
+th {
+    font-size: large;
+    background: #8e9c7fe3 ;
+    font-weight: bold;
+}
+td.Pending {
+    color: red;
+    font-weight: bold;
+}
+td.Dispatch {
+    color: green;
+    font-weight: bold;
+}
+tr.mat-row:hover {
+    background:rgb(198, 237, 198) ;
+    transition: 0.3s ease-in-out;
+    transform: scale(1.02);
+    height: 52px;
+}
