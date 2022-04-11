@@ -13,11 +13,11 @@ import { ProductsService } from 'src/app/core/services/products.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent{
-  public productList : any ;
+  public productList : Product[] = [];
   public filterCategory = new Array();
+  public categories: any[] = []
   public carouselItems = new Array()
   searchKey:string ="";
-  // isLoggedIn:boolean = false
 
   constructor(private api : ProductsService, 
     private cartService : CartApiService,
@@ -28,15 +28,26 @@ export class ProductListComponent{
     this.api.getProduct()
     .subscribe(res=>{
       this.productList = res;
-      for(let product of this.productList){
-        if(product.isActive){
-          this.filterCategory.push(product)
-        }  
-      }
-      for(let i = 0; i < 3; i++){
-        this.carouselItems.push(this.filterCategory[i])
-      }
+      this.filterCategory = this.productList.filter(p=>{
+        return p.isActive
+      })
+
+      this.setCarousel(this.productList)
+
+      this.setCategory(this.productList)
     });
+  }
+
+  setCarousel(productList: Product[]) {
+    for(let i = 0; i < 3; i++){
+      this.carouselItems.push(this.filterCategory[i])
+    }
+  }
+
+  setCategory(productList: Product[]) {
+    this.productList.forEach(p=>{
+      if(this.categories.indexOf(p.category) < 0) this.categories.push(p.category)
+    })
   }
   
   addtocart(item: Product){
@@ -48,5 +59,15 @@ export class ProductListComponent{
   viewProduct(product:any){
     console.log(product.id)
     this.router.navigate(["/products", product.id])
+  }
+
+  filterProduct(category:string){
+    this.filterCategory = this.productList.filter(p=>{
+      return p.category === category
+    })
+  }
+
+  filterNone(){
+    this.filterCategory = this.productList
   }
 }
