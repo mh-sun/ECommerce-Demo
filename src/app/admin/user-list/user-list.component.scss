@@ -9,12 +9,7 @@ table{
     height: 100%;
     width: 100%;
 }
-th.mat-header-cell {
-    font-size: large;
-    color: white;
-    text-align: center;
-}
-td{
+th{
     text-align: center;
 }
 .trim-info {
@@ -29,12 +24,22 @@ td{
 button {
     color: black;
 }
-tr.mat-header-row{
-    background-color: #598889ed;
+tr.mat-header-row {
+    background-color: #c2a887d1;
+    
+}
+th.mat-header-cell {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+td{
+    text-align: center;
 }
 tr.mat-row:hover {
-    background:#a4d0d2ed ;
+    background:#dbc3a3d1 ;
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;
 }
+  

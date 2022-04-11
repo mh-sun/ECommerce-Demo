@@ -1,0 +1,8 @@
+.Pending {
+    color: red;
+    font-weight: bold;
+}
+.Dispatched {
+    color: green;
+    font-weight: bold;
+}

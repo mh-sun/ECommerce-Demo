@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './add-product/add-product.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -25,14 +27,16 @@ import { OrderViewComponent } from './order-view/order-view.component';
     ProductEditComponent,
     AddProductComponent,
     OrderListComponent,
-    OrderViewComponent
+    OrderViewComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule,
   ]
 })
 export class AdminModule { }

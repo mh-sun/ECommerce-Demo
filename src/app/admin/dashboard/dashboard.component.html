@@ -1,5 +1,5 @@
 <div class="container-fluid page">
-    <div class="page__content p-3 position-relative">
+  <div class="page__content p-3 position-relative">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> ID. </th>
@@ -50,6 +50,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
             <tr mat-row  *matRowDef="let row; columns: displayedColumns;" ></tr>
           </table>
-  </div>
-  <router-outlet></router-outlet>
+</div>
+<router-outlet></router-outlet>
 

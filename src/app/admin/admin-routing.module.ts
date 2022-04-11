@@ -7,11 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent ,children:[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {path:'addProduct',component:AddProductComponent},
+    {path:'userList',component:UserListComponent},
     {path:'orderList',component:OrderListComponent},
     {path:'orderView/:id',component:OrderViewComponent},
     {path:'productList',component:DashboardComponent,children:[

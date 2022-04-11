@@ -25,6 +25,15 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-md-4 ">
+                       <span class="{{productStatus}}">
+                        {{productStatus}}
+                       </span>
+                        <button mat-button *ngIf="productStatus=='Pending'"(click)="changeStatus()">Dispatch</button> 
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

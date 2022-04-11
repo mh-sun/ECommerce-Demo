@@ -9,8 +9,10 @@ import { AdminService } from 'src/app/core/services/admin.service';
   styleUrls: ['./order-view.component.css']
 })
 export class OrderViewComponent implements OnInit {
+  data:any;
+  productStatus:string|any;
   products:productDetails[] = [];
-  productIdFromRoute: number | undefined;
+  productIdFromRoute: number | any;
   title:string|any;
   headerTitle:string|any;
   constructor(private route:ActivatedRoute,private service:AdminService) { 
@@ -24,7 +26,16 @@ export class OrderViewComponent implements OnInit {
      this.productIdFromRoute = Number(routeParams.get('id'));
     this.service.getOneProduct(this.productIdFromRoute).subscribe(res=>{
       this.products = res.products;
+      this.productStatus = res.status;
+      this.data = res;
     })
+  }
+  changeStatus(){
+    console.log(this.data);
+    this.productStatus = "Dispatched"
+    this.data.status='Dispatched';
+  console.log(this.data); 
+  this.service.updatePost(this.data,this.productIdFromRoute);
   }
 
 }

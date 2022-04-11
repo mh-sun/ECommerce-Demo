@@ -9,7 +9,7 @@ export class AdminService{
     constructor(private http:HttpClient){
     }
 
-    private url = 'http://localhost:3000/admin';
+    private url = 'http://localhost:3000/adminOrder';
 
     getOrders(){
         return this.http.get<any>(this.url);
@@ -24,5 +24,12 @@ export class AdminService{
         this.http.put( newUrl, postData).subscribe(data => {
           console.log(data);
         });
-      }
+    }
+    getOneProduct(id:number){
+      const newUrl = this.url+'/'+id;
+      return this.http.get<any>(newUrl).pipe(map((res:any)=>{
+        return res;
+      }))
+    }
+
 }

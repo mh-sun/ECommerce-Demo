@@ -1,13 +1,14 @@
 <div class="container-fluid page">
       <!-- <div class="center"> -->
-        <div class="row">
-          <div class="col-md-3">
+        <div class="row space">
+          <div class="col-md-4 space">
             <mat-card class="example-card">
               <mat-card-header>
-                <mat-card-title>Product in Stock</mat-card-title>
+                <mat-card-title><button mat-button><mat-icon>inventory</mat-icon> </button>Product in Stock</mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <p>
+                 
                   Total {{totalProduct}} products is in stock.
                 </p>
               </mat-card-content>
@@ -18,13 +19,16 @@
               </mat-card-actions>
             </mat-card>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4 space">
               <mat-card class="example-card">
                 <mat-card-header>
-                  <mat-card-title>Orders</mat-card-title>
+                  <mat-card-title>
+                    <button mat-button> <mat-icon>shopping_cart</mat-icon></button>Orders
+                  </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <p>
+
                     Total {{totalOrder}} order is submitted.
                   </p>
                 </mat-card-content>
@@ -35,24 +39,27 @@
                 </mat-card-actions>
               </mat-card>
             </div>
-           <div class="col-md-3">
-            <mat-card class="example-card">
-              <mat-card-header>
-                <mat-card-title>Registared User</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Total {{totalUser}} user registered so far.
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <a routerLink="/admin/productList">
-                  <button mat-button>View</button>
-                </a>
-              </mat-card-actions>
-            </mat-card>
+            </div>
+           <div class="row space">
+            <div class="col-md-4 space">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title><button mat-button><mat-icon>person</mat-icon></button> Registered User</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    Total {{totalUser}} user registered so far.
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <a routerLink="/admin/userList">
+                    <button mat-button>View Users</button>
+                  </a>
+                </mat-card-actions>
+              </mat-card>
+             </div>
            </div>
-      </div>
+      <!-- </div> -->
       <!-- </div> -->
   </div>
   
