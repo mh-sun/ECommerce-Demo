@@ -53,7 +53,14 @@ export class ProductEditComponent implements OnInit {
       this.quantity.push(variation['quantity'])
      }
      this.product.image = this.productEditForm.get('image').value;
-
+     if (Object.keys(this.Variation[0]).length === 0) {
+      this.variantType=false;
+      console.log("The Object is empty")
+     }
+    //  if(this.Variation.length==0){
+    //    this.variantType=false;
+    //  }
+     console.log(this.Variation)
     });
 
   }

@@ -44,7 +44,7 @@
             
         </mat-form-field> -->
        <div class="full-width variant">
-        <div *ngIf="variantType" class="full-width">
+        <div  class="full-width">
             <p class="title">Variant:</p>
         </div>
         <div *ngFor="let variation of Variation;let k=index">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </ng-container>
-            <button mat-button (click)="removeVariation(k)" ><mat-icon >remove</mat-icon>Remove variation</button>
+            <button *ngIf="variantType" mat-button (click)="removeVariation(k)" ><mat-icon >remove</mat-icon>Remove variation</button>
         </div>
         <!-- <div>
             <button mat-button (click)="addVariant=!addVariant"><mat-icon>add</mat-icon>Add More Variant</button>
@@ -108,27 +108,29 @@
                 <mat-icon class="add-course-btn">add</mat-icon>
             </button>
         </ng-container> -->
-        <div class="full-width" *ngFor="let group of types.controls; let i = index;" formArrayName="types">
-            <div class="form-group jumbotron" [formGroupName]='i'>
-                <mat-form-field appearance="fill">
-                    <mat-label>Key</mat-label>
-                  <input matInput value="" formControlName="key"> 
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Value</mat-label>
-                  <input matInput value="" formControlName="value"> 
-                </mat-form-field>
-                <div class="rightAlign">
-                 <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
+        <div *ngIf="variantType">
+            <div class="full-width" *ngFor="let group of types.controls; let i = index;" formArrayName="types">
+                <div class="form-group jumbotron" [formGroupName]='i'>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Key</mat-label>
+                      <input matInput value="" formControlName="key"> 
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Value</mat-label>
+                      <input matInput value="" formControlName="value"> 
+                    </mat-form-field>
+                    <div class="rightAlign">
+                     <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
+                    </div>
                 </div>
             </div>
-          </div>
-          <div class="full-width">
-            <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add More Type</button>
-          </div>
-        <label for="quantity">Quantity:</label>
-        <input type="text" id="key" #box>
-        <button mat-button type="submit" (click)="addMore(box.value)" ><mat-icon>done</mat-icon></button>
+              <div class="full-width">
+                <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add More Type</button>
+              </div>
+            <label for="quantity">Quantity:</label>
+            <input type="text" id="key" #box>
+            <button mat-button type="submit" (click)="addMore(box.value)" ><mat-icon>done</mat-icon></button>
+        </div>
        </div>
 
         <mat-card-actions class="button">

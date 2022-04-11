@@ -123,25 +123,8 @@
       "isActive": true,
       "variation": [
         {
-          "type": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 4
-        },
-        {
-          "type": {
-            "color": "green",
-            "size": "M"
-          },
-          "quantity": 4
-        },
-        {
-          "type": {
-            "color": "black",
-            "size": "M"
-          },
-          "quantity": 4
+          "type": {},
+          "quantity": 5
         }
       ]
     },
