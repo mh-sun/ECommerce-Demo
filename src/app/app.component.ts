@@ -21,14 +21,12 @@ export class AppComponent {
         if (event['url'] == '/admin'||event['url'] == '/admin/home'||event['url'] == '/admin/productList') {
           this.hide = false;
         } else {
-          // console.log("NU")
           this.hide = true;
         }
       }
     });
   }
   @HostListener('window:scroll',['$event']) onScroll(){
-    // console.log(window.scrollY)
-    window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
+    window.scrollY > 0 ? this.scrolled = true: this.scrolled = false
   }
 }

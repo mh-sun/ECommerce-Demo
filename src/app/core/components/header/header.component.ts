@@ -12,19 +12,12 @@ export class HeaderComponent implements OnInit{
 
   logStatus!:boolean
   cartItemNumber:number|undefined = 0
-  scrolled:boolean = false
-  orders: Order[] | undefined ;
+  orders: Order[] = [] ;
   constructor(private cartService:CartApiService, private logger:LogService){
-    
-    // this.logger.getLogStatus().subscribe({
-    //   next:(res:boolean)=>{
-    //     this.logStatus = res
-    //   }
-    // })
     this.logger.loggedUser.subscribe({
       next:u=>{
-        this.orders = u?.orders;
-        this.cartItemNumber = u?.carts.length
+        this.orders = u === null? [] :u?.orders
+        this.cartItemNumber = u === null? 0:u?.carts.length
         this.logStatus = u === null? false:true
       }
     })
@@ -35,9 +28,5 @@ export class HeaderComponent implements OnInit{
   
   logOut(){
     this.logger.logout()
-  }
-
-  @HostListener('window:scroll',['$event']) onScroll(){
-    window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
   }
 }
