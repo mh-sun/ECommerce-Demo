@@ -15,12 +15,12 @@ export class AppComponent {
   }
 
   constructor(private router: Router) {
-  // on route change to '/login', set the variable showHead to false
     router.events.forEach((event:any) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/admin'||event['url'] == '/admin/home'||event['url'] == '/admin/productList') {
+        if(event['url'].includes('/admin')){
           this.hide = false;
-        } else {
+        }
+        else {
           this.hide = true;
         }
       }

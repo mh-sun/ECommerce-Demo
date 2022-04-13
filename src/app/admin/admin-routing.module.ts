@@ -11,7 +11,7 @@ import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent ,children:[
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path:'addProduct',component:AddProductComponent},
     {path:'userList',component:UserListComponent},
     {path:'orderList',component:OrderListComponent},
@@ -19,7 +19,7 @@ const routes: Routes = [
     {path:'productList',component:DashboardComponent,children:[
       
     ]},
-    {path:'home',component:HomeComponent},
+    {path:'dashboard',component:HomeComponent},
     {path:':id',component:ProductEditComponent},
 
   ]},

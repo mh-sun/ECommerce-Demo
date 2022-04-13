@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.title = 'Home';
+    this.title = 'Dashboard';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
 
