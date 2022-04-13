@@ -16,18 +16,17 @@ export class AppComponent {
 
   constructor(private router: Router) {
   // on route change to '/login', set the variable showHead to false
-    router.events.forEach((event) => {
+    router.events.forEach((event:any) => {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/admin'||event['url'] == '/admin/home'||event['url'] == '/admin/productList') {
           this.hide = false;
         } else {
-          // console.log("NU")
           this.hide = true;
         }
       }
     });
   }
   @HostListener('window:scroll',['$event']) onScroll(){
-    window.scrollY > 100 ? this.scrolled = true: this.scrolled = false
+    window.scrollY > 0 ? this.scrolled = true: this.scrolled = false
   }
 }

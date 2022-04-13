@@ -1,0 +1,6 @@
+.success{
+    background-color: rgba(0, 255, 0, .05);
+    color: green;
+    border: 1px solid green;
+    margin-top: 10%;
+}

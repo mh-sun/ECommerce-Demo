@@ -55,4 +55,19 @@ img.mat-card-image {
     transition: 0.3s ease-in-out;
     transform: scale(1.1);
 }
-
+.title{
+    margin: 10px 0px;
+}
+.btn{
+    transition: font-size 500ms;
+    height: 50px;
+}
+.btn:hover{
+    background-color: grey;
+    color: white;
+    font-size: 18px;
+}
+.row{
+    padding-left: 16px;
+    padding-right: 16px;
+}

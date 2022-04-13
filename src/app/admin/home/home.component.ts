@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LogService } from 'src/app/core/services/log.service';
 import { AdminService } from 'src/app/core/services/admin.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   totalProduct=0;
   totalUser=0;
   totalOrder=0;
-  constructor(private route:Router,private productService:ProductsService,private userService:AuthService,private adminService:AdminService ) { 
+  constructor(private route:Router,private productService:ProductsService,private userService:LogService,private adminService:AdminService ) { 
   }
 
   ngOnInit(): void {
@@ -23,16 +23,15 @@ export class HomeComponent implements OnInit {
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
 
-    this.productService.getProduct().subscribe(res=>{
+    this.productService.getProduct().subscribe((res:any)=>{
        console.log(res.length)
       this.totalProduct=res.length;
     });
-    this.userService.login().subscribe(res=>{
+    this.userService.getUsers().subscribe((res:any)=>{
       this.totalUser = res.length;
     });
-    this.adminService.getOrders().subscribe(res=>{
+    this.adminService.getOrders().subscribe((res:any)=>{
       this.totalOrder = res.length;
     })
   }
-
 }

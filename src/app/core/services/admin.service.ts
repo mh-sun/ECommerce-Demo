@@ -10,7 +10,7 @@ export class AdminService{
     }
 
     private url = 'http://localhost:3000/adminOrder';
-
+    
     getOrders(){
         return this.http.get<any>(this.url);
     }

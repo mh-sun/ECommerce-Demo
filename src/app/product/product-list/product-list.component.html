@@ -42,21 +42,34 @@
     </button>
 </div>
 
-
-<div class="container">
-  <div class="row justify-content-center">
-    <ng-container *ngFor="let item of filterCategory">
-      <div class="card col-md-3" >
-        <div (click)="viewProduct(item)">
-          <div class="img-wrap">
-            <img mat-card-image src="{{item.image}}" alt="" class="prodct-img">
-          </div>
-          <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
-          <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
-          <p><strong>Price:</strong> ${{item.price}}</p>
-        </div>
-        <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button>
-      </div>
+<div class="row">
+  <div class="col-sm-2 bg-light py-3 d-flex flex-column ">
+    <p class="text-center h3">All Category</p><hr>
+    <button class="btn" (click)="filterNone()">
+      All products
+    </button>
+    <ng-container *ngFor="let cat of categories">
+      <button class="btn" (click)="filterProduct(cat)">
+        {{cat}}
+      </button>
     </ng-container>
+  </div>
+
+  <div class="container col-sm-10">
+    <div class="row justify-content-center">
+      <ng-container *ngFor="let item of filterCategory">
+        <div class="card col-md-3" >
+          <div (click)="viewProduct(item)">
+            <div class="img-wrap">
+              <img mat-card-image src="{{item.image}}" alt="" class="prodct-img">
+            </div>
+            <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
+            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
+            <p><strong>Price:</strong> ${{item.price}}</p>
+          </div>
+          <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>

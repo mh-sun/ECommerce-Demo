@@ -1,11 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
-import { User } from 'src/app/core/models/user.model';
 import { LogService } from 'src/app/core/services/log.service';
+import { User } from 'src/app/core/models/user.model';
 
 
 @Component({
@@ -16,7 +15,6 @@ import { LogService } from 'src/app/core/services/log.service';
 export class LoginComponent implements OnDestroy{
 
   constructor (private fb:FormBuilder, 
-    private http:AuthService,
     private route:Router,
     private dialog:MatDialog,
     private logger:LogService
@@ -33,11 +31,14 @@ export class LoginComponent implements OnDestroy{
   loginSubscription:any = null
 
   onLogin(){
-    this.loginSubscription = this.http.login().subscribe((users:any)=>{
-      
+    this.loginSubscription = this.logger.getUsers().subscribe((users:User[])=>{
+      console.log(users)
       for(let i=0; i<users.length; i++){
         let user = users[i]
-        if(user.email === this.user.value.email && user.password === this.user.value.password){
+        if(
+          user.email === this.user.value.email && 
+          user.password === this.user.value.password
+        ){
           this.logger.logIn(user)
           this.user.reset()
           this.route.navigate(['/'])
@@ -50,8 +51,10 @@ export class LoginComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if(this.loginSubscription)
+    if(this.loginSubscription){
+      console.log("login subscription unsubscribed")
       this.loginSubscription.unsubscribe()
+    }
   }
 
   showDialog() {

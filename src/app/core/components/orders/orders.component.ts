@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
+// import { AuthService } from '../../services/auth.service';
 import { LogService } from '../../services/log.service';
 import { OrderService } from '../../services/order.service';
 import { ProductsService } from '../../services/products.service';
@@ -22,7 +22,7 @@ export class OrdersComponent implements OnInit {
   totalBill=0;
   order:Order|any;
   subscriptionName!: Subscription;
-  constructor(private service:ProductsService,private userService:AuthService,private route:ActivatedRoute,private log:LogService,private router:Router,private orderService:OrderService) {   
+  constructor(private service:ProductsService,private userService:LogService,private route:ActivatedRoute,private log:LogService,private router:Router,private orderService:OrderService) {   
   
   }
   ngOnInit(): void {

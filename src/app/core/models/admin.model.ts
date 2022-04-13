@@ -5,8 +5,8 @@ export interface productDetails{
     variation:object
     quantity:number
 }
+
 export interface orderAdmin{
-  
     id:string,
     name:string,
     products:productDetails[]

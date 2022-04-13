@@ -1,113 +1,160 @@
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable, OnDestroy, OnInit } from '@angular/core';
-// import { BehaviorSubject, map } from 'rxjs';
-// import { CartProduct } from '../models/cart-product.model';
-// import { Product } from '../models/product.model';
-// import { User } from '../models/user.model';
-// import { LogService } from './log.service';
-// import { ProductsService } from './products.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, map } from 'rxjs';
+import { Cart } from '../models/cart-product.model';
+import { Product } from '../models/product.model';
+import { User } from '../models/user.model';
+import { LogService } from './log.service';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CartApiService{
+@Injectable({
+  providedIn: 'root'
+})
+export class CartApiService{
+  
+  private cartProducts:Cart[] = []
+  public cartSubject = new BehaviorSubject<Cart[]>(this.cartProducts)
 
-//   private user!:User|null
-//   public cartProducts:CartProduct[] = []
-//   public grandTotal = new BehaviorSubject<number>(0)
-//   constructor(
-//     private logger:LogService,
-//     private productApi:ProductsService) {
+  private url:string = 'http://localhost:3000/carts/'
 
-//     this.logger.loggedUser.subscribe({
-//       next: u=>{
-//         this.user = u
-//         console.log(111111111111)
-//         this.grandTotalPrice()
-//         this.getProducts()
-//       }
-//     })
-//   }
-//   grandTotalPrice() {
-//     let grandTotal = 0;
-//     this.cartProducts.forEach(c=>{
-//       grandTotal += (c.product.price*c.quantity)
-//     })
-//     console.log(this.cartProducts)
-//     this.grandTotal.next(grandTotal)
-//   }
-//   getProducts(){
-//     console.log("Cart : ???????????", this.user?.cart)
-//     this.user?.cart.forEach(item=>{
-//       this.addToCartProduct(item)
-//     })
-//     console.log('Cart Product : ???????????', this.cartProducts)
-//     return this.cartProducts
-//   }
+  private user!:User|null
+  constructor(
+    private http:HttpClient,
+    private logger:LogService,
+    private snackBar:MatSnackBar
+  ){
+    this.logger.loggedUser.subscribe({
+      next:(res)=>{
+        this.user = res
+        this.cartProductLoad()
+      },
+      error:val=>console.error(val),
+      complete:()=>console.error(' Logger user subscription complete')
+    })
+  }
 
-//   addToCartProduct(element:any){
-//     this.productApi.getOneProduct(element.productId).subscribe(res=>{
-//       let resProduct:CartProduct = {
-//         product : res,
-//         quantity: element.quantity,
-//         variation: element.variation
-//       }
-//       this.cartProducts.push(resProduct)
-//     })
-//   }
+  createCartItem(product:Product, variation:object, quantity:number):Cart
+  {
+    return {
+      id:Math.floor(Math.random() * 1000),
+      productId:product.id,
+      title: product.title,
+      total: {
+          price:product.price,
+          shipping:100,
+          discount:0
+      },
+      description: product.description,
+      image: product.image,
+      variation: variation,
+      quantity : quantity
+    }
+  }
 
-//   addToCart(product : any){
-//     let flag = true
-//     this.user?.cart.map((a:any, index:number)=>{
-//       if(product.productId === a.productId){
-//         flag = false
-//         if(this.isEqualObject(product.variation, a.variation)){
-//           this.user!.cart[index].quantity += product.quantity
-//           this.cartProducts[index].quantity += product.quantity
-//         }
-//         else flag = true
-//       }
-//     })
-//     if(flag) this.user?.cart.push(product)
-//     this.logger.loggedUser.next(this.user)
-//     this.logger.storeUser(this.user)
-//   }
+  addToCart(product : Cart):boolean{
+    if(this.user === null) {
+      this.snackBar.open("Please login", "Close", {
+        duration:1000
+      })
+      return false
+    }
+    let flag = false
+    for (let i = 0; i < this.cartProducts.length; i++) {
+      const cartItem = this.cartProducts[i];
+      if(
+        cartItem.productId === product.productId &&
+        this.isEqualObject(cartItem.variation, product.variation)){
+          flag = true
+          console.log("product exists in cart")
+          return false
+        }
+    }
+    if(!flag) this.cartAdd(product)
+    return true
+  }
 
-//   isEqualObject(object1:any, object2:any):boolean{
-//     const keys1 = Object.keys(object1);
-//     const keys2 = Object.keys(object2);
-//     if (keys1.length !== keys2.length) {
-//       return false;
-//     }
-//     for (const key of keys1) {
-//       const val1 = object1[key];
-//       const val2 = object2[key];
-//       if (val1 !== val2) {
-//         return false;
-//       }
-//     }
-//     return true;
-//   }
+  public isEqualObject(object1:any, object2:any):boolean{
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+    for (const key of keys1) {
+      const val1 = object1[key];
+      const val2 = object2[key];
+      if (val1 !== val2) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-//   removeCartItem(cartItem: CartProduct){
-//     let index = 0
-//     this.user?.cart.map((a:any, i:any)=>{
-//       if(cartItem.product.id === a.productId &&
-//         cartItem.quantity === a.quantity &&
-//         cartItem.variation === a.variation){
-//         index = i
-//       }
-//     })
-//     this.user?.cart.splice(index, 1);
-//     this.cartProducts.splice(index, 1);
-//     this.logger.loggedUser.next(this.user)
-//     this.logger.storeUser(this.user)
-//   }
+  cartAdd(item:Cart) {
+    this.http.post<Cart>(this.url, item).subscribe({
+      next:(r:Cart)=>{
+        this.cartProducts.push(r)
+        this.cartSubject.next(this.cartProducts)
+        this.user?.carts.push(r.id)
+        this.logger.loggedUser.next(this.user)
+      },
+      error:err=>{
+        console.log(err)
+      }
+    })
+  }
+  cartUpdate(item:Cart) {
+    this.http.put<Cart>(this.url + item.id, item).subscribe({
+      next:(r:Cart)=>{console.log("Cart is updated", r)}
+    })
+  }
 
-//   clearCart(){
-//     this.user?.cart.splice(0,this.user.cart.length)
-//     this.cartProducts.splice(0, this.cartProducts.length)
-//     this.logger.loggedUser.next(this.user)
-//     this.logger.storeUser(this.user)
-//   }
-// }
+  removeCartItem(product: Cart){
+    for (let i = 0; i < this.cartProducts.length; i++) {
+      const item = this.cartProducts[i];
+      if(product.id === item.id){
+        this.cartProducts.splice(i, 1)
+        break
+      }
+    }
+    this.cartSubject.next(this.cartProducts)
+    for (let i = 0; i < this.user!.carts.length; i++) {
+      const id = this.user!.carts[i];
+      if(id === product.id) {
+        this.user?.carts.splice(i,1)
+        this.logger.loggedUser.next(this.user)
+        break
+      }
+    }
+    this.cartDelete(product.id)
+  }
+
+  cartDelete(id: number) {
+    this.http.delete<Cart>(this.url + id).subscribe({
+      next:(r:Cart)=>{console.log('cart item deleted', r)}
+    })
+  }
+
+  clearCart(){
+    this.cartProducts = []
+    this.cartSubject.next(this.cartProducts)
+    this.user?.carts.splice(0, this.user.carts.length)
+    this.logger.loggedUser.next(this.user)
+  }
+
+  cartProductLoad(){
+    this.cartProducts = []
+    this.cartSubject.next(this.cartProducts)
+
+    this.user?.carts.forEach((i, index)=>{
+      this.http.get<Cart>(this.url+ i).subscribe({
+        next:(res:Cart)=>{
+          this.cartProducts.push(res)
+          if(index === this.user!.carts.length-1){
+            console.log(this.cartProducts)
+            this.cartSubject.next(this.cartProducts)
+          }
+        }
+      })
+    })
+  }
+}

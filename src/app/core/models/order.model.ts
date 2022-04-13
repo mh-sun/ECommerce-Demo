@@ -16,4 +16,5 @@ export interface Order{
     }
     address:string
     date:string
+    status:string
 }

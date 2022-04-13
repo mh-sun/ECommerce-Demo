@@ -12,7 +12,7 @@ import { LogService } from '../core/services/log.service';
 })
 export class CartComponent {
   public products : Cart[] = [];
-  public grandTotal !: number;
+  public grandTotal : number = 0;
   public user: User|null = null;
   public deliveryCharge:number = 100
 
@@ -30,16 +30,20 @@ export class CartComponent {
       next:(res)=>{
         console.log(res)
         this.products = res
+        this.grandTotalPrice()
+      },
+      error:(err)=>{
+        console.log(err)
       },
       complete:()=>{
-        this.grandTotalPrice()
+        console.log("COMplete")
       }
     })
   }
   grandTotalPrice() {
     this.grandTotal = 0
     this.products.forEach(cp=>{
-      this.grandTotal += (cp.total.price*cp.quantity+cp.total.shipping)
+      this.grandTotal += (cp.total.price*cp.quantity)
     })
   }
 
@@ -60,6 +64,7 @@ export class CartComponent {
     return (this.grandTotal + this.deliveryCharge).toFixed(2)
   }
   makePayment(){
+    //order->
     this.router.navigate(['cart/payment'])
   }
 }

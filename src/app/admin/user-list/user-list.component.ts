@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { LogService } from 'src/app/core/services/log.service';
 
 @Component({
   selector: 'app-user-list',
@@ -13,14 +13,14 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email','address','phone','remove'];
   dataSource:any;
   active!:string;
-  constructor(private route:Router  ,private service:AuthService) { 
+  constructor(private route:Router  ,private service:LogService) { 
     this.title = 'User List';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
   }
 
   ngOnInit(): void {
-    this.service.login().subscribe(res=>{
+    this.service.getUsers().subscribe((res:any)=>{
       this.dataSource = res;
       console.log(res)
     })

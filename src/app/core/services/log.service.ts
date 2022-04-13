@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
@@ -8,33 +9,43 @@ import { User } from '../models/user.model';
 export class LogService {
 
   public userSubscription:any
-  private user!:User|null
-  private _logStatus = new BehaviorSubject<boolean>((localStorage.getItem('loggedUser')!==null));
   public loggedUser = new BehaviorSubject<User|null>(null)
 
-  constructor(){
+  private url = 'http://localhost:3000/'
+
+  constructor(private http:HttpClient){
     let str = localStorage.getItem('loggedUser')
-    str === null ? this.loggedUser.next(null) : this.loggedUser.next(JSON.parse(str))
-    this.userSubscription = this.loggedUser.subscribe({
-      next: u=>{
-        this.user = u
+    if(str === null){
+      this.loggedUser.next(null)
+    }
+    else{
+      this.loggedUser.next(JSON.parse(str))
+    }
+    this.loggedUser.subscribe(user=>{
+      if(user !== null){
+        this.storeUser(user)
+        http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{console.log(res)})
       }
     })
   }
+    
+  getUsers(){
+      let link = this.url + 'users'
+      return this.http.get<User[]>(link)
+  }
 
-  public getLogStatus(){
-    return this._logStatus
+  Registration(user: User){
+      let link = this.url + 'users'
+      return this.http.post(link, user);
   }
 
   logIn(user:User){
     localStorage.setItem('loggedUser', JSON.stringify(user))
-    this._logStatus.next(true)
     this.loggedUser.next(user)
     
   }
   logout(){
     localStorage.removeItem('loggedUser')
-    this._logStatus.next(false)
     this.loggedUser.next(null)
   }
   storeUser(user:User|null){

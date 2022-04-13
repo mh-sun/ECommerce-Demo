@@ -17,9 +17,9 @@ const routes: Routes = [
     redirectTo:'products',
     pathMatch: 'full'
   },
-  { 
-    path: 'product', 
-    loadChildren: () => import('./product/product.module').then(m => m.ProductModule) 
+  {
+    path:'cart',
+    loadChildren:()=>import('./cart/cart.module').then(m=>m.CartModule)
   },
   {
     path:'orders/:id',

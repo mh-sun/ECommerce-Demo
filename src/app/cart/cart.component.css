@@ -1,0 +1,30 @@
+.checkout{
+    position: fixed;
+    right: 0;
+    bottom: 15%;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 400px;
+    z-index: 10;
+    border-radius: 5px;
+    display: flex;
+    align-self: center;
+    transition-duration: 500ms;
+}
+.checkoutInActive{
+    right: -500px;
+}
+.row{
+    width: 100%;
+}
+.text-right{
+    text-align: right;
+}
+.cross{
+    background-color: inherit;
+    border: 0;
+    font-size: x-large;
+}
+ul{
+    padding: 0px 15px;
+}
