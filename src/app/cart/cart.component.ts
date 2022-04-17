@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart } from '../core/models/cart-product.model';
+import { Order } from '../core/models/order.model';
 import { User } from '../core/models/user.model';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
@@ -15,6 +16,8 @@ export class CartComponent {
   public grandTotal : number = 0;
   public user: User|null = null;
   public deliveryCharge:number = 100
+  
+  public address:string = ''
 
   constructor(
     private cartService : CartApiService,
@@ -64,8 +67,37 @@ export class CartComponent {
     return (this.grandTotal + this.deliveryCharge).toFixed(2)
   }
   makePayment(){
-    //order->
+    let products = this.getProductDetailsForOrder()
+    let order:Order = {
+      id:Math.floor(Math.random()*1000).toString(),
+      userid:this.user!.id,
+      payment:{
+        subtotal:this.grandTotal,
+        shipping:this.deliveryCharge
+      },
+      address:this.address,
+      date:(new Date()).toDateString(),
+      status:"Pending",
+      products:products
+    }
+    console.log(order)
+    this.user?.orders.push(order)
+    this.logger.loggedUser.next(this.user)
     this.router.navigate(['cart/payment'])
+  }
+  getProductDetailsForOrder() {
+    let products:any = []
+    this.products.forEach(p=>{
+      let obj = {
+        title:p.title,
+        image:p.image,
+        productId:p.id,
+        variation:p.variation,
+        quantity:p.quantity,
+      }
+      products.push(obj)
+    })
+    return products
   }
 }
 
