@@ -12,7 +12,7 @@ import { ProductEditComponent } from '../product-edit/product-edit.component';
 export class DashboardComponent implements OnInit {
   title:string|any;
   headerTitle:string|any;
-  displayedColumns: string[] = ['id', 'title', 'price','description','availailability','edit','delete'];
+  displayedColumns: string[] = ['id', 'title', 'price','description','availailability','edit'];
   dataSource:any;
   active!:string;
   constructor(private route:Router  ,private service:ProductsService) { 
