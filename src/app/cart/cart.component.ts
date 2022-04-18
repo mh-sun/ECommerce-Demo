@@ -77,12 +77,13 @@ export class CartComponent {
       },
       address:this.address,
       date:(new Date()).toDateString(),
-      status:"Pending",
+      status:"Payment Pending",
       products:products
     }
     console.log(order)
     this.user?.orders.push(order)
     this.logger.loggedUser.next(this.user)
+    this.cartService.clearCart()
     this.router.navigate(['cart/payment'])
   }
   getProductDetailsForOrder() {
