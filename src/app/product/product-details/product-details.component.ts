@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,6 +35,7 @@ export class ProductDetailsComponent implements OnInit{
     private snackBar:MatSnackBar
   ) {
   }
+
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
     this.productService.getOneProduct(id).subscribe({
@@ -47,7 +48,6 @@ export class ProductDetailsComponent implements OnInit{
               this.var_keys.push(k)
           })
         }
-        console.log(this.var_keys)
         this.var_keys.forEach(key=>{
           let arr:any = []
           for(let var_i of this.data.variation){
@@ -57,13 +57,13 @@ export class ProductDetailsComponent implements OnInit{
           }
           this.var_values.push(arr)
         })
-        console.log(this.var_values);
-        
+        this.variation=res.variation[0].type
       }
     })
   }
   
   addtocart(item: Product){
+    console.log(this.variation)
     let c:Cart = this.cartService.createCartItem(item, this.variation, this.quantity)
     if(Object.keys(this.variation).length !== this.var_keys.length){
       this.showSnackBar("Please Select a full variant", 1000)
@@ -81,6 +81,7 @@ export class ProductDetailsComponent implements OnInit{
     if(this.cartService.addToCart(c)) this.showSnackBar("Product added successfully", 1000)
     else this.showSnackBar("Add product unsuccessful", 1000)
   }
+
   variationExists():boolean {
     for (const variation of this.data.variation) {
       if(this.isEqualObject(variation.type, this.variation)){

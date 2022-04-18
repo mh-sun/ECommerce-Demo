@@ -30,12 +30,18 @@
                                 <div class="row">
                                     <h4 class="h4 text-secondary" class="col-md-4">{{item}}</h4>
                                     <mat-radio-group class="col-md-8" [(ngModel)]="variation[item]">
-                                        <ng-container *ngFor="let value of var_values[i]">
-                                            <mat-radio-button  [value]="value" >
+                                        <ng-container *ngFor="let value of var_values[i];let i = index">
+                                            <mat-radio-button [checked]="i === 0" [value]="value" >
                                                 {{value}}
                                             </mat-radio-button>
                                         </ng-container>
                                     </mat-radio-group>
+                                    <!-- <div class="col-md-8">
+                                        <ng-container *ngFor="let value of var_values[i];let i = index">
+                                            <input type="radio" [id]="value" [name]="item" [value]="value" [(ngModel)]="variation[item]">
+                                            <label>{{value}}</label>
+                                        </ng-container>
+                                    </div> -->
                                 </div>
                             </ng-container>
                             <div class="row">
