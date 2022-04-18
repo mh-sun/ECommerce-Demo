@@ -11,7 +11,7 @@ import { ProductsService } from 'src/app/core/services/products.service';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-  @ViewChild('box') inputQtn: any; 
+  // @ViewChild('box') inputQtn: any; 
   quantity:number[]=[];
   valueArray = new Array();
   Variation:Variation[]|any = [];
@@ -19,7 +19,7 @@ export class ProductEditComponent implements OnInit {
   msg = "";
   index:number | undefined;
   existValue=false;
-  addVariant=false;
+  // addVariant=false;
   title:string|any;
   headerTitle:string|any;
   product:Product|any;
@@ -34,19 +34,21 @@ export class ProductEditComponent implements OnInit {
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
     const routeParams = this.route.snapshot.paramMap;
-     this.productIdFromRoute = Number(routeParams.get('id'));
+    this.productIdFromRoute = Number(routeParams.get('id'));
     this.service.getOneProduct(this.productIdFromRoute).subscribe((res)=>{
       this.product = res;
       console.log(this.product)
       this.productEditForm = this.fb.group({
         title:[this.product.title,],
-        price:[this.product.price,],
+        price:[this.product.price,Validators.required],
         description:[this.product.description,],
         category:[this.product.category,],
         image:[this.product.image,],
-        types:this.fb.array([
-          // this.addTypeGroup()
-        ])
+        types:this.fb.array([]) ,
+        variant:this.fb.array([
+          // 
+        ]),
+               
      });
      for(let variation of this.product.variation){
       this.Variation.push(variation['type'])
@@ -57,12 +59,12 @@ export class ProductEditComponent implements OnInit {
       this.variantType=false;
       console.log("The Object is empty")
      }
-    //  if(this.Variation.length==0){
-    //    this.variantType=false;
-    //  }
      console.log(this.Variation)
     });
 
+  }
+  get variants(){
+    return this.productEditForm.get('variant') as FormArray
   }
   get types(){
     return this.productEditForm.get('types') as FormArray
@@ -85,11 +87,21 @@ export class ProductEditComponent implements OnInit {
   //   }
   // }
   // }
+  private addVariantGroup(): FormGroup {
+    return this.fb.group({
+      key: ['',Validators.required],
+      value: ['',Validators.required],
+      quantity:['',Validators.required]
+    });
+  }
   private addTypeGroup(): FormGroup {
     return this.fb.group({
-      key: [],
-      value: []
+      moreKey: ['',Validators.required],
+      moreValue: ['',Validators.required]
     });
+  }
+  addVariants(){
+    this.variants.push( this.addVariantGroup())
   }
   addType(){
     this.types.push(this.addTypeGroup())
@@ -108,27 +120,27 @@ export class ProductEditComponent implements OnInit {
   //   console.log(this.types)
   // }
 
-  addVariation(key:string,input:string){
-    input = input.toString();
-    console.log(key,input,this.product.variation[key])
-    console.log(input in this.product.variation[key] )
-    console.log(this.product.variation[key].indexOf(input));
-    for(let v of this.product.variation[key]){
-      console.log(this.existValue)
-      if(this.product.variation[key].indexOf(input) !== -1){
-        this.existValue = true;
-        console.log(this.existValue)
-          break;
-      } 
-      else{
-        this.product.variation[key].push(input);
-        this.index=-1;
-        break;
-      }
-    }
-    console.log(this.product.variation[key][0])
+  // addVariation(key:string,input:string){
+  //   input = input.toString();
+  //   console.log(key,input,this.product.variation[key])
+  //   console.log(input in this.product.variation[key] )
+  //   console.log(this.product.variation[key].indexOf(input));
+  //   for(let v of this.product.variation[key]){
+  //     console.log(this.existValue)
+  //     if(this.product.variation[key].indexOf(input) !== -1){
+  //       this.existValue = true;
+  //       console.log(this.existValue)
+  //         break;
+  //     } 
+  //     else{
+  //       this.product.variation[key].push(input);
+  //       this.index=-1;
+  //       break;
+  //     }
+  //   }
+  //   console.log(this.product.variation[key][0])
     
-  }
+  // }
 
   removeVariation(index:number){
     this.product.variation.splice(index,1)
@@ -177,24 +189,31 @@ export class ProductEditComponent implements OnInit {
   //   this.addVariant = false;
   // }
 
-  addMore(quantity:string){
-    console.log(this.types,quantity);
+  addMore(){
     let obj:any={
       type:{
       },
-      quantity:quantity
+      quantity:0
     };
-   
-     for(let x of this.types.value){
-      console.log(x)
-      obj.type[x.key] = x.value;
-     }
-     console.log(obj)
-     this.Variation.push(obj.type)
-     this.product.variation.push(obj);
-     console.log(this.product.variation)
-     this.types.reset();
-     this.inputQtn.nativeElement.value = ' ';
+    if(this.variants.length!=0){
+      for(let x of this.variants.value){
+          // console.log(x)
+          obj.type[x.key] = x.value;
+          obj.quantity = +x.quantity;
+          // console.log(obj)
+          if(this.productEditForm.get('types').length!=0){
+            for(let x of this.types.value){
+                obj.type[x.moreKey] = x.moreValue;
+                console.log(obj.type)      
+            }
+          }
+          this.Variation.push(obj.type)
+                console.log(this.Variation)
+          this.product.variation.push(obj);   
+      }
+    }
+    this.variants.reset();
+    this.types.reset(); 
   }
   increaseQuantity(index:number){
     this.product.variation[index]['quantity']++;
@@ -207,14 +226,55 @@ export class ProductEditComponent implements OnInit {
 
    console.log(this.product.variation[index].quantity)
   }
+  removeFormArrays(){
+    for(let i=0;i<this.variants.length;i++){
+      this.variants.removeAt(i)
+    }
 
+    for(let i=0;i<this.types.length;i++){
+      this.types.removeAt(i)
+    }
+  }
   onSubmit(){
     let arr = ['title','price','description','category','image'];
     for(let key of arr){
       console.log(key)
       this.product[key] = this.productEditForm.get(key).value;
     }
-    console.log('onsubmit:' ,this.productEditForm.value,'Product Detail:',this.product);
+    this.addMore()
+    // let obj:any={
+    //   type:{
+    //   },
+    //   quantity:0
+    // };
+    // if(this.variants.length!=0){
+    //   for(let x of this.variants.value){
+    //       // console.log(x)
+    //       obj.type[x.key] = x.value;
+    //       obj.quantity = +x.quantity;
+    //       // console.log(obj)
+    //       if(this.productEditForm.get('types').length!=0){
+    //         for(let x of this.types.value){
+    //             obj.type[x.moreKey] = x.moreValue;
+    //             console.log(obj.type)      
+    //         }
+    //       }
+    //       this.Variation.push(obj.type)
+    //             console.log(this.Variation)
+    //       this.product.variation.push(obj);   
+    //   }
+    // }
+    // this.variants.reset();
+    // this.types.reset(); 
+    this.removeFormArrays();
+    // for(let i=0;i<this.variants.length;i++){
+    //   this.variants.removeAt(i)
+    // }
+
+    // for(let i=0;i<this.types.length;i++){
+    //   this.types.removeAt(i)
+    // }
+    // console.log('onsubmit:' ,this.productEditForm.value,'Product Detail:',this.product);
     this.service.updatePost(this.product,this.productIdFromRoute);
   }
 }

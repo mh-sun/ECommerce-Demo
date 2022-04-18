@@ -1,0 +1,72 @@
+<mat-card class="content">
+    <div *ngIf="product">
+        <div class="card py-3">
+           <div class="table">
+            <tr>
+                <td class="col-sm-6">
+                  <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
+                  <img [src]="product.image" >
+                  <!-- </div>  -->
+                </td>
+                <td class="col-sm-8">
+                    <div>
+                        <div>Title:</div>
+                        {{product.title}}
+                    </div>
+                    <div>
+                        <div>Description:</div>
+                        {{product.description}}
+                    </div>
+                    <div>
+                        <div>Price:</div>
+                        {{product.price|currency}}
+                    </div>
+                    <div>
+                        <div>Rating:</div>
+                        <div>Rate:</div>{{product.rating.rate}}
+                        <div>Count:</div>{{product.rating.count}}
+                    </div>
+                    <div>
+                        <div>Variation:</div>
+                        <!-- {{product.variation|json}} -->
+                        <div *ngFor="let variant of product.variation">
+                            <div>Type:</div>
+                            <div *ngFor="let var_k of variant.type|keyvalue">
+                                <div class="d-flex" >
+                                    <div class="col-md-4">
+                                        <span class="d-flex center">{{var_k.key}}:</span>
+                                    </div>
+                                    <div class="col-md-8 d-flex flex-column">
+                                        <span class="d-flex" >{{var_k.value}} 
+                                        </span>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div>Quantity:</div>
+                            {{variant.quantity}}
+                        </div>
+                    </div>
+                    <div>
+                        <div>Status:</div>
+                        <div *ngIf="product.isActive">Active</div>
+                        <div *ngIf="!product.isActive">Deactive</div>
+                    </div>
+                    <div>
+                        <div>Change Status:</div>
+                        <div *ngIf="product.isActive"><button mat-button (click)="activate(!product.isActive)">Deactive</button></div>
+                        <div *ngIf="!product.isActive"><button mat-button (click)="activate(product.isActive)">Active</button></div>
+                        <div class="rightAlign">
+                            <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
+                                <button mat-button>
+                                  <mat-icon>edit</mat-icon>
+                                   Edit Product Details
+                                </button>
+                              </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+           </div>
+        </div>
+    </div>
+</mat-card>
