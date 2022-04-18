@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import {Variation} from 'src/app/core/models/variation.model';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { PriceValidatorDirective } from '../../shared/price-validator.directive';
 
 @Component({
   selector: 'app-product-edit',
@@ -40,7 +41,7 @@ export class ProductEditComponent implements OnInit {
       console.log(this.product)
       this.productEditForm = this.fb.group({
         title:[this.product.title,],
-        price:[this.product.price,Validators.required],
+        price:[this.product.price,[Validators.required,this.validate]],
         description:[this.product.description,],
         category:[this.product.category,],
         image:[this.product.image,],
@@ -87,6 +88,13 @@ export class ProductEditComponent implements OnInit {
   //   }
   // }
   // }
+  validate(control: AbstractControl) : {[key: string]: any} | null {
+    const pattern = /[0-9\+\-\ ]/;
+    if (control.value<= 0||!pattern.test(control.value)) {
+      return { 'priceInvalid': true };
+    }
+    return null;
+  }
   private addVariantGroup(): FormGroup {
     return this.fb.group({
       key: ['',Validators.required],

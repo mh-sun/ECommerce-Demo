@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
+// import { PricingPipe } from '../pipes/pricing.pipe';
+import { MycurrencyPipe } from '../pipes/MyCurrencyPipe';
+import { AdminModule } from '../admin.module';
 // import { HomeComponent } from '../home/home.component';
 
 
@@ -16,6 +19,8 @@ import { ProductViewComponent } from './product-view/product-view.component';
     ProductEditComponent,
     ProductListComponent,
     ProductViewComponent,
+    // PricingPipe,
+    MycurrencyPipe
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,7 @@ import { ProductViewComponent } from './product-view/product-view.component';
     AngularMaterialModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-   
+    AdminModule
   ]
 })
 export class ProductModule { }

@@ -13,6 +13,8 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PricingPipe } from './pipes/pricing.pipe';
+import { PriceValidatorDirective } from './shared/price-validator.directive';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AddProductComponent,
     OrderListComponent,
     OrderViewComponent,
-    UserListComponent
+    UserListComponent,
+    PricingPipe,
+    PriceValidatorDirective
   ],
   imports: [
     CommonModule,
@@ -32,6 +36,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AngularMaterialModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+  ],
+  exports:[
+    PricingPipe
   ]
 })
 export class AdminModule { }
