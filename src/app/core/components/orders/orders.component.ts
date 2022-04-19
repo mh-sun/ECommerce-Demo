@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Order } from '../../models/order.model';
@@ -12,30 +12,28 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit {
-  name = 'Progress Bar';
+export class OrdersComponent implements OnInit, AfterViewInit{
   user: User|any;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
   totalBill=0;
   order:Order|any;
   orderStatusIndex :number = -1
-  subscriptionName!: Subscription;
+  orderId!:any
   constructor(
-    private service:ProductsService,
-    private userService:LogService,
     private route:ActivatedRoute,
     private log:LogService,
-    private router:Router,
     private orderService:OrderService
-  ) {}
+  ) {
+  }
+  ngAfterViewInit(): void {
+  }
   ngOnInit(): void {
+    
     let orders:Order[]|undefined;
     const routeParams = this.route.snapshot.paramMap;
-    let orderId = String(routeParams.get('id'));
-    console.log(this.orderStatusIndex)
+    this.orderId = routeParams.get('id');
     this.orderService.currentOrder.subscribe({
       next:order=>{
-        console.log(this.orderStatusIndex)
         this.order = order;
         if(order===null) return
         this.orderStatusIndex = this.counts.indexOf(order.status)
@@ -44,14 +42,15 @@ export class OrdersComponent implements OnInit {
     })
     this.log.loggedUser.subscribe({
       next:u=>{
-        console.log(this.orderStatusIndex)
         this.user = u;
+        console.log(this.order)
         if(this.order===null){
           orders = u?.orders;
           if(orders!=null){
             for(let order of orders){
-              if(order.id==orderId){
+              if(order.id===this.orderId){
                 this.order = order;
+                this.orderStatusIndex = this.counts.indexOf(order.status)
                 this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
               }
             }
