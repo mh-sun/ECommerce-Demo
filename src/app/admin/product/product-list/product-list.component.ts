@@ -1,18 +1,17 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/core/models/product.model';
 import { ProductsService } from 'src/app/core/services/products.service';
-import { ProductEditComponent } from '../product-edit/product-edit.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class ProductListComponent implements OnInit {
+
   title:string|any;
   headerTitle:string|any;
-  displayedColumns: string[] = ['id', 'title', 'price','description','availailability','edit','delete'];
+  displayedColumns: string[] = ['id', 'title', 'price','description','availailability','edit'];
   dataSource:any;
   active!:string;
   constructor(private route:Router  ,private service:ProductsService) { 
@@ -46,4 +45,5 @@ export class DashboardComponent implements OnInit {
 
   addData(){}
   clearTable(){}
+
 }

@@ -10,30 +10,73 @@
                             <th>Product Image</th>
                             <th>Variation</th>
                             <th>Quantity</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of products; let i = index">
                             <td>{{i+1}}</td>
                             <td>{{item.title}}</td>
-                            <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
                             <td>
-                                    {{item.variation | json}}
+                                <img style="width: 120px;" src="{{item.image}}" alt="">
                             </td>
-                            <td>{{item.quantity}}</td>
+                            <td>
+                                <div *ngFor="let var_k of item.variation|keyvalue">
+                                    <div class="d-flex">
+                                        <div class="col-md-4">
+                                            <span class="d-flex center">{{var_k.key}}:</span>
+                                        </div>
+                                        <div class="col-md-8 d-flex flex-column">
+                                            <span class="d-flex">{{var_k.value}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {{item.quantity}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row">
-                    <div class="col-md-4 ">
-                       <span class="{{productStatus}}">
+                    <div class="col-md-2 ">
+                        <!-- <span class="{{productStatus}}">
                         {{productStatus}}
-                       </span>
-                        <button mat-button *ngIf="productStatus=='Pending'"(click)="changeStatus()">Dispatch</button> 
+                       </span> -->
+                        <h2><b>Current Status: </b> </h2>
+                        <h4>{{productStatus}}</h4>
                     </div>
+                    <!-- <div class="col-md-2">
+                        <h4>{{productStatus}}</h4>
+                    </div> -->
+                    <!-- </div>
+                    <div class="row"> -->
                 </div>
-                
+                <div class="row">
+                    <h2><b>Change Status: </b></h2>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Status</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let status of statusQueue"
+                                (onSelectionChange)="changeStatus(status,$event)">
+                                {{ status }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-md-2 ">  
+                       <mat-form-field appearance="outline">
+                        <mat-label>Select Status</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let status of statusQueue"(onSelectionChange)="changeStatus(status,$event)">
+                          {{ status }}
+                         </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div> -->
+                <!-- </div> -->
+
             </div>
         </div>
     </div>

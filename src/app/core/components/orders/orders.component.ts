@@ -20,7 +20,7 @@ export class OrdersComponent implements OnInit {
   totalBill=0;
   order:Order|any;
   subscriptionName!: Subscription;
-  constructor(private service:ProductsService,private userService:LogService,private route:ActivatedRoute,private log:LogService,private router:Router,private orderService:OrderService) {   
+  constructor(private service:ProductsService,private route:ActivatedRoute,private log:LogService,private orderService:OrderService) {   
   
   }
   ngOnInit(): void {
