@@ -33,6 +33,10 @@ export class LogService {
       let link = this.url + 'users'
       return this.http.get<User[]>(link)
   }
+  getOneUser(id:number){
+    let link = this.url + 'users'+'/'+id
+    return this.http.get<User>(link)
+  }
 
   Registration(user: User){
       let link = this.url + 'users'

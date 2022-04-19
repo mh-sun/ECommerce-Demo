@@ -1,4 +1,4 @@
-interface productDetails{
+export interface productDetails{
     title:string
     image:string
     productId:number

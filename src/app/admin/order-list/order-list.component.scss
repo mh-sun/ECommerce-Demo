@@ -1,45 +1,40 @@
 @import "../home/home.component.scss";
+
 .page__content-data {
     // top: 39%;
     height: 100%;
     width: 100%;
     padding: 2%;
 }
-table{
+
+table {
     height: 100%;
     width: 100%;
 }
-// th{
-//     text-align: center;
-// }
-// .trim-info {
-//     max-width: 150px;
-//     display: inline-block;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;  
-//     line-height: 25px;
-//     position: relative;
-//  }
+
 button {
     color: black;
 }
+
 th {
     // text-align: center;
     font-size: large;
-    background: #8e9c7fe3 ;
+    background: #8e9c7fe3;
     font-weight: bold;
 }
+
 td.Pending {
     color: red;
     font-weight: bold;
 }
-td.Dispatched {
+
+td.Delivered {
     color: green;
     font-weight: bold;
 }
+
 tr.mat-row:hover {
-    background:#bbcca8e3;
+    background: #bbcca8e3;
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;
