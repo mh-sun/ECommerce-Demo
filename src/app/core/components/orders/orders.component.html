@@ -17,9 +17,11 @@
         <mat-card class="full-width" >
             <div class="scalling">
                 <span *ngFor="let item of counts;let i = index">
-                    <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
-                    <span class="circles" [class.active]="orderStatus == item"></span>
-                    <span class="bar" *ngIf="(i != counts.length-1)"></span>
+                    <span class="circle-desc" [class.circle-desc-active]="i===orderStatusIndex"
+                        [class.unreached]="i>orderStatusIndex">{{ item }}</span>
+                    <span class="circles" [class.unreached]="i>orderStatusIndex"></span>
+                    <span class="bar" *ngIf="(i != counts.length-1)"
+                        [class.unreached]="i>orderStatusIndex"></span>
                 </span>
             </div>
             <div class="card-table">

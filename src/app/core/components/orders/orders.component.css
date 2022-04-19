@@ -30,7 +30,6 @@ mat-card-title{
     padding-bottom: 3%;
 }
 .circles{
-    
     height: 0.968em;
     width: 0.968em;
     border: 0.188em solid green;
@@ -39,14 +38,14 @@ mat-card-title{
     display: inline-block;
   }
   
-  .active{
-      background-color:white;
-  }
-  
   .circle-desc-active{
   font-weight: bold;
   }
-  
+  .unreached{
+    color: grey;
+    background-color: white;
+    border-color: grey;
+  }
   .bar{
     width: 16%;
     height: 0.163em;
