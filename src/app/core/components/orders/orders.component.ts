@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
 import { LogService } from '../../services/log.service';
@@ -12,27 +12,37 @@ import { ProductsService } from '../../services/products.service';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit, AfterViewInit{
-  user: User|any;
+export class OrdersComponent implements OnInit, OnDestroy{
+  public user: User|any;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
-  totalBill=0;
-  order:Order|any;
-  orderStatusIndex :number = -1
-  orderId!:any
+  public totalBill=0;
+  public order:Order|any;
+  public orderStatusIndex :number = -1
+  public orderId!:any
+  // public subcriptions:Subscription = new Subscription()
+  public subOff$ = new Subject()
+  
   constructor(
     private route:ActivatedRoute,
     private log:LogService,
     private orderService:OrderService
-  ) {
+  ) {}
+  ngOnDestroy(): void {
+    // this.subcriptions.unsubscribe()
+
+    this.subOff$.next(1)
+    this.subOff$.complete()
   }
-  ngAfterViewInit(): void {
-  }
+
   ngOnInit(): void {
-    
     let orders:Order[]|undefined;
+
     const routeParams = this.route.snapshot.paramMap;
     this.orderId = routeParams.get('id');
-    this.orderService.currentOrder.subscribe({
+
+    const orderSub = this.orderService.currentOrder
+    .pipe(takeUntil(this.subOff$))
+    .subscribe({
       next:order=>{
         this.order = order;
         if(order===null) return
@@ -40,7 +50,11 @@ export class OrdersComponent implements OnInit, AfterViewInit{
         this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
       }
     })
-    this.log.loggedUser.subscribe({
+    // this.subcriptions.add(orderSub)
+
+    const logSub = this.log.loggedUser
+    .pipe(takeUntil(this.subOff$))
+    .subscribe({
       next:u=>{
         this.user = u;
         console.log(this.order)
@@ -58,6 +72,7 @@ export class OrdersComponent implements OnInit, AfterViewInit{
         }
       }
     })
+    // this.subcriptions.add(logSub)
   }
   
 }

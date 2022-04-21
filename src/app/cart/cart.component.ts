@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Cart } from '../core/models/cart-product.model';
 import { Order } from '../core/models/order.model';
 import { User } from '../core/models/user.model';
@@ -11,25 +12,39 @@ import { LogService } from '../core/services/log.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnDestroy{
+
   public products : Cart[] = [];
   public grandTotal : number = 0;
   public user: User|null = null;
   public deliveryCharge:number = 100
-  
   public address:string = ''
-
+  // public subcriptions:Subscription = new Subscription();
+  public subOff$ = new Subject()
+  
   constructor(
     private cartService : CartApiService,
     private router:Router,
     private logger:LogService
   ) {
-    this.logger.loggedUser.subscribe({
+    const logSub = this.logger.loggedUser
+    .pipe(takeUntil(this.subOff$))
+    .subscribe({
       next:u=>{
         this.user = u
+      },
+      error:(err)=>{
+        console.log(err)
+      },
+      complete:()=>{
+        console.log("COMplete")
       }
     })
-    this.cartService.cartSubject.subscribe({
+    // this.subcriptions.add(logSub)
+
+    const cartSub = this.cartService.cartSubject
+    .pipe(takeUntil(this.subOff$))
+    .subscribe({
       next:(res)=>{
         console.log(res)
         this.products = res
@@ -42,7 +57,16 @@ export class CartComponent {
         console.log("COMplete")
       }
     })
+    // this.subcriptions.add(cartSub)
   }
+
+  ngOnDestroy(): void {
+    // this.subcriptions.unsubscribe()
+
+    this.subOff$.next(1)
+    this.subOff$.complete()
+  }
+
   grandTotalPrice() {
     this.grandTotal = 0
     this.products.forEach(cp=>{
@@ -54,18 +78,22 @@ export class CartComponent {
     console.log(item)
     this.cartService.removeCartItem(item);
   }
+
   emptycart(){
     this.cartService.clearCart();
   }
+
   checkOut(){
     let elem = document.getElementById('checkout')
     elem?.classList.contains('checkoutInActive')?
       elem.classList.remove('checkoutInActive'):
       elem?.classList.add('checkoutInActive')
   }
+
   getTotal(){
     return (this.grandTotal + this.deliveryCharge).toFixed(2)
   }
+
   makePayment(){
     let products = this.getProductDetailsForOrder()
     let order:Order = {
@@ -86,6 +114,7 @@ export class CartComponent {
     this.cartService.clearCart()
     this.router.navigate(['cart/payment'])
   }
+
   getProductDetailsForOrder() {
     let products:any = []
     this.products.forEach(p=>{
@@ -101,4 +130,3 @@ export class CartComponent {
     return products
   }
 }
-

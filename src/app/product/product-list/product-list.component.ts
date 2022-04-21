@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
@@ -12,20 +13,24 @@ import { ProductsService } from 'src/app/core/services/products.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent{
+export class ProductListComponent implements OnDestroy{
   public productList : Product[] = [];
   public filterCategory = new Array();
   public categories: any[] = []
   public carouselItems = new Array()
-  searchKey:string ="";
+  public searchKey:string ="";
+  // public subcriptions:Subscription = new Subscription()
+  public subOff$ = new Subject()
 
-  constructor(private api : ProductsService, 
+  constructor(
+    private api : ProductsService, 
     private cartService : CartApiService,
     private dialog:MatDialog,
     private logger:LogService,
-    private router:Router) {
-
-    this.api.getProduct()
+    private router:Router
+  ){
+    const productSub = this.api.getProduct()
+    .pipe(takeUntil(this.subOff$))
     .subscribe(res=>{
       this.productList = res;
       this.filterCategory = this.productList.filter(p=>{
@@ -35,7 +40,15 @@ export class ProductListComponent{
       this.setCarousel(this.productList)
 
       this.setCategory(this.productList)
-    });
+    })
+    // this.subcriptions.add(productSub)
+  }
+
+  ngOnDestroy(): void {
+    // this.subcriptions.unsubscribe()
+
+    this.subOff$.next(1)
+    this.subOff$.complete()
   }
 
   setCarousel(productList: Product[]) {
