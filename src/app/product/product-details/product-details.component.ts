@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/core/models/cart-product.model';
 import { Product } from 'src/app/core/models/product.model';
 import { User } from 'src/app/core/models/user.model';
@@ -20,25 +21,36 @@ import { ProductsService } from 'src/app/core/services/products.service';
   }]
 })
 
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailsComponent implements OnInit, OnDestroy{
 
   public var_keys:string[]= []
   public var_values:any = []
   public variation:any = {}
   public quantity:number = 1
   public data:any = null
+  // public subcriptions:Subscription = new Subscription()
+  public subOff$ = new Subject()
+
   constructor(
     private cartService: CartApiService,
     private logger:LogService,
     private productService:ProductsService,
     private route:ActivatedRoute,
     private snackBar:MatSnackBar
-  ) {
+  ) {}
+
+  ngOnDestroy(): void {
+    // this.subcriptions.unsubscribe()
+
+    this.subOff$.next(1)
+    this.subOff$.complete()
   }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    this.productService.getOneProduct(id).subscribe({
+    const productSub = this.productService.getOneProduct(id)
+    .pipe(takeUntil(this.subOff$))
+    .subscribe({
       next:res=>{
         this.data = res
         for(let var_i of this.data.variation){
@@ -60,6 +72,7 @@ export class ProductDetailsComponent implements OnInit{
         this.variation=res.variation[0].type
       }
     })
+    // this.subcriptions.add(productSub)
   }
   
   addtocart(item: Product){

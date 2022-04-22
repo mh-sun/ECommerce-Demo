@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { CredentialsMismatchComponent } from './credentials-mismatch/credentials-mismatch.component';
 import { LogService } from 'src/app/core/services/log.service';
 import { User } from 'src/app/core/models/user.model';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -20,18 +21,21 @@ export class LoginComponent implements OnDestroy{
     private logger:LogService
   ){}
   
-  user = this.fb.group({
+  public user = this.fb.group({
     email:['', [
       Validators.required,
       Validators.email
     ]],
     password:['', Validators.required]
   })
-
-  loginSubscription:any = null
+  
+  // public subscription:Subscription = new Subscription();
+  public subOff$ = new Subject()
 
   onLogin(){
-    this.loginSubscription = this.logger.getUsers().subscribe((users:User[])=>{
+    let subs = this.logger.getUsers()
+    .pipe(takeUntil(this.subOff$))
+    .subscribe((users:User[])=>{
       console.log(users)
       for(let i=0; i<users.length; i++){
         let user = users[i]
@@ -48,13 +52,13 @@ export class LoginComponent implements OnDestroy{
       this.showDialog()
       this.user.reset()
     })
+    // this.subscription.add(subs)
   }
 
   ngOnDestroy(): void {
-    if(this.loginSubscription){
-      console.log("login subscription unsubscribed")
-      this.loginSubscription.unsubscribe()
-    }
+    // this.subscription.unsubscribe()
+    this.subOff$.next(1)
+    this.subOff$.complete()
   }
 
   showDialog() {
