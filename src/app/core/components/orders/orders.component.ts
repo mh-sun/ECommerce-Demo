@@ -15,20 +15,12 @@ import { ProductsService } from '../../services/products.service';
 export class OrdersComponent implements OnInit, OnDestroy{
   public user: User|any;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
-<<<<<<< HEAD
-  public orderStatus = "Delivered";
-  totalBill=0;
-  order:Order|any;
-  subscriptionName!: Subscription;
-  constructor(private service:ProductsService,private route:ActivatedRoute,private log:LogService,private orderService:OrderService) {   
-=======
   public totalBill=0;
   public order:Order|any;
   public orderStatusIndex :number = -1
   public orderId!:any
   // public subcriptions:Subscription = new Subscription()
   public subOff$ = new Subject()
->>>>>>> mh-sun
   
   constructor(
     private route:ActivatedRoute,

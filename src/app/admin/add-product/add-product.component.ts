@@ -12,39 +12,39 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 export class AddProductComponent implements OnInit {
   obj = new Object;
   addVariant = false;
-  product:Product|any;
-  imageLink:string|any;
+  product: Product | any;
+  imageLink: string | any;
   productForm = this.fb.group({
-    title:[''],
-    price:[''],
-    description:[''],
-    category:[''],
-    image:[''],
-    variation:['']
- });
+    title: [''],
+    price: [''],
+    description: [''],
+    category: [''],
+    image: [''],
+    variation: ['']
+  });
 
   constructor(
     public dialogRef: MatDialogRef<SidenavComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder){}
+    @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  ngOnInit(): void {
-  }
-  imagePreview(e:any) {
+  ngOnInit(): void { }
+
+  imagePreview(e: any) {
     let event = (e.target as HTMLInputElement).files;
-    let file:any;
-    if(event!=null){
-       file = event[0];
+    let file: any;
+    if (event != null) {
+      file = event[0];
       this.productForm.patchValue({
         image: file
       });
     }
 
     let img = this.productForm.get('image');
-    if(img!=null){
+    if (img != null) {
       img.updateValueAndValidity()
     }
     const reader = new FileReader();
@@ -53,24 +53,25 @@ export class AddProductComponent implements OnInit {
     }
     reader.readAsDataURL(file)
   }
-  addMore(input1:string,input2:string){
-    console.log(input1,input2);
+
+  addMore(input1: string, input2: string) {
+    console.log(input1, input2);
     let arr = new Array(input2);
-    
-    Object.assign(this.obj,{[input1]:input2})
+
+    Object.assign(this.obj, { [input1]: input2 })
     console.log(this.obj)
     this.productForm.patchValue({
       variation: this.obj
     });
     let variant = this.productForm.get('variation');
     console.log(variant?.value)
-    if(variant!=null){
+    if (variant != null) {
       variant.updateValueAndValidity()
     }
-    this.addVariant=false;
+    this.addVariant = false;
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.productForm.value);
     this.dialogRef.close();
   }
