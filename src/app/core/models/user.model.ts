@@ -17,5 +17,5 @@ export interface User{
     },
     phone: string
     carts : number[]
-    orders : Order[]
+    orders : string[]
 }

@@ -15,29 +15,19 @@ import { ProductsService } from '../../services/products.service';
 export class OrdersComponent implements OnInit, OnDestroy{
   public user: User|any;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
-<<<<<<< HEAD
-  public orderStatus = "Delivered";
-  totalBill=0;
-  order:Order|any;
-  subscriptionName!: Subscription;
-  constructor(private service:ProductsService,private route:ActivatedRoute,private log:LogService,private orderService:OrderService) {   
-=======
   public totalBill=0;
   public order:Order|any;
   public orderStatusIndex :number = -1
   public orderId!:any
-  // public subcriptions:Subscription = new Subscription()
   public subOff$ = new Subject()
->>>>>>> mh-sun
   
   constructor(
     private route:ActivatedRoute,
     private log:LogService,
     private orderService:OrderService
   ) {}
+  
   ngOnDestroy(): void {
-    // this.subcriptions.unsubscribe()
-
     this.subOff$.next(1)
     this.subOff$.complete()
   }
@@ -48,7 +38,7 @@ export class OrdersComponent implements OnInit, OnDestroy{
     const routeParams = this.route.snapshot.paramMap;
     this.orderId = routeParams.get('id');
 
-    const orderSub = this.orderService.currentOrder
+    this.orderService.currentOrder
     .pipe(takeUntil(this.subOff$))
     .subscribe({
       next:order=>{
@@ -58,29 +48,23 @@ export class OrdersComponent implements OnInit, OnDestroy{
         this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
       }
     })
-    // this.subcriptions.add(orderSub)
 
-    const logSub = this.log.loggedUser
+    this.log.loggedUser
     .pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
         this.user = u;
-        console.log(this.order)
-        if(this.order===null){
-          orders = u?.orders;
-          if(orders!=null){
-            for(let order of orders){
-              if(order.id===this.orderId){
-                this.order = order;
-                this.orderStatusIndex = this.counts.indexOf(order.status)
-                this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
-              }
-            }
-          }
-        }
+        if(this.order===null) this.setOrder()
       }
     })
-    // this.subcriptions.add(logSub)
+  }
+  setOrder() {
+    this.orderService.getOneProduct(this.orderId).subscribe(order=>{
+      console.log(order)
+      this.order = order
+      this.orderStatusIndex = this.counts.indexOf(order.status)
+      this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
+    })
   }
   
 }

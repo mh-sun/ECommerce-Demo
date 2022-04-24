@@ -6,6 +6,7 @@ import { Order } from '../core/models/order.model';
 import { User } from '../core/models/user.model';
 import { CartApiService } from '../core/services/cart-api.service';
 import { LogService } from '../core/services/log.service';
+import { OrderService } from '../core/services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,16 +20,15 @@ export class CartComponent implements OnDestroy{
   public user: User|null = null;
   public deliveryCharge:number = 100
   public address:string = ''
-  // public subcriptions:Subscription = new Subscription();
   public subOff$ = new Subject()
   
   constructor(
     private cartService : CartApiService,
     private router:Router,
-    private logger:LogService
+    private logger:LogService,
+    private orderService:OrderService
   ) {
-    const logSub = this.logger.loggedUser
-    .pipe(takeUntil(this.subOff$))
+    this.logger.loggedUser.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
         this.user = u
@@ -40,10 +40,8 @@ export class CartComponent implements OnDestroy{
         console.log("COMplete")
       }
     })
-    // this.subcriptions.add(logSub)
 
-    const cartSub = this.cartService.cartSubject
-    .pipe(takeUntil(this.subOff$))
+    this.cartService.cartSubject.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:(res)=>{
         console.log(res)
@@ -57,12 +55,9 @@ export class CartComponent implements OnDestroy{
         console.log("COMplete")
       }
     })
-    // this.subcriptions.add(cartSub)
   }
 
   ngOnDestroy(): void {
-    // this.subcriptions.unsubscribe()
-
     this.subOff$.next(1)
     this.subOff$.complete()
   }
@@ -95,6 +90,18 @@ export class CartComponent implements OnDestroy{
   }
 
   makePayment(){
+    let order:Order = this.createOrder()
+
+    this.user?.orders.push(order.id)
+    this.logger.loggedUser.next(this.user)
+
+    this.orderService.postOrder(order)
+    
+    this.cartService.clearCart()
+    this.router.navigate(['cart/payment'])
+  }
+
+  createOrder(): Order {
     let products = this.getProductDetailsForOrder()
     let order:Order = {
       id:Math.floor(Math.random()*1000).toString(),
@@ -108,11 +115,7 @@ export class CartComponent implements OnDestroy{
       status:"Payment Pending",
       products:products
     }
-    console.log(order)
-    this.user?.orders.push(order)
-    this.logger.loggedUser.next(this.user)
-    this.cartService.clearCart()
-    this.router.navigate(['cart/payment'])
+    return order
   }
 
   getProductDetailsForOrder() {
