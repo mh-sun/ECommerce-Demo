@@ -8,14 +8,14 @@ import { AddProductComponent } from '../add-product/add-product.component';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit,OnDestroy {
+export class SidenavComponent implements OnInit, OnDestroy {
 
   animal!: string;
   name!: string;
   notifier = new Subject()
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(AddProductComponent, {});

@@ -5,7 +5,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { Product } from 'src/app/core/models/product.model';
 import { Variation } from 'src/app/core/models/variation.model';
 import { ProductsService } from 'src/app/core/services/products.service';
-import { PriceValidatorDirective } from '../../shared/price-validator.directive';
 
 @Component({
   selector: 'app-product-edit',

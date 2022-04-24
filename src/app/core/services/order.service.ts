@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map} from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+  
   public userSubscription: any
   private order!: Order | null
   public currentOrder = new BehaviorSubject<Order | null>(null)
@@ -27,18 +28,22 @@ export class OrderService {
     return this.http.get<Order[]>(this.url);
   }
 
-  updatePost(postData: Object, id: number) {
+  updatePost(postData: Object, id: string) {
     const newUrl = this.url + '/' + id;
     this.http.put(newUrl, postData).subscribe(data => {
       console.log(data);
     });
   }
-  
-  getOneProduct(id: number) {
+
+  getOneProduct(id: string) {
     const newUrl = this.url + '/' + id;
     return this.http.get<any>(newUrl).pipe(map((res: any) => {
       return res;
     }))
+  }
+
+  deleteOrder(id: string) {
+    return this.http.delete(this.url + '/' + id);
   }
 
 }

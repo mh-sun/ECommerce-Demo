@@ -8,19 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
-// import { PricingPipe } from '../pipes/pricing.pipe';
-import { MycurrencyPipe } from '../pipes/MyCurrencyPipe';
 import { AdminModule } from '../admin.module';
-// import { HomeComponent } from '../home/home.component';
-
 
 @NgModule({
   declarations: [
     ProductEditComponent,
     ProductListComponent,
     ProductViewComponent,
-    // PricingPipe,
-    MycurrencyPipe
   ],
   imports: [
     CommonModule,

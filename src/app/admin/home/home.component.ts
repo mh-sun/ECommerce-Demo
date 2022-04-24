@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   totalUser = 0;
   totalOrder = 0;
   notifier = new Subject();
-  
-  constructor(private route: Router, private productService: ProductsService, private userService: LogService, private orderService: OrderService) {}
+
+  constructor(private route: Router, private productService: ProductsService, private userService: LogService, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.title = 'Dashboard';

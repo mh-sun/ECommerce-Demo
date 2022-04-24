@@ -52,4 +52,8 @@ export class OrderViewComponent implements OnInit {
     }
   }
 
+  removeItem(i: number) {
+
+  }
+
 }
