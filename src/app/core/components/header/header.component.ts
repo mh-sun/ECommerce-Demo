@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
       }
     })
   }
+
   setOrders(u:User|null) {
     if(u === null) {
       this.orders = []
@@ -64,4 +65,5 @@ export class HeaderComponent implements OnInit, OnDestroy{
   sendOrder(order:Order): void {
     this.orderService.sendOrder(order);
   }
+  
 }

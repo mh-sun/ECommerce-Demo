@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrdersComponent } from './core/components/orders/orders.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -21,13 +20,18 @@ const routes: Routes = [
     path:'cart',
     loadChildren:()=>import('./cart/cart.module').then(m=>m.CartModule)
   },
-  {
-    path:'orders/:id',
-    component:OrdersComponent, data: { kind: 'update' }
+  { 
+    path: 'order', 
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule) 
   },
   { 
     path: 'admin', 
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) 
+  },
+  { 
+    path: 'profile', 
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) 
+  },
   {
     path:'**',
     component:PageNotFoundComponent,

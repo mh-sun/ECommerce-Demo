@@ -1,16 +1,20 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { BehaviorSubject, Subject, Subscription, takeUntil } from 'rxjs';
-import { Order } from '../../models/order.model';
-import { User } from '../../models/user.model';
-import { LogService } from '../../services/log.service';
-import { OrderService } from '../../services/order.service';
-import { ProductsService } from '../../services/products.service';
+import { Order } from '../core/models/order.model';
+import { User } from '../core/models/user.model';
+import { LogService } from '../core/services/log.service';
+import { OrderService } from '../core/services/order.service';
+// import { Order } from '../../models/order.model';
+// import { User } from '../../models/user.model';
+// import { LogService } from '../../services/log.service';
+// import { OrderService } from '../../services/order.service';
+// import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.css']
 })
 export class OrdersComponent implements OnInit, OnDestroy{
   public user: User|any;

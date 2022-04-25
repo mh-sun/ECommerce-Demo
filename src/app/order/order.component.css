@@ -1,0 +1,120 @@
+.title{
+    padding-top: 2%;
+    
+    }
+    h1{
+        font-weight: bolder;
+    }
+    .main{
+        background-color: gainsboro;
+    }
+    .scalling{
+        font-size:1em;
+        padding-bottom: 4%;
+        min-width:320px;
+        margin: "0px auto";
+        text-align: center;
+    }
+    .row{
+        margin-bottom: 2%;
+    }
+    .font{
+      
+        font-size:1.2em;
+    }
+    mat-card-title{
+        margin-bottom: 7%;
+    }
+    .full-width {
+        /* padding-top: 3%; */
+        padding-bottom: 3%;
+    }
+    .circles{
+        height: 0.968em;
+        width: 0.968em;
+        border: 0.188em solid green;
+        background-color:green;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      
+      .circle-desc-active{
+      font-weight: bold;
+      }
+      .unreached{
+        color: grey;
+        background-color: white;
+        border-color: grey;
+      }
+      .bar{
+        width: 16%;
+        height: 0.163em;
+        margin-bottom:0.469em;
+        border: 0.061em solid green;
+        color:green;
+        background-color:green;
+        display: inline-block;
+        text-align:center;
+        margin:"0 auto";
+      }
+      
+      /* .container{
+        min-width:320px;
+        margin: "0px auto";
+        text-align: center;
+      }
+       */
+       .homeBtn{
+        min-width: 26px;
+        padding: 0;
+       }
+      .circle-desc{
+       position: absolute;
+       top:2.000em;
+       font-size: 1.125em;
+       width: auto;
+       max-width:9.375em;
+       margin-left:-0.750em;
+      }
+      
+    @media only screen and (max-width: 320px){
+        .scalling {
+          font-size:20%
+       }
+     } 
+     
+     /*extra small devices*/
+     @media only screen and (max-width: 600px){
+        .scalling {
+          font-size:40%
+       }
+     } 
+     
+     /* Small devices (portrait tablets and large phones, 600px and up) */
+     @media only screen and (min-width: 600px) {
+        .scalling {
+          font-size:60%
+       }
+     } 
+     
+     /* Medium devices (landscape tablets, 768px and up) */
+     @media only screen and (min-width: 768px) {
+        .scalling{
+          font-size:80%
+       }
+     } 
+     
+     /* Large devices (laptops/desktops, 992px and up) */
+     @media only screen and (min-width: 992px) {
+        .scalling {
+          font-size:100%
+       }
+     } 
+     
+     /* Extra large devices (large laptops and desktops, 1200px and up) */
+     @media only screen and (min-width: 1200px) {
+        .scalling {
+          font-size:120%
+       }
+     }
+     

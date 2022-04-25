@@ -13,14 +13,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
 import { FooterComponent} from'./core/components/footer/footer.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
-import { OrdersComponent } from './core/components/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    OrdersComponent
   ],
   imports: [
     BrowserModule,

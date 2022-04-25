@@ -14,7 +14,6 @@ import { CartComponent } from './cart.component'
   imports: [
     CommonModule,
     CartRoutingModule,
-    CartRoutingModule,
     FormsModule,
   ],
   

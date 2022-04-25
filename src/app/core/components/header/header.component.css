@@ -7,11 +7,7 @@ div{
     flex-direction: row;
     column-gap: 10px;
 }
-.auth{
-    font-size: large;
-    color: white;
-    text-decoration: none;
-}
+
 #or{
     color: rgba(255, 255, 255, .75);
 }
@@ -54,3 +50,30 @@ div{
     color: yellow;
     font-size: 50px;
 }
+
+/* .dropdown-active{
+
+}
+
+.drop-down{
+    position: relative;
+} */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+    right: 0;
+  }
+  
