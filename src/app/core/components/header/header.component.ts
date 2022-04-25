@@ -56,14 +56,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   setElemActive(elem:HTMLElement){
-    console.log(elem)
-    // elem.classList.contains('dropdown-active')?
-    //   elem.classList.remove('dropdown-active'):
       elem.classList.add('dropdown-active')
   }
 
   setElemInactive(elem:HTMLElement){
-    console.log(elem)
     elem.classList.remove('dropdown-active')
 
   }
