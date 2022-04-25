@@ -13,12 +13,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddIDInterceptor } from './core/interceptors/add-id.interceptor';
 import { FooterComponent} from'./core/components/footer/footer.component';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { ClickOutsideDirective } from './click-outside.directive';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

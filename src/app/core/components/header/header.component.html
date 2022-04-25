@@ -36,8 +36,8 @@
             </ul>
 
             <ul class="navbar-nav">
-                <li class="nav-item drop-down">
-                    <a class="nav-link" (click)="setElemActive(track)">
+                <li class="nav-item drop-down" (clickOutside)="setElemInactive(track)">
+                    <a class="nav-link" (click)="setElemActive(track)" >
                         <mat-icon class="text-white">search</mat-icon>
                     </a>
                     <div class="drop-down-content row-gap" #track>
@@ -48,7 +48,7 @@
                         <button mat-button class="w-full bg-orange-300" (click)="trackOrder(order_id.value)">Track</button>
                     </div>
                 </li>
-                <li class="nav-link drop-down">
+                <li class="nav-link drop-down" (clickOutside)="setElemInactive(log)">
                     <mat-icon class="text-white" (click)="setElemActive(log)">perm_identity</mat-icon>
                     <div class="drop-down-content text-black" #log>
                         <div *ngIf="!logStatus;then loggedIn else loggedOut"></div>
