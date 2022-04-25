@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
@@ -15,13 +16,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   public logStatus!:boolean
   public cartItemNumber:number|undefined = 0
-  public orders: Order[] = [] ;
   public subOff$ = new Subject()
 
   constructor(
     private cartService:CartApiService,
     private logger:LogService,
-    private orderService:OrderService){
+    private orderService:OrderService,
+    private router:Router){
     
     this.logger.loggedUser
     .pipe(takeUntil(this.subOff$))
@@ -29,23 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
       next:u=>{
         this.cartItemNumber = u === null? 0:u?.carts.length
         this.logStatus = u === null? false:true
-        this.setOrders(u)
       }
-    })
-  }
-
-  setOrders(u:User|null) {
-    if(u === null) {
-      this.orders = []
-      return
-    }
-
-    this.orderService.getOrders().subscribe(allOrders=>{
-      let selectedOrders = allOrders.filter(order=>{
-        return u.orders.indexOf(order.id) !== -1
-      })
-      console.log("Orders of users", selectedOrders)
-      this.orders = selectedOrders
     })
   }
 
@@ -66,4 +51,15 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.orderService.sendOrder(order);
   }
   
+  trackOrder(id:string){
+    this.router.navigate(['/order',id])
+  }
+
+  setElemActive(elem:HTMLElement){
+    console.log(typeof elem)
+    console.log(elem)
+    elem.classList.contains('dropdown-active')?
+      elem.classList.remove('dropdown-active'):
+      elem.classList.add('dropdown-active')
+  }
 }

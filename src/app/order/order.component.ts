@@ -5,11 +5,6 @@ import { Order } from '../core/models/order.model';
 import { User } from '../core/models/user.model';
 import { LogService } from '../core/services/log.service';
 import { OrderService } from '../core/services/order.service';
-// import { Order } from '../../models/order.model';
-// import { User } from '../../models/user.model';
-// import { LogService } from '../../services/log.service';
-// import { OrderService } from '../../services/order.service';
-// import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-orders',
@@ -37,20 +32,13 @@ export class OrdersComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    let orders:Order[]|undefined;
-
     const routeParams = this.route.snapshot.paramMap;
     this.orderId = routeParams.get('id');
-
-    this.orderService.currentOrder
+    this.route.params
     .pipe(takeUntil(this.subOff$))
-    .subscribe({
-      next:order=>{
-        this.order = order;
-        if(order===null) return
-        this.orderStatusIndex = this.counts.indexOf(order.status)
-        this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
-      }
+    .subscribe(res=>{
+      this.orderId = res['id']
+      this.setOrder()
     })
 
     this.log.loggedUser
@@ -58,16 +46,19 @@ export class OrdersComponent implements OnInit, OnDestroy{
     .subscribe({
       next:u=>{
         this.user = u;
-        if(this.order===null) this.setOrder()
+        console.log(this.user)
       }
     })
   }
+
   setOrder() {
-    this.orderService.getOneProduct(this.orderId).subscribe(order=>{
-      console.log(order)
-      this.order = order
-      this.orderStatusIndex = this.counts.indexOf(order.status)
-      this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
+    this.orderService.getOneProduct(this.orderId)
+    .pipe(takeUntil(this.subOff$))
+    .subscribe(o=>{
+      this.order = o
+      if(o===null) return
+        this.orderStatusIndex = this.counts.indexOf(o.status)
+        this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
     })
   }
   

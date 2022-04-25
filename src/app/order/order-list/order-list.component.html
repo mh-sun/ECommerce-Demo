@@ -1,1 +1,23 @@
-<p>order-list works!</p>
+<div class="container">
+    <div class="row">
+        <table class="w-full">
+            <thead>
+                <td>Order Id</td>
+                <td>Status</td>
+                <td>Address</td>
+                <td>Date</td>
+                <td>Total</td>
+            </thead>
+            <ng-container *ngFor="let order of orders">
+                <tbody>
+                    <td>{{order.id}}</td>
+                    <td>{{order.status}}</td>
+                    <td>{{order.address}}</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.payment.subtotal+order.payment.shipping}}</td>
+                </tbody>
+            </ng-container>
+        </table>
+    </div>
+    
+</div>

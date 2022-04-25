@@ -53,7 +53,13 @@ export class OrderService {
     })
   }
 
-  getUserOrders(ids = []){
-    
+  getUserOrders(ids:string[] = []){
+    return this.getOrders().pipe(
+      map(orders=>{
+        return orders.filter(order=>{
+          return ids.indexOf(order.id) !== -1
+        })
+      })
+    )
   }
 }
