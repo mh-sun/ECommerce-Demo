@@ -181,6 +181,6 @@ export class ProductEditComponent implements OnInit {
       this.product[key] = this.productEditForm.get(key).value;
     }
     this.addMore()
-    this.service.updatePost(this.product, this.productIdFromRoute);
+    this.service.updateProduct(this.product, this.productIdFromRoute);
   }
 }

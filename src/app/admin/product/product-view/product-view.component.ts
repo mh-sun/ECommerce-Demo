@@ -34,7 +34,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     console.log(state)
     this.product.isActive = state;
     console.log(state, this.product, this.productIdFromRoute);
-    this.service.updatePost(this.product, this.productIdFromRoute);
+    this.service.updateProduct(this.product, this.productIdFromRoute);
   }
 
   ngOnDestroy(): void {

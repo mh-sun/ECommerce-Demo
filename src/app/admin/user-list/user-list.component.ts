@@ -8,7 +8,7 @@ import { LogService } from 'src/app/core/services/log.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit,OnDestroy{
+export class UserListComponent implements OnInit, OnDestroy {
 
   title: string | any;
   headerTitle: string | any;
@@ -26,6 +26,7 @@ export class UserListComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     const userSub = this.service.getUsers().pipe(takeUntil(this.notifier)).subscribe({
       next: res => {
+        console.log(res)
         this.dataSource = res;
       },
       error: (err) => {
@@ -35,6 +36,12 @@ export class UserListComponent implements OnInit,OnDestroy{
         console.log("Complete")
       }
     })
+  }
+
+  removeUser(id: number) {
+    this.service.deleteUser(id).subscribe(response => {
+      this.dataSource = this.dataSource.filter(((item: { id: number; }) => item.id !== id))
+    });;
   }
 
   ngOnDestroy() {

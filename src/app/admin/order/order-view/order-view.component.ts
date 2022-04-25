@@ -30,7 +30,7 @@ export class OrderViewComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.productIdFromRoute = Number(routeParams.get('id'));
 
-    this.service.getOneProduct(this.productIdFromRoute).pipe(takeUntil(this.notifier)).subscribe(res => {
+    this.service.getOneOrder(this.productIdFromRoute).pipe(takeUntil(this.notifier)).subscribe(res => {
       this.products = res.products;
       this.productStatus = res.status;
       this.data = res;
@@ -48,7 +48,7 @@ export class OrderViewComponent implements OnInit {
     if (event.isUserInput) {
       this.productStatus = status
       this.data.status = status;
-      this.service.updatePost(this.data, this.productIdFromRoute);
+      this.service.updateOrder(this.data, this.productIdFromRoute);
     }
   }
 

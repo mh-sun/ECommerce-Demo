@@ -28,14 +28,14 @@ export class OrderService {
     return this.http.get<Order[]>(this.url);
   }
 
-  updatePost(postData: Object, id: string) {
+  updateOrder(postData: Object, id: string) {
     const newUrl = this.url + '/' + id;
     this.http.put(newUrl, postData).subscribe(data => {
       console.log(data);
     });
   }
 
-  getOneProduct(id: string) {
+  getOneOrder(id: string) {
     const newUrl = this.url + '/' + id;
     return this.http.get<any>(newUrl).pipe(map((res: any) => {
       return res;

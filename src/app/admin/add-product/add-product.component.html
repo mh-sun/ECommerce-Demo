@@ -42,14 +42,59 @@
             <div class="full-width">
                 <mat-label>Variant</mat-label>
                 <div>
-                    <button mat-button (click)="addVariant=!addVariant"><mat-icon >add</mat-icon>Add Variant</button>
-                    <div *ngIf="addVariant">
+                    <!-- <button mat-button (click)="addVariants()"><mat-icon >add</mat-icon>Add Variant</button> -->
+                    <!-- <div *ngIf="variantType"> -->
+                        <div class="full-width" *ngFor="let group of variants.controls; let i = index;"
+                            formArrayName="variant">
+                            <div class="form-group jumbotron" [formGroupName]='i'>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Key</mat-label>
+                                    <input matInput formControlName="key">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Value</mat-label>
+                                    <input matInput formControlName="value">
+                                </mat-form-field>
+                                <!-- </div> -->
+                                <!-- </div> -->
+                                <!-- <div class="full-width">
+                                    <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add
+                                        More Type</button>
+                                </div> -->
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Quantity</mat-label>
+                                    <input matInput formControlName="quantity">
+                                </mat-form-field>
+                                <!-- <div class="rightAlign">
+             <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
+            </div> -->
+                            </div>
+                        </div>
+                    <div class="full-width">
+                        <button mat-button (click)="addVariants()"><i class="fas fa-plus"></i>Add More
+                            Variant</button>
+                    </div>
+                    <!-- <div class="full-width" *ngFor="let group of types.controls; let j = index;"
+                        formArrayName="types">
+                        <div class="form-group jumbotron" [formGroupName]='j'>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Key</mat-label>
+                                <input matInput formControlName="moreKey">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Value</mat-label>
+                                <input matInput formControlName="moreValue">
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                    
+                    <!-- <div *ngIf="addVariant">
                         <label for="key">Key</label>
                         <input type="text" id="key" #box1>
                         <label for="value">Value</label>
                     <input type="text" id="value" #box2 >
                     <button mat-button (click)="addMore(box1.value,box2.value)" ><mat-icon>done</mat-icon></button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     

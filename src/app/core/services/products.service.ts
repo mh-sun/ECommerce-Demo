@@ -13,34 +13,6 @@ export class ProductsService {
 
   getProduct(){ 
     return this.http.get<Product[]>(this.url).pipe(map((res:any)=>{
-      // res.forEach((a:any)=>{
-        // Object.assign(a,{
-        //   quantity:1,
-        //   total:a.price
-        // });        
-        // if(a.variation != {} && a.variation != undefined) return res
-
-        // if(a.category=='men\'s clothing' || a.category=='women\'s clothing'){
-        //   Object.assign(a,{
-        //     variation:{
-        //       color:['red', 'black', 'yellow'],
-        //       size:['S', 'M', 'L', 'XL'],
-        //     }
-        //   })
-        // }
-        // else if(a.category=='jewelery'){
-        //   Object.assign(a,{
-        //     variation:{
-        //       material:['gold', 'silver']
-        //     }
-        //   })
-        // }
-        // else {
-        //   Object.assign(a,{
-        //     variation:{}
-        //   })
-        // }
-      // })
       return res;
     }))
   }
@@ -51,14 +23,21 @@ export class ProductsService {
     }))
   }
   
-  updatePost(postData: Object,id:number) {
+  updateProduct(postData: Object,id:number) {
     const newUrl = this.url+'/'+id;
     this.http.put( newUrl, postData).subscribe(data => {
       console.log(data);
     });
   }
+
+  addProduct(product:Product){
+    console.log(product)
+    return this.http.post(this.url, product).subscribe(res=>{
+      console.log('res',res)
+    });
+  }
   
-  public deletePost(id:number) {
+  deleteProduct(id:number) {
     const newUrl = this.url+'/'+id;
     this.http.delete(newUrl).subscribe(data => {
       console.log(data);

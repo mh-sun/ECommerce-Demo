@@ -32,11 +32,11 @@ export class ProductListComponent implements OnInit {
   activate(state: boolean, i: number) {
     this.dataSource[i].isActive = !state;
     let index = i + 1;
-    this.service.updatePost(this.dataSource[i], index);
+    this.service.updateProduct(this.dataSource[i], index);
   }
 
   delete(id: number) {
-    this.service.deletePost(id);
+    this.service.deleteProduct(id);
     this.ngOnInit();
   }
 
