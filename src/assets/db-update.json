@@ -2,6 +2,10 @@
   "users": [
     {
       "address": {
+        "geolocation": {
+          "lat": "-37.3159",
+          "long": "81.1496"
+        },
         "city": "kilcoole",
         "street": "new road",
         "number": 7682,
@@ -59,12 +63,6 @@
         }
       ],
       "orders": [
-<<<<<<< HEAD
-        "259",
-        "83",
-        "801",
-        "863"
-=======
         {
           "id": 1,
           "products": [
@@ -108,7 +106,6 @@
           "address": "Barmiz Market,Cox's Bazar",
           "date": "20.03.2022"
         }
->>>>>>> atkia
       ]
     },
     {
@@ -170,11 +167,7 @@
           "quantity": 4
         }
       ],
-<<<<<<< HEAD
-      "isActive": false
-=======
       "isActive": true
->>>>>>> atkia
     },
     {
       "id": 3,
@@ -580,51 +573,6 @@
           "quantity": 4
         }
       ]
-<<<<<<< HEAD
-=======
-    },
-    {
-      "id": 13,
-      "title": "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
-      "price": 599,
-      "description": "21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. No compatibility for VESA Mount Refresh Rate: 75Hz - Using HDMI port Zero-frame design | ultra-thin | 4ms response time | IPS panel Aspect ratio - 16: 9. Color Supported - 16. 7 million colors. Brightness - 250 nit Tilt angle -5 degree to 15 degree. Horizontal viewing angle-178 degree. Vertical viewing angle-178 degree 75 hertz",
-      "category": "electronics",
-      "image": "../../../assets/images/product-image/81QpkIctqPL._AC_SX679_.jpg",
-      "rating": {
-        "rate": 2.9,
-        "count": 250
-      },
-      "isActive": true,
-      "variation": [
-        {
-          "type": {
-            "company": "Acer"
-          },
-          "quantity": 4
-        }
-      ]
-    },
-    {
-      "isActive": true,
-      "id": 21,
-      "title": "beg",
-      "price": "1000",
-      "description": "women's beg",
-      "category": "Accessories",
-      "image": {},
-      "rating": {
-        "rate": 0,
-        "count": 0
-      },
-      "variation": [
-        {
-          "type": {
-            "color": "red"
-          },
-          "quantity": 2
-        }
-      ]
->>>>>>> atkia
     }
   ],
   "carts": [
@@ -1419,8 +1367,6 @@
           "quantity": 1
         }
       ]
-    }
-  ]
     }
   ],
   "assets": []

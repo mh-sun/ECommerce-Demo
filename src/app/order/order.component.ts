@@ -52,7 +52,7 @@ export class OrdersComponent implements OnInit, OnDestroy{
   }
 
   setOrder() {
-    this.orderService.getOneProduct(this.orderId)
+    this.orderService.getOneOrder(this.orderId)
     .pipe(takeUntil(this.subOff$))
     .subscribe(o=>{
       this.order = o
