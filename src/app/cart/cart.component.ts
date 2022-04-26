@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Cart } from '../core/models/cart-product.model';
@@ -19,7 +19,14 @@ export class CartComponent implements OnDestroy{
   public grandTotal : number = 0;
   public user: User|null = null;
   public deliveryCharge:number = 100
+
   public address:string = ''
+  public addrToggle:boolean = false
+  public phone:string = ''
+  public phnToggle:boolean = false
+  public email:string = ''
+  public emlToggle:boolean = false
+  
   public subOff$ = new Subject()
   
   constructor(
@@ -32,12 +39,17 @@ export class CartComponent implements OnDestroy{
     .subscribe({
       next:u=>{
         this.user = u
+        if(this.user){
+          this.address = u?.address.number+', '+u?.address.street+', '+u?.address.city
+          this.phone = u?.phone+''
+          this.email = u?.email+''
+        }
       },
       error:(err)=>{
         console.log(err)
       },
       complete:()=>{
-        console.log("COMplete")
+        console.log("Complete")
       }
     })
 
@@ -52,7 +64,7 @@ export class CartComponent implements OnDestroy{
         console.log(err)
       },
       complete:()=>{
-        console.log("COMplete")
+        console.log("Complete")
       }
     })
   }
@@ -111,6 +123,8 @@ export class CartComponent implements OnDestroy{
         shipping:this.deliveryCharge
       },
       address:this.address,
+      phone:this.phone,
+      email:this.email,
       date:(new Date()).toDateString(),
       status:"Payment Pending",
       products:products
@@ -132,4 +146,20 @@ export class CartComponent implements OnDestroy{
     })
     return products
   }
+
+  addrChange(){    
+    this.addrToggle = !this.addrToggle
+    return this.addrToggle
+  }
+
+  emailChange(){
+    this.emlToggle = !this.emlToggle
+    return this.emlToggle
+  }
+
+  phnChange(){
+    this.phnToggle = !this.phnToggle
+    return this.phnToggle
+  }
+
 }

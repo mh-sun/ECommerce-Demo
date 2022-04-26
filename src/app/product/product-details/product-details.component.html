@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container p-4">
     <div class="row">
         <div class="card py-3" *ngIf="data">
             <div class="table">
@@ -26,32 +26,28 @@
                                 <del>{{(data.price+data.price*.3).toFixed(2)}}</del> <strong> -30% </strong>
                             </h5>
                             <hr>
-                            <ng-container *ngFor="let item of var_keys; let i = index">
-                                <div class="row">
-                                    <h4 class="h4 text-secondary" class="col-md-4">{{item}}</h4>
-                                    <mat-radio-group class="col-md-8" [(ngModel)]="variation[item]">
-                                        <ng-container *ngFor="let value of var_values[i];let i = index">
-                                            <mat-radio-button [checked]="i === 0" [value]="value" >
-                                                {{value}}
-                                            </mat-radio-button>
-                                        </ng-container>
-                                    </mat-radio-group>
-                                    <!-- <div class="col-md-8">
-                                        <ng-container *ngFor="let value of var_values[i];let i = index">
-                                            <input type="radio" [id]="value" [name]="item" [value]="value" [(ngModel)]="variation[item]">
-                                            <label>{{value}}</label>
-                                        </ng-container>
-                                    </div> -->
-                                </div>
-                            </ng-container>
+                            <div class="mt-4">
+                                <ng-container *ngFor="let item of var_keys; let i = index">
+                                    <div class="row">
+                                        <h4 class="h4 text-secondary" class="col-md-4">{{item}}</h4>
+                                        <mat-radio-group class="col-md-8" [(ngModel)]="variation[item]">
+                                            <ng-container *ngFor="let value of var_values[i];let i = index">
+                                                <mat-radio-button [checked]="i === 0" [value]="value" >
+                                                    {{value}}
+                                                </mat-radio-button>
+                                            </ng-container>
+                                        </mat-radio-group>
+                                    </div>
+                                </ng-container>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4 class="h4 text-secondary">Quantity</h4>
                                 </div>
                                 <div class="col-md-8 quant">
-                                    <button class="btn-ico" (click)="increaseQuantity()"><i class="fas fa-plus"></i></button>
+                                    <button class="btn-ico" (click)="increaseQuantity()"><i class="fas fa-plus rounded-full w-6 h-4"></i></button>
                                     <input type="text" [value]="quantity" [(ngModel)]="quantity">
-                                    <button class="btn-ico" (click)="decreaseQuantity()"><i class="fas fa-minus"></i></button>
+                                    <button class="btn-ico" (click)="decreaseQuantity()"><i class="fas fa-minus rounded-full w-6 h-4"></i></button>
                                 </div>
                             </div>
                         </div>

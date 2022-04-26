@@ -1,14 +1,11 @@
 .checkout{
     position: fixed;
     right: 0;
-    bottom: 15%;
-    margin-top: 10px;
-    margin-right: 10px;
+    top: 100px;
     width: 400px;
     z-index: 10;
     border-radius: 5px;
     display: flex;
-    align-self: center;
     transition-duration: 500ms;
 }
 .checkoutInActive{
@@ -16,6 +13,10 @@
 }
 .row{
     width: 100%;
+    margin: 4px 0px;
+}
+.w-125{
+    width: 12.5%;
 }
 .text-right{
     text-align: right;
