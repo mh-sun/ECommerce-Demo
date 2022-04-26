@@ -1,1 +1,32 @@
-<p>profile works!</p>
+<div class="container bg-white rounded-md my-4 p-4 grid grid-cols-1 gap-4">
+    <p class="text-xl text-center">My Profile</p>
+    <hr>
+    <div class="grid grid-cols-3 gap-4">
+        <div>
+            <p class="text-lg text-left">Full name</p>
+            <p>{{user?.name?.firstname+" "+user?.name?.lastname}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Email</p>
+            <p>{{user?.email}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Phone</p>
+            <p>{{user?.phone}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Username</p>
+            <p>{{user?.username}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Address</p>
+            <p>{{user?.address?.number+", "+user?.address?.street}}</p>
+            <p>{{user?.address?.city}}</p>
+        </div>
+    </div>
+    <p class="text-xl text-center">Recent orders</p>
+    <hr>
+    <div class="grid grid-cols-1 gap-4">
+            
+    </div>
+</div>

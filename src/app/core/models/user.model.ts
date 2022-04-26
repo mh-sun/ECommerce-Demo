@@ -1,5 +1,3 @@
-import { Order } from "./order.model"
-
 export interface User{
     address: {
         city: string
