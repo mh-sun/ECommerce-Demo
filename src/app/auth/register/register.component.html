@@ -1,83 +1,76 @@
 <mat-card class="content">
-    <form class="my-form content content-center-col" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <mat-label class="title">
-         <h1>Registration Page</h1>
+  <mat-toolbar color="primary" *ngIf="show">
+    <mat-toolbar-row>
+      <span>Registration Complete :)</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <form class="my-form content content-center-col" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <mat-label class="title">
+      <h1>Registration Page</h1>
+    </mat-label>
+
+    <div formGroupName="name" class="full-width">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstname" placeholder="First name">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastname" placeholder="Last Name" name="lname">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email" name="email">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="Password" name="password">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Phone No</mat-label>
+      <input matInput formControlName="phone" placeholder="phone" name="phone">
+    </mat-form-field>
+
+    <div formGroupName="address" class="full-width">
+      <mat-label>
+        <h2>Address</h2>
       </mat-label>
-
-      <div formGroupName="name" class="full-width">
-        <mat-form-field class="full-width" appearance="fill">
-                <mat-label>First Name</mat-label>
-                <input  matInput formControlName="firstName"placeholder="First name">
-              </mat-form-field>
-        
-              <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Last Name</mat-label>
-                <input  matInput formControlName="lastName"  placeholder="Last Name" name="lname"  >
-               </mat-form-field>
-      </div>
-      
       <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Username</mat-label>
-        <input  matInput  placeholder="Username" formControlName="username">
-      </mat-form-field>
-      
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Email</mat-label>
-        <input  matInput formControlName="email"  placeholder="Email" name="email" type="email">
+        <mat-label>City: </mat-label>
+        <input matInput formControlName="city">
       </mat-form-field>
 
-      <mat-form-field class="full-width"appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password"  placeholder="Password"  name="password" type="password">
-      </mat-form-field >
-      
-      <div formGroupName="address" class="full-width">
-        <mat-label>
-                <h2>Address</h2>
-        </mat-label>
-        <mat-form-field class="full-width"appearance="fill">
-                <mat-label>City: </mat-label>
-                <input matInput formControlName="city">
-        </mat-form-field>
-
-        <mat-form-field class="full-width"appearance="fill">
-                <mat-label>Street: </mat-label>
-                <input matInput formControlName="street">
-        </mat-form-field>
-
-        <mat-form-field class="full-width"appearance="fill">
-                <mat-label>Holding No:</mat-label>
-                <input matInput formControlName="number">
-        </mat-form-field>
-
-        <mat-form-field class="full-width"appearance="fill">
-                <mat-label>Zip Code:</mat-label>
-                <input matInput formControlName="zip">
-        </mat-form-field>
-      </div>
-      <!-- <mat-form-field class="full-width"appearance="fill">
-              <mat-label>Address</mat-label>
-              <input  matInput   placeholder="Address" name="address" formControlName="address" >
-      </mat-form-field> -->
-      
-      <!-- <section class="full-width example-section" >
-            <label class="example-margin">Gender: </label>
-            <mat-radio-group class ="example-radio-group" formControlName="gender" >
-              <mat-radio-button class="example-radio-button" value="male">Male</mat-radio-button>
-              <mat-radio-button class="example-radio-button" value="female">Female</mat-radio-button>
-              <mat-radio-button class="example-radio-button" value="other">Other</mat-radio-button>
-            </mat-radio-group>
-      </section>
-       
       <mat-form-field class="full-width" appearance="fill">
-         <mat-label>Date of Birth</mat-label>
-         <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" placeholder="Choose a date">
-         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
-      <mat-card-actions class="button">
-        <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid" >REGISTER</button>
-        <button mat-raised-button color="primary" type="button" (click)="profileForm.reset()" class="resetButton">RESET</button>
-      </mat-card-actions>
-    </form>
+        <mat-label>Street: </mat-label>
+        <input matInput formControlName="street">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Holding No:</mat-label>
+        <input matInput formControlName="number">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Zip Code:</mat-label>
+        <input matInput formControlName="zipcode">
+      </mat-form-field>
+    </div>
+  
+    <mat-card-actions class="button">
+      <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">REGISTER</button>
+      <button mat-raised-button color="primary" type="button" (click)="profileForm.reset()"
+        class="resetButton">RESET</button>
+    </mat-card-actions>
+  </form>
 </mat-card>

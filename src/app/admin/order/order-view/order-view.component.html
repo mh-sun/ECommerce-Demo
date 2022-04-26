@@ -10,7 +10,7 @@
                             <th>Product Image</th>
                             <th>Variation</th>
                             <th>Quantity</th>
-
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,22 +36,20 @@
                             <td>
                                 {{item.quantity}}
                             </td>
+                            <td>
+                                <button mat-icon-button (click)="removeItem(i)">
+                                    <mat-icon>delete_forever</mat-icon>
+                                    Remove
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row">
                     <div class="col-md-2 ">
-                        <!-- <span class="{{productStatus}}">
-                        {{productStatus}}
-                       </span> -->
                         <h2><b>Current Status: </b> </h2>
                         <h4>{{productStatus}}</h4>
                     </div>
-                    <!-- <div class="col-md-2">
-                        <h4>{{productStatus}}</h4>
-                    </div> -->
-                    <!-- </div>
-                    <div class="row"> -->
                 </div>
                 <div class="row">
                     <h2><b>Change Status: </b></h2>
@@ -65,18 +63,6 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <!-- <div class="col-md-2 ">  
-                       <mat-form-field appearance="outline">
-                        <mat-label>Select Status</mat-label>
-                        <mat-select>
-                          <mat-option *ngFor="let status of statusQueue"(onSelectionChange)="changeStatus(status,$event)">
-                          {{ status }}
-                         </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div> -->
-                <!-- </div> -->
-
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 import { AddProductComponent } from '../add-product/add-product.component';
 
 @Component({
@@ -7,24 +8,26 @@ import { AddProductComponent } from '../add-product/add-product.component';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
-  
+export class SidenavComponent implements OnInit, OnDestroy {
+
   animal!: string;
   name!: string;
+  notifier = new Subject()
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
-  }
-  openDialog(): void {
-    let dialogRef = this.dialog.open(AddProductComponent, {
-      // width: '250px',
-      // data: { name: this.name, animal: this.animal }
-    });
+  ngOnInit(): void { }
 
-    dialogRef.afterClosed().subscribe(result => {
+  openDialog(): void {
+    let dialogRef = this.dialog.open(AddProductComponent, {});
+
+    const dialogSub = dialogRef.afterClosed().pipe(takeUntil(this.notifier)).subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
+  }
+
+  ngOnDestroy() {
+    this.notifier.next(1)
+    this.notifier.complete()
   }
 
 }

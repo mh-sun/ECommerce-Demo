@@ -1,4 +1,4 @@
-@import "../home/home.component.scss";
+// @import "../home/home.component.scss";
 
 .page__content-data {
     // top: 39%;
@@ -38,4 +38,8 @@ tr.mat-row:hover {
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;
+}
+
+.cancelBtn {
+    color: red;
 }

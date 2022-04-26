@@ -56,4 +56,8 @@ export class LogService {
     if(user === null) return
     localStorage.setItem('loggedUser', JSON.stringify(user))
   }
+  deleteUser(id:number) {
+    const newUrl = this.url+ 'users'+'/'+id;
+    return this.http.delete(newUrl);
+  }
 }

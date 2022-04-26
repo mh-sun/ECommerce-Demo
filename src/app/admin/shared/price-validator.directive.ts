@@ -1,13 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
-// export function forbiddenPriceValidator(price:number):ValidatorFn{
-//    if(price<=0){
-//      return 
-//    }
-//    return null;
-// }
-
 @Directive({
   selector: '[appPriceValidator]',
   providers: [{

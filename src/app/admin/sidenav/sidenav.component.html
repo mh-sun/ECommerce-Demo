@@ -1,19 +1,50 @@
 <mat-nav-list>
-    <div class="logo py-4 brand">
-        E<span class="dot">.</span>SHOP
-    </div>
-    <mat-divider></mat-divider>
-    <h2 matSubheader class="mt-2">APPLICATIONS</h2>
-  
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
-      <button mat-button> <mat-icon>dashboard</mat-icon> Dashboard</button>
-     
+  <div class="logo py-4 brand">
+    <a class="navbar-brand brand" [routerLink]="['/products']">
+      E<span class="dot">.</span>SHOP
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="product">
-      <button mat-button> <mat-icon>list</mat-icon> Product List</button>
-    </a>
+  </div>
+  <mat-divider></mat-divider>
+  <h2 matSubheader class="mt-2">APPLICATIONS</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
+    <button mat-button>
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </button>
+  </a>
+  <a mat-list-item>
+    <button mat-button (click)="openDialog()"><i class='fa fa-shopping-bag'></i> Add Product</button>
+  </a>
+  <div>
     <a mat-list-item>
-      <button mat-button (click)="openDialog()"><i class='fa fa-shopping-bag'></i> Add Product</button>
-    </a>  
-  </mat-nav-list>
-  
+      <button mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>store</mat-icon>Product
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </a>
+    <mat-menu #menu="matMenu">
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="product">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>ProductList</span>
+        </button>
+      </a>
+    </mat-menu>
+  </div>
+  <div>
+    <a mat-list-item>
+      <button mat-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+        <mat-icon> table_chart</mat-icon>Order
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </a>
+    <mat-menu #menu2="matMenu">
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="order">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>OrderList</span>
+        </button>
+      </a>
+    </mat-menu>
+  </div>
+</mat-nav-list>
