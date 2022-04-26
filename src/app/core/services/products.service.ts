@@ -36,6 +36,13 @@ export class ProductsService {
       console.log('res',res)
     });
   }
+
+  upload(formData: FormData) {
+    return this.http.post<any>('http://localhost:3000/assets', formData).subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error),
+      });
+  }
   
   deleteProduct(id:number) {
     const newUrl = this.url+'/'+id;

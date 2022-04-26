@@ -1,6 +1,8 @@
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { map } from 'rxjs';
 import { Product } from 'src/app/core/models/product.model';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
@@ -27,6 +29,14 @@ export class AddProductComponent implements OnInit {
     },
     variation: []
   };
+
+  
+  public selectedFile: File| any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
+
+
   imageLink: string | any;
   productForm = this.fb.group({
     title: ['', Validators.required],
@@ -39,7 +49,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SidenavComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,private service:ProductsService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,private service:ProductsService,private httpClient:HttpClient) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -66,6 +76,8 @@ export class AddProductComponent implements OnInit {
 
   imagePreview(e: any) {
     let event = (e.target as HTMLInputElement).files;
+    this.selectedFile = e.target.files[0];
+    
     let file: any;
     if (event != null) {
       file = event[0];
@@ -117,6 +129,38 @@ export class AddProductComponent implements OnInit {
     }
     this.variants.reset();
   }
+  async onUpload() {
+
+    const uploadData: any = new FormData();
+    // const uploadData = new FormData();
+    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+    // uploadData.append('myFile', this.productForm.get('image')?.value);
+    // var options = { content: uploadData };
+    console.log(uploadData.get('myFile'),this.productForm.get('image')?.value)
+    // this.httpClient.post('http://localhost:3000/assets', options).subscribe((res: any) => 
+    // {
+    //   console.log(res);
+    //   this.receivedImageData = res;
+    //   this.base64Data = this.receivedImageData.pic;
+    //   this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; 
+    // });
+    // this.httpClient
+    // .post('http://localhost:3000/assets', uploadData)
+    // .subscribe({
+    //   next: (response) => console.log(response),
+    //   error: (error) => console.log(error),
+    // });
+    // this.selectedFile.inProgress = true; 
+    // this.service.upload(uploadData)
+    // let response = await fetch(' http://localhost:3000/assets', {
+    //   method: 'POST',
+    //   body: uploadData
+    // });
+    // let result = await response.json();
+    // alert(result.message);
+    this.service.upload(uploadData)
+
+   }
 
   onSubmit() {
     console.log(this.productForm.value);

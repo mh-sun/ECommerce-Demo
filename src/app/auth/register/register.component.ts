@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LogService } from 'src/app/core/services/log.service';
 import { Router } from '@angular/router';
+import { CustomValidationService } from 'src/app/core/shared/custom-validation.service';
 
 @Component({
   selector: 'app-register',
@@ -14,16 +15,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
   
   profileForm = this.fb.group({
     removeValidator: [''],
-    username: [''],
+    username: ['',this.customValidator.userNameValidator.bind(this.customValidator)],
     name: this.fb.group({
-      firstname: [''],
-      lastname: [''],
+      firstname: ['',this.customValidator.nameValidator.bind(this.customValidator)],
+      lastname: ['',this.customValidator.nameValidator.bind(this.customValidator)],
     }),
     address: this.fb.group({
       city: [''],
       street: [''],
       number: [''],
-      zipcode: ['']
+      zipcode: ['',this.customValidator.numberValidator.bind(this.customValidator)]
     }),
     email: ['', Validators.required, Validators.email],
     password: ['', Validators.required],
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   show = false;
   registerSubcription: any;
 
-  constructor(private fb: FormBuilder, private http: LogService, private router: Router) { }
+  constructor(private fb: FormBuilder, private http: LogService, private router: Router,private customValidator:CustomValidationService) { }
 
   ngOnInit(): void {
   }

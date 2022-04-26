@@ -37,7 +37,8 @@
           <div class="full-width variant">
             <mat-label>Upload product image: </mat-label>
             <input  type="file" accept="image/*" (change)="imagePreview($event)" />
-          </div>
+            <input type="button" (click)="onUpload()" value="upload">  
+        </div>
            <div class="full-width variant">
             <div class="full-width">
                 <mat-label>Variant</mat-label>
