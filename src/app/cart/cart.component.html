@@ -127,7 +127,7 @@
                             <td><button routerLink="/products" class="btn btn-primary">Shop</button></td>
                             <td><button class="btn btn-success" (click)="checkOut()">Checkout</button></td>
                             <!-- <td><strong>Grand Total : ${{grandTotal | number : '.2'}}</strong></td> -->
-                            <td><strong>Grand Total : ${{grandTotal}}</strong></td>
+                            <td><strong>Grand Total : ${{(grandTotal).toFixed(2)}}</strong></td>
                         </tr>
                     </tbody>
                 </table>

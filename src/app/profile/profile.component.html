@@ -24,9 +24,30 @@
             <p>{{user?.address?.city}}</p>
         </div>
     </div>
-    <p class="text-xl text-center">Recent orders</p>
+    <p class="text-xl text-center">Recent Orders</p>
     <hr>
-    <div class="grid grid-cols-1 gap-4">
-            
+    <div class="grid grid-cols-1">
+        <div class="grid grid-cols-6 gap-3 p-2 border-b-2 border-b-grey">
+            <p>Order#</p>
+            <p>Date</p>
+            <p class="col-span-2">Items</p>
+            <p>Total</p>
+            <p>View</p>
+        </div>
+        <ng-container *ngFor="let order of orders">
+            <div class="grid grid-cols-6 gap-3 p-2 rounded border-b-2 border-b-grey hover:bg-slate-200">
+                <p>{{order.id}}</p>
+                <p>{{order.date}}</p>
+                <div class="col-span-2 flex overflow-x-auto">
+                    <ng-container *ngFor="let o_product of order.products">
+                        <img [src]="o_product.image" class="object-scale-down p-1 rounded-full h-11 w-11">
+                    </ng-container>
+                </div>
+                <p>{{order.payment.subtotal+order.payment.shipping}}</p>
+                <p>
+                    <mat-icon [routerLink]="['/order', order.id]" class="cursor-pointer hover:text-cyan-500">remove_red_eye</mat-icon>
+                </p>
+            </div>
+        </ng-container>
     </div>
 </div>
