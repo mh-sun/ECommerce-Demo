@@ -14,8 +14,8 @@
         </span>
     </div>
     <div class="row"><hr class="text-light"></div>
-    <div class="row">
-        <table class="text-white table table-borderless">
+    <!-- <div class="row">
+        <table class="text-white table table-borderless gap-2">
             <tr class="row ">
                 <td class="col-sm-2"><i class="fas fa-map-marker-alt"></i></td>
                 <td class="col-sm-7">
@@ -24,30 +24,90 @@
                         {{user?.address?.street}}, {{user?.address?.city}}
                     </span>
                 </td>
-                <td class="col-sm-3"><i class="fas fa-edit"></i></td>
             </tr>
-            <tr class="row ">
+            <tr class="row">
                 <td class="col-sm-2"><i class="fas fa-file-alt"></i></td>
                 <td class="col-sm-7">
-                    <span>Bill to same address</span><br>
+                    <span *ngIf="!addrToggle">{{address}}</span>
+                    <input *ngIf="addrToggle" type="text" class="border-2 border-sky-500 rounded" [placeholder]="address" [(ngModel)]="address">
                 </td>
-                <td class="col-sm-3"><i class="fas fa-edit"></i></td>
+                <td class="col-sm-3 flex justify-center">
+                    <i class="fas fa-check-circle" *ngIf="addrToggle" (click)="addrChange()"></i>
+                    <i class="fas fa-edit" id="addr_checkbox" (click)="addrChange()"></i>
+                </td>
             </tr>
             <tr class="row ">
                 <td class="col-sm-2"><i class="fas fa-phone-alt"></i></td>
                 <td class="col-sm-7">
-                    <span>{{user?.phone}}</span>
+                    <span>{{phone}}</span>
                 </td>
-                <td class="col-sm-3"><i class="fas fa-edit"></i></td>
+                <td class="col-sm-3 flex justify-center">
+                    <i class="fas fa-edit" #p_edit></i>
+                </td>
             </tr>
             <tr class="row ">
                 <td class="col-sm-2"><i class="fas fa-envelope"></i></td>
                 <td class="col-sm-7">
                     <span>{{user?.email}}</span>
                 </td>
-                <td class="col-sm-3"><i class="fas fa-edit"></i></td>
+                <td class="col-sm-3 flex justify-center">
+                    <i class="fas fa-edit" (click)="emailEdit()"></i>
+                </td>
             </tr>
         </table>
+    </div> -->
+    <div class="w-full my-4 grid grid-cols-1 gap-4 text-white">
+        <div class="grid grid-cols-6 gap-2">
+            <div>
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="col-span-4">
+                <span>{{user?.name?.firstname}} {{user?.name?.lastname}}</span><br>
+                <span>
+                    {{user?.address?.street}}, {{user?.address?.city}}
+                </span>
+            </div>
+            
+        </div>
+        <div class="grid grid-cols-6 gap-2">
+            <div>
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="col-span-4">
+                <span *ngIf="!addrToggle">{{address}}</span>
+                <input *ngIf="addrToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="address" [(ngModel)]="address">
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <i class="fas fa-check-circle" *ngIf="addrToggle" (click)="addrChange()"></i>
+                <i class="fas fa-edit" (click)="addrChange()"></i>
+            </div>
+        </div>
+        <div class="grid grid-cols-6 gap-2">
+            <div>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="col-span-4">
+                <span *ngIf="!phnToggle">{{phone}}</span>
+                <input *ngIf="phnToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="phone" [(ngModel)]="phone">
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <i class="fas fa-check-circle" *ngIf="phnToggle" (click)="phnChange()"></i>
+                <i class="fas fa-edit" (click)="phnChange()"></i>
+            </div>
+        </div>
+        <div class="grid grid-cols-6 gap-2">
+            <div>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="col-span-4">
+                <span *ngIf="!emlToggle">{{email}}</span>
+                <input *ngIf="emlToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="email" [(ngModel)]="email">
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <i class="fas fa-check-circle" *ngIf="emlToggle" (click)="emailChange()"></i>
+                <i class="fas fa-edit" (click)="emailChange()"></i>
+            </div>
+        </div>
     </div>
     <div class="row text-center">
         <span class="text-white h4">
@@ -80,16 +140,15 @@
 </div>
 
 <ng-container *ngIf="products.length!=0">
-    <div class="container">
+    <div class="bg-white rounded m-8 p-4">
         <div class="card-table">
             <div class="cart-product">
                 <table class="table table-responsive">
                     <thead>
                         <tr>
                             <th>Sr.No</th>
-                            <th>Product Name</th>
-                            <th>Product Image</th>
-                            <th>Description</th>
+                            <th>Name</th>
+                            <th>Image</th>
                             <th>Price</th>
                             <th>Variation</th>
                             <th>Quantity</th>
@@ -101,10 +160,9 @@
                         <tr *ngFor="let item of products; let i = index">
                             <td>{{i+1}}</td>
                             <td>{{item.title}}</td>
-                            <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
-                            <td style="width: 25%;">{{item.description}}</td>
-                            <th style="width: 12%;">{{item.total.price}}</th>
-                            <td style="width: 12%;">
+                            <td><img src="{{item.image}}" alt="" class="w-50"></td>
+                            <th>{{item.total.price}}</th>
+                            <td>
                                 <ul>
                                     <ng-container *ngFor="let item of item.variation | keyvalue">
                                         <li>
@@ -113,8 +171,8 @@
                                     </ng-container>        
                                 </ul>
                             </td>
-                            <td style="width: 12%;">{{item.quantity}}</td>
-                            <td style="width: 12%;">{{item.total.price*item.quantity}}</td>
+                            <td >{{item.quantity}}</td>
+                            <td >{{item.total.price*item.quantity}}</td>
                             <td>
                                 <button (click)="removeItem(item)" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
@@ -126,7 +184,6 @@
                             <td><button (click)="emptycart()" class="btn btn-danger">Clear</button></td>
                             <td><button routerLink="/products" class="btn btn-primary">Shop</button></td>
                             <td><button class="btn btn-success" (click)="checkOut()">Checkout</button></td>
-                            <!-- <td><strong>Grand Total : ${{grandTotal | number : '.2'}}</strong></td> -->
                             <td><strong>Grand Total : ${{(grandTotal).toFixed(2)}}</strong></td>
                         </tr>
                     </tbody>

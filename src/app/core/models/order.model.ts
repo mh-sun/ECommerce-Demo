@@ -7,8 +7,8 @@ export interface productDetails{
 }
 
 export interface Order{
-    id:string,
-    userid:number,
+    id:string
+    userid:number
     products:productDetails[]
     payment:{
         subtotal:number
@@ -17,4 +17,6 @@ export interface Order{
     address:string
     date:string
     status:string
+    phone:string
+    email:string
 }
