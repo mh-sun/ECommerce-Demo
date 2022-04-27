@@ -24,7 +24,9 @@ export class LogService {
     this.loggedUser.subscribe(user=>{
       if(user !== null){
         this.storeUser(user)
-        http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{console.log(res)})
+        http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{
+          // console.log(res)
+        })
       }
     })
   }

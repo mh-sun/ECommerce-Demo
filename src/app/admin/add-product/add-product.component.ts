@@ -6,7 +6,6 @@ import { map } from 'rxjs';
 import { Product } from 'src/app/core/models/product.model';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -129,39 +128,72 @@ export class AddProductComponent implements OnInit {
     }
     this.variants.reset();
   }
-  async onUpload() {
+//  onUpload() {
 
-    const uploadData: any = new FormData();
-    // const uploadData = new FormData();
-    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-    // uploadData.append('myFile', this.productForm.get('image')?.value);
-    // var options = { content: uploadData };
-    console.log(uploadData.get('myFile'),this.productForm.get('image')?.value)
-    // this.httpClient.post('http://localhost:3000/assets', options).subscribe((res: any) => 
-    // {
-    //   console.log(res);
-    //   this.receivedImageData = res;
-    //   this.base64Data = this.receivedImageData.pic;
-    //   this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; 
-    // });
-    // this.httpClient
-    // .post('http://localhost:3000/assets', uploadData)
-    // .subscribe({
-    //   next: (response) => console.log(response),
-    //   error: (error) => console.log(error),
-    // });
-    // this.selectedFile.inProgress = true; 
-    // this.service.upload(uploadData)
-    // let response = await fetch(' http://localhost:3000/assets', {
-    //   method: 'POST',
-    //   body: uploadData
-    // });
-    // let result = await response.json();
-    // alert(result.message);
-    this.service.upload(uploadData)
+//     const uploadData: any = new FormData();
+//     // const uploadData = new FormData();
+//     uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+//     // uploadData.append('myFile', this.productForm.get('image')?.value);
+//     // var options = { content: uploadData };
+//     console.log(this.productForm.get('image')?.value,this.selectedFile)
+//     // this.httpClient.post('http://localhost:3000/assets', options).subscribe((res: any) => 
+//     // {
+//     //   console.log(res);
+//     //   this.receivedImageData = res;
+//     //   this.base64Data = this.receivedImageData.pic;
+//     //   this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; 
+//     // });
+//     // this.httpClient
+//     // .post('http://localhost:3000/assets', uploadData)
+//     // .subscribe({
+//     //   next: (response) => console.log(response),
+//     //   error: (error) => console.log(error),
+//     // });
+//     // this.selectedFile.inProgress = true; 
+//     // this.service.upload(uploadData)
+//     // let response = await fetch(' http://localhost:3000/assets', {
+//     //   method: 'POST',
+//     //   body: uploadData
+//     // });
+//     // let result = await response.json();
+//     // alert(result.message);
+//     this.service.upload(uploadData)
 
-   }
-
+//    }
+//   onUpload(){
+//     const fs = require('fs');
+ 
+// // Get the current filenames
+// // before the function
+// // getCurrentFilenames();
+// console.log("\nFile Contents of example_file:",
+//       fs.readFileSync(this.selectedFile.name, "utf8"));
+ 
+// // Copying the file to a the same name
+// fs.copyFile("example_file.txt", "copied_file.txt",
+//       fs.constants.COPYFILE_EXCL, (err: any) => {
+//   if (err) {
+//     console.log("Error Found:", err);
+//   }
+//   else {
+ 
+//     // Get the current filenames
+//     // after the function
+//     // getCurrentFilenames();
+//     console.log("\nFile Contents of copied_file:",
+//       fs.readFileSync("copied_file.txt", "utf8"));
+//   }
+// });
+ 
+// // Function to get current filenames
+// // in directory
+// // function getCurrentFilenames() {
+// //   console.log("\nCurrent filenames:");
+// //   fs.readdirSync(__dirname).forEach((file: any) => {
+// //     console.log(file);
+// //   });
+// // }
+//   }
   onSubmit() {
     console.log(this.productForm.value);
     let arr = ['title', 'price', 'description', 'category', 'image'];

@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }),
     email: ['', Validators.required, Validators.email],
     password: ['', Validators.required],
-    phone: ['', Validators.required]
+    phone: ['', Validators.required,,this.customValidator.numberValidator.bind(this.customValidator)]
   });
   show = false;
   registerSubcription: any;
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       username: this.profileForm.get('username')?.value,
       password: this.profileForm.get('password')?.value,
       name: this.profileForm.get('name')?.value,
-      phone: '',
+      phone: this.profileForm.get('phone')?.value,
       carts: [],
       orders: []
     };
