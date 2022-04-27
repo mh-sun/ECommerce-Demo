@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   logOut(){
     this.logger.logout()
+    this.router.navigate(['/'])
   }
 
   sendOrder(order:Order): void {
