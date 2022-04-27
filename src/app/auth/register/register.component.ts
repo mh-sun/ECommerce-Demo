@@ -12,45 +12,54 @@ import { CustomValidationService } from 'src/app/core/shared/custom-validation.s
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  
+
   profileForm = this.fb.group({
     removeValidator: [''],
-    username: ['',this.customValidator.userNameValidator.bind(this.customValidator)],
+    username: ['', this.customValidator.userNameValidator.bind(this.customValidator)],
     name: this.fb.group({
-      firstname: ['',this.customValidator.nameValidator.bind(this.customValidator)],
-      lastname: ['',this.customValidator.nameValidator.bind(this.customValidator)],
+      firstname: ['', this.customValidator.nameValidator.bind(this.customValidator)],
+      lastname: ['', this.customValidator.nameValidator.bind(this.customValidator)],
     }),
     address: this.fb.group({
       city: [''],
       street: [''],
       number: [''],
-      zipcode: ['',this.customValidator.numberValidator.bind(this.customValidator)]
+      zipcode: ['', this.customValidator.numberValidator.bind(this.customValidator)]
     }),
     email: ['', Validators.required],
     password: ['', Validators.required],
-    phone: ['', this.customValidator.numberValidator.bind(this.customValidator)]
+    phone: ['', { validators: [Validators.required, this.customValidator.numberValidator.bind(this.customValidator)] }]
   });
   show = false;
   registerSubcription: any;
 
-  constructor(private fb: FormBuilder, private http: LogService, private router: Router,private customValidator:CustomValidationService) { this.show = false;}
-
-  ngOnInit(): void {
-    
+  get fName() {
+    return this.profileForm.get('name')?.get('firstname')!;
   }
 
-  onSubmit() {
-    console.log(this.profileForm.value);
-    // const geolocation = {
-    //   "lat":'',
-    //   "long":''
-    // }
-    let address = this.profileForm.get('address')?.value;
-    // const returnedTarget = Object.assign({geolocation}, address);
+  get lName() {
+    return this.profileForm.get('name')?.get('lastname')!;
+  }
 
-    //address.splice(0,0,geolocation);
-    //address.push(this.profileForm.get('address')?.value);
-    // console.log(address,returnedTarget);
+  get uName() {
+    return this.profileForm.get('username')!;
+  }
+
+  get phone() {
+    return this.profileForm.get('phone')!;
+  }
+
+  get code() {
+    return this.profileForm.get('address')?.get('zipcode')!;
+  }
+
+  constructor(private fb: FormBuilder, private http: LogService, private router: Router, private customValidator: CustomValidationService) { this.show = false; }
+
+  ngOnInit(): void {}
+
+  onSubmit() {
+    console.log(this.profileForm.get('name')?.get('firstname'));
+    let address = this.profileForm.get('address')?.value;;
     const user: User =
     {
       address: address,

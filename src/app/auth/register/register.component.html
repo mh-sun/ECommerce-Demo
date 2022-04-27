@@ -15,17 +15,33 @@
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstname" placeholder="First name">
       </mat-form-field>
+      <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
+        <div *ngIf="fName.errors">
+          Name cannot be blank or number
+        </div>
+      </div>
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastname" placeholder="Last Name" name="lname">
       </mat-form-field>
+      <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
+        <div *ngIf="lName.errors">
+          Name cannot be blank or number
+        </div>
+      </div>
     </div>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Username</mat-label>
       <input matInput placeholder="Username" formControlName="username">
     </mat-form-field>
+    <div *ngIf="uName.invalid && (uName.dirty || uName.touched)" class="alert alert-danger full-width">
+      <div *ngIf="uName.errors">
+        Username only takes alphabets and number
+      </div>
+    </div>
+
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Email</mat-label>
@@ -41,6 +57,11 @@
       <mat-label>Phone No</mat-label>
       <input matInput formControlName="phone" placeholder="phone" name="phone">
     </mat-form-field>
+    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger full-width">
+      <div *ngIf="phone.errors">
+        Phone no only contains number
+      </div>
+    </div>
 
     <div formGroupName="address" class="full-width">
       <mat-label>
@@ -65,8 +86,13 @@
         <mat-label>Zip Code:</mat-label>
         <input matInput formControlName="zipcode">
       </mat-form-field>
+      <div *ngIf="code.invalid && (code.dirty || code.touched)" class="alert alert-danger">
+        <div *ngIf="code.errors">
+          Zip code only contains number
+        </div>
+      </div>
     </div>
-  
+
     <mat-card-actions class="button">
       <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">REGISTER</button>
       <button mat-raised-button color="primary" type="button" (click)="profileForm.reset()"
