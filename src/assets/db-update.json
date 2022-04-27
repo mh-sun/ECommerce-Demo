@@ -49,46 +49,6 @@
           ]
         }
       ]
-    },
-    {
-      "address": {
-        "city": "",
-        "street": "",
-        "number": "",
-        "zipcode": ""
-      },
-      "id": 2,
-      "email": "atkia1999@gmail.com",
-      "username": "",
-      "password": "1455",
-      "name": {
-        "firstname": "346",
-        "lastname": ""
-      },
-      "phone": "",
-      "carts": [],
-      "orders": []
-    },
-    {
-      "address": {
-        "city": "Dhaka",
-        "street": "ss bazar",
-        "number": "123",
-        "zipcode": "1200"
-      },
-      "id": 3,
-      "email": "mehedi@gmail.com",
-      "username": "mehe",
-      "password": "123",
-      "name": {
-        "firstname": "mehedi",
-        "lastname": "sun"
-      },
-      "phone": "123",
-      "carts": [],
-      "orders": [
-        "968"
-      ]
     }
   ],
   "products": [
@@ -743,7 +703,7 @@
       "phone": "0191345678",
       "email": "john@gmail.com",
       "date": "Wed Apr 27 2022",
-      "status": "Payment Pending",
+      "status": "Shipped",
       "products": [
         {
           "title": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
