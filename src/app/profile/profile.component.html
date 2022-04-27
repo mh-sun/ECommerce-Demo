@@ -24,6 +24,9 @@
             <p>{{user?.address?.city}}</p>
         </div>
     </div>
+    <div class="flex justify-center">
+        <button mat-button class="bg-green-300" [routerLink]="['/profile/edit']" >Edit Profile</button>
+    </div>
     <p class="text-xl text-center">Recent Orders</p>
     <hr>
     <div class="grid grid-cols-1">
@@ -43,7 +46,7 @@
                         <img [src]="o_product.image" class="object-scale-down p-1 rounded-full h-11 w-11">
                     </ng-container>
                 </div>
-                <p>{{order.payment.subtotal+order.payment.shipping}}</p>
+                <p>{{(order.payment.subtotal+order.payment.shipping).toFixed(2)}}</p>
                 <p>
                     <mat-icon [routerLink]="['/order', order.id]" class="cursor-pointer hover:text-cyan-500">remove_red_eye</mat-icon>
                 </p>

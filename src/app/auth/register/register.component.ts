@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
     this.profileForm.reset();
     this.show = true;
-    setInterval(() => {
+    setTimeout(() => {
       {
         this.router.navigate(['/'])
       }

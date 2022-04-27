@@ -35,9 +35,15 @@ export class LogService {
       let link = this.url + 'users'
       return this.http.get<User[]>(link)
   }
+
   getOneUser(id:number){
     let link = this.url + 'users'+'/'+id
     return this.http.get<User>(link)
+  }
+
+  updateUser(id:any, user:any){
+    let link = this.url + 'users/' + id
+    return this.http.patch<User>(link, user)
   }
 
   Registration(user: User){
@@ -50,14 +56,17 @@ export class LogService {
     this.loggedUser.next(user)
     
   }
+
   logout(){
     localStorage.removeItem('loggedUser')
     this.loggedUser.next(null)
   }
+
   storeUser(user:User|null){
     if(user === null) return
     localStorage.setItem('loggedUser', JSON.stringify(user))
   }
+
   deleteUser(id:number) {
     const newUrl = this.url+ 'users'+'/'+id;
     return this.http.delete(newUrl);
