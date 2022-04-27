@@ -11,6 +11,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PricingPipe } from './pipes/pricing.pipe';
+import { UserViewComponent } from './user-view/user-view.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PricingPipe } from './pipes/pricing.pipe';
     AddProductComponent,
     UserListComponent,
     PricingPipe,
+    UserViewComponent,
   ],
   imports: [
     CommonModule,
