@@ -124,10 +124,29 @@
       "username": "nan123",
       "password": "1234",
       "name": {
-        "firstName": "Nancy",
-        "lastName": "Jor"
+        "firstname": "Nancy",
+        "lastname": "Jor"
       },
-      "phone": "",
+      "phone": "01304658222",
+      "carts": [],
+      "orders": []
+    },
+    {
+      "address": {
+        "city": "Dhaka",
+        "street": "cox",
+        "number": "56",
+        "zipcode": "2000"
+      },
+      "id": 3,
+      "email": "bsse1015@iit.du.ac.bd",
+      "username": "",
+      "password": "1455",
+      "name": {
+        "firstname": "Atkia",
+        "lastname": "Sobah"
+      },
+      "phone": "080978565",
       "carts": [],
       "orders": []
     }
@@ -1128,245 +1147,6 @@
       "address": "Barmiz Market,Cox's Bazar",
       "date": "20.03.2022",
       "status": "Delivered"
-    },
-    {
-      "id": "259",
-      "userid": 1,
-      "payment": {
-        "subtotal": 55.99,
-        "shipping": 100
-      },
-      "address": "",
-      "date": "Sun Apr 24 2022",
-      "status": "Shipped",
-      "products": [
-        {
-          "title": "Mens Cotton Jacket",
-          "image": "../../../assets/images/product-image/71li-ujtlUL._AC_UX679_.jpg",
-          "productId": 761,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "83",
-      "userid": 1,
-      "payment": {
-        "subtotal": 1200000,
-        "shipping": 100
-      },
-      "address": "",
-      "date": "Sun Apr 24 2022",
-      "status": "Payment Pending",
-      "products": [
-        {
-          "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-          "image": "../../../assets/images/product-image/81fPKd-2AYL._AC_SL1500_.jpg",
-          "productId": 889,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "379",
-      "userid": 2,
-      "payment": {
-        "subtotal": 55.99,
-        "shipping": 100
-      },
-      "address": "",
-      "date": "Mon Apr 25 2022",
-      "status": "Shipped",
-      "products": [
-        {
-          "title": "Mens Cotton Jacket",
-          "image": "../../../assets/images/product-image/71li-ujtlUL._AC_UX679_.jpg",
-          "productId": 325,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "801",
-      "userid": 1,
-      "payment": {
-        "subtotal": 178.81,
-        "shipping": 100
-      },
-      "address": "",
-      "date": "Tue Apr 26 2022",
-      "status": "Payment Pending",
-      "products": [
-        {
-          "title": "Mens Cotton Jacket",
-          "image": "../../../assets/images/product-image/71li-ujtlUL._AC_UX679_.jpg",
-          "productId": 216,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "Mens Casual Slim Fit",
-          "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
-          "productId": 169,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "MBJ Women's Solid Short Sleeve Boat Neck V ",
-          "image": "../../../assets/images/product-image/71z3kpMAYsL._AC_UY879_.jpg",
-          "productId": 821,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
-          "image": "../../../assets/images/product-image/51Y5NI-I5jL._AC_UX679_.jpg",
-          "productId": 522,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
-          "image": "../../../assets/images/product-image/71HblAHs5xL._AC_UY879_-2.jpg",
-          "productId": 616,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "863",
-      "userid": 1,
-      "payment": {
-        "subtotal": 385.78000000000003,
-        "shipping": 100
-      },
-      "address": "",
-      "date": "Tue Apr 26 2022",
-      "status": "Payment Pending",
-      "products": [
-        {
-          "title": "Mens Cotton Jacket",
-          "image": "../../../assets/images/product-image/71li-ujtlUL._AC_UX679_.jpg",
-          "productId": 837,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "Mens Casual Slim Fit",
-          "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
-          "productId": 246,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
-          "image": "../../../assets/images/product-image/51Y5NI-I5jL._AC_UX679_.jpg",
-          "productId": 288,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "MBJ Women's Solid Short Sleeve Boat Neck V ",
-          "image": "../../../assets/images/product-image/71z3kpMAYsL._AC_UY879_.jpg",
-          "productId": 39,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "DANVOUY Womens T Shirt Casual Cotton Short",
-          "image": "../../../assets/images/product-image/61pHAEJ4NML._AC_UX679_.jpg",
-          "productId": 62,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
-          "image": "../../../assets/images/product-image/71HblAHs5xL._AC_UY879_-2.jpg",
-          "productId": 119,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "White Gold Plated Princess",
-          "image": "../../../assets/images/product-image/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-          "productId": 394,
-          "variation": {
-            "metal": "Gold"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
-          "image": "../../../assets/images/product-image/61IBBVJvSDL._AC_SY879_.jpg",
-          "productId": 361,
-          "variation": {},
-          "quantity": 1
-        },
-        {
-          "title": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
-          "image": "../../../assets/images/product-image/71kWymZ+c+L._AC_SX679_.jpg",
-          "productId": 364,
-          "variation": {
-            "company": "SP"
-          },
-          "quantity": 1
-        },
-        {
-          "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
-          "image": "../../../assets/images/product-image/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-          "productId": 568,
-          "variation": {
-            "metal": "Gold"
-          },
-          "quantity": 1
-        }
-      ]
     }
   ],
   "assets": []

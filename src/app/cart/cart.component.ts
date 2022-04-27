@@ -105,7 +105,7 @@ export class CartComponent implements OnDestroy{
     let products = this.getProductDetailsForOrder()
     let order:Order = {
       id:Math.floor(Math.random()*1000).toString(),
-      userid:this.user!.id,
+      userId:this.user!.id,
       payment:{
         subtotal:this.grandTotal,
         shipping:this.deliveryCharge
