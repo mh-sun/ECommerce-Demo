@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { AbstractControl } from '@angular/forms';
 export class CustomValidationService {
 
   constructor() { }
-  nameValidator(userControl: AbstractControl) {
+  nameValidator(userControl: AbstractControl){
     if (this.validateName(userControl.value)) {
       return null
     } else {
@@ -29,7 +29,6 @@ export class CustomValidationService {
     }
   }
   validateName(userName: string) {
-    console.log(userName)
     const re = /^[A-Za-z]+$/;
     return re.test(userName)
   }
