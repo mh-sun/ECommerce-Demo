@@ -107,25 +107,6 @@
           "date": "20.03.2022"
         }
       ]
-    },
-    {
-      "address": {
-        "city": "",
-        "street": "",
-        "number": "",
-        "zipcode": ""
-      },
-      "id": 2,
-      "email": "atkia1999@gmail.com",
-      "username": "",
-      "password": "1455",
-      "name": {
-        "firstname": "346",
-        "lastname": ""
-      },
-      "phone": "",
-      "carts": [],
-      "orders": []
     }
   ],
   "products": [
@@ -695,7 +676,7 @@
       "phone": "0191345678",
       "email": "john@gmail.com",
       "date": "Wed Apr 27 2022",
-      "status": "Payment Pending",
+      "status": "Shipped",
       "products": [
         {
           "title": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
