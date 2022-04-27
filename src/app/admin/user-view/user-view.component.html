@@ -1,77 +1,56 @@
-<!-- <mat-card class="content">
-    <div *ngIf="product">
-        <div class="card py-3">
-           <div class="table">
-            <tr>
-                <td class="col-sm-8">
-                    <div>
-                        <div><h2>User Name</h2></div>
-                        {{user.name.firstname+' '+user.name.lastname}}
-                    </div>
-                    <div>
-                        <div><h2>Description:</h2></div>
-                        {{product.description}}
-                    </div>
-                    <div>
-                        <div><h2>Price:</h2></div>
-                        {{product.price|pricing}}
-                    </div>
-                    <div>
-                        <div><h2>Rating:</h2></div>
-                        <div><h4>Rate:</h4></div>{{product.rating.rate}}
-                        <div><h4>Count:</h4></div>{{product.rating.count}}
-                    </div>
-                    <div>
-                        <div><h2>Variation:</h2></div>
-                    
-                        <div *ngFor="let variant of product.variation">
-                            <div><h4><b>Type:</b></h4></div>
-                            <div *ngFor="let var_k of variant.type|keyvalue">
-                                <div class="d-flex" >
-                                    <div class="col-md-4">
-                                        <span class="d-flex center">{{var_k.key}}:</span>
-                                    </div>
-                                    <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex" >{{var_k.value}} 
-                                        </span>
-                                    </div>   
-                                </div>
-                            </div>
-                            <div>
-                                <div class="d-flex" >
-                                    <div class="col-md-4">
-                                        <span class="d-flex center"><b>Quantity:</b></span>
-                                    </div>
-                                    <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex" >{{variant.quantity}}
-                                        </span>
-                                    </div>   
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div>
-                        <div><h2>Status:</h2></div>
-                        <div *ngIf="product.isActive">Active</div>
-                        <div *ngIf="!product.isActive">Deactive</div>
-                    </div>
-                    <div>
-                        <div><h2>Change Status:</h2></div>
-                        <div *ngIf="product.isActive"><button mat-button (click)="activate(!product.isActive)">Deactive</button></div>
-                        <div *ngIf="!product.isActive"><button mat-button (click)="activate(product.isActive)">Active</button></div>
-                        <div class="rightAlign">
-                            <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
-                                <button mat-button>
-                                  <mat-icon>edit</mat-icon>
-                                   Edit Product Details
-                                </button>
-                              </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-           </div>
+<div class="container bg-white rounded-md my-4 p-4 grid grid-cols-1 gap-4">
+    <p class="text-xl text-center">My Profile</p>
+    <hr>
+    <div class="grid grid-cols-3 gap-4">
+        <div>
+            <p class="text-lg text-left">Full name</p>
+            <p>{{user?.name?.firstname+" "+user?.name?.lastname}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Email</p>
+            <p>{{user?.email}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Phone</p>
+            <p>{{user?.phone}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Username</p>
+            <p>{{user?.username}}</p>
+        </div>
+        <div>
+            <p class="text-lg text-left">Address</p>
+            <p>{{user?.address?.number+", "+user?.address?.street}}</p>
+            <p>{{user?.address?.city}}</p>
         </div>
     </div>
-</mat-card> -->
+    <!-- <div class="flex justify-center">
+        <button mat-button class="bg-green-300" [routerLink]="['/profile/edit']" >Edit Profile</button>
+    </div> -->
+    <p class="text-xl text-center">Recent Orders</p>
+    <hr>
+    <div class="grid grid-cols-1">
+        <div class="grid grid-cols-6 gap-3 p-2 border-b-2 border-b-grey">
+            <p>Order#</p>
+            <p>Date</p>
+            <p class="col-span-2">Items</p>
+            <p>Total</p>
+            <p>View</p>
+        </div>
+        <ng-container *ngFor="let order of orders">
+            <div class="grid grid-cols-6 gap-3 p-2 rounded border-b-2 border-b-grey hover:bg-slate-200">
+                <p>{{order.id}}</p>
+                <p>{{order.date}}</p>
+                <div class="col-span-2 flex overflow-x-auto">
+                    <ng-container *ngFor="let o_product of order.products">
+                        <img [src]="o_product.image" class="object-scale-down p-1 rounded-full h-11 w-11">
+                    </ng-container>
+                </div>
+                <p>{{(order.payment.subtotal+order.payment.shipping).toFixed(2)}}</p>
+                <p>
+                    <mat-icon [routerLink]="['/order', order.id]" class="cursor-pointer hover:text-cyan-500">remove_red_eye</mat-icon>
+                </p>
+            </div>
+        </ng-container>
+    </div>
+</div>
