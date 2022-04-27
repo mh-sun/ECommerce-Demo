@@ -52,7 +52,7 @@ export class OrdersComponent implements OnInit, OnDestroy{
         this.orderStatusIndex = this.counts.indexOf(o.status)
         this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
 
-        this.log.getOneUser(this.order?.userid)
+        this.log.getOneUser(this.order?.userId)
         .pipe(takeUntil(this.subOff$))
         .subscribe({
           next:u=>{

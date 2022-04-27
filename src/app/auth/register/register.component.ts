@@ -26,16 +26,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
       number: [''],
       zipcode: ['',this.customValidator.numberValidator.bind(this.customValidator)]
     }),
-    email: ['', Validators.required, Validators.email],
+    email: ['', Validators.required],
     password: ['', Validators.required],
-    phone: ['', Validators.required,,this.customValidator.numberValidator.bind(this.customValidator)]
+    phone: ['', this.customValidator.numberValidator.bind(this.customValidator)]
   });
   show = false;
   registerSubcription: any;
 
-  constructor(private fb: FormBuilder, private http: LogService, private router: Router,private customValidator:CustomValidationService) { }
+  constructor(private fb: FormBuilder, private http: LogService, private router: Router,private customValidator:CustomValidationService) { this.show = false;}
 
   ngOnInit(): void {
+    
   }
 
   onSubmit() {
