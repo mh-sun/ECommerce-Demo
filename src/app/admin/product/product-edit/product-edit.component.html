@@ -126,14 +126,15 @@
                                             </mat-form-field>
                                             <!-- </div> -->
                                             <!-- </div> -->
-                                            <div class="full-width">
-                                                <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add
-                                                    More Type</button>
-                                            </div>
+                                            
+                                          
                                             <mat-form-field appearance="fill">
                                                 <mat-label>Quantity</mat-label>
                                                 <input matInput formControlName="quantity">
                                             </mat-form-field>
+                                            <div class="rightAlign">
+                                                <button mat-button (click)="removeVariation(i)"><i class="fas fa-plus"></i>Remove Variant</button>
+                                            </div>
                                             <!-- <div class="rightAlign">
                          <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
                         </div> -->
@@ -143,6 +144,12 @@
                                         <button mat-button (click)="addVariants()"><i class="fas fa-plus"></i>Add More
                                             Variant</button>
                                     </div>
+                                    <div class="rightAlign">
+                                        <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add
+                                            More Type</button>
+                                    </div>
+                                  
+                                    
                                     <div class="full-width" *ngFor="let group of types.controls; let j = index;"
                                         formArrayName="types">
                                         <div class="form-group jumbotron" [formGroupName]='j'>
@@ -155,7 +162,11 @@
                                                 <input matInput formControlName="moreValue">
                                             </mat-form-field>
                                         </div>
+                                        <div class="rightAlign">
+                                            <button mat-button (click)="removeType(j)"><i class="fas fa-plus"></i>Remove Type</button>
+                                        </div>
                                     </div>
+
 
                                     <!-- <label for="quantity">Quantity:</label>
                 <input type="text" id="key" #box> -->

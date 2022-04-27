@@ -27,6 +27,7 @@ export class ProductEditComponent implements OnInit {
   variantType = true;
   notifier = new Subject();
 
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private service: ProductsService) { }
 
   ngOnInit(): void {
@@ -153,7 +154,13 @@ export class ProductEditComponent implements OnInit {
       }
     }
     this.variants.reset();
+    for(let i=0;i<this.variants.length;i++){
+      this.variants.removeAt(i);
+    }
     this.types.reset();
+    for(let i=0;i<this.types.length;i++){
+      this.types.removeAt(i);
+    }
   }
 
   increaseQuantity(index: number) {
