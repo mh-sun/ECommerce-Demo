@@ -1,6 +1,6 @@
 <div class="container bg-white rounded-md my-4 p-4 grid grid-cols-1 gap-2">
     <p class="text-xl text-center border-b-2 border-b-grey py-2">My Orders</p>
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1" *ngIf="orders.length!=0">
         <div class="grid grid-cols-7 gap-3 p-2 border-b-2 border-b-grey">
             <p>Order#</p>
             <p>Date</p>

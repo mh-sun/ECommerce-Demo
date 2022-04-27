@@ -26,7 +26,8 @@ export class CartApiService{
     this.logger.loggedUser.subscribe({
       next:(res)=>{
         this.user = res
-        this.cartProductLoad()
+        if(this.user!=null)
+          this.cartProductLoad()
       },
       error:val=>console.error(val),
       complete:()=>console.error(' Logger user subscription complete')
@@ -145,6 +146,8 @@ export class CartApiService{
     this.cartProducts = []
     this.cartSubject.next(this.cartProducts)
 
+    console.log(this.user)
+    console.log(this.user?.carts)
     this.user?.carts.forEach((i, index)=>{
       this.http.get<Cart>(this.url+ i).subscribe({
         next:(res:Cart)=>{

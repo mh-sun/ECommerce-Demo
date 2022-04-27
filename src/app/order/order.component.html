@@ -6,11 +6,11 @@
         <mat-card class="full-width">
             <table class="full-width">
                 <tr>
-                    <td>Order #{{order.id}}</td>
+                    <td>Order #{{order?.id}}</td>
                     <td rowspan="2" style="text-align: right;">Total {{totalBill|currency}}</td>
                 </tr>
                 <tr>
-                    <td>Placed On: {{order.date}}</td>
+                    <td>Placed On: {{order?.date}}</td>
                 </tr>
             </table>
         </mat-card>
@@ -28,7 +28,7 @@
                 <div class="cart-product">
                     <table class="table table-responsive">
                         <!-- <tbody> -->
-                            <tr *ngFor="let item of order.products; let i = index">
+                            <tr *ngFor="let item of order?.products; let i = index">
                                 <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
                                 <td style="width: 25%;">{{item.title}}</td>
                                 <th style="width: 13%;">{{totalBill|currency}}</th>
@@ -45,16 +45,31 @@
             </div>
         </mat-card>
         <!-- <mat-card class="full-width"> -->
-            <div class="row">
+            <div class="row" *ngIf="user">
                 <div class="col-md-6">
                     <mat-card class="full-width">
                         <mat-card-title>
                             Shipping Address
                         </mat-card-title>
                         <mat-card-content class="font">
-                            <div class="full-width">{{user.name.firstname + ' ' + user.name.lastname}}</div>
-                            <div class="full-width"><button mat-button class="homeBtn"><mat-icon>home</mat-icon></button> {{user.address.city +' '+ user.address.street +' '+ user.address.zipcode}}</div>
-                            <div class="full-width">{{user.phone}}</div>
+                            <div class="full-width grid grid-cols-6 gap-2">
+                                <i class="fas fa-user"></i>
+                                <span class="col-span-5">
+                                    {{user.name.firstname + ' ' + user.name.lastname}}
+                                </span>
+                            </div>
+                            <div class="full-width grid grid-cols-6 gap-2">
+                                <i class="fas fa-location-arrow"></i>
+                                <span class="col-span-5">
+                                    {{order?.address}}
+                                </span>
+                            </div>
+                            <div class="full-width grid grid-cols-6 gap-2">
+                                <i class="fas fa-phone-alt"></i>
+                                <span class="col-span-5">
+                                    {{order?.phone}}
+                                </span>
+                            </div>
                         </mat-card-content>
                     </mat-card>
                     <mat-card class="full-width">
@@ -62,9 +77,24 @@
                             Billing Address
                         </mat-card-title>
                         <mat-card-content class="font">
-                            <div class="full-width ">{{user.name.firstname + ' ' + user.name.lastname}}</div>
-                            <div class="full-width "> {{order.address}}</div>
-                            <div class="full-width">{{user.phone}}</div>
+                            <div class="full-width  grid grid-cols-6 gap-2">
+                                <i class="fas fa-user"></i>
+                                <span class="col-span-5">
+                                    {{user.name.firstname + ' ' + user.name.lastname}}
+                                </span>
+                            </div>
+                            <div class="full-width  grid grid-cols-6 gap-2"> 
+                                <i class="fas fa-location-arrow"></i>
+                                <span class="col-span-5">
+                                    {{user.address.number}}, {{user.address.street}}, {{user.address.city}}
+                                </span>
+                            </div>
+                            <div class="full-width grid grid-cols-6 gap-2">
+                                <i class="fas fa-phone-alt"></i>
+                                <span class="col-span-5">
+                                    {{user.phone}}
+                                </span>
+                            </div>
                         </mat-card-content>
                     </mat-card>
                 </div>
@@ -76,11 +106,11 @@
                         <mat-card-content class="font">
                             <div class="row">
                                 <div class="col-md-6">Subtotal</div>
-                                <div class="col-md-6" style="text-align: right;">{{order.payment.subtotal|currency}}</div>
+                                <div class="col-md-6" style="text-align: right;">{{order?.payment?.subtotal|currency}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">Shipping fee</div>
-                                <div class="col-md-6" style="text-align: right;">{{order.payment.shipping|currency}}</div>
+                                <div class="col-md-6" style="text-align: right;">{{order?.payment?.shipping|currency}}</div>
                             </div>
                             <!-- <div class="full-width"> -->
                                 <hr>

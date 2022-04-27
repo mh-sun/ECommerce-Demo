@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit, OnDestroy{
   public user: User|any;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
   public totalBill=0;
-  public order:Order|any;
+  public order:Order|null = null;
   public orderStatusIndex :number = -1
   public orderId!:any
   public subOff$ = new Subject()
@@ -40,15 +40,6 @@ export class OrdersComponent implements OnInit, OnDestroy{
       this.orderId = res['id']
       this.setOrder()
     })
-
-    this.log.loggedUser
-    .pipe(takeUntil(this.subOff$))
-    .subscribe({
-      next:u=>{
-        this.user = u;
-        console.log(this.user)
-      }
-    })
   }
 
   setOrder() {
@@ -56,9 +47,19 @@ export class OrdersComponent implements OnInit, OnDestroy{
     .pipe(takeUntil(this.subOff$))
     .subscribe(o=>{
       this.order = o
-      if(o===null) return
+      console.log(this.order)
+      if(this.order){
         this.orderStatusIndex = this.counts.indexOf(o.status)
         this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
+
+        this.log.getOneUser(this.order?.userid)
+        .pipe(takeUntil(this.subOff$))
+        .subscribe({
+          next:u=>{
+            this.user = u;
+          }
+        })
+      }
     })
   }
   
