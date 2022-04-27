@@ -28,7 +28,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy{
   public variation:any = {}
   public quantity:number = 1
   public data:any = null
-  // public subcriptions:Subscription = new Subscription()
   public subOff$ = new Subject()
 
   constructor(
@@ -40,15 +39,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnDestroy(): void {
-    // this.subcriptions.unsubscribe()
-
     this.subOff$.next(1)
     this.subOff$.complete()
   }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    const productSub = this.productService.getOneProduct(id)
+    this.productService.getOneProduct(id)
     .pipe(takeUntil(this.subOff$))
     .subscribe({
       next:res=>{
@@ -69,10 +66,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy{
           }
           this.var_values.push(arr)
         })
-        this.variation=res.variation[0].type
+        for(let key in this.data.variation[0].type){
+          this.variation[key] = this.data.variation[0].type[key]
+        }
       }
     })
-    // this.subcriptions.add(productSub)
   }
   
   addtocart(item: Product){

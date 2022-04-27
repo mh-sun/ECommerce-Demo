@@ -2,10 +2,6 @@
   "users": [
     {
       "address": {
-        "geolocation": {
-          "lat": "-37.3159",
-          "long": "81.1496"
-        },
         "city": "kilcoole",
         "street": "new road",
         "number": 7682,
@@ -20,91 +16,37 @@
         "lastname": "doe"
       },
       "phone": "1-570-236-7033",
-      "cart": [
-        {
-          "productId": 1,
-          "variation": {
-            "color": "red",
-            "size": "M"
-          },
-          "quantity": 2
-        },
-        {
-          "productId": 2,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "productId": 3,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "productId": 2,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        },
-        {
-          "productId": 1,
-          "variation": {
-            "color": "red",
-            "size": "S"
-          },
-          "quantity": 1
-        }
-      ],
+      "carts": [],
       "orders": [
         {
-          "id": 1,
-          "products": [
-            {
-              "title": "Solid Gold Petite Micropave ",
-              "image": "../../../assets/images/product-image/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-              "quantity": 1,
-              "variation": {
-                "material": [
-                  "gold",
-                  "silver"
-                ]
-              }
-            }
-          ],
+          "id": "193",
+          "userid": 1,
           "payment": {
-            "subtotal": 10000,
+            "subtotal": 78.29,
             "shipping": 100
           },
-          "address": "Barmiz Market,Cox's Bazar",
-          "date": "10.03.2022"
-        },
-        {
-          "id": 2,
+          "address": "",
+          "date": "Tue Apr 19 2022",
+          "status": "Payment Pending",
           "products": [
             {
-              "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-              "image": "../../../assets/images/product-image/81fPKd-2AYL._AC_SL1500_.jpg",
-              "quantity": 1,
+              "title": "Mens Cotton Jacket",
+              "image": "../../../assets/images/product-image/71li-ujtlUL._AC_UX679_.jpg",
+              "productId": 507,
               "variation": {
-                "color": [
-                  "black"
-                ]
-              }
+                "color": "red",
+                "size": "S"
+              },
+              "quantity": 1
+            },
+            {
+              "title": "Mens Casual Premium Slim Fit T-Shirts ",
+              "image": "../../../assets/images/product-image/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+              "productId": 758,
+              "variation": {},
+              "quantity": 1
             }
-          ],
-          "payment": {
-            "subtotal": 4000,
-            "shipping": 100
-          },
-          "address": "Barmiz Market,Cox's Bazar",
-          "date": "20.03.2022"
+          ]
         }
       ]
     },
@@ -709,6 +651,57 @@
       "variation": {
         "color": "red",
         "size": "S"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 476,
+      "productId": 4,
+      "title": "Mens Casual Slim Fit",
+      "total": {
+        "price": 15.99,
+        "shipping": 100,
+        "discount": 0
+      },
+      "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
+      "variation": {
+        "color": "black",
+        "size": "S"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 368,
+      "productId": 4,
+      "title": "Mens Casual Slim Fit",
+      "total": {
+        "price": 15.99,
+        "shipping": 100,
+        "discount": 0
+      },
+      "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
+      "variation": {
+        "color": "red",
+        "size": "M"
+      },
+      "quantity": 1
+    },
+    {
+      "id": 29,
+      "productId": 4,
+      "title": "Mens Casual Slim Fit",
+      "total": {
+        "price": 15.99,
+        "shipping": 100,
+        "discount": 0
+      },
+      "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "image": "../../../assets/images/product-image/71YXzeOuslL._AC_UY879_.jpg",
+      "variation": {
+        "color": "black",
+        "size": "M"
       },
       "quantity": 1
     }
