@@ -16,11 +16,15 @@ import { ProductsService } from 'src/app/core/services/products.service';
 export class ProductListComponent implements OnDestroy{
   public productList : Product[] = [];
   public filteredProduct = new Array();
+
   public categories: any[] = ["men's clothing", "women's clothing","jewelery", "electronics"]
   public currentCategory:string = ''
+  public searchKey:string ="";
+
+  public allProductLoaded:boolean = false
   public loader:boolean = false
   public carouselItems = new Array()
-  public searchKey:string ="";
+  
   public subOff$ = new Subject()
 
   constructor(
@@ -81,25 +85,31 @@ export class ProductListComponent implements OnDestroy{
   }
 
   onScroll(){
-    this.loader = true
-    setTimeout(() => {
-      this.api.getNextProducts()
-      .pipe(takeUntil(this.subOff$))
-      .subscribe(res=>{
-        if(res.length === 0) return
+    if(!this.allProductLoaded){
 
-        this.loader = false
+      this.loader = true
 
-        this.productList = this.productList.concat(res)
-        if(this.currentCategory === ''){
-          this.filteredProduct = this.filteredProduct.concat(res)
-        }
-        else{
-          this.filteredProduct = this.filteredProduct.concat(res.filter(p=>{
-            return p.category === this.currentCategory
-          }))
-        }
-      })
-    }, 2000);
+      setTimeout(() => {
+        this.api.getNextProducts().pipe(takeUntil(this.subOff$)).subscribe(res=>{
+          if(res.length === 0) {
+            this.loader = false
+            this.allProductLoaded = true
+            return
+          }
+
+          this.loader = false
+
+          this.productList = this.productList.concat(res)
+          if(this.currentCategory === ''){
+            this.filteredProduct = this.filteredProduct.concat(res)
+          }
+          else{
+            this.filteredProduct = this.filteredProduct.concat(res.filter(p=>{
+              return p.category === this.currentCategory
+            }))
+          }
+        })
+      }, 2000);
+    }
   }
 }

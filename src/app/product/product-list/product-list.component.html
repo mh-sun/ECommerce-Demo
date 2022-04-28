@@ -42,38 +42,47 @@
     </button>
 </div>
 
-<div class="row">
-  <div class="col-md-2 bg-light py-3 d-flex flex-column ">
+<div class="grid grid-cols-5 gap-4">
+  <div class="bg-white">
     <p class="text-center h3">All Category</p><hr>
-    <button class="btn" (click)="filterNone()">
-      All products
-    </button>
-    <ng-container *ngFor="let cat of categories">
-      <button class="btn" (click)="filterProduct(cat)">
-        {{cat}}
+    <div>
+      <button mat-button class="w-full" (click)="filterNone()">
+        All products
       </button>
+    </div>
+    <ng-container *ngFor="let cat of categories">
+      <div>
+        <button mat-button class="w-full" (click)="filterProduct(cat)">
+          {{cat}}
+        </button>
+      </div>
     </ng-container>
   </div>
-  <div class="col-md-9">
-    <div class="row justify-content-center"
+  <div class="col-span-4 "
+  infiniteScroll
+  [infiniteScrollDistance]="0"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScroll()">
+    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3 p-4"
     infiniteScroll
     [infiniteScrollDistance]="0"
     [infiniteScrollThrottle]="150"
     (scrolled)="onScroll()">
-      <ng-container 
-      *ngFor="let item of filteredProduct">
-        <div class="card col-md-3" >
-          <div (click)="viewProduct(item)">
-            <div class="img-wrap">
-              <img mat-card-image src="{{item.image}}" alt="" class="prodct-img">
+      <ng-container *ngFor="let item of filteredProduct">
+        <div class="bg-white h-96 w-64 grid grid-rows-6 grid-flow-col gap-3 py-4 px-3 rounded justify-self-center" >
+          <div (click)="viewProduct(item)" class="row-span-5 grid grid-rows-5 grid-flow-col gap-2">
+            <div class="row-span-3 flex justify-center">
+              <img src="{{item.image}}" alt="" class="product-img object-contain w-40 h-40">
             </div>
-            <div>
-              <h5 class="truncate">{{item.title}}</h5>
+            <div class="row-span-2 grid grid-rows-3 grid-flow-col gap-1">
+              <h5 class="truncate text-center">{{item.title}}</h5>
               <p class="truncate">{{item.description}}</p>
-              <p><strong>Price:</strong> ${{item.price}}</p>
+              <p class="text-center"><strong>Price:</strong> ${{item.price}}</p>
             </div>
           </div>
-          <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button>
+          <div class="flex justify-center w-full">
+            <button mat-button (click)=addtocart(item) class="bg-cyan-300 rounded w-36">Add to cart</button>
+          </div>
         </div>
       </ng-container>
     </div>
