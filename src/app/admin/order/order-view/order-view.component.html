@@ -10,7 +10,7 @@
                             <th>Product Image</th>
                             <th>Variation</th>
                             <th>Quantity</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -36,25 +36,25 @@
                             <td>
                                 {{item.quantity}}
                             </td>
-                            <td>
+                            <!-- <td>
                                 <button mat-icon-button (click)="removeItem(i)">
                                     <mat-icon>delete_forever</mat-icon>
                                     Remove
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-2 ">
                         <h2><b>Current Status: </b> </h2>
                         <h4>{{productStatus}}</h4>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <h2><b>Change Status: </b></h2>
                     <mat-form-field appearance="outline">
-                        <mat-label>Select Status</mat-label>
+                        <mat-label>{{productStatus}}</mat-label>
                         <mat-select>
                             <mat-option *ngFor="let status of statusQueue"
                                 (onSelectionChange)="changeStatus(status,$event)">
