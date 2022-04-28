@@ -136,6 +136,11 @@ export class CartApiService{
   }
 
   clearCart(){
+    let ids = this.cartProducts.map(c=>c.id)
+    ids.forEach(id=>{
+      this.cartDelete(id)
+    })
+
     this.cartProducts = []
     this.cartSubject.next(this.cartProducts)
     this.user?.carts.splice(0, this.user.carts.length)

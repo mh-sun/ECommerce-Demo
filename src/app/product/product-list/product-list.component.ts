@@ -15,11 +15,12 @@ import { ProductsService } from 'src/app/core/services/products.service';
 })
 export class ProductListComponent implements OnDestroy{
   public productList : Product[] = [];
-  public filterCategory = new Array();
-  public categories: any[] = []
+  public filteredProduct = new Array();
+  public categories: any[] = ["men's clothing", "women's clothing","jewelery", "electronics"]
+  public currentCategory:string = ''
+  public loader:boolean = false
   public carouselItems = new Array()
   public searchKey:string ="";
-  // public subcriptions:Subscription = new Subscription()
   public subOff$ = new Subject()
 
   constructor(
@@ -29,39 +30,33 @@ export class ProductListComponent implements OnDestroy{
     private logger:LogService,
     private router:Router
   ){
-    const productSub = this.api.getProduct()
+    this.api.getNextProducts()
     .pipe(takeUntil(this.subOff$))
     .subscribe(res=>{
       this.productList = res;
-      this.filterCategory = this.productList.filter(p=>{
-        return p.isActive
-      })
+      this.filteredProduct = this.productList
 
-      this.setCarousel(this.productList)
+      this.setCarousel()
 
-      this.setCategory(this.productList)
     })
-    // this.subcriptions.add(productSub)
   }
 
   ngOnDestroy(): void {
-    // this.subcriptions.unsubscribe()
-
     this.subOff$.next(1)
     this.subOff$.complete()
   }
 
-  setCarousel(productList: Product[]) {
+  setCarousel() {
     for(let i = 0; i < 3; i++){
-      this.carouselItems.push(this.filterCategory[i])
+      this.carouselItems.push(this.productList[i])
     }
   }
 
-  setCategory(productList: Product[]) {
-    this.productList.forEach(p=>{
-      if(this.categories.indexOf(p.category) < 0) this.categories.push(p.category)
-    })
-  }
+  // setCategory() {
+  //   this.productList.forEach(p=>{
+  //     if(this.categories.indexOf(p.category) < 0) this.categories.push(p.category)
+  //   })
+  // }
   
   addtocart(item: Product){
     let cartItem:Cart = this.cartService.createCartItem(item, item.variation[0].type, 1)
@@ -75,12 +70,36 @@ export class ProductListComponent implements OnDestroy{
   }
 
   filterProduct(category:string){
-    this.filterCategory = this.productList.filter(p=>{
-      return p.category === category
+    this.currentCategory = category
+    this.filteredProduct = this.productList.filter(p=>{
+      return p.category === this.currentCategory
     })
   }
 
   filterNone(){
-    this.filterCategory = this.productList
+    this.filteredProduct = this.productList
+  }
+
+  onScroll(){
+    this.loader = true
+    setTimeout(() => {
+      this.api.getNextProducts()
+      .pipe(takeUntil(this.subOff$))
+      .subscribe(res=>{
+        if(res.length === 0) return
+
+        this.loader = false
+
+        this.productList = this.productList.concat(res)
+        if(this.currentCategory === ''){
+          this.filteredProduct = this.filteredProduct.concat(res)
+        }
+        else{
+          this.filteredProduct = this.filteredProduct.concat(res.filter(p=>{
+            return p.category === this.currentCategory
+          }))
+        }
+      })
+    }, 2000);
   }
 }

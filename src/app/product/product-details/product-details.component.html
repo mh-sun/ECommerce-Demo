@@ -23,7 +23,7 @@
                                 {{data.price}}$
                             </h1>
                             <h5>
-                                <del>{{(data.price+data.price*.3).toFixed(2)}}</del> <strong> -30% </strong>
+                                <del>{{getPrice(data.price)}}</del> <strong> -30% </strong>
                             </h5>
                             <hr>
                             <div class="mt-4">
@@ -32,7 +32,7 @@
                                         <h4 class="h4 text-secondary" class="col-md-4">{{item}}</h4>
                                         <mat-radio-group class="col-md-8" [(ngModel)]="variation[item]">
                                             <ng-container *ngFor="let value of var_values[i];let i = index">
-                                                <mat-radio-button [checked]="i === 0" [value]="value" >
+                                                <mat-radio-button [value]="value" >
                                                     {{value}}
                                                 </mat-radio-button>
                                             </ng-container>

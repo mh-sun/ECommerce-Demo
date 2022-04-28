@@ -60,12 +60,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy{
         this.var_keys.forEach(key=>{
           let arr:any = []
           for(let var_i of this.data.variation){
+            if(!var_i.type[key]) continue
             if(arr.indexOf(var_i.type[key]) === -1){
               arr.push(var_i.type[key])
             }
           }
           this.var_values.push(arr)
         })
+        console.log(this.data.variation[0].type)
         for(let key in this.data.variation[0].type){
           this.variation[key] = this.data.variation[0].type[key]
         }
@@ -156,5 +158,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy{
     this.snackBar.open(message, "Close", {
       duration:time
     })
+  }
+
+  getPrice(price:number){
+    return price+Math.imul(price, 0.3)
   }
 }

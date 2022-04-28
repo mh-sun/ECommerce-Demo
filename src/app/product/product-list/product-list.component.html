@@ -54,10 +54,14 @@
       </button>
     </ng-container>
   </div>
-
-  <div class="col-md-10">
-    <div class="row justify-content-center">
-      <ng-container *ngFor="let item of filterCategory">
+  <div class="col-md-9">
+    <div class="row justify-content-center"
+    infiniteScroll
+    [infiniteScrollDistance]="0"
+    [infiniteScrollThrottle]="150"
+    (scrolled)="onScroll()">
+      <ng-container 
+      *ngFor="let item of filteredProduct">
         <div class="card col-md-3" >
           <div (click)="viewProduct(item)">
             <div class="img-wrap">
@@ -72,6 +76,9 @@
           <button class="btn btn-primary mt-auto" (click)=addtocart(item)>Add to cart</button>
         </div>
       </ng-container>
+    </div>
+    <div class="flex justify-center my-4" *ngIf="loader">
+      <div class="border-t-4 border-sky-500 rounded-full h-16 w-16 animate-spin"></div>
     </div>
   </div>
 </div>

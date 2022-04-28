@@ -32,6 +32,7 @@
     "json-server": "^0.17.0",
     "mdb-ui-kit": "^3.11.0",
     "ngx-bootstrap": "^8.0.0",
+    "ngx-infinite-scroll": "^13.0.1",
     "ngx-star-rating": "^2.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
