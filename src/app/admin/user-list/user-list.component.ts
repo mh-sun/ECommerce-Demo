@@ -12,7 +12,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   title: string | any;
   headerTitle: string | any;
-  displayedColumns: string[] = ['id', 'name', 'email', 'address', 'phone', 'view','remove'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'address', 'phone','remove'];
   dataSource: any;
   active!: string;
   notifier = new Subject()
