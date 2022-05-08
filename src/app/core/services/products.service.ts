@@ -9,8 +9,8 @@ import { Product } from '../models/product.model';
 
 export class ProductsService {
   public url ="http://localhost:3000/products";
-  private productPerLoad = 6
-  private productCount = 0
+  private productPerLoad = 4
+  public productCount = 0
   public renderedProductCount = new BehaviorSubject(0)
   constructor(private http:HttpClient) { 
     this.renderedProductCount.subscribe(num=>{
@@ -77,4 +77,7 @@ export class ProductsService {
     });
   }
 
+  productCountReset(){
+    this.productCount = 0
+  }
 }

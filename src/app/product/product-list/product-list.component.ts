@@ -19,8 +19,8 @@ export class ProductListComponent implements OnDestroy{
   public filteredProduct = new Array();
 
   public categories: any[] = ["men's clothing", "women's clothing","jewelery", "electronics"]
-  public currentCategory:string = ''
-  public searchKey:string ="";
+  public currentCategory:string = ""
+  public searchKey:string = "";
 
   public allProductLoaded:boolean = false
   public loader:boolean = false
@@ -39,13 +39,12 @@ export class ProductListComponent implements OnDestroy{
     this.api.getNextProducts().pipe(takeUntil(this.subOff$)).subscribe(res=>{
       this.productList = res;
       this.filteredProduct = this.productList
-
+      console.log(this.filteredProduct)
       this.setCarousel()
     })
 
     this.keyword.keyword$.pipe(takeUntil(this.subOff$)).subscribe(key=>{
       if(key!==''){
-        this.searchKey = key
         this.filterProductByKeywd(key)
       }
     })
@@ -54,10 +53,13 @@ export class ProductListComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subOff$.next(1)
     this.subOff$.complete()
+    this.api.productCountReset()
   }
 
   filterProductByKeywd(key: string) {
+    this.searchKey = key
     this.filteredProduct = this.productList.filter(product=>{
+      if(key === '') return true
       return product.title.toLowerCase().includes(key.toLowerCase())
     })
   }
@@ -68,12 +70,6 @@ export class ProductListComponent implements OnDestroy{
     }
   }
 
-  // setCategory() {
-  //   this.productList.forEach(p=>{
-  //     if(this.categories.indexOf(p.category) < 0) this.categories.push(p.category)
-  //   })
-  // }
-  
   addtocart(item: Product){
     let cartItem:Cart = this.cartService.createCartItem(item, item.variation[0].type, 1)
     this.cartService.addToCart(cartItem);
@@ -88,6 +84,7 @@ export class ProductListComponent implements OnDestroy{
   filterProduct(category:string){
     this.currentCategory = category
     this.filteredProduct = this.productList.filter(p=>{
+      if(category === '') return true
       return p.category === this.currentCategory
     })
   }
@@ -97,7 +94,7 @@ export class ProductListComponent implements OnDestroy{
   }
 
   onScroll(){
-    if(!this.allProductLoaded){
+    if(!this.allProductLoaded && !this.loader){
 
       this.loader = true
 
@@ -109,12 +106,12 @@ export class ProductListComponent implements OnDestroy{
             return
           }
 
-          this.loader = false
-
           this.productList = this.productList.concat(res)
 
           this.filterProduct(this.currentCategory)
           this.filterProductByKeywd(this.searchKey)
+
+          this.loader = false
         })
       }, 2000);
     }
