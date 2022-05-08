@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 import { CartApiService } from '../../services/cart-api.service';
 import { LogService } from '../../services/log.service';
 import { OrderService } from '../../services/order.service';
+import { SearchProductsService } from '../../services/search-products.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     private cartService:CartApiService,
     private logger:LogService,
     private orderService:OrderService,
+    private searchedKeywdSurvice:SearchProductsService,
     private router:Router){
     
     this.logger.loggedUser
@@ -63,5 +65,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
   setElemInactive(elem:HTMLElement){
     elem.classList.remove('dropdown-active')
 
+  }
+
+  searchProduct(keyword:string){
+    if(keyword!='')
+      this.searchedKeywdSurvice.keyword$.next(keyword)
   }
 }

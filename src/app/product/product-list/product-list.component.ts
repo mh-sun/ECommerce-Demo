@@ -7,6 +7,7 @@ import { Product } from 'src/app/core/models/product.model';
 import { CartApiService } from 'src/app/core/services/cart-api.service';
 import { LogService } from 'src/app/core/services/log.service';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { SearchProductsService } from 'src/app/core/services/search-products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -32,22 +33,33 @@ export class ProductListComponent implements OnDestroy{
     private cartService : CartApiService,
     private dialog:MatDialog,
     private logger:LogService,
-    private router:Router
+    private router:Router,
+    private keyword:SearchProductsService,
   ){
-    this.api.getNextProducts()
-    .pipe(takeUntil(this.subOff$))
-    .subscribe(res=>{
+    this.api.getNextProducts().pipe(takeUntil(this.subOff$)).subscribe(res=>{
       this.productList = res;
       this.filteredProduct = this.productList
 
       this.setCarousel()
+    })
 
+    this.keyword.keyword$.pipe(takeUntil(this.subOff$)).subscribe(key=>{
+      if(key!==''){
+        this.searchKey = key
+        this.filterProductByKeywd(key)
+      }
     })
   }
 
   ngOnDestroy(): void {
     this.subOff$.next(1)
     this.subOff$.complete()
+  }
+
+  filterProductByKeywd(key: string) {
+    this.filteredProduct = this.productList.filter(product=>{
+      return product.title.toLowerCase().includes(key.toLowerCase())
+    })
   }
 
   setCarousel() {
@@ -100,14 +112,9 @@ export class ProductListComponent implements OnDestroy{
           this.loader = false
 
           this.productList = this.productList.concat(res)
-          if(this.currentCategory === ''){
-            this.filteredProduct = this.filteredProduct.concat(res)
-          }
-          else{
-            this.filteredProduct = this.filteredProduct.concat(res.filter(p=>{
-              return p.category === this.currentCategory
-            }))
-          }
+
+          this.filterProduct(this.currentCategory)
+          this.filterProductByKeywd(this.searchKey)
         })
       }, 2000);
     }

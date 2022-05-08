@@ -7,8 +7,8 @@
         <span class="navbar-toggler-icon"></span>
         </button>
         <form class="d-flex search-form">
-            <input class="form-control me-2 search" type="text" placeholder="Search items" aria-label="Search">
-            <button class="d-flex align-items-center search-icon" type="submit">
+            <input class="form-control me-2 search" type="text" placeholder="Search items" aria-label="Search" #keywd>
+            <button class="d-flex align-items-center search-icon" type="submit" (click)="searchProduct(keywd.value)">
                 <mat-icon>search</mat-icon>
             </button>
         </form>
