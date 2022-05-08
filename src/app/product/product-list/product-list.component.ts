@@ -44,9 +44,7 @@ export class ProductListComponent implements OnDestroy{
     })
 
     this.keyword.keyword$.pipe(takeUntil(this.subOff$)).subscribe(key=>{
-      if(key!==''){
-        this.filterProductByKeywd(key)
-      }
+      this.filterProductByKeywd(key)
     })
   }
 
@@ -65,7 +63,8 @@ export class ProductListComponent implements OnDestroy{
   }
 
   setCarousel() {
-    for(let i = 0; i < 3; i++){
+    let len = this.productList.length>3? 3:this.productList.length
+    for(let i = 0; i < len; i++){
       this.carouselItems.push(this.productList[i])
     }
   }

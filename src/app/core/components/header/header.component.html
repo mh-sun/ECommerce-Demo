@@ -6,10 +6,13 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="d-flex search-form">
-            <input class="form-control me-2 search" type="text" placeholder="Search items" aria-label="Search" #keywd>
-            <button class="d-flex align-items-center search-icon" type="submit" (click)="searchProduct(keywd.value)">
+        <form class="d-flex search-form relative">
+            <input class="form-control me-2 search" type="text" placeholder="Search items" aria-label="Search" [(ngModel)]="searchKey" [ngModelOptions]="{standalone: true}">
+            <button class="flex items-center absolute right-6 h-full" type="submit" (click)="searchProduct()">
                 <mat-icon>search</mat-icon>
+            </button>
+            <button class="flex items-center absolute right-12 h-full" (click)="resetKey()" *ngIf="searchKey!=''">
+                <mat-icon>clear</mat-icon>
             </button>
         </form>
         <div class="collapse navbar-collapse" id="navmenu">

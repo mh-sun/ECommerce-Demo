@@ -29,20 +29,13 @@ div{
     font-size: xx-large;
 }
 .search-form{
-    position: relative;
     width: 400px;
 }
 .search{
     border-radius: 50px;
     width: 100%;
 }
-.search-icon{
-    position: absolute;
-    right: 18px;
-    border: none;
-    background-color: inherit;
-    height: 100%;
-}
+
 .indicator{
     position:absolute;
     top: 0;

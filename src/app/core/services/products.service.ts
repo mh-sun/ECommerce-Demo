@@ -9,7 +9,7 @@ import { Product } from '../models/product.model';
 
 export class ProductsService {
   public url ="http://localhost:3000/products";
-  private productPerLoad = 4
+  private productPerLoad = 3
   public productCount = 0
   public renderedProductCount = new BehaviorSubject(0)
   constructor(private http:HttpClient) { 

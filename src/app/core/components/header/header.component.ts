@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   public logStatus!:boolean
   public cartItemNumber:number|undefined = 0
+  public searchKey:string = ''
   public subOff$ = new Subject()
 
   constructor(
@@ -67,8 +68,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   }
 
-  searchProduct(keyword:string){
-    if(keyword!='')
-      this.searchedKeywdSurvice.keyword$.next(keyword)
+  searchProduct(){
+    this.searchedKeywdSurvice.keyword$.next(this.searchKey)
   }
+
+  resetKey(){
+    this.searchKey = ''
+    this.searchProduct()
+  }
+
 }
