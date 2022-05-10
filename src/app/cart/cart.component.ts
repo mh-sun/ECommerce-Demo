@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Cart } from '../core/models/cart-product.model';
@@ -28,14 +29,15 @@ export class CartComponent implements OnDestroy{
   public phnToggle:boolean = false
   public email:string = ''
   public emlToggle:boolean = false
-  
+
   public subOff$ = new Subject()
   
   constructor(
     private cartService : CartApiService,
     private router:Router,
     private logger:LogService,
-    private orderService:OrderService
+    private orderService:OrderService,
+    private snackBar:MatSnackBar
   ) {
     this.logger.loggedUser.pipe(takeUntil(this.subOff$))
     .subscribe({
@@ -105,6 +107,23 @@ export class CartComponent implements OnDestroy{
   }
 
   makePayment(){
+    if(this.name===''){
+      this.showSnackBar('Name is empty',1000)
+      return
+    }
+    else if(this.address===''){
+      this.showSnackBar('Address is empty',1000)
+      return
+    }
+    else if(this.phone===''){
+      this.showSnackBar('Phone is empty',1000)
+      return
+    }
+    else if(this.email===''){
+      this.showSnackBar('Email is empty',1000)
+      return
+    }
+    
     let order:Order = this.createOrder()
 
     if(this.user){
@@ -175,5 +194,11 @@ export class CartComponent implements OnDestroy{
 
   getFullName(){
     return this.user?.name.firstname+' '+this.user?.name.lastname
+  }
+
+  public showSnackBar(message:string, time:number){
+    this.snackBar.open(message, "Close", {
+      duration:time
+    })
   }
 }

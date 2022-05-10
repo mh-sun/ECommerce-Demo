@@ -19,18 +19,11 @@
             <div>
                 <i class="fas fa-user"></i>
             </div>
-            <!-- <div class="col-span-4">
-                <span>{{user?.name?.firstname}} {{user?.name?.lastname}}</span><br>
-                <span>
-                    {{user?.address?.street}}, {{user?.address?.city}}
-                </span>
-            </div> -->
             <div class="col-span-4">
                 <div *ngIf="!nameToggle">
                     <span *ngIf="name!==''">{{name}}</span>
                     <span *ngIf="name===''">Enter a name</span>
                 </div>
-                <!-- <input *ngIf="!nameToggle" [value]='name' [placeholder]="user?getFullName():'Enter a Name'"> -->
                 <input *ngIf="nameToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="name" [(ngModel)]="name">
             </div>
             <div class="grid grid-cols-2 gap-1">
@@ -43,12 +36,10 @@
                 <i class="fas fa-map-marker-alt"></i>
             </div>
             <div class="col-span-4">
-                <!-- <span *ngIf="!addrToggle">{{address}}</span> -->
                 <div *ngIf="!addrToggle">
                     <span *ngIf="address!==''">{{address}}</span>
                     <span *ngIf="address===''">Enter a address</span>
                 </div>
-                <!-- <input *ngIf="!addrToggle" [value]='address' [placeholder]="user?address:'Enter a Address'"> -->
                 <input *ngIf="addrToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="address" [(ngModel)]="address">
             </div>
             <div class="grid grid-cols-2 gap-1">
@@ -61,8 +52,6 @@
                 <i class="fas fa-phone-alt"></i>
             </div>
             <div class="col-span-4">
-                <!-- <span *ngIf="!phnToggle">{{phone}}</span> -->
-                <!-- <input *ngIf="!phnToggle" [value]='phone' [placeholder]="user?phone:'Enter a phone no.'"> -->
                 <div *ngIf="!phnToggle">
                     <span *ngIf="phone!==''">{{phone}}</span>
                     <span *ngIf="phone===''">Enter a phone no.</span>
@@ -79,8 +68,6 @@
                 <i class="fas fa-envelope"></i>
             </div>
             <div class="col-span-4">
-                <!-- <span *ngIf="!emlToggle">{{email}}</span> -->
-                <!-- <input *ngIf="!emlToggle" [value]='email' [placeholder]="user?email:'Enter a phone no.'"> -->
                 <div *ngIf="!emlToggle">
                     <span *ngIf="email!==''">{{email}}</span>
                     <span *ngIf="email===''">Enter a email</span>
@@ -120,7 +107,6 @@
             Make payment
         </button>
     </div>
-    
 </div>
 
 <ng-container *ngIf="products.length!=0">
