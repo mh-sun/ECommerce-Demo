@@ -5,15 +5,15 @@
     </a>
   </div>
   <mat-divider></mat-divider>
-  <h2 matSubheader class="mt-2">APPLICATIONS</h2>
+  <!-- <h2 matSubheader class="mt-2">APPLICATIONS</h2> -->
 
   <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
     <button mat-button>
       <mat-icon>dashboard</mat-icon> Dashboard
     </button>
   </a>
-  <a mat-list-item>
-    <button mat-button (click)="openDialog()"><i class='fa fa-shopping-bag'></i> Add Product</button>
+  <a mat-list-item  routerLinkActive="list-item-active" routerLink="product/productAdd">
+    <button mat-button><i class='fa fa-shopping-bag'></i> Add Product</button>
   </a>
   <div>
     <a mat-list-item>

@@ -9,12 +9,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { AdminModule } from '../admin.module';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 @NgModule({
   declarations: [
     ProductEditComponent,
     ProductListComponent,
     ProductViewComponent,
+    ProductAddComponent,
   ],
   imports: [
     CommonModule,

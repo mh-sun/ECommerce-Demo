@@ -25,7 +25,7 @@ button {
     color: black;
 }
 tr.mat-header-row {
-    background-color: #c2a887d1;
+    background: rgb(160, 160, 160);
     
 }
 th.mat-header-cell {
@@ -37,7 +37,7 @@ td{
     text-align: center;
 }
 tr.mat-row:hover {
-    background:#dbc3a3d1 ;
+    background: rgb(215, 212, 212);
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;

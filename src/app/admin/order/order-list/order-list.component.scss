@@ -19,7 +19,7 @@ button {
 th {
     // text-align: center;
     font-size: large;
-    background: #8e9c7fe3;
+    background: rgb(160, 160, 160);
     font-weight: bold;
 }
 
@@ -34,7 +34,7 @@ td.Delivered {
 }
 
 tr.mat-row:hover {
-    background: #bbcca8e3;
+    background: rgb(215, 212, 212);
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;
