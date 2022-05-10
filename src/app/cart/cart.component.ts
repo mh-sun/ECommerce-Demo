@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
@@ -21,14 +22,29 @@ export class CartComponent implements OnDestroy{
   public user: User|null = null;
   public deliveryCharge:number = 100
 
-  public name:string = ''
+  // public name:string = ''
   public nameToggle:boolean = false
-  public address:string = ''
+  // public address:string = ''
   public addrToggle:boolean = false
-  public phone:string = ''
+  // public phone:string = ''
   public phnToggle:boolean = false
-  public email:string = ''
+  // public email:string = ''
   public emlToggle:boolean = false
+
+  public orderForm = this.fb.group({
+    name:['',[
+      Validators.required,Validators.minLength(7)
+    ]],
+    address:['',[
+      Validators.required,Validators.minLength(7)
+    ]],
+    phone:['',[
+      Validators.required,Validators.minLength(11)
+    ]],
+    email:['',[
+      Validators.required,Validators.minLength(6),Validators.email
+    ]],
+  })
 
   public subOff$ = new Subject()
   
@@ -37,17 +53,18 @@ export class CartComponent implements OnDestroy{
     private router:Router,
     private logger:LogService,
     private orderService:OrderService,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private fb:FormBuilder
   ) {
     this.logger.loggedUser.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
         this.user = u
         if(this.user){
-          this.name = this.user.name.firstname + ' ' + this.user.name.lastname
-          this.address = u?.address.number+', '+u?.address.street+', '+u?.address.city
-          this.phone = u?.phone+''
-          this.email = u?.email+''
+          this.orderForm.value.name = this.user.name.firstname + ' ' + this.user.name.lastname
+          this.orderForm.value.address = u?.address.number+', '+u?.address.street+', '+u?.address.city
+          this.orderForm.value.phone = u?.phone+''
+          this.orderForm.value.email = u?.email+''
         }
       },
       error:(err)=>{
@@ -107,22 +124,22 @@ export class CartComponent implements OnDestroy{
   }
 
   makePayment(){
-    if(this.name===''){
-      this.showSnackBar('Name is empty',1000)
-      return
-    }
-    else if(this.address===''){
-      this.showSnackBar('Address is empty',1000)
-      return
-    }
-    else if(this.phone===''){
-      this.showSnackBar('Phone is empty',1000)
-      return
-    }
-    else if(this.email===''){
-      this.showSnackBar('Email is empty',1000)
-      return
-    }
+    // if(this.name===''){
+    //   this.showSnackBar('Name is empty',1000)
+    //   return
+    // }
+    // else if(this.address===''){
+    //   this.showSnackBar('Address is empty',1000)
+    //   return
+    // }
+    // else if(this.phone===''){
+    //   this.showSnackBar('Phone is empty',1000)
+    //   return
+    // }
+    // else if(this.email===''){
+    //   this.showSnackBar('Email is empty',1000)
+    //   return
+    // }
     
     let order:Order = this.createOrder()
 
@@ -146,10 +163,10 @@ export class CartComponent implements OnDestroy{
         subtotal:this.grandTotal,
         shipping:this.deliveryCharge
       },
-      name:this.name,
-      address:this.address,
-      phone:this.phone,
-      email:this.email,
+      name:this.orderForm.value.name,
+      address:this.orderForm.value.address,
+      phone:this.orderForm.value.phone,
+      email:this.orderForm.value.email,
       date:(new Date()).toDateString(),
       status:"Payment Pending",
       products:products
