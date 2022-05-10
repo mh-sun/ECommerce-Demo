@@ -31,9 +31,11 @@ export class OrderListComponent implements OnInit {
       this.dataSource = responses;
       for(let response of responses){
         console.log(response.userId)
-        this.userService.getOneUser(response.userId).subscribe(res=>{
-          this.users.push(res);
-        })
+        if(response.userId){
+          this.userService.getOneUser(response.userId).subscribe(res=>{
+            this.users.push(res);
+          })
+        }
       }  
     });
   }

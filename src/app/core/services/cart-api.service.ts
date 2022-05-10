@@ -30,7 +30,6 @@ export class CartApiService{
           this.cartProductLoad()
       },
       error:val=>console.error(val),
-      complete:()=>console.error(' Logger user subscription complete')
     })
   }
 
@@ -53,12 +52,12 @@ export class CartApiService{
   }
 
   addToCart(product : Cart):boolean{
-    if(this.user === null) {
-      this.snackBar.open("Please login", "Close", {
-        duration:1000
-      })
-      return false
-    }
+    // if(this.user === null) {
+    //   this.snackBar.open("Please login", "Close", {
+    //     duration:1000
+    //   })
+    //   return false
+    // }
     let flag = false
     for (let i = 0; i < this.cartProducts.length; i++) {
       const cartItem = this.cartProducts[i];
@@ -95,8 +94,10 @@ export class CartApiService{
       next:(r:Cart)=>{
         this.cartProducts.push(r)
         this.cartSubject.next(this.cartProducts)
-        this.user?.carts.push(r.id)
-        this.logger.loggedUser.next(this.user)
+        if(this.user){
+          this.user.carts.push(r.id)
+          this.logger.loggedUser.next(this.user)
+        }
       },
       error:err=>{
         console.log(err)
@@ -118,14 +119,18 @@ export class CartApiService{
       }
     }
     this.cartSubject.next(this.cartProducts)
-    for (let i = 0; i < this.user!.carts.length; i++) {
-      const id = this.user!.carts[i];
-      if(id === product.id) {
-        this.user?.carts.splice(i,1)
-        this.logger.loggedUser.next(this.user)
-        break
+
+    if(this.user){
+      for (let i = 0; i < this.user!.carts.length; i++) {
+        const id = this.user!.carts[i];
+        if(id === product.id) {
+          this.user?.carts.splice(i,1)
+          this.logger.loggedUser.next(this.user)
+          break
+        }
       }
     }
+    
     this.cartDelete(product.id)
   }
 
@@ -143,16 +148,16 @@ export class CartApiService{
 
     this.cartProducts = []
     this.cartSubject.next(this.cartProducts)
-    this.user?.carts.splice(0, this.user.carts.length)
-    this.logger.loggedUser.next(this.user)
+    if(this.user){
+      this.user?.carts.splice(0, this.user.carts.length)
+      this.logger.loggedUser.next(this.user)
+    }
   }
 
   cartProductLoad(){
     this.cartProducts = []
     this.cartSubject.next(this.cartProducts)
 
-    console.log(this.user)
-    console.log(this.user?.carts)
     this.user?.carts.forEach((i, index)=>{
       this.http.get<Cart>(this.url+ i).subscribe({
         next:(res:Cart)=>{

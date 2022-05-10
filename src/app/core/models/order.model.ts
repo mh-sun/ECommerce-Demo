@@ -8,12 +8,13 @@ export interface productDetails{
 
 export interface Order{
     id:string,
-    userId:number,
+    userId:number|null,
     products:productDetails[]
     payment:{
         subtotal:number
         shipping:number
     }
+    name:string
     address:string
     date:string
     status:string

@@ -2,7 +2,7 @@
     d-flex flex-column 
     justify-content-around align-items-center checkoutInActive" 
 
-    id="checkout" *ngIf="user!==null">
+    id="checkout" >
     <div>
         <button class="text-light cross" (click)="checkOut()">
             <i class="fas fa-times-circle"></i>
@@ -14,67 +14,41 @@
         </span>
     </div>
     <div class="row"><hr class="text-light"></div>
-    <!-- <div class="row">
-        <table class="text-white table table-borderless gap-2">
-            <tr class="row ">
-                <td class="col-sm-2"><i class="fas fa-map-marker-alt"></i></td>
-                <td class="col-sm-7">
-                    <span>{{user?.name?.firstname}} {{user?.name?.lastname}}</span><br>
-                    <span>
-                        {{user?.address?.street}}, {{user?.address?.city}}
-                    </span>
-                </td>
-            </tr>
-            <tr class="row">
-                <td class="col-sm-2"><i class="fas fa-file-alt"></i></td>
-                <td class="col-sm-7">
-                    <span *ngIf="!addrToggle">{{address}}</span>
-                    <input *ngIf="addrToggle" type="text" class="border-2 border-sky-500 rounded" [placeholder]="address" [(ngModel)]="address">
-                </td>
-                <td class="col-sm-3 flex justify-center">
-                    <i class="fas fa-check-circle" *ngIf="addrToggle" (click)="addrChange()"></i>
-                    <i class="fas fa-edit" id="addr_checkbox" (click)="addrChange()"></i>
-                </td>
-            </tr>
-            <tr class="row ">
-                <td class="col-sm-2"><i class="fas fa-phone-alt"></i></td>
-                <td class="col-sm-7">
-                    <span>{{phone}}</span>
-                </td>
-                <td class="col-sm-3 flex justify-center">
-                    <i class="fas fa-edit" #p_edit></i>
-                </td>
-            </tr>
-            <tr class="row ">
-                <td class="col-sm-2"><i class="fas fa-envelope"></i></td>
-                <td class="col-sm-7">
-                    <span>{{user?.email}}</span>
-                </td>
-                <td class="col-sm-3 flex justify-center">
-                    <i class="fas fa-edit" (click)="emailEdit()"></i>
-                </td>
-            </tr>
-        </table>
-    </div> -->
     <div class="w-full my-4 grid grid-cols-1 gap-4 text-white">
+        <div class="grid grid-cols-6 gap-2">
+            <div>
+                <i class="fas fa-user"></i>
+            </div>
+            <!-- <div class="col-span-4">
+                <span>{{user?.name?.firstname}} {{user?.name?.lastname}}</span><br>
+                <span>
+                    {{user?.address?.street}}, {{user?.address?.city}}
+                </span>
+            </div> -->
+            <div class="col-span-4">
+                <div *ngIf="!nameToggle">
+                    <span *ngIf="name!==''">{{name}}</span>
+                    <span *ngIf="name===''">Enter a name</span>
+                </div>
+                <!-- <input *ngIf="!nameToggle" [value]='name' [placeholder]="user?getFullName():'Enter a Name'"> -->
+                <input *ngIf="nameToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="name" [(ngModel)]="name">
+            </div>
+            <div class="grid grid-cols-2 gap-1">
+                <i class="fas fa-check-circle" *ngIf="nameToggle" (click)="nameChange()"></i>
+                <i class="fas fa-edit" (click)="nameChange()"></i>
+            </div>
+        </div>
         <div class="grid grid-cols-6 gap-2">
             <div>
                 <i class="fas fa-map-marker-alt"></i>
             </div>
             <div class="col-span-4">
-                <span>{{user?.name?.firstname}} {{user?.name?.lastname}}</span><br>
-                <span>
-                    {{user?.address?.street}}, {{user?.address?.city}}
-                </span>
-            </div>
-            
-        </div>
-        <div class="grid grid-cols-6 gap-2">
-            <div>
-                <i class="fas fa-file-alt"></i>
-            </div>
-            <div class="col-span-4">
-                <span *ngIf="!addrToggle">{{address}}</span>
+                <!-- <span *ngIf="!addrToggle">{{address}}</span> -->
+                <div *ngIf="!addrToggle">
+                    <span *ngIf="address!==''">{{address}}</span>
+                    <span *ngIf="address===''">Enter a address</span>
+                </div>
+                <!-- <input *ngIf="!addrToggle" [value]='address' [placeholder]="user?address:'Enter a Address'"> -->
                 <input *ngIf="addrToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="address" [(ngModel)]="address">
             </div>
             <div class="grid grid-cols-2 gap-1">
@@ -87,7 +61,12 @@
                 <i class="fas fa-phone-alt"></i>
             </div>
             <div class="col-span-4">
-                <span *ngIf="!phnToggle">{{phone}}</span>
+                <!-- <span *ngIf="!phnToggle">{{phone}}</span> -->
+                <!-- <input *ngIf="!phnToggle" [value]='phone' [placeholder]="user?phone:'Enter a phone no.'"> -->
+                <div *ngIf="!phnToggle">
+                    <span *ngIf="phone!==''">{{phone}}</span>
+                    <span *ngIf="phone===''">Enter a phone no.</span>
+                </div>
                 <input *ngIf="phnToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="phone" [(ngModel)]="phone">
             </div>
             <div class="grid grid-cols-2 gap-1">
@@ -100,7 +79,12 @@
                 <i class="fas fa-envelope"></i>
             </div>
             <div class="col-span-4">
-                <span *ngIf="!emlToggle">{{email}}</span>
+                <!-- <span *ngIf="!emlToggle">{{email}}</span> -->
+                <!-- <input *ngIf="!emlToggle" [value]='email' [placeholder]="user?email:'Enter a phone no.'"> -->
+                <div *ngIf="!emlToggle">
+                    <span *ngIf="email!==''">{{email}}</span>
+                    <span *ngIf="email===''">Enter a email</span>
+                </div>
                 <input *ngIf="emlToggle" type="text" class="border-2 border-sky-500 rounded text-black w-full" [placeholder]="email" [(ngModel)]="email">
             </div>
             <div class="grid grid-cols-2 gap-1">

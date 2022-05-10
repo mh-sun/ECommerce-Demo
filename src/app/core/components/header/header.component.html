@@ -8,7 +8,7 @@
         </button>
         <form class="d-flex search-form relative">
             <input class="form-control me-2 search" type="text" placeholder="Search items" aria-label="Search" [(ngModel)]="searchKey" [ngModelOptions]="{standalone: true}">
-            <button class="flex items-center absolute right-6 h-full" type="submit" (click)="searchProduct()">
+            <button class="flex items-center absolute right-5 h-full" type="submit" (click)="searchProduct()">
                 <mat-icon>search</mat-icon>
             </button>
             <button class="flex items-center absolute right-12 h-full" (click)="resetKey()" *ngIf="searchKey!=''">

@@ -20,6 +20,8 @@ export class CartComponent implements OnDestroy{
   public user: User|null = null;
   public deliveryCharge:number = 100
 
+  public name:string = ''
+  public nameToggle:boolean = false
   public address:string = ''
   public addrToggle:boolean = false
   public phone:string = ''
@@ -40,6 +42,7 @@ export class CartComponent implements OnDestroy{
       next:u=>{
         this.user = u
         if(this.user){
+          this.name = this.user.name.firstname + ' ' + this.user.name.lastname
           this.address = u?.address.number+', '+u?.address.street+', '+u?.address.city
           this.phone = u?.phone+''
           this.email = u?.email+''
@@ -104,8 +107,10 @@ export class CartComponent implements OnDestroy{
   makePayment(){
     let order:Order = this.createOrder()
 
-    this.user?.orders.push(order.id)
-    this.logger.loggedUser.next(this.user)
+    if(this.user){
+      this.user.orders.push(order.id)
+      this.logger.loggedUser.next(this.user)
+    }
 
     this.orderService.postOrder(order)
     
@@ -116,12 +121,13 @@ export class CartComponent implements OnDestroy{
   createOrder(): Order {
     let products = this.getProductDetailsForOrder()
     let order:Order = {
-      id:Math.floor(Math.random()*1000).toString(),
-      userId:this.user!.id,
+      id:Math.floor(Math.random()*100000).toString(),
+      userId:this.user?this.user.id:null,
       payment:{
         subtotal:this.grandTotal,
         shipping:this.deliveryCharge
       },
+      name:this.name,
       address:this.address,
       phone:this.phone,
       email:this.email,
@@ -147,6 +153,11 @@ export class CartComponent implements OnDestroy{
     return products
   }
 
+  nameChange(){    
+    this.nameToggle = !this.nameToggle
+    return this.nameToggle
+  }
+
   addrChange(){    
     this.addrToggle = !this.addrToggle
     return this.addrToggle
@@ -162,4 +173,7 @@ export class CartComponent implements OnDestroy{
     return this.phnToggle
   }
 
+  getFullName(){
+    return this.user?.name.firstname+' '+this.user?.name.lastname
+  }
 }

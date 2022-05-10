@@ -12,13 +12,12 @@ const routes: Routes = [
   {
     path:'',
     component:CartComponent,
-    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers:[AuthGuard]
+  providers:[]
 })
 export class CartRoutingModule { }

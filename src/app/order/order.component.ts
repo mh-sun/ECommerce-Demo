@@ -12,7 +12,7 @@ import { OrderService } from '../core/services/order.service';
   styleUrls: ['./order.component.css']
 })
 export class OrdersComponent implements OnInit, OnDestroy{
-  public user: User|any;
+  public user: User|null = null;
   public counts = ["Payment Pending","Processing","Shipped","Delivered"];
   public totalBill=0;
   public order:Order|null = null;
@@ -34,31 +34,27 @@ export class OrdersComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     this.orderId = routeParams.get('id');
-    this.route.params
-    .pipe(takeUntil(this.subOff$))
-    .subscribe(res=>{
+    this.route.params.pipe(takeUntil(this.subOff$)).subscribe(res=>{
       this.orderId = res['id']
       this.setOrder()
     })
   }
 
   setOrder() {
-    this.orderService.getOneOrder(this.orderId)
-    .pipe(takeUntil(this.subOff$))
-    .subscribe(o=>{
+    this.orderService.getOneOrder(this.orderId).pipe(takeUntil(this.subOff$))
+    .subscribe((o:Order)=>{
       this.order = o
-      console.log(this.order)
       if(this.order){
         this.orderStatusIndex = this.counts.indexOf(o.status)
         this.totalBill = this.order.payment.shipping+this.order.payment.subtotal;
 
-        this.log.getOneUser(this.order?.userId)
-        .pipe(takeUntil(this.subOff$))
-        .subscribe({
-          next:u=>{
-            this.user = u;
-          }
-        })
+        if(this.order.userId){
+          this.log.getOneUser(this.order.userId).pipe(takeUntil(this.subOff$)).subscribe({
+            next:u=>{
+              this.user = u;
+            }
+          })
+        }
       }
     })
   }

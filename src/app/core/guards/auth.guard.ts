@@ -11,9 +11,7 @@ export class AuthGuard implements CanActivate {
   private user:User|null = null
   constructor(private router:Router, private logger:LogService){
     this.logger.loggedUser.subscribe({
-      next:(u)=>{
-        // console.log(u);
-        
+      next:(u)=>{        
         this.user = u
       }
     })
