@@ -16,7 +16,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   product: Product | any;
   productIdFromRoute!: number;
   notifier = new Subject();
-
+  statusQueue = ["Active", "Deactive"];
   constructor(private route: ActivatedRoute, private service: ProductsService) { }
 
   ngOnInit(): void {
@@ -36,7 +36,21 @@ export class ProductViewComponent implements OnInit, OnDestroy {
     console.log(state, this.product, this.productIdFromRoute);
     this.service.updateProduct(this.product, this.productIdFromRoute);
   }
+  changeStatus(status: string, event: any) {
+    if (event.isUserInput) {
+      if(status=="Active"){
+        this.product.isActive = true;
+      }
+      else{
+        this.product.isActive = false;
+      }
+      this.service.updateProduct(this.product, this.productIdFromRoute);
 
+      // this.productStatus = status
+      // this.data.status = status;
+      // this.service.updateOrder(this.data, this.productIdFromRoute);
+    }
+  }
   ngOnDestroy(): void {
     this.notifier.next(1)
     this.notifier.complete()

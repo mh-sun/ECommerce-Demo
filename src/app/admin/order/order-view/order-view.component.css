@@ -7,3 +7,12 @@
     color: green;
     font-weight: bold;
 }
+mat-form-field{
+    width: 32%;
+}
+th{
+    background: rgb(215, 212, 212);
+}
+.container {
+    padding: 2%;
+}

@@ -84,14 +84,14 @@
 
                         </div>
                     </div>
-                    <div>
+                    <!-- <div>
                         <div>
                             <h2>Status:</h2>
                         </div>
                         <div *ngIf="product.isActive">Active</div>
                         <div *ngIf="!product.isActive">Deactive</div>
-                    </div>
-                    <div>
+                    </div> -->
+                    <!-- <div>
                         <div>
                             <h2>Change Status:</h2>
                         </div>
@@ -102,6 +102,19 @@
                                 (click)="activate(product.isActive)">Active</button>
                         </div>
 
+                    </div> -->
+                    <div class="row">
+                        <h2><b>Status: </b></h2>
+                        <mat-form-field appearance="outline">
+                            <mat-label *ngIf="product.isActive">Active</mat-label>
+                            <mat-label *ngIf="!product.isActive">Deactive</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let status of statusQueue"
+                                    (onSelectionChange)="changeStatus(status,$event)">
+                                    {{ status }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </td>
             </tr>
