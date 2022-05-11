@@ -1,17 +1,18 @@
 <div class="container-fluid page">
   <!-- <div class="center"> -->
   <div class="row space">
-    <div class="col-md-4 space">
+    <div class="col-md-5 space">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><button mat-button>
-              <mat-icon>inventory</mat-icon>
-            </button>Product in Stock</mat-card-title>
+          <div mat-card-avatar>
+            <mat-icon>inventory</mat-icon>
+          </div>
+          <mat-card-title>Product in Stock</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>
+          <p class="font">
 
-            Total {{totalProduct}} products is in stock.
+            Total {{totalProduct}} products is in stock.If you click on view product you can see all product list in a table. You can also change the product details if you need. You can active or deactive a product.
           </p>
         </mat-card-content>
         <mat-card-actions>
@@ -21,40 +22,41 @@
         </mat-card-actions>
       </mat-card>
     </div>
-    <div class="col-md-4 space">
+    <div class="col-md-5 space">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>
-            <button mat-button>
+          <div mat-card-avatar>
               <mat-icon>shopping_cart</mat-icon>
-            </button>Orders
+          </div>
+          <mat-card-title>
+            Orders
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>
-
-            Total {{totalOrder}} order is submitted.
+          <p class="font">
+            Total {{totalOrder}} order is submitted.If you click on view order you can see all order list in a table. You can also view the order details if you need. You can change the order status.
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <a routerLink="/admin/order">
-            <button mat-button>View Orders</button>
-          </a>
+            <a routerLink="/admin/order">
+              <button mat-button>View Orders</button>
+            </a>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
   <div class="row space">
-    <div class="col-md-4 space">
+    <div class="col-md-5 space2">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><button mat-button>
-              <mat-icon>person</mat-icon>
-            </button> Registered User</mat-card-title>
+          <div mat-card-avatar>
+            <mat-icon>person</mat-icon>
+          </div>
+          <mat-card-title>Registered User</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>
-            Total {{totalUser}} user registered so far.
+          <p class="font">
+            Total {{totalUser}} user registered so far.If you click on view users you can see all user list in a table. You can also remove user as you need.
           </p>
         </mat-card-content>
         <mat-card-actions>

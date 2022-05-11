@@ -30,10 +30,10 @@ button {
     color: black;
 }
 tr.mat-header-row{
-    background-color: #598889ed;
+    background: rgb(160, 160, 160);
 }
 tr.mat-row:hover {
-    background:#a4d0d2ed ;
+    background: rgb(215, 212, 212);
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;

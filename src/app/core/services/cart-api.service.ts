@@ -28,6 +28,9 @@ export class CartApiService{
         this.user = res
         if(this.user!=null)
           this.cartProductLoad()
+        else{
+          this.clearCart()
+        }
       },
       error:val=>console.error(val),
     })
@@ -52,12 +55,6 @@ export class CartApiService{
   }
 
   addToCart(product : Cart):boolean{
-    // if(this.user === null) {
-    //   this.snackBar.open("Please login", "Close", {
-    //     duration:1000
-    //   })
-    //   return false
-    // }
     let flag = false
     for (let i = 0; i < this.cartProducts.length; i++) {
       const cartItem = this.cartProducts[i];

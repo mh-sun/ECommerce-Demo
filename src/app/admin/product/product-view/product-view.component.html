@@ -1,82 +1,106 @@
 <mat-card class="content">
+    <h1 class="centerTitle"><b>View Product Details</b></h1>
     <div *ngIf="product">
-        <div class="card py-3">
-           <div class="table">
+        <!-- <div class="card py-3"> -->
+        <div class="table">
             <tr>
                 <td class="col-sm-6">
-                  <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
-                  <img [src]="product.image" >
-                  <!-- </div>  -->
+                    <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
+                    <img [src]="product.image">
+                    <!-- </div>  -->
                 </td>
                 <td class="col-sm-8">
                     <div>
-                        <div><h2>Title:</h2></div>
+                        <div>
+                            <h2>Title:</h2>
+                        </div>
                         {{product.title}}
                     </div>
                     <div>
-                        <div><h2>Description:</h2></div>
+                        <div>
+                            <h2>Description:</h2>
+                        </div>
                         {{product.description}}
                     </div>
                     <div>
-                        <div><h2>Price:</h2></div>
+                        <div>
+                            <h2>Price:</h2>
+                        </div>
                         {{product.price|pricing}}
                     </div>
                     <div>
-                        <div><h2>Rating:</h2></div>
-                        <div><h4>Rate:</h4></div>{{product.rating.rate}}
-                        <div><h4>Count:</h4></div>{{product.rating.count}}
+                        <div>
+                            <h2>Rating:</h2>
+                        </div>
+                        <div>
+                            <h4>Rate:</h4>
+                        </div>{{product.rating.rate}}
+                        <div>
+                            <h4>Count:</h4>
+                        </div>{{product.rating.count}}
                     </div>
                     <div>
-                        <div><h2>Variation:</h2></div>
+                        <div>
+                            <h2>Variation:</h2>
+                        </div>
                         <!-- {{product.variation|json}} -->
                         <div *ngFor="let variant of product.variation">
-                            <div><h4><b>Type:</b></h4></div>
+                            <div>
+                                <h4><b>Type:</b></h4>
+                            </div>
                             <div *ngFor="let var_k of variant.type|keyvalue">
-                                <div class="d-flex" >
+                                <div class="d-flex">
                                     <div class="col-md-4">
                                         <span class="d-flex center">{{var_k.key}}:</span>
                                     </div>
                                     <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex" >{{var_k.value}} 
+                                        <span class="d-flex">{{var_k.value}}
                                         </span>
-                                    </div>   
+                                    </div>
                                 </div>
                             </div>
                             <div>
-                                <div class="d-flex" >
+                                <div class="d-flex">
                                     <div class="col-md-4">
                                         <span class="d-flex center"><b>Quantity:</b></span>
                                     </div>
                                     <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex" >{{variant.quantity}}
+                                        <span class="d-flex">{{variant.quantity}}
                                         </span>
-                                    </div>   
+                                    </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div>
-                        <div><h2>Status:</h2></div>
+                        <div>
+                            <h2>Status:</h2>
+                        </div>
                         <div *ngIf="product.isActive">Active</div>
                         <div *ngIf="!product.isActive">Deactive</div>
                     </div>
                     <div>
-                        <div><h2>Change Status:</h2></div>
-                        <div *ngIf="product.isActive"><button mat-button (click)="activate(!product.isActive)">Deactive</button></div>
-                        <div *ngIf="!product.isActive"><button mat-button (click)="activate(product.isActive)">Active</button></div>
+                        <div>
+                            <h2>Change Status:</h2>
+                        </div>
+                        <div *ngIf="product.isActive"><button mat-button
+                                (click)="activate(!product.isActive)">Deactive</button></div>
+                        <div *ngIf="!product.isActive"><button mat-button
+                                (click)="activate(product.isActive)">Active</button></div>
                         <div class="rightAlign">
-                            <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
+                            <a mat-list-item routerLinkActive="list-item-active"
+                                [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
                                 <button mat-button>
-                                  <mat-icon>edit</mat-icon>
-                                   Edit Product Details
+                                    <mat-icon>edit</mat-icon>
+                                    Edit Product Details
                                 </button>
-                              </a>
+                            </a>
                         </div>
                     </div>
                 </td>
             </tr>
-           </div>
         </div>
     </div>
+    <!-- </div> -->
 </mat-card>

@@ -58,6 +58,7 @@ export class LogService {
   }
 
   logout(){
+    
     localStorage.removeItem('loggedUser')
     this.loggedUser.next(null)
   }

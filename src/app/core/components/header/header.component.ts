@@ -31,14 +31,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
     .pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
-        // this.cartItemNumber = u === null? 0:u?.carts.length
         this.logStatus = u === null? false:true
       },
       error:err=>{
         console.log(err)
       }
     })
-    cartService.cartSubject.pipe(takeUntil(this.subOff$)).subscribe({
+    this.cartService.cartSubject.pipe(takeUntil(this.subOff$)).subscribe({
       next:carts=>{
         this.cartItemNumber = carts.length
       }

@@ -1,0 +1,144 @@
+<mat-card class="content">
+    <h1 class="centerTitle"><b>Add Product Details</b></h1>
+    <div class="table">
+        <tr>
+            <td class="col-sm-6" *ngIf="imageLink && imageLink !== ''">
+                <img [src]="imageLink">
+            </td>
+            <td class="col-sm-8">
+
+                <form class="my-form content content-center-col" [formGroup]="productForm">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Title</mat-label>
+                        <input matInput formControlName="title">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Price</mat-label>
+                        <input matInput formControlName="price">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <input matInput formControlName="description">
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Category</mat-label>
+                        <input matInput formControlName="category">
+                    </mat-form-field>
+
+                    <div class="full-width variant">
+                        <mat-label>Upload product image: </mat-label>
+                        <input type="file" accept="image/*" (change)="imagePreview($event)" />
+                    </div>
+                    <div class="full-width variant">
+                        <div class="full-width">
+                            <p class="title">Variant:</p>
+                        </div>
+                        <div *ngFor="let variation of Variation;let k=index">
+                            <ng-container>
+                                <div class="table full-width" *ngFor="let var_k of variation|keyvalue">
+                                    <div class="d-flex">
+                                        <div class="col-md-4">
+                                            <span class="d-flex center">{{var_k.key}}:</span>
+                                        </div>
+                                        <div class="col-md-8 d-flex flex-column">
+                                            <span class="d-flex">{{var_k.value}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container>
+                                <div class="table full-width">
+                                    <div class="d-flex">
+                                        <div class="col-md-4">Quantity:
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn-ico" (click)="increaseQuantity(k)"><i
+                                                    class="fas fa-plus"></i></button>
+                                            <span>{{product.variation[k]['quantity']}}</span>
+                                            <button class="btn-ico" (click)="decreaseQuantity(k)"><i
+                                                    class="fas fa-minus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <button *ngIf="variantType" mat-button (click)="removeVariation(k)">
+                                <mat-icon>remove</mat-icon>Remove variation
+                            </button>
+                        </div>
+
+                        <div *ngIf="variantType">
+                            <div class="full-width" *ngFor="let group of variants.controls; let i = index;"
+                                formArrayName="variant">
+                                <div class="form-group jumbotron" [formGroupName]='i'>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Key</mat-label>
+                                        <input matInput formControlName="key">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Value</mat-label>
+                                        <input matInput formControlName="value">
+                                    </mat-form-field>
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Quantity</mat-label>
+                                        <input matInput formControlName="quantity">
+                                    </mat-form-field>
+                                    <div class="rightAlign">
+                                        <button mat-button (click)="removeVariation(i)"><i
+                                                class="fas fa-plus"></i>Remove Variant</button>
+                                    </div>
+                                    <!-- <div class="rightAlign">
+                         <button mat-button *ngIf="i>=0" (click)="removeType(i)"><mat-icon >remove</mat-icon>Remove Type</button>
+                        </div> -->
+                                </div>
+                            </div>
+                            <div class="full-width">
+                                <button mat-button (click)="addVariants()"><i class="fas fa-plus"></i>Add More
+                                    Variant</button>
+                            </div>
+                            <div class="rightAlign">
+                                <button mat-button (click)="addType()"><i class="fas fa-plus"></i>Add
+                                    More Type</button>
+                            </div>
+
+
+                            <div class="full-width" *ngFor="let group of types.controls; let j = index;"
+                                formArrayName="types">
+                                <div class="form-group jumbotron" [formGroupName]='j'>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Key</mat-label>
+                                        <input matInput formControlName="moreKey">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Value</mat-label>
+                                        <input matInput formControlName="moreValue">
+                                    </mat-form-field>
+                                </div>
+                                <div class="rightAlign">
+                                    <button mat-button (click)="removeType(j)"><i class="fas fa-plus"></i>Remove
+                                        Type</button>
+                                </div>
+                            </div>
+
+
+                            <!-- <label for="quantity">Quantity:</label>
+                <input type="text" id="key" #box> -->
+                            <!-- <button mat-button type="submit" (click)="addMore()" ><mat-icon>done</mat-icon></button> -->
+                        </div>
+                    </div>
+
+                    <mat-card-actions class="button">
+                        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()"
+                            [disabled]="!productForm.valid">Save</button>
+                    </mat-card-actions>
+                </form>
+            </td>
+        </tr>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+</mat-card>

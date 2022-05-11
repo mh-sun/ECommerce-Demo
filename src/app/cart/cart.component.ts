@@ -33,16 +33,16 @@ export class CartComponent implements OnDestroy{
 
   public orderForm = this.fb.group({
     name:['',[
-      Validators.required,Validators.minLength(7)
+      Validators.required,Validators.minLength(5),Validators.pattern('[a-zA-Z ]*')
     ]],
     address:['',[
-      Validators.required,Validators.minLength(7)
+      Validators.required,Validators.minLength(5),Validators.pattern('[a-zA-Z0-9 ,/-]*')
     ]],
     phone:['',[
-      Validators.required,Validators.minLength(11)
+      Validators.required,Validators.maxLength(15),Validators.pattern('[0-9-]*')
     ]],
     email:['',[
-      Validators.required,Validators.minLength(6),Validators.email
+      Validators.required,Validators.minLength(5),Validators.email
     ]],
   })
 
@@ -56,15 +56,20 @@ export class CartComponent implements OnDestroy{
     private snackBar:MatSnackBar,
     private fb:FormBuilder
   ) {
+    setTimeout(() => {
+      console.log(this.orderForm)
+    }, 1000);
     this.logger.loggedUser.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
         this.user = u
         if(this.user){
-          this.orderForm.value.name = this.user.name.firstname + ' ' + this.user.name.lastname
-          this.orderForm.value.address = u?.address.number+', '+u?.address.street+', '+u?.address.city
-          this.orderForm.value.phone = u?.phone+''
-          this.orderForm.value.email = u?.email+''
+          this.orderForm.patchValue({
+            name : u?.name.firstname + ' ' + u?.name.lastname,
+            address : u?.address.number+', '+u?.address.street+', '+u?.address.city,
+            phone : u?.phone,
+            email : u?.email
+          })
         }
       },
       error:(err)=>{
@@ -119,8 +124,8 @@ export class CartComponent implements OnDestroy{
       elem?.classList.add('checkoutInActive')
   }
 
-  getTotal(){
-    return (this.grandTotal + this.deliveryCharge).toFixed(2)
+  getTotal(amount:number){
+    return (amount).toFixed(2)
   }
 
   makePayment(isValid:boolean){

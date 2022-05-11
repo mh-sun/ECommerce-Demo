@@ -5,32 +5,33 @@
     </a>
   </div>
   <mat-divider></mat-divider>
-  <h2 matSubheader class="mt-2">APPLICATIONS</h2>
+  <!-- <h2 matSubheader class="mt-2">APPLICATIONS</h2> -->
 
   <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
     <button mat-button>
       <mat-icon>dashboard</mat-icon> Dashboard
     </button>
   </a>
-  <a mat-list-item>
-    <button mat-button (click)="openDialog()"><i class='fa fa-shopping-bag'></i> Add Product</button>
+  <a mat-list-item  routerLinkActive="list-item-active" routerLink="product/productAdd">
+    <button mat-button><i class='fa fa-shopping-bag'></i> Add Product</button>
   </a>
   <div>
     <a mat-list-item>
-      <button mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button mat-button [matMenuTriggerFor]="menu" >
         <mat-icon>store</mat-icon>Product
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </a>
-    <mat-menu #menu="matMenu">
-      <a mat-list-item routerLinkActive="list-item-active" routerLink="product">
+    <mat-menu #menu>
+      <a  routerLinkActive="list-item-active" routerLink="product">
         <button mat-menu-item>
           <mat-icon>list</mat-icon>
-          <span>ProductList</span>
+          ProductList
         </button>
       </a>
     </mat-menu>
   </div>
+ 
   <div>
     <a mat-list-item>
       <button mat-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
@@ -39,7 +40,7 @@
       </button>
     </a>
     <mat-menu #menu2="matMenu">
-      <a mat-list-item routerLinkActive="list-item-active" routerLink="order">
+      <a  routerLinkActive="list-item-active" routerLink="order">
         <button mat-menu-item>
           <mat-icon>list</mat-icon>
           <span>OrderList</span>

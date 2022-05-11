@@ -1,37 +1,41 @@
-.card img{
+.mat-card img {
     width: 70%;
     height: 100%;
 }
-.title{
-    color: rgba(0,0,0,.6);
+
+.title {
+    color: rgba(0, 0, 0, .6);
     text-align: left;
     font-size: large;
     font-weight: bold;
 }
-.variant{
-    background-color: rgba(0,0,0,.04);
+
+.variant {
+    background-color: rgba(0, 0, 0, .04);
     padding: 2%
 }
-/* .center{
-    color: rgba(0,0,0,.7);
-    padding-top: 18%;
-    font-size: small;
-    font-weight: bold;
-} */
-.btn-ico{
+
+.btn-ico {
     border: none;
     border-radius: 20px;
 }
-.btn-ico:hover{
-    margin-left:2% ;
-    color: white;
-    background-color:grey;
+
+.centerTitle {
+    text-align: center;
 }
-.quantity{
+
+.btn-ico:hover {
+    margin-left: 2%;
+    color: white;
+    background-color: grey;
+}
+
+.quantity {
     border: 0;
     text-align: center;
-    width:20%
+    width: 20%
 }
-.rightAlign{
+
+.rightAlign {
     text-align: right;
 }
