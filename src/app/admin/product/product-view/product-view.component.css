@@ -1,1 +1,7 @@
-@import '../product-edit/product-edit.component.css'
+@import '../product-edit/product-edit.component.css';
+/* div.leftAlign {
+    text-align: left;
+} */
+span .rightAlign {
+    text-align: right;
+}

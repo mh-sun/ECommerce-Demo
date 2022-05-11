@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { productDetails } from 'src/app/core/models/order.model';
-import { LogService } from 'src/app/core/services/log.service';
 import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class OrderViewComponent implements OnInit {
   statusQueue = ["Payment Pending", "Processing", "Shipped", "Delivered"];
   notifier = new Subject();
 
-  constructor(private route: ActivatedRoute, private service: OrderService, private log: LogService) {
+  constructor(private route: ActivatedRoute, private service: OrderService) {
     this.title = 'Order View';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;

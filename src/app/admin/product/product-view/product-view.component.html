@@ -11,8 +11,19 @@
                 </td>
                 <td class="col-sm-8">
                     <div>
-                        <div>
-                            <h2>Title:</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Title:</h2>
+                            </div>
+                            <div class="col-md-6 rightAlign">
+                                <a mat-list-item routerLinkActive="list-item-active"
+                                    [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
+                                    <button mat-button>
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </a>
+                            </div>
+
                         </div>
                         {{product.title}}
                     </div>
@@ -85,18 +96,12 @@
                             <h2>Change Status:</h2>
                         </div>
                         <div *ngIf="product.isActive"><button mat-button
-                                (click)="activate(!product.isActive)">Deactive</button></div>
-                        <div *ngIf="!product.isActive"><button mat-button
-                                (click)="activate(product.isActive)">Active</button></div>
-                        <div class="rightAlign">
-                            <a mat-list-item routerLinkActive="list-item-active"
-                                [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
-                                <button mat-button>
-                                    <mat-icon>edit</mat-icon>
-                                    Edit Product Details
-                                </button>
-                            </a>
+                                (click)="activate(!product.isActive)">Deactive</button>
                         </div>
+                        <div *ngIf="!product.isActive"><button mat-button
+                                (click)="activate(product.isActive)">Active</button>
+                        </div>
+
                     </div>
                 </td>
             </tr>
