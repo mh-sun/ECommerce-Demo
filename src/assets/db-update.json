@@ -167,7 +167,7 @@
           "quantity": 4
         }
       ],
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 3,
@@ -809,12 +809,12 @@
         "subtotal": 15.99,
         "shipping": 100
       },
-      "name":"John Doe",
+      "name": "John Doe",
       "address": "7682, new road, kilcoole",
       "phone": "1-570-236-7033",
       "email": "john@gmail.com",
       "date": "Wed Apr 27 2022",
-      "status": "Delivered",
+      "status": "Payment Pending",
       "products": [
         {
           "title": "Mens Casual Slim Fit",
@@ -834,7 +834,7 @@
         "subtotal": 39.99,
         "shipping": 100
       },
-      "name":"John Doe",
+      "name": "John Doe",
       "address": "7682, new road, Azimpur",
       "phone": "0191345678",
       "email": "john@gmail.com",
