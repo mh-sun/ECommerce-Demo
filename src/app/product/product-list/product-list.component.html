@@ -42,8 +42,8 @@
     </button>
 </div>
 
-<div class="grid grid-cols-5 gap-4">
-  <div class="bg-white">
+<div class="grid grid-cols-5">
+  <div class="bg-white col-span-2 md:col-span-1">
     <p class="text-center h3">All Category</p><hr>
     <div>
       <button mat-button class="w-full" (click)="filterNone()">
@@ -58,18 +58,18 @@
       </div>
     </ng-container>
   </div>
-  <div class="col-span-4 "
+  <div class="col-span-3 md:col-span-4"
   infiniteScroll
   [infiniteScrollDistance]="0"
   [infiniteScrollThrottle]="150"
   (scrolled)="onScroll()">
-    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3 p-4"
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 p-4"
     infiniteScroll
     [infiniteScrollDistance]="0"
     [infiniteScrollThrottle]="150"
     (scrolled)="onScroll()">
       <ng-container *ngFor="let item of filteredProduct">
-        <div class="bg-white h-96 w-64 grid grid-rows-6 grid-flow-col gap-3 py-4 px-3 rounded justify-self-center" >
+        <div class="bg-white grid grid-rows-6 grid-flow-col gap-3 py-4 px-3 rounded justify-self-center" >
           <div (click)="viewProduct(item)" class="row-span-5 grid grid-rows-5 grid-flow-col gap-2">
             <div class="row-span-3 flex justify-center">
               <img src="{{item.image}}" alt="" class="product-img object-contain w-40 h-40">

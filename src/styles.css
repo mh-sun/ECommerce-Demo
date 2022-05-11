@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html, body { 
   height: 100%;
 }
@@ -10,8 +11,9 @@ body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: gainsboro;
-    /* min-width: 768px; */
+    min-width: 480px;
 }
+
 a{
   cursor: pointer;
 }
@@ -19,10 +21,6 @@ a{
 .self-center{
   margin-left: auto;
   margin-right: auto;
-}
-mat-card{
-  width: 60%;
-  margin-top: 20px;    
 }
   
 .content{

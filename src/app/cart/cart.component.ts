@@ -123,23 +123,8 @@ export class CartComponent implements OnDestroy{
     return (this.grandTotal + this.deliveryCharge).toFixed(2)
   }
 
-  makePayment(){
-    // if(this.name===''){
-    //   this.showSnackBar('Name is empty',1000)
-    //   return
-    // }
-    // else if(this.address===''){
-    //   this.showSnackBar('Address is empty',1000)
-    //   return
-    // }
-    // else if(this.phone===''){
-    //   this.showSnackBar('Phone is empty',1000)
-    //   return
-    // }
-    // else if(this.email===''){
-    //   this.showSnackBar('Email is empty',1000)
-    //   return
-    // }
+  makePayment(isValid:boolean){
+    if(!isValid) return
     
     let order:Order = this.createOrder()
 
