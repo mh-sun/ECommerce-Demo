@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
   status = false;
   displayedColumns: string[] = ['id', 'name', 'address', 'date', 'price', 'status', 'edit', 'action'];
   array: any[] = [];
-  users:User[] =[];
+  // users:User[] =[];
   dataSource: Order[] = [];
   notifier = new Subject();
 
@@ -29,14 +29,14 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getOrders().pipe(takeUntil(this.notifier)).subscribe(responses => {
       this.dataSource = responses;
-      for(let response of responses){
-        console.log(response.userId)
-        if(response.userId){
-          this.userService.getOneUser(response.userId).subscribe(res=>{
-            this.users.push(res);
-          })
-        }
-      }  
+      // for(let response of responses){
+      //   console.log(response.userId)
+      //   if(response.userId){
+      //     this.userService.getOneUser(response.userId).subscribe(res=>{
+      //       this.users.push(res);
+      //     })
+      //   }
+      // }  
     });
   }
 

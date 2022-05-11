@@ -20,7 +20,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private service: ProductsService) { }
 
   ngOnInit(): void {
-    this.title = 'Edit Product';
+    this.title = 'View Product';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
     const routeParams = this.route.snapshot.paramMap;

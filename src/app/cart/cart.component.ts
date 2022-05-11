@@ -56,9 +56,6 @@ export class CartComponent implements OnDestroy{
     private snackBar:MatSnackBar,
     private fb:FormBuilder
   ) {
-    setTimeout(() => {
-      console.log(this.orderForm)
-    }, 1000);
     this.logger.loggedUser.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:u=>{
@@ -148,7 +145,6 @@ export class CartComponent implements OnDestroy{
     let products = this.getProductDetailsForOrder()
     let order:Order = {
       id:Math.floor(Math.random()*100000).toString(),
-      userId:this.user?this.user.id:null,
       payment:{
         subtotal:this.grandTotal,
         shipping:this.deliveryCharge
