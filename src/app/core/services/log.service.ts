@@ -10,6 +10,7 @@ export class LogService {
 
   public userSubscription:any
   public loggedUser = new BehaviorSubject<User|null>(null)
+  public logChange$ = new BehaviorSubject(false)
 
   private url = 'http://localhost:3000/'
 
@@ -20,13 +21,12 @@ export class LogService {
     }
     else{
       this.loggedUser.next(JSON.parse(str))
+      this.logChange$.next(true)
     }
     this.loggedUser.subscribe(user=>{
       if(user !== null){
         this.storeUser(user)
-        http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{
-          // console.log(res)
-        })
+        http.put<User>(this.url+'users/'+user?.id, user)
       }
     })
   }
@@ -54,13 +54,13 @@ export class LogService {
   logIn(user:User){
     localStorage.setItem('loggedUser', JSON.stringify(user))
     this.loggedUser.next(user)
-    
+    this.logChange$.next(true)
   }
 
   logout(){
-    
     localStorage.removeItem('loggedUser')
     this.loggedUser.next(null)
+    this.logChange$.next(false)
   }
 
   storeUser(user:User|null){
