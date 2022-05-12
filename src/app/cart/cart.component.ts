@@ -127,7 +127,7 @@ export class CartComponent implements OnDestroy{
     this.orderService.postOrder(order)
     
     this.cartService.clearCart()
-    this.router.navigate(['cart/payment'])
+    this.router.navigate(['cart/payment',order.id])
   }
 
   createOrder(): Order {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor() { }
+  public order_num:number = 0
+
+  constructor(
+    private route:ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => this.order_num = params['id']);
   }
-
+  
 }

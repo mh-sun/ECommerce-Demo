@@ -21,26 +21,21 @@ export class OrderService {
     this.userSubscription = this.currentOrder.subscribe({
       next: u => {
         this.order = u
-        console.log(this.order)
       }
     })
   }
 
   getOrders() {
-    console.log('getting orders')
     return this.http.get<Order[]>(this.url);
   }
 
   updateOrder(postData: Object, id: string) {
     const newUrl = this.url + '/' + id;
-    this.http.put(newUrl, postData).subscribe(data => {
-      console.log(data);
-    });
+    this.http.put(newUrl, postData)
   }
 
   getOneOrder(id: string) {
     const newUrl = this.url + '/' + id;
-    console.log('getting a single order')
     return this.http.get<any>(newUrl).pipe(map((res: any) => {
       return res;
     }))
@@ -48,9 +43,8 @@ export class OrderService {
 
   postOrder(order:Order){
     this.http.post<Order>(this.url, order).subscribe({
-      next:res=>console.log(res),
+      next:res=>{},
       error:err=>console.log(err),
-      complete:()=>console.log('complete')
     })
   }
 
