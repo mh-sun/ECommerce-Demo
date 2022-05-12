@@ -22,21 +22,17 @@ export class CartComponent implements OnDestroy{
   public user: User|null = null;
   public deliveryCharge:number = 100
 
-  // public name:string = ''
   public nameToggle:boolean = false
-  // public address:string = ''
   public addrToggle:boolean = false
-  // public phone:string = ''
   public phnToggle:boolean = false
-  // public email:string = ''
   public emlToggle:boolean = false
 
   public orderForm = this.fb.group({
     name:['',[
-      Validators.required,Validators.minLength(5),Validators.pattern('[a-zA-Z ]*')
+      Validators.required,Validators.minLength(5),
     ]],
     address:['',[
-      Validators.required,Validators.minLength(5),Validators.pattern('[a-zA-Z0-9 ,/-]*')
+      Validators.required,Validators.minLength(5),
     ]],
     phone:['',[
       Validators.required,Validators.maxLength(15),Validators.pattern('[0-9-]*')

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactComponent } from './core/components/contact/contact.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   { 
     path: 'profile', 
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) 
+  },
+  {
+    path:'contact',
+    component:ContactComponent
   },
   {
     path:'**',

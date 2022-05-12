@@ -1,129 +1,99 @@
-<!-- <mat-card class="w-50 self-center p-4 my-5 main"> -->
-    <div class="container">
-        <div class="title">
-            <h1>Order Details</h1>
-        </div>
-        <mat-card class="full-width">
-            <table class="full-width">
-                <tr>
-                    <td>Order #{{order?.id}}</td>
-                    <td rowspan="2" style="text-align: right;">Total {{totalBill|currency}}</td>
-                </tr>
-                <tr>
-                    <td>Placed On: {{order?.date}}</td>
-                </tr>
-            </table>
-        </mat-card>
-        <mat-card class="full-width" >
-            <div class="scalling">
-                <span *ngFor="let item of counts;let i = index">
-                    <span class="circle-desc" [class.circle-desc-active]="i===orderStatusIndex"
-                        [class.unreached]="i>orderStatusIndex">{{ item }}</span>
-                    <span class="circles" [class.unreached]="i>orderStatusIndex"></span>
-                    <span class="bar" *ngIf="(i != counts.length-1)"
-                        [class.unreached]="i>orderStatusIndex"></span>
-                </span>
-            </div>
-            <div class="card-table">
-                <div class="cart-product">
-                    <table class="table table-responsive">
-                        <!-- <tbody> -->
-                            <tr *ngFor="let item of order?.products; let i = index">
-                                <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
-                                <td style="width: 25%;">{{item.title}}</td>
-                                <th style="width: 13%;">{{totalBill|currency}}</th>
-                                <td style="width: 12%;">Qty: {{item.quantity}}</td>
-                                <td>
-                                    <button class="btn">
-                                        Write a review
-                                    </button>
-                                </td>
-                            </tr>
-                        <!-- </tbody> -->
-                    </table>
-                </div>
-            </div>
-        </mat-card>
-        <!-- <mat-card class="full-width"> -->
-            <div class="row">
-                <div class="col-md-6">
-                    <mat-card class="full-width">
-                        <mat-card-title>
-                            Shipping Address
-                        </mat-card-title>
-                        <mat-card-content class="font">
-                            <div class="full-width grid grid-cols-6 gap-2">
-                                <i class="fas fa-user"></i>
-                                <span class="col-span-5">
-                                    {{order?.name}}
-                                </span>
-                            </div>
-                            <div class="full-width grid grid-cols-6 gap-2">
-                                <i class="fas fa-location-arrow"></i>
-                                <span class="col-span-5">
-                                    {{order?.address}}
-                                </span>
-                            </div>
-                            <div class="full-width grid grid-cols-6 gap-2">
-                                <i class="fas fa-phone-alt"></i>
-                                <span class="col-span-5">
-                                    {{order?.phone}}
-                                </span>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                    <mat-card class="full-width" *ngIf="user">
-                        <mat-card-title>
-                            Billing Address
-                        </mat-card-title>
-                        <mat-card-content class="font">
-                            <div class="full-width  grid grid-cols-6 gap-2">
-                                <i class="fas fa-user"></i>
-                                <span class="col-span-5">
-                                    {{user.name.firstname + ' ' + user.name.lastname}}
-                                </span>
-                            </div>
-                            <div class="full-width  grid grid-cols-6 gap-2"> 
-                                <i class="fas fa-location-arrow"></i>
-                                <span class="col-span-5">
-                                    {{user.address.number}}, {{user.address.street}}, {{user.address.city}}
-                                </span>
-                            </div>
-                            <div class="full-width grid grid-cols-6 gap-2">
-                                <i class="fas fa-phone-alt"></i>
-                                <span class="col-span-5">
-                                    {{user.phone}}
-                                </span>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="col-md-6">
-                    <mat-card class="full-width">
-                        <mat-card-title>
-                            Total Summary
-                        </mat-card-title>
-                        <mat-card-content class="font">
-                            <div class="row">
-                                <div class="col-md-6">Subtotal</div>
-                                <div class="col-md-6" style="text-align: right;">{{order?.payment?.subtotal|currency}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">Shipping fee</div>
-                                <div class="col-md-6" style="text-align: right;">{{order?.payment?.shipping|currency}}</div>
-                            </div>
-                            <!-- <div class="full-width"> -->
-                                <hr>
-                            <!-- </div> -->
-                            <div class="row">
-                                <div class="col-md-6">Total</div>
-                                <div class="col-md-6" style="text-align: right;">{{totalBill|currency}}</div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-            </div>
-        <!-- </mat-card> -->
+<div class="grid grid-flow-row auto-rows-max gap-4 p-4">
+    <div class="">
+        <p class="text-2xl font-bold align-middle my-2 px-3 text-center">Order Details</p>
     </div>
-<!-- </mat-card> -->
-
+    <mat-card class="">
+        <table class="full-width">
+            <tr>
+                <td>Order #{{order?.id}}</td>
+                <td rowspan="2" style="text-align: right;">Total {{totalBill|currency}}</td>
+            </tr>
+            <tr>
+                <td>Placed On: {{order?.date}}</td>
+            </tr>
+        </table>
+    </mat-card>
+    <mat-card class="" >
+        <div class="scalling">
+            <span *ngFor="let item of counts;let i = index">
+                <span class="circle-desc" [class.circle-desc-active]="i===orderStatusIndex"
+                    [class.unreached]="i>orderStatusIndex">{{ item }}</span>
+                <span class="circles" [class.unreached]="i>orderStatusIndex"></span>
+                <span class="bar" *ngIf="(i != counts.length-1)"
+                    [class.unreached]="i>orderStatusIndex"></span>
+            </span>
+        </div>
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-responsive">
+                    <!-- <tbody> -->
+                        <tr *ngFor="let item of order?.products; let i = index">
+                            <td><img style="width: 120px;" src="{{item.image}}" alt=""></td>
+                            <td style="width: 25%;">{{item.title}}</td>
+                            <th style="width: 13%;">{{totalBill|currency}}</th>
+                            <td style="width: 12%;">Qty: {{item.quantity}}</td>
+                            <td>
+                                <button class="btn">
+                                    Write a review
+                                </button>
+                            </td>
+                        </tr>
+                    <!-- </tbody> -->
+                </table>
+            </div>
+        </div>
+    </mat-card>
+    <!-- <mat-card class="full-width"> -->
+    <div class="grid grid-cols-2 gap-4">
+        <div class="">
+            <mat-card class="h-full">
+                <mat-card-title>
+                    Shipping Address
+                </mat-card-title>
+                <mat-card-content class="font">
+                    <div class="full-width grid grid-cols-6 gap-2">
+                        <i class="fas fa-user"></i>
+                        <span class="col-span-5">
+                            {{order?.name}}
+                        </span>
+                    </div>
+                    <div class="full-width grid grid-cols-6 gap-2">
+                        <i class="fas fa-location-arrow"></i>
+                        <span class="col-span-5">
+                            {{order?.address}}
+                        </span>
+                    </div>
+                    <div class="full-width grid grid-cols-6 gap-2">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="col-span-5">
+                            {{order?.phone}}
+                        </span>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="">
+            <mat-card class="h-full">
+                <mat-card-title>
+                    Total Summary
+                </mat-card-title>
+                <mat-card-content class="font">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="">Subtotal</div>
+                        <div class="" style="text-align: right;">{{order?.payment?.subtotal|currency}}</div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="">Shipping fee</div>
+                        <div class="" style="text-align: right;">{{order?.payment?.shipping|currency}}</div>
+                    </div>
+                    <br><hr>
+                </mat-card-content>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="">Total</div>
+                    <div class="" style="text-align: right;">{{totalBill|currency}}</div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <!-- </mat-card> -->
+</div>

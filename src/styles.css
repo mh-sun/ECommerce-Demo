@@ -28,22 +28,28 @@ a{
   margin-right:auto;  
   margin-bottom: 2%;
 }
+
 .example-section{
   margin: 2%;
 }
+
 .example-radio-group {
   display: inline-flex;
   flex-direction: column;
 }
+
 .example-radio-button {
   margin: 5px;
 }
+
 .button{
   display: block;
 }
+
 .resetButton{
   margin-left: 5%;
 }
+
 .my-form{
   min-width: 450px;
   max-width: 500px;
@@ -53,12 +59,14 @@ a{
 .full-width {
   width: 100%;
 }
+
 .content-center-col{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
 .justify-content-center{
   display: flex;
   justify-content: center;
