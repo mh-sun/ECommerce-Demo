@@ -108,9 +108,14 @@ export class ProductEditComponent implements OnInit {
     this.variants.push(this.addVariantGroup())
   }
 
+  removeVariant(index: number): void {
+    this.variants.removeAt(index);
+  }
+
   addType() {
     this.types.push(this.addTypeGroup())
   }
+  
   removeType(index: number): void {
     this.types.removeAt(index);
   }

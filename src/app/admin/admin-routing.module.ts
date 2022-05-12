@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddProductComponent } from './add-product/add-product.component';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -10,7 +9,6 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'addProduct', component: AddProductComponent },
       { path: 'userList', component: UserListComponent },
       {path:'userView/:id',component:UserViewComponent},
       {

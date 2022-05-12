@@ -55,7 +55,7 @@
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Phone No</mat-label>
-      <input matInput formControlName="phone" placeholder="phone" name="phone">
+      <input matInput formControlName="phone" placeholder="phone" name="phone" type="number">
     </mat-form-field>
     <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger full-width">
       <div *ngIf="phone.errors">
@@ -84,7 +84,7 @@
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Zip Code:</mat-label>
-        <input matInput formControlName="zipcode">
+        <input matInput formControlName="zipcode" type="number">
       </mat-form-field>
       <div *ngIf="code.invalid && (code.dirty || code.touched)" class="alert alert-danger">
         <div *ngIf="code.errors">

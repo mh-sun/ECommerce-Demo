@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product.model';
 import { Variation } from 'src/app/core/models/variation.model';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { ProductListComponent } from '../product-list/product-list.component';
 
 @Component({
   selector: 'app-product-add',
@@ -41,7 +43,7 @@ export class ProductAddComponent implements OnInit {
   imageLink: string | any;
   productForm = this.fb.group({
     title: ['', Validators.required],
-    price: ['', Validators.required],
+    price: ['', [Validators.required, this.validate]],
     description: ['', Validators.required],
     category: ['', Validators.required],
     image: ['', Validators.required],
@@ -49,8 +51,12 @@ export class ProductAddComponent implements OnInit {
     variant: this.fb.array([])
   });
 
-  constructor(private fb: FormBuilder, private service: ProductsService, private httpClient: HttpClient) { }
-
+  constructor(  public dialogRef: MatDialogRef<ProductListComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder, private service: ProductsService, private httpClient: HttpClient) { }
+  
+  onNoClick(): void {
+      this.dialogRef.close();
+  }
   get variants() {
     return this.productForm.get('variant') as FormArray
   }
@@ -68,6 +74,14 @@ export class ProductAddComponent implements OnInit {
   changeType(index: number) {
     console.log(index)
     this.index = index;
+  }
+
+  validate(control: AbstractControl): { [key: string]: any } | null {
+    const pattern = /[0-9\+\-\ ]/;
+    if (control.value <= 0 || !pattern.test(control.value)) {
+      return { 'priceInvalid': true };
+    }
+    return null;
   }
 
   private addVariantGroup(): FormGroup {
@@ -88,6 +102,10 @@ export class ProductAddComponent implements OnInit {
   addVariants() {
     console.log('called')
     this.variants.push(this.addVariantGroup())
+  }
+
+  removeVariant(index: number): void {
+    this.variants.removeAt(index);
   }
 
   addType() {
@@ -175,6 +193,7 @@ export class ProductAddComponent implements OnInit {
     this.addMore()
     console.log(this.product);
     this.service.addProduct(this.product)
+    this.dialogRef.close();
   }
 
 }
