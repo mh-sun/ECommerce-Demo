@@ -99,7 +99,6 @@ export class CartApiService{
     this.http.post<Cart>(this.url, item).subscribe({
       next:(r:Cart)=>{
         this.cartProducts.push(r)
-        console.log('something')
         this.cartSubject.next(this.cartProducts)
 
         if(this.user){
@@ -121,7 +120,6 @@ export class CartApiService{
             break
           }
         }
-        console.log('something')
         this.cartSubject.next(this.cartProducts)
       }
     })
@@ -135,7 +133,6 @@ export class CartApiService{
         break
       }
     }
-    console.log('something')
     this.cartSubject.next(this.cartProducts)
 
     if(this.user){
@@ -153,9 +150,7 @@ export class CartApiService{
   }
 
   cartDelete(id: number) {
-    this.http.delete<Cart>(this.url + id).subscribe({
-      next:(r:Cart)=>{console.log('cart item deleted', r)}
-    })
+    this.http.delete<Cart>(this.url + id)
   }
 
   clearCart(){
@@ -165,7 +160,6 @@ export class CartApiService{
     })
 
     this.cartProducts = []
-    console.log('something')
     this.cartSubject.next(this.cartProducts)
     if(this.user){
       this.user?.carts.splice(0, this.user.carts.length)
@@ -175,7 +169,6 @@ export class CartApiService{
 
   cartProductLoad(){
     this.cartProducts = []
-    console.log('something')
     this.cartSubject.next(this.cartProducts)
 
     this.user?.carts.forEach((i, index)=>{
@@ -183,8 +176,6 @@ export class CartApiService{
         next:(res:Cart)=>{
           this.cartProducts.push(res)
           if(index === this.user!.carts.length-1){
-            console.log(this.cartProducts)
-            console.log('something')
             this.cartSubject.next(this.cartProducts)
           }
         }

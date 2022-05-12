@@ -18,6 +18,7 @@ export class LogService {
     let str = localStorage.getItem('loggedUser')
     if(str === null){
       this.loggedUser.next(null)
+      this.logChange$.next(false)
     }
     else{
       this.loggedUser.next(JSON.parse(str))
