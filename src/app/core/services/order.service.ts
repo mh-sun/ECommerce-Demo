@@ -31,7 +31,7 @@ export class OrderService {
 
   updateOrder(postData: Object, id: string) {
     const newUrl = this.url + '/' + id;
-    this.http.put(newUrl, postData)
+    this.http.put(newUrl, postData).subscribe(res=>{})
   }
 
   getOneOrder(id: string) {

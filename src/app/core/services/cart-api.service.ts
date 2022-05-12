@@ -150,7 +150,7 @@ export class CartApiService{
   }
 
   cartDelete(id: number) {
-    this.http.delete<Cart>(this.url + id)
+    this.http.delete<Cart>(this.url + id).subscribe(res=>{})
   }
 
   clearCart(){

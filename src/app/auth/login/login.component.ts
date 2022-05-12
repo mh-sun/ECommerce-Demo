@@ -29,14 +29,11 @@ export class LoginComponent implements OnDestroy{
     password:['', Validators.required]
   })
   
-  // public subscription:Subscription = new Subscription();
   public subOff$ = new Subject()
 
   onLogin(){
-    let subs = this.logger.getUsers()
-    .pipe(takeUntil(this.subOff$))
+    this.logger.getUsers().pipe(takeUntil(this.subOff$))
     .subscribe((users:User[])=>{
-      console.log(users)
       for(let i=0; i<users.length; i++){
         let user = users[i]
         if(
@@ -52,11 +49,9 @@ export class LoginComponent implements OnDestroy{
       this.showDialog()
       this.user.reset()
     })
-    // this.subscription.add(subs)
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe()
     this.subOff$.next(1)
     this.subOff$.complete()
   }

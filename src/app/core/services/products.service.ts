@@ -52,14 +52,14 @@ export class ProductsService {
   updateProduct(postData: Object,id:number) {
     const newUrl = this.url+'/'+id;
     this.http.put( newUrl, postData).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
   addProduct(product:Product){
     console.log(product)
     return this.http.post(this.url, product).subscribe(res=>{
-      console.log('res',res)
+      // console.log('res',res)
     });
   }
 
@@ -73,7 +73,7 @@ export class ProductsService {
   deleteProduct(id:number) {
     const newUrl = this.url+'/'+id;
     this.http.delete(newUrl).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 

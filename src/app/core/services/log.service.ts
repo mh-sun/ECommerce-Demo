@@ -27,7 +27,7 @@ export class LogService {
     this.loggedUser.subscribe(user=>{
       if(user !== null){
         this.storeUser(user)
-        http.put<User>(this.url+'users/'+user?.id, user)
+        http.put<User>(this.url+'users/'+user?.id, user).subscribe(res=>{})
       }
     })
   }
@@ -67,6 +67,7 @@ export class LogService {
   storeUser(user:User|null){
     if(user === null) return
     localStorage.setItem('loggedUser', JSON.stringify(user))
+
   }
 
   deleteUser(id:number) {
