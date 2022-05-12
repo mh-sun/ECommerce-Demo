@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Order } from '../../models/order.model';
@@ -25,7 +26,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
     private logger:LogService,
     private orderService:OrderService,
     private searchedKeywdSurvice:SearchProductsService,
-    private router:Router){
+    private router:Router,
+    private snackBar:MatSnackBar
+  ){
     
     this.logger.loggedUser
     .pipe(takeUntil(this.subOff$))
@@ -63,8 +66,19 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.orderService.sendOrder(order);
   }
   
-  trackOrder(id:string){
-    this.router.navigate(['/order',id])
+  trackOrder(id:string, elem:HTMLElement){
+    this.orderService.isValid(id).subscribe(res=>{
+      this.setElemInactive(elem)
+      if(res){
+        this.router.navigate(['/order',id])
+      }
+      else {
+        this.snackBar.open('Track number not found', "Close", {
+          duration:1000
+        })
+      }
+
+    })
   }
 
   setElemActive(elem:HTMLElement){
@@ -73,7 +87,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   setElemInactive(elem:HTMLElement){
     elem.classList.remove('dropdown-active')
-
   }
 
   searchProduct(){

@@ -57,8 +57,23 @@ export class OrderService {
       })
     )
   }
+
   deleteOrder(id: string) {
     return this.http.delete(this.url + '/' + id);
   }
 
+  isValid(id:string){
+    return this.getOrders().pipe(map(res=>{
+      let check = false
+      
+      for(let i of res){
+        if(i.id === id){
+          check = true
+          break
+        }
+      }
+
+      return check
+    }))
+  }
 }
