@@ -71,24 +71,17 @@ export class CartComponent implements OnDestroy{
       },
       error:(err)=>{
         console.log(err)
-      },
-      complete:()=>{
-        console.log("Complete")
       }
     })
 
     this.cartService.cartSubject.pipe(takeUntil(this.subOff$))
     .subscribe({
       next:(res)=>{
-        console.log(res)
         this.products = res
         this.grandTotalPrice()
       },
       error:(err)=>{
         console.log(err)
-      },
-      complete:()=>{
-        console.log("Complete")
       }
     })
   }

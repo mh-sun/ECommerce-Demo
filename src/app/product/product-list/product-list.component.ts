@@ -39,7 +39,6 @@ export class ProductListComponent implements OnDestroy{
     this.api.getNextProducts().pipe(takeUntil(this.subOff$)).subscribe(res=>{
       this.productList = res;
       this.filteredProduct = this.productList
-      console.log(this.filteredProduct)
       this.setCarousel()
     })
 

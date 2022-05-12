@@ -21,25 +21,30 @@ export class CartApiService{
   constructor(
     private http:HttpClient,
     private logger:LogService,
-    private snackBar:MatSnackBar
   ){
     this.logger.loggedUser.subscribe({
       next:(res)=>{
         this.user = res
-        if(this.user!=null)
+      },
+      error:val=>console.error(val)
+    })
+
+    this.logger.logChange$.subscribe({
+      next:res=>{
+        if(res)
           this.cartProductLoad()
         else{
           this.clearCart()
         }
       },
-      error:val=>console.error(val),
+      error:val=>console.error(val)
     })
   }
 
   createCartItem(product:Product, variation:object, quantity:number):Cart
   {
     return {
-      id:Math.floor(Math.random() * 1000),
+      id:Math.floor(Math.random() * 100000),
       productId:product.id,
       title: product.title,
       total: {
@@ -62,8 +67,12 @@ export class CartApiService{
         cartItem.productId === product.productId &&
         this.isEqualObject(cartItem.variation, product.variation)){
           flag = true
-          console.log("product exists in cart")
-          return false
+          this.http.get<Cart>(this.url+cartItem.id).subscribe(res=>{
+            product.quantity = res.quantity+1
+            product.id = res.id
+            this.cartUpdate(product)
+          })
+          return true
         }
     }
     if(!flag) this.cartAdd(product)
@@ -90,7 +99,9 @@ export class CartApiService{
     this.http.post<Cart>(this.url, item).subscribe({
       next:(r:Cart)=>{
         this.cartProducts.push(r)
+        console.log('something')
         this.cartSubject.next(this.cartProducts)
+
         if(this.user){
           this.user.carts.push(r.id)
           this.logger.loggedUser.next(this.user)
@@ -103,7 +114,16 @@ export class CartApiService{
   }
   cartUpdate(item:Cart) {
     this.http.put<Cart>(this.url + item.id, item).subscribe({
-      next:(r:Cart)=>{console.log("Cart is updated", r)}
+      next:(r:Cart)=>{
+        for (let i = 0; i < this.cartProducts.length; i++) {
+          if(this.cartProducts[i].id === r.id){
+            this.cartProducts[i].quantity = r.quantity
+            break
+          }
+        }
+        console.log('something')
+        this.cartSubject.next(this.cartProducts)
+      }
     })
   }
 
@@ -115,6 +135,7 @@ export class CartApiService{
         break
       }
     }
+    console.log('something')
     this.cartSubject.next(this.cartProducts)
 
     if(this.user){
@@ -144,6 +165,7 @@ export class CartApiService{
     })
 
     this.cartProducts = []
+    console.log('something')
     this.cartSubject.next(this.cartProducts)
     if(this.user){
       this.user?.carts.splice(0, this.user.carts.length)
@@ -153,6 +175,7 @@ export class CartApiService{
 
   cartProductLoad(){
     this.cartProducts = []
+    console.log('something')
     this.cartSubject.next(this.cartProducts)
 
     this.user?.carts.forEach((i, index)=>{
@@ -161,6 +184,7 @@ export class CartApiService{
           this.cartProducts.push(res)
           if(index === this.user!.carts.length-1){
             console.log(this.cartProducts)
+            console.log('something')
             this.cartSubject.next(this.cartProducts)
           }
         }

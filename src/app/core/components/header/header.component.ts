@@ -37,9 +37,12 @@ export class HeaderComponent implements OnInit, OnDestroy{
         console.log(err)
       }
     })
+    console.log(11111111111);
+    
     this.cartService.cartSubject.pipe(takeUntil(this.subOff$)).subscribe({
       next:carts=>{
         this.cartItemNumber = carts.length
+        console.log(this.cartItemNumber);
       }
     })
   }
