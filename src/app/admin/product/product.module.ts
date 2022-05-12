@@ -24,7 +24,8 @@ import { ProductAddComponent } from './product-add/product-add.component';
     AngularMaterialModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    AdminModule
+    AdminModule,
+    // AddProductComponent
   ]
 })
 export class ProductModule { }

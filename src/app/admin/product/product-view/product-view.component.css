@@ -5,3 +5,12 @@
 span .rightAlign {
     text-align: right;
 }
+div .font{
+    font-size: large;
+}
+div .padding{
+    padding-bottom: 1%;
+}
+.viewCard{
+    background-color: rgb(215, 215, 215);
+}

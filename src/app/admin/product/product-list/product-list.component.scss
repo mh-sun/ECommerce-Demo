@@ -26,9 +26,9 @@ td{
     line-height: 25px;
     position: relative;
  }
-button {
-    color: black;
-}
+// button {
+//     color: black;
+// }
 tr.mat-header-row{
     background: rgb(160, 160, 160);
 }
@@ -37,4 +37,14 @@ tr.mat-row:hover {
     transition: 0.3s ease-in-out;
     transform: scale(1.02);
     height: 52px;
+}
+.rightAlign {
+
+    text-align: right;
+}
+.addBtn{
+    height: 63px;
+    width: 209px;
+    font-size: x-large;
+    margin: 1%;
 }

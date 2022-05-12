@@ -22,17 +22,18 @@ export class UserViewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: LogService,private orderService:OrderService) { }
 
   ngOnInit(): void {
-    this.title = 'Edit Product';
+    this.title = 'View User Details';
     this.headerTitle = document.getElementById('headerTitle')
     this.headerTitle.innerText = this.title;
     const routeParams = this.route.snapshot.paramMap;
     this.userIdFromRoute = Number(routeParams.get('id'));
-    const productSub = this.service.getOneUser(this.userIdFromRoute).pipe(takeUntil(this.notifier)).subscribe((res) => {
+    this.service.getOneUser(this.userIdFromRoute).pipe(takeUntil(this.notifier)).subscribe((res) => {
       this.user = res;
       if(this.user!==null){
         this.orderService.getUserOrders(this.user.orders)
         .pipe(takeUntil(this.notifier))
         .subscribe(orders=>{
+          console.log(orders)
           let c = 0
           for(let i = orders.length-1;i>=0;i--){
             if(c<3) {
@@ -42,7 +43,7 @@ export class UserViewComponent implements OnInit {
             else break
           }
         })
-      }    
+      }     
     });
   }
 

@@ -1,5 +1,12 @@
 <div class="container-fluid page">
     <div class="page__content p-3 position-relative">
+      <div class="rightAlign">
+        <button mat-raised-button color="primary" class="addBtn" (click)="openDialog()">
+          <mat-icon>add
+          </mat-icon> Add Product
+        </button>
+        
+      </div>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID. </th>

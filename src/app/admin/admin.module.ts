@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AngularMaterialModule } from '../angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddProductComponent } from './add-product/add-product.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PricingPipe } from './pipes/pricing.pipe';
@@ -19,7 +18,6 @@ import { UserViewComponent } from './user-view/user-view.component';
     HeaderComponent,
     HomeComponent,
     SidenavComponent,
-    AddProductComponent,
     UserListComponent,
     PricingPipe,
     UserViewComponent,
@@ -32,7 +30,7 @@ import { UserViewComponent } from './user-view/user-view.component';
     FontAwesomeModule,
   ],
   exports:[
-    PricingPipe
+    PricingPipe,
   ]
 })
 export class AdminModule { }
