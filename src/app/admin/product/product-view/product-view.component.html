@@ -1,124 +1,128 @@
 <mat-card class="content">
-    <h1 class="centerTitle"><b>View Product Details</b></h1>
+    <div class="centerTitle"><b>View Product Details</b></div>
     <div *ngIf="product">
-        <!-- <div class="card py-3"> -->
+        <div class="card py-3">
         <div class="table">
             <tr>
-                <td class="col-sm-6">
+                <td class="col-sm-4">
                     <!-- <div class="imagePreview" *ngIf="product.image && product.image !== ''"> -->
-                    <img [src]="product.image">
+                    <img class="content" [src]="product.image">
                     <!-- </div>  -->
                 </td>
                 <td class="col-sm-8">
-                    <div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2>Title:</h2>
-                            </div>
-                            <div class="col-md-6 rightAlign">
-                                <a mat-list-item routerLinkActive="list-item-active"
-                                    [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
-                                    <button mat-button>
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                </a>
-                            </div>
+                    <div class="my-form content">
+                        <div class="padding">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2>Title:</h2>
+                                </div>
+                                <div class="col-md-6 rightAlign">
+                                    <a mat-list-item routerLinkActive="list-item-active"
+                                        [routerLink]="['/admin/product/productEdit',productIdFromRoute]">
+                                        <button mat-button>
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </a>
+                                </div>
 
+                            </div>
+                            {{product.title}}
                         </div>
-                        {{product.title}}
-                    </div>
-                    <div>
-                        <div>
-                            <h2>Description:</h2>
+
+                        <div class="padding">
+                            <div>
+                                <h2>Description:</h2>
+                            </div>
+                            {{product.description}}
                         </div>
-                        {{product.description}}
-                    </div>
-                    <div>
-                        <div>
-                            <h2>Price:</h2>
+                        <div class="padding">
+                            <div>
+                                <h2>Price:</h2>
+                            </div>
+                            {{product.price|currency}}
                         </div>
-                        {{product.price|pricing}}
-                    </div>
-                    <div>
-                        <div>
+                        <div class="padding" >
                             <h2>Rating:</h2>
                         </div>
-                        <div>
-                            <h4>Rate:</h4>
-                        </div>{{product.rating.rate}}
-                        <div>
-                            <h4>Count:</h4>
-                        </div>{{product.rating.count}}
-                    </div>
-                    <div>
-                        <div>
-                            <h2>Variation:</h2>
-                        </div>
-                        <!-- {{product.variation|json}} -->
-                        <div *ngFor="let variant of product.variation">
-                            <div>
-                                <h4><b>Type:</b></h4>
-                            </div>
-                            <div *ngFor="let var_k of variant.type|keyvalue">
-                                <div class="d-flex">
-                                    <div class="col-md-4">
-                                        <span class="d-flex center">{{var_k.key}}:</span>
-                                    </div>
-                                    <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex">{{var_k.value}}
-                                        </span>
-                                    </div>
+                        <div class="padding">
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <span class="d-flex center">Rate:</span>
+                                </div>
+                                <div class="col-md-8 d-flex flex-column">
+                                    <span class="d-flex">{{product.rating.rate}}
+                                    </span>
                                 </div>
                             </div>
-                            <div>
-                                <div class="d-flex">
-                                    <div class="col-md-4">
-                                        <span class="d-flex center"><b>Quantity:</b></span>
-                                    </div>
-                                    <div class="col-md-8 d-flex flex-column">
-                                        <span class="d-flex">{{variant.quantity}}
-                                        </span>
-                                    </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <span class="d-flex center">Count:</span>
+                                </div>
+                                <div class="col-md-8 d-flex flex-column">
+                                    <span class="d-flex">{{product.rating.count}}
+                                    </span>
                                 </div>
                             </div>
+                            
+                            <!-- <div>
+                                <h4>Rate:</h4>
+                            </div>{{product.rating.rate}} -->
+                            <!-- <div>
+                                <h4>Count:</h4>
+                            </div>{{product.rating.count}} -->
+                        </div>
+                        <div class="padding">
+                            <div class="padding">
+                                <h2><b>Variation:</b></h2>
+                            </div>
+                            <!-- {{product.variation|json}} -->
+                            <div *ngFor="let variant of product.variation">
+                                <div>
+                                    <h3><b>Type:</b></h3>
+                                </div>
+                                <div class="padding" *ngFor="let var_k of variant.type|keyvalue">
+                                    <div class="d-flex">
+                                        <div class="col-md-4">
+                                            <span class="d-flex center">{{var_k.key}}:</span>
+                                        </div>
+                                        <div class="col-md-8 d-flex flex-column">
+                                            <span class="d-flex">{{var_k.value}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="padding">
+                                    <div class="d-flex">
+                                        <div class="col-md-4">
+                                            <h3><b>Quantity:</b></h3>
+                                            <!-- <span class="d-flex center">Quantity:</span> -->
+                                        </div>
+                                        <div class="col-md-8 d-flex flex-column">
+                                            <span class="d-flex">{{variant.quantity}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
-                    <!-- <div>
-                        <div>
-                            <h2>Status:</h2>
+                        <div class="row padding">
+                            <h2><b>Status: </b></h2>
+                            <mat-form-field appearance="outline">
+                                <mat-label *ngIf="product.isActive">Active</mat-label>
+                                <mat-label *ngIf="!product.isActive">Deactive</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let status of statusQueue"
+                                        (onSelectionChange)="changeStatus(status,$event)">
+                                        {{ status }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
-                        <div *ngIf="product.isActive">Active</div>
-                        <div *ngIf="!product.isActive">Deactive</div>
-                    </div> -->
-                    <!-- <div>
-                        <div>
-                            <h2>Change Status:</h2>
-                        </div>
-                        <div *ngIf="product.isActive"><button mat-button
-                                (click)="activate(!product.isActive)">Deactive</button>
-                        </div>
-                        <div *ngIf="!product.isActive"><button mat-button
-                                (click)="activate(product.isActive)">Active</button>
-                        </div>
-
-                    </div> -->
-                    <div class="row">
-                        <h2><b>Status: </b></h2>
-                        <mat-form-field appearance="outline">
-                            <mat-label *ngIf="product.isActive">Active</mat-label>
-                            <mat-label *ngIf="!product.isActive">Deactive</mat-label>
-                            <mat-select>
-                                <mat-option *ngFor="let status of statusQueue"
-                                    (onSelectionChange)="changeStatus(status,$event)">
-                                    {{ status }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
                     </div>
                 </td>
             </tr>
         </div>
     </div>
-    <!-- </div> -->
+    </div>
 </mat-card>
