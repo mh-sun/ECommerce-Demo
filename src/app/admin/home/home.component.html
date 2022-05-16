@@ -1,42 +1,22 @@
 <div class="container-fluid page">
-  <!-- <div class="center"> -->
-  <div class="row space">
-    <div class="col-md-6 space">
-      <!-- <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar>
-            <mat-icon>inventory</mat-icon>
-          </div>
-          <mat-card-title>Product in Stock</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="font">
-
-            Total {{totalProduct}} products is in stock.If you click on view product you can see all product list in a table. You can also change the product details if you need. You can active or deactive a product.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <a routerLink="/admin/product">
-            <button mat-button>View Product</button>
-          </a>
-        </mat-card-actions>
-      </mat-card> -->
+  <div class="row">
+    <div class="col-md-4 space" >
+     
       <div class="box">
         <div class="title row">
           <div class="col-md-1">
-            <button mat-button class="btn">
-              <!-- <i class="fas fa-inventory"></i> -->
+            <button mat-button>
               <mat-icon>inventory</mat-icon>
+              Product in Stock
             </button>
           </div>
           
-          <div class="col-md-11 text">Product in Stock</div> 
+          <!-- <div class="col-md-11 text">Product in Stock</div>  -->
         </div>
-        <!-- <div class="content"> -->
           <p class="font">
             Total {{totalProduct}} products is in stock.If you click on view product you can see all product list in a table. You can also change the product details if you need. You can active or deactive a product.
           </p>
-        <!-- </div> -->
+       
         <div class="footer">
           <a routerLink="/admin/product">
             <button mat-button class="link">View Product</button>
@@ -44,23 +24,22 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 space">
+    <div class="col-md-4 space">
       <div class="box">
         <div class="title row">
           <div class="col-md-1">
-            <button mat-button class="btn">
-              <!-- <i class="fas fa-inventory"></i> -->
-              <mat-icon>shopping_cart</mat-icon>
+            <button mat-button >
+              <mat-icon>shopping_cart</mat-icon>Orders
             </button>
           </div>
-          
-          <div class="col-md-11 text">Orders</div> 
+<!--           
+          <div class="col-md-11 text">Orders</div>  -->
         </div>
-        <!-- <div class="content"> -->
+      
           <p class="font">
             Total {{totalOrder}} order is submitted.If you click on view order you can see all order list in a table. You can also view the order details if you need. You can change the order status.
           </p>
-        <!-- </div> -->
+      
         <div class="footer">
           <a routerLink="/admin/order">
             <button mat-button class="link">View Orders</button>
@@ -68,14 +47,60 @@
         </div>
       </div>
     </div>
+    <div class="col-md-4 space">
+      <div class="box">
+        <div class="title row">
+          <div class="col-md-1">
+            <button mat-button>
+            
+              <mat-icon>person</mat-icon>Registered User
+            </button>
+          </div>
+          
+          <!-- <div class="col-md-11 text">Registered User</div>  -->
+        </div>
+        <!-- <div class="content"> -->
+          <p class="font">
+            Total {{totalUser}} user registered so far.If you click on view users you can see all user list in a table. You can also remove user as you need.You can active or deactive a product.
+          </p>
+        <!-- </div> -->
+        <div class="footer">
+          <a routerLink="/admin/userList">
+            <button mat-button class="link">View Users</button>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row space2">
+  <div class="chart">
+    <div >
+      <canvas class="myChart" baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend">
+      </canvas>
+    </div>
+  </div>
+  <!-- <div class="chart-wrapper">
+    <canvas baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [type]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+</div> -->
+
+  <!-- <canvas id="myChart2" style="width:100%;max-width:600px"></canvas> -->
+  <!-- <div class="row space2">
     <div class="col-md-6 space">
       <div class="box">
         <div class="title row">
           <div class="col-md-1">
             <button mat-button class="btn">
-              <!-- <i class="fas fa-inventory"></i> -->
+            
               <mat-icon>person</mat-icon>
             </button>
           </div>
@@ -94,5 +119,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
+
+
+

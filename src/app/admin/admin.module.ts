@@ -11,6 +11,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PricingPipe } from './pipes/pricing.pipe';
 import { UserViewComponent } from './user-view/user-view.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { UserViewComponent } from './user-view/user-view.component';
     AngularMaterialModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    NgChartsModule
   ],
   exports:[
     PricingPipe,
