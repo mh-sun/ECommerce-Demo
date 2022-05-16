@@ -1,14 +1,12 @@
-<div class="container-fluid p-4 bg-dark checkout 
+<div class="container-fluid px-4 bg-dark checkout 
 d-flex flex-column 
-justify-content-around align-items-center checkoutInActive" 
-
-id="checkout" >
+justify-content-around align-items-center checkoutInActive" id="checkout" >
     <div>
         <button class="text-light cross" (click)="checkOut()">
             <i class="fas fa-times-circle"></i>
         </button>
     </div>
-    <div class="row p-3 text-center">
+    <div class="row px-3 text-center">
         <span class="text-white h2">
             Shipping and Billing
         </span>
@@ -18,7 +16,7 @@ id="checkout" >
         <form [formGroup]="orderForm" (ngSubmit)="makePayment(orderForm.valid)">
             <div class="w-full my-4 grid grid-cols-1 gap-4 text-white">
                 <div class="grid grid-cols-6 gap-2">
-                    <div>
+                    <div class="flex justify-center">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="col-span-4">
@@ -34,7 +32,7 @@ id="checkout" >
                     </div>
                 </div>
                 <div class="grid grid-cols-6 gap-2">
-                    <div>
+                    <div class="flex justify-center">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="col-span-4">
@@ -50,7 +48,7 @@ id="checkout" >
                     </div>
                 </div>
                 <div class="grid grid-cols-6 gap-2">
-                    <div>
+                    <div class="flex justify-center">
                         <i class="fas fa-phone-alt"></i>
                     </div>
                     <div class="col-span-4">
@@ -66,7 +64,7 @@ id="checkout" >
                     </div>
                 </div>
                 <div class="grid grid-cols-6 gap-2">
-                    <div>
+                    <div class="flex justify-center">
                         <i class="fas fa-envelope"></i>
                     </div>
                     <div class="col-span-4">
@@ -115,9 +113,9 @@ id="checkout" >
 
 <ng-container *ngIf="products.length!=0">
     <div class="bg-white rounded m-8 p-4">
-        <div class="card-table">
+        <div class="card-table overflow-x-auto">
             <div class="cart-product">
-                <table class="table table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Sr.No</th>
