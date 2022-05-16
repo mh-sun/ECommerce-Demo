@@ -1,8 +1,12 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<button (click)="scrolltop()" class="fixed right-10 bottom-10 w-14 h-14 bg-cyan-400 z-10 rounded-full drop-shadow-md">
+  <i class="fas fa-arrow-up text-white text-2xl"></i>
+</button>
+
+<div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div class="carousel-indicators m-0">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="bg-black active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="bg-black" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class="bg-black" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
       <ng-container *ngFor="let item of carouselItems;let i = index">
@@ -12,13 +16,12 @@
               <div class="row">
                 <div class="text-white">
                   <span>New Arival</span>
-                  <h2>
+                  <h2 class="truncate">
                     {{item.title}}
                   </h2>
-                  <p>
+                  <p class="truncate">
                     {{item.description}}
                   </p>
-                  <br>
                   <div class="d-flex justify-content-around">
                     <a (click)="addtocart(item)" class="btn btn-carousel">Add to cart</a>
                     <a (click)="viewProduct(item)" class="btn btn-carousel">Discover</a>
@@ -27,32 +30,32 @@
               </div>
             </div>
           </div>
-          <img [src]="item.image" class="carousel-img">
+          <img [src]="item.image" class="carousel-img mb-48">
         </div>
       </ng-container>
 
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="carousel-control-prev-icon rounded py-4 bg-black" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon rounded py-4 bg-black" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
 </div>
 
-<div class="grid grid-cols-5">
-  <div class="bg-white col-span-2 md:col-span-1">
+<div class="sm:grid sm:grid-cols-5" #viewPanel>
+  <div class="bg-white col-span-2 md:col-span-1 rounded p-2 mb-4">
     <p class="text-center h3">All Category</p><hr>
     <div>
-      <button mat-button class="w-full" (click)="filterNone()">
+      <button mat-button class="w-full m-0" (click)="filterNone()">
         All products
       </button>
     </div>
     <ng-container *ngFor="let cat of categories">
       <div>
-        <button mat-button class="w-full" (click)="filterProduct(cat)">
+        <button mat-button class="w-full truncate" (click)="filterProduct(cat)">
           {{cat}}
         </button>
       </div>
@@ -63,7 +66,7 @@
   [infiniteScrollDistance]="0"
   [infiniteScrollThrottle]="150"
   (scrolled)="onScroll()">
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 p-4"
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 px-4"
     infiniteScroll
     [infiniteScrollDistance]="0"
     [infiniteScrollThrottle]="150"

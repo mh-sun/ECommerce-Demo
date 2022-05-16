@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject, Subscription, takeUntil } from 'rxjs';
@@ -111,7 +111,14 @@ export class ProductListComponent implements OnDestroy{
 
           this.loader = false
         })
-      }, 2000);
+      }, 1000);
     }
+  }
+
+  scrolltop(){
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    })
   }
 }
